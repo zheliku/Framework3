@@ -1,0 +1,25 @@
+{
+  "name": "com.zheliku.framework3",
+  "version": "0.0.1",
+  "displayName": "Framework3",
+  "description": "An easy framework for Unity",
+  "unity": "2022.3",
+  "dependencies": {
+    "com.unity.addressables": "2.3.16"
+  },
+  "author": {
+    "name": "zheliku"
+  },
+  "samples": [
+    {
+      "displayName": "Core",
+      "description": "Core samples for Framework3",
+      "path": "Samples~/Core"
+    },
+    {
+      "displayName": "Toolkits",
+      "description": "Toolkits samples for Framework3",
+      "path": "Samples~/Toolkits"
+    }
+  ]
+}
