@@ -118,6 +118,11 @@ namespace Framework.Toolkits.CodeGenKit.Editor
             if (Architecture.GetTypeByName() == null)
             {
                 var architectureContent = CodeGenPipeline.Default.GenerateArchitectureCode();
+                
+                if (!Directory.Exists(FolderPath))
+                {
+                    Directory.CreateDirectory(FolderPath);
+                }
 
                 File.WriteAllText(FolderPath + "/" + Architecture + ".cs", architectureContent);
             }
