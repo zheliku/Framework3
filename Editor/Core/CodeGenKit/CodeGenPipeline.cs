@@ -6,8 +6,6 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-#if UNITY_EDITOR
-
 namespace Framework.Toolkits.CodeGenKit.Editor
 {
     using System;
@@ -17,11 +15,11 @@ namespace Framework.Toolkits.CodeGenKit.Editor
     using UnityEditor.Callbacks;
     using UnityEngine;
 
-    public class CodeGenKitPipeline : ScriptableObject
+    public class CodeGenPipeline : ScriptableObject
     {
-        private static CodeGenKitPipeline _Default;
+        private static CodeGenPipeline _Default;
 
-        public static CodeGenKitPipeline Default
+        public static CodeGenPipeline Default
         {
             get
             {
@@ -32,10 +30,10 @@ namespace Framework.Toolkits.CodeGenKit.Editor
 
                 if (File.Exists(filePath))
                 {
-                    return _Default = AssetDatabase.LoadAssetAtPath<CodeGenKitPipeline>(filePath);
+                    return _Default = AssetDatabase.LoadAssetAtPath<CodeGenPipeline>(filePath);
                 }
 
-                _Default = CreateInstance<CodeGenKitPipeline>();
+                _Default = CreateInstance<CodeGenPipeline>();
 
                 if (!Directory.Exists(directoryPath))
                 {
@@ -77,9 +75,9 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         [ReadOnly]
         public string Architecture = "Game";
 
-        public string GenerateCodeFileContent()
+        public string GenerateViewCode()
         {
-            var templateContent = File.ReadAllText(CodeGenKit.CODE_TEMPLATE_PATH);
+            var templateContent = CodeGenTemplate.VIEW_CODE;
 
             // 获取当前时间，格式化为 yyyy-MM-dd HH:mm:ss
             var modifiedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -94,9 +92,9 @@ namespace Framework.Toolkits.CodeGenKit.Editor
             return content;
         }
 
-        public string GenerateArchitectureFileContent()
+        public string GenerateArchitectureCode()
         {
-            var templateContent = File.ReadAllText(CodeGenKit.ARCHITECTURE_TEMPLATE_PATH);
+            var templateContent = CodeGenTemplate.ARCHITECTURE_CODE;
 
             // 获取当前时间，格式化为 yyyy-MM-dd HH:mm:ss
             var modifiedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -149,4 +147,3 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         }
     }
 }
-#endif

@@ -8,8 +8,6 @@
 
 using Framework.Toolkits.FluentAPI;
 
-#if UNITY_EDITOR
-
 namespace Framework.Toolkits.CodeGenKit.Editor
 {
     using System.IO;
@@ -23,31 +21,31 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         [ShowInInspector]
         public string NameSpace
         {
-            get => CodeGenKitPipeline.Default.NameSpace;
-            set => CodeGenKitPipeline.Default.NameSpace = value;
+            get => CodeGenPipeline.Default.NameSpace;
+            set => CodeGenPipeline.Default.NameSpace = value;
         }
 
         [ShowInInspector] [FolderPath]
         public string FolderPath
         {
-            get => CodeGenKitPipeline.Default.FolderPath;
-            set => CodeGenKitPipeline.Default.FolderPath = value;
+            get => CodeGenPipeline.Default.FolderPath;
+            set => CodeGenPipeline.Default.FolderPath = value;
         }
 
         [ShowInInspector]
         public string FileName
         {
-            get => CodeGenKitPipeline.Default.FileName;
-            set => CodeGenKitPipeline.Default.FileName = value;
+            get => CodeGenPipeline.Default.FileName;
+            set => CodeGenPipeline.Default.FileName = value;
         }
 
         [ShowInInspector]
         public GameObject SelectedGameObject
         {
-            get => CodeGenKitPipeline.Default.LastSelectedGameObject;
+            get => CodeGenPipeline.Default.LastSelectedGameObject;
             set
             {
-                CodeGenKitPipeline.Default.LastSelectedGameObject = value;
+                CodeGenPipeline.Default.LastSelectedGameObject = value;
 
                 if (value != null)
                 {
@@ -59,14 +57,14 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         [ShowInInspector]
         public string Architecture
         {
-            get => CodeGenKitPipeline.Default.Architecture;
-            set => CodeGenKitPipeline.Default.Architecture = value;
+            get => CodeGenPipeline.Default.Architecture;
+            set => CodeGenPipeline.Default.Architecture = value;
         }
 
         public bool IsGenerating
         {
-            get => CodeGenKitPipeline.Default.IsGenerating;
-            set => CodeGenKitPipeline.Default.IsGenerating = value;
+            get => CodeGenPipeline.Default.IsGenerating;
+            set => CodeGenPipeline.Default.IsGenerating = value;
         }
 
         [HorizontalGroup("Buttons")]
@@ -119,7 +117,7 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         {
             if (Architecture.GetTypeByName() == null)
             {
-                var architectureContent = CodeGenKitPipeline.Default.GenerateArchitectureFileContent();
+                var architectureContent = CodeGenPipeline.Default.GenerateArchitectureCode();
 
                 File.WriteAllText(FolderPath + "/" + Architecture + ".cs", architectureContent);
             }
@@ -128,7 +126,7 @@ namespace Framework.Toolkits.CodeGenKit.Editor
         [ShowInInspector] [DisplayAsString(false)] [HideLabel]
         public string GenerateCodeContent
         {
-            get => CodeGenKitPipeline.Default.GenerateCodeFileContent();
+            get => CodeGenPipeline.Default.GenerateViewCode();
         }
 
         [MenuItem("Framework/CodeGen/Open CodeGen Window &V")]
@@ -144,21 +142,19 @@ namespace Framework.Toolkits.CodeGenKit.Editor
 
         private void LoadCodeGenData()
         {
-            NameSpace    = CodeGenKitPipeline.Default.GlobalNameSpace;
-            FolderPath   = CodeGenKitPipeline.Default.GlobalFolderPath;
-            FileName     = CodeGenKitPipeline.Default.GlobalFileName;
-            Architecture = CodeGenKitPipeline.Default.GlobalArchitecture;
+            NameSpace    = CodeGenPipeline.Default.GlobalNameSpace;
+            FolderPath   = CodeGenPipeline.Default.GlobalFolderPath;
+            FileName     = CodeGenPipeline.Default.GlobalFileName;
+            Architecture = CodeGenPipeline.Default.GlobalArchitecture;
         }
 
         [Button(ButtonSizes.Large)] [PropertySpace(5)]
         private void SaveCodeGenData()
         {
-            CodeGenKitPipeline.Default.GlobalNameSpace    = NameSpace;
-            CodeGenKitPipeline.Default.GlobalFolderPath   = FolderPath;
-            CodeGenKitPipeline.Default.GlobalFileName     = FileName;
-            CodeGenKitPipeline.Default.GlobalArchitecture = Architecture;
+            CodeGenPipeline.Default.GlobalNameSpace    = NameSpace;
+            CodeGenPipeline.Default.GlobalFolderPath   = FolderPath;
+            CodeGenPipeline.Default.GlobalFileName     = FileName;
+            CodeGenPipeline.Default.GlobalArchitecture = Architecture;
         }
     }
 }
-
-#endif

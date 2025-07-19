@@ -16,11 +16,6 @@ namespace Framework.Toolkits.CodeGenKit
 
     public class CodeGenKit
     {
-        public static readonly string PROJECT_PATH = Application.dataPath[..Application.dataPath.IndexOf("/Assets", StringComparison.Ordinal)];
-        
-        public static readonly string CODE_TEMPLATE_PATH = PROJECT_PATH + "/Packages/Framework3/RunTime/Toolkits/Core/CodeGenKit/CodeTemplate.cs";
-        public static readonly string ARCHITECTURE_TEMPLATE_PATH = PROJECT_PATH + "/Packages/Framework3/RunTime/Toolkits/Core/CodeGenKit/ArchitectureTemplate.cs";
-        
         public static readonly string PIPE_LINE_PATH = "Assets/Framework3_Data/CodeGenKitPipeline.asset";
 
         public static void OpenFile(string path)
