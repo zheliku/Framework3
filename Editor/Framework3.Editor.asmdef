@@ -1,0 +1,19 @@
+{
+    "name": "Framework3",
+    "rootNamespace": "",
+    "references": [
+        "GUID:16b8f06c7d1139345bf37052380d3898",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
