@@ -8,9 +8,7 @@
 
 namespace Framework3.Core
 {
-    using Command;
     using System;
-    using Model;
 
     /// <summary>
     /// Architecture 接口，用于规范 System、Model、Utility 的架构
