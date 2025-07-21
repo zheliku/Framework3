@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "displayName": "Framework3",
   "description": "An easy framework for Unity",
-  "unity": "2022.3",
+  "unity": "6000.0",
   "dependencies": {
     "com.unity.addressables": "2.3.16"
   },
