@@ -6,9 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.InputKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.InputKit
 {
-    using Framework.Core;
+    using Framework3.Core;
 
     public class BindableKeyCodeInputProperty : BindableProperty<bool>
     {

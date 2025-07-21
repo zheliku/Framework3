@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.CodeGenKit.Editor
+namespace Framework3.Toolkits.CodeGenKit.Editor
 {
     using System;
     using System.IO;

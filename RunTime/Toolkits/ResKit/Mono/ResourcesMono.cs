@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-namespace Framework.Toolkits.ResKit
+namespace Framework3.Toolkits.ResKit
 {
     using System.Collections.Generic;
     using Sirenix.OdinInspector;

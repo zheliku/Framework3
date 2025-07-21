@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.TimerKit
+namespace Framework3.Toolkits.TimerKit
 {
     using System;
     using System.Collections.Generic;

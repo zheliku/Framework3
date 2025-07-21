@@ -6,12 +6,14 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.GridKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.GridKit
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Framework.Core;
+    using Framework3.Core;
     using Sirenix.OdinInspector;
     using UnityEngine;
 

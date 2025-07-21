@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.PoolKit
+namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
     /// 可放进 Pool 的对象接口.

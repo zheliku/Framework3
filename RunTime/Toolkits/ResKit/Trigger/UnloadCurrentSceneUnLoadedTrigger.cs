@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.ResKit
+namespace Framework3.Toolkits.ResKit
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;

@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.DataKit
+namespace Framework3.Toolkits.DataKit
 {
     using System.IO;
     using FluentAPI;

@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.AudioKit
+namespace Framework3.Toolkits.AudioKit
 {
     using System;
     using ResKit;

@@ -6,12 +6,14 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.EventKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.EventKit
 {
     using System;
     using System.Collections.Generic;
     using FluentAPI;
-    using Framework.Core;
+    using Framework3.Core;
     using Sirenix.OdinInspector;
 
     public class StringEventSystem

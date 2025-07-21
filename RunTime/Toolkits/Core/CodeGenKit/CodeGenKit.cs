@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Framework.Toolkits.CodeGenKit
+namespace Framework3.Toolkits.CodeGenKit
 {
     using System.Diagnostics;
     using UnityEngine;

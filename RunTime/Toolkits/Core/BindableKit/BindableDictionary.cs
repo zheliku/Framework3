@@ -6,13 +6,15 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.BindableKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.BindableKit
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using Framework.Core;
+    using Framework3.Core;
 
     [Serializable]
     public class BindableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,

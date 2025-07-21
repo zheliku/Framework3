@@ -6,9 +6,9 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-using Framework.Toolkits.FluentAPI;
+using Framework3.Toolkits.FluentAPI;
 
-namespace Framework.Toolkits.CodeGenKit.Editor
+namespace Framework3.Toolkits.CodeGenKit.Editor
 {
     using System.IO;
     using Sirenix.OdinInspector;

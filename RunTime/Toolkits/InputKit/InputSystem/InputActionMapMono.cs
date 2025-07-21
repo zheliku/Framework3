@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-namespace Framework.Toolkits.InputKit
+namespace Framework3.Toolkits.InputKit
 {
     using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;

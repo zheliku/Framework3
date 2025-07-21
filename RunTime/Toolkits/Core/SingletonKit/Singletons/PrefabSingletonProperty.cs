@@ -6,10 +6,10 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.SingletonKit
+namespace Framework3.Toolkits.SingletonKit
 {
     using System;
-    using Framework.Toolkits.FluentAPI;
+    using Framework3.Toolkits.FluentAPI;
     using UnityEngine;
     using Object = UnityEngine.Object;
 

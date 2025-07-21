@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.PoolKit
+namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
     /// 默认对象工厂：相关对象是通过 New 出来的

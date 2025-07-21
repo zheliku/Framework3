@@ -6,11 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.FluentAPI
+namespace Framework3.Toolkits.FluentAPI
 {
     using System.Collections.Generic;
     using System.IO;
-    using Framework.Core;
+    using Framework3.Core;
 
     /// <summary>
     /// 针对 System.IO 提供的链式扩展，主要是文件和文件夹的 IO 操作

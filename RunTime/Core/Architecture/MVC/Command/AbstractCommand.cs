@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core.Command
+namespace Framework3.Core
 {
     using Sirenix.OdinInspector;
 

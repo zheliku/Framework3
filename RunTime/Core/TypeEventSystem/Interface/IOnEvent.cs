@@ -7,7 +7,7 @@
 // ------------------------------------------------------------
 
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     /// <summary>
     /// 简易事件监听接口，可快速实现事件监听

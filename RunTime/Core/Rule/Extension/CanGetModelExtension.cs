@@ -6,10 +6,8 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
-    using Model;
-
     /// <summary>
     /// ICanGetModel 的扩展实现
     /// </summary>

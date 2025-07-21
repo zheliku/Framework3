@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-namespace Framework.Toolkits.ResKit
+namespace Framework3.Toolkits.ResKit
 {
     using System;
     using System.Collections.Generic;

@@ -1,8 +1,10 @@
-﻿namespace Framework.Toolkits.EventKit
+﻿using Framework3.Core;
+
+namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;
-    using Framework.Core;
+    using Framework3.Core;
     using UnityEngine;
 
     public class OnDisableEventTrigger : MonoBehaviour

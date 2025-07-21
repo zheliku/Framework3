@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.InputKit
+namespace Framework3.Toolkits.InputKit
 {
     using System;
     using UnityEngine.InputSystem;
