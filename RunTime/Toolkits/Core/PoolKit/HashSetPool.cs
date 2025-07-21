@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.PoolKit
+namespace Framework3.Toolkits.PoolKit
 {
     using System.Collections.Generic;
 

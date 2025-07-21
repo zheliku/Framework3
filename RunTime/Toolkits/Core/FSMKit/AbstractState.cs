@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.FSMKit
+namespace Framework3.Toolkits.FSMKit
 {
     public abstract class AbstractState<TStateId, TOwner> : IState
     {

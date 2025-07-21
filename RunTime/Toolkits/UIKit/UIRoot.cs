@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.UIKit
+namespace Framework3.Toolkits.UIKit
 {
     using ResKit;
     using SingletonKit;

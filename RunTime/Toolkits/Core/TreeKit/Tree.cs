@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.TreeKit
+namespace Framework3.Toolkits.TreeKit
 {
     using System;
     using System.Collections.Generic;

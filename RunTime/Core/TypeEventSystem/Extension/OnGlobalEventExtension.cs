@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     /// <summary>
     /// IOnEvent 扩展

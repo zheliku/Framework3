@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Framework.Toolkits.TreeKit
+namespace Framework3.Toolkits.TreeKit
 {
     /// <summary>
     /// 树节点实现类

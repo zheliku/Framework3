@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.PoolKit
+namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
     /// I cache type.

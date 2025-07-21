@@ -10,9 +10,9 @@ using UnityEngine;
 
 namespace Game
 {
-    using Framework.Core;
-    using Framework.Toolkits.EventKit;
-    using Framework.Toolkits.FluentAPI;
+    using Framework3.Core;
+    using Framework3.Toolkits.EventKit;
+    using Framework3.Toolkits.FluentAPI;
     using UnityEngine.EventSystems;
     using UnityEngine.InputSystem.OnScreen;
 

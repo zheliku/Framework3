@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.BindableKit
+namespace Framework3.Toolkits.BindableKit
 {
     using System;
     using System.Collections.Generic;

@@ -6,11 +6,13 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.ActionKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.ActionKit
 {
     using System;
     using System.Collections;
-    using Framework.Core;
+    using Framework3.Core;
 
     public partial class ActionKit : AbstractArchitecture<ActionKit>
     {

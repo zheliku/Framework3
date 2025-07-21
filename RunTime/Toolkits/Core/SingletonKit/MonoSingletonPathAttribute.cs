@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.SingletonKit
+namespace Framework3.Toolkits.SingletonKit
 {
     using System;
 

@@ -6,7 +6,7 @@
  * https://gitee.com/liangxiegame/QFramework
  ****************************************************************************/
 
-namespace Framework.Toolkits.EventKit
+namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;

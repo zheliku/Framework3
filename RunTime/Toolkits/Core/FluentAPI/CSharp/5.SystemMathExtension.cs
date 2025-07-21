@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.FluentAPI
+namespace Framework3.Toolkits.FluentAPI
 {
     using System.Collections.Generic;
 

@@ -6,9 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.SingletonKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.SingletonKit
 {
-    using Framework.Core;
+    using Framework3.Core;
     using UnityEngine;
 
     /// <summary>

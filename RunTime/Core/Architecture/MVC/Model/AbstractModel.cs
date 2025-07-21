@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core.Model
+namespace Framework3.Core.Model
 {
     using Sirenix.OdinInspector;
 
@@ -25,12 +25,20 @@ namespace Framework.Core.Model
         void ICanSetArchitecture.SetArchitecture(IArchitecture architecture) { _architecture = architecture; }
 
         [ShowInInspector]
-        public bool Initialized { get; set; }
+        public bool Initialized { get; protected set; }
 
         // 仅能通过 ICanInit 接口使用 Init 方法
-        void ICanInit.Init() { OnInit(); }
+        void ICanInit.Init()
+        {
+            OnInit();
+            Initialized = true;
+        }
 
-        public void Deinit() { OnDeinit(); }
+        public void Deinit()
+        {
+            OnDeinit();
+            Initialized = false;
+        }
 
         /// <summary>
         /// 初始化方法，需要由子类实现

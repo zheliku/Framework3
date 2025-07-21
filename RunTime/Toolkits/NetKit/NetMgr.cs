@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.NetKit
+namespace Framework3.Toolkits.NetKit
 {
     using SingletonKit;
     using Sirenix.OdinInspector;

@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core.Model
+namespace Framework3.Core.Model
 {
     /// <summary>
     /// Model 接口

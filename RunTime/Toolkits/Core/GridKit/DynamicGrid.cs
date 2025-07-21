@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.GridKit
+namespace Framework3.Toolkits.GridKit
 {
     using System;
     using System.Collections;

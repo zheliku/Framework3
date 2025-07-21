@@ -7,15 +7,15 @@
 // ------------------------------------------------------------
 
 using System.Collections.Generic;
-using Framework.Toolkits.SingletonKit;
+using Framework3.Toolkits.SingletonKit;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Framework.Toolkits.InputKit
+namespace Framework3.Toolkits.InputKit
 {
     using System;
-    using Framework.Core;
+    using Framework3.Core;
 
     [MonoSingletonPath("Framework/InputKit/OldInput/MouseInput")]
     public class MouseInput : MonoSingleton<MouseInput>

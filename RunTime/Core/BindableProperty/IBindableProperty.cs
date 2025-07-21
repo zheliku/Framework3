@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     /// <summary>
     /// 可绑定事件监听的 Property 接口

@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     /// <summary>
     /// 可发送 Event，通过 Architecture 发送，由 CanSendEventExtension 扩展实现

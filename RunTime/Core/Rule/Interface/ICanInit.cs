@@ -6,7 +6,7 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     /// <summary>
     /// 继承该接口，即可初始化
@@ -16,7 +16,7 @@ namespace Framework.Core
         /// <summary>
         /// 是否已经初始化
         /// </summary>
-        bool Initialized { get; set; }
+        bool Initialized { get; }
 
         /// <summary>
         /// 初始化方法

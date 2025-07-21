@@ -1,4 +1,4 @@
-namespace Framework.Toolkits.DataKit
+namespace Framework3.Toolkits.DataKit
 {
     using System;
     using System.Collections.Generic;

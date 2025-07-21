@@ -6,10 +6,10 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Core
+namespace Framework3.Core
 {
     using Command;
-    using global::System;
+    using System;
     using Model;
 
     /// <summary>

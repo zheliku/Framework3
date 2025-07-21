@@ -6,9 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework.Toolkits.BindableKit
+using Framework3.Core;
+
+namespace Framework3.Toolkits.BindableKit
 {
-    using Framework.Core;
+    using Framework3.Core;
     using UnityEngine;
 
     public class PlayerPrefsBoolProperty : BindableProperty<bool>

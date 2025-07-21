@@ -7,7 +7,7 @@
 // ------------------------------------------------------------
 
 
-namespace Framework.Toolkits.BindableKit.Editor
+namespace Framework3.Toolkits.BindableKit.Editor
 {
     using System;
     using System.Diagnostics;
