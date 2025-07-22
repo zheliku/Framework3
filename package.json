@@ -14,12 +14,12 @@
     {
       "displayName": "Core",
       "description": "Core samples for Framework3",
-      "path": "Samples~/Core"
+      "path": "Samples/Core"
     },
     {
       "displayName": "Toolkits",
       "description": "Toolkits samples for Framework3",
-      "path": "Samples~/Toolkits"
+      "path": "Samples/Toolkits"
     }
   ]
 }

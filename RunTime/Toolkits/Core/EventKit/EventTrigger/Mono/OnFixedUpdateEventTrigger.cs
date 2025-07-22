@@ -2,7 +2,7 @@
 {
     using System;
     using FluentAPI;
-    using Core;
+    using Framework3.Core;
     using UnityEngine;
 
     public class OnFixedUpdateEventTrigger : MonoBehaviour

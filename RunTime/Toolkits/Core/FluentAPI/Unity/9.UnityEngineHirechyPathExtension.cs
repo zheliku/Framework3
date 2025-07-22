@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.FluentAPI
 {
     using System.Linq;
-    using Core;
+    using Framework3.Core;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 

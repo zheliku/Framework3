@@ -10,7 +10,7 @@ namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;
-    using Core;
+    using Framework3.Core;
     using UnityEngine;
 
     public class OnApplicationQuitEventTrigger : MonoBehaviour

@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.SingletonKit
 {
-    using Core;
+    using Framework3.Core;
 
     public abstract class MonoSingleton<TMonoSingleton> : AbstractView, ISingleton where TMonoSingleton : MonoSingleton<TMonoSingleton>
     {

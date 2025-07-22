@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.BindableKit
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Core;
+    using Framework3.Core;
 
     [Serializable]
     public class BindableList<TElem> : Collection<TElem>
