@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.InputKit
 {
-    using Core;
+    using Framework3.Core;
     
     public enum MouseInputType
     {
