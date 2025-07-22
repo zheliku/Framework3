@@ -20,7 +20,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
 
 namespace __Game__
 {
-    using Framework.Core;
+    using Framework3.Core;
 
     public class CodeTemplate : AbstractView
     {
@@ -38,7 +38,7 @@ namespace __Game__
 
 namespace __Game__
 {
-    using Framework.Core;
+    using Framework3.Core;
 
     public class ArchitectureTemplate : AbstractArchitecture<ArchitectureTemplate>
     {
