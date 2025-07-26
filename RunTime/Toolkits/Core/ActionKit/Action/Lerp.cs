@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using PoolKit;
     using UnityEngine;
 
     /// <summary>
@@ -16,10 +15,6 @@ namespace Framework3.Toolkits.ActionKit
     /// </summary>
     public class Lerp : AbstractAction<Lerp>
     {
-    #region 常量
-
-    #endregion
-
     #region Static
 
         public static Lerp Create(float a, float b, float duration, System.Action<float> onLerp, System.Action onLerpFinished)

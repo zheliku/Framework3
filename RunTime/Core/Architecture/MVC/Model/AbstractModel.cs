@@ -18,16 +18,19 @@ namespace Framework3.Core
     {
         private IArchitecture _architecture;
 
-        // 仅能通过 IBelongToArchitecture 接口访问 Architecture 属性
-        IArchitecture IBelongToArchitecture.Architecture => _architecture;
+        IArchitecture IBelongToArchitecture.Architecture
+        {
+            get => _architecture;
+        }
 
-        // 仅能通过 ICanSetArchitecture 接口设置 Architecture 属性
-        void ICanSetArchitecture.SetArchitecture(IArchitecture architecture) { _architecture = architecture; }
+        IArchitecture ICanSetArchitecture.Architecture
+        {
+            set => _architecture = value;
+        }
 
         [ShowInInspector]
         public bool Initialized { get; protected set; }
 
-        // 仅能通过 ICanInit 接口使用 Init 方法
         void ICanInit.Init()
         {
             OnInit();

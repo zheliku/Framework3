@@ -24,6 +24,9 @@ namespace Framework3.Core
 
         protected static TArchitecture s_architecture;
 
+        /// <summary>
+        /// 确保架构实例存在，若不存在则创建新的实例并初始化
+        /// </summary>
         static void MakeSureArchitecture()
         {
             if (s_architecture == null)
@@ -48,7 +51,7 @@ namespace Framework3.Core
                 }
 
                 // 设置架构已经初始化
-                s_architecture._inited = true;
+                s_architecture._initialized = true;
             }
         }
 
@@ -69,7 +72,7 @@ namespace Framework3.Core
     #region 字段
         
         [ShowInInspector]
-        private bool _inited = false;
+        private bool _initialized = false;
 
         [ShowInInspector]
         private IOCContainer _iocContainer = new IOCContainer();
@@ -82,153 +85,85 @@ namespace Framework3.Core
 
     #region 公共方法
 
-        /// <summary>
-        /// 注册 System
-        /// </summary>
-        /// <param name="system">System 实例</param>
-        /// <typeparam name="TSystem">System 类型</typeparam>
         public void RegisterSystem<TSystem>(TSystem system) where TSystem : ISystem
         {
-            system.SetArchitecture(this);
+            system.Architecture = this;
             _iocContainer.Register<TSystem>(system);
 
-            if (_inited)
+            if (_initialized)
             {
                 // 若 Architecture 已初始化，则新注册的 System 也需要立即初始化
                 system.Init();
             }
         }
 
-        /// <summary>
-        /// 注册 Model
-        /// </summary>
-        /// <param name="model">Model 实例</param>
-        /// <typeparam name="TModel">Model 类型</typeparam>
         public void RegisterModel<TModel>(TModel model) where TModel : IModel
         {
-            model.SetArchitecture(this);
+            model.Architecture = this;
             _iocContainer.Register<TModel>(model);
 
-            if (_inited)
+            if (_initialized)
             {
                 // 若 Architecture 已初始化，则新注册的 Model 也需要立即初始化
                 model.Init();
             }
         }
 
-        /// <summary>
-        /// 注册 TUtility
-        /// </summary>
-        /// <param name="utility">TUtility 实例</param>
-        /// <typeparam name="TUtility">TUtility 类型</typeparam>
         public void RegisterUtility<TUtility>(TUtility utility) where TUtility : IUtility
         {
             _iocContainer.Register<TUtility>(utility);
         }
 
-        /// <summary>
-        /// 获取已注册的 System
-        /// </summary>
-        /// <typeparam name="TSystem">System 类型</typeparam>
         public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
         {
             return _iocContainer.Get<TSystem>();
         }
 
-        /// <summary>
-        /// 获取已注册的 System
-        /// </summary>
-        /// <typeparam name="TModel">Model 类型</typeparam>
         public TModel GetModel<TModel>() where TModel : class, IModel
         {
             return _iocContainer.Get<TModel>();
         }
 
-        /// <summary>
-        /// 获取已注册的 System
-        /// </summary>
-        /// <typeparam name="TUtility">Utility 类型</typeparam>
         public TUtility GetUtility<TUtility>() where TUtility : class, IUtility
         {
             return _iocContainer.Get<TUtility>();
         }
 
-        /// <summary>
-        /// 发送 Command
-        /// </summary>
-        /// <param name="command">Command 实例</param>
-        /// <typeparam name="TCommand">Command 类型</typeparam>
         public void SendCommand<TCommand>(TCommand command) where TCommand : ICommand
         {
             ExecuteCommand(command);
         }
 
-        /// <summary>
-        /// 发送带有返回值的 Command&lt;TResult&gt;
-        /// </summary>
-        /// <param name="command">Command&lt;TResult&gt; 实例</param>
-        /// <typeparam name="TResult">返回值类型</typeparam>
-        /// <returns>返回值</returns>
         public TResult SendCommand<TResult>(ICommand<TResult> command)
         {
             return ExecuteCommand(command);
         }
         
-        /// <summary>
-        /// 发送查询请求，返回查询结果。
-        /// </summary>
-        /// <typeparam name="TResult">查询结果类型</typeparam>
-        /// <param name="query">查询对象</param>
-        /// <returns>查询结果</returns>
         public TResult SendQuery<TResult>(IQuery<TResult> query)
         {
             return DoQuery<TResult>(query);
         }
 
-        /// <summary>
-        /// 发送无参数事件。
-        /// </summary>
-        /// <typeparam name="TEvent">事件类型</typeparam>
         public void SendEvent<TEvent>() where TEvent : new()
         {
             _typeEventSystem.Send<TEvent>();
         }
 
-        /// <summary>
-        /// 发送带参数事件。
-        /// </summary>
-        /// <typeparam name="TEvent">事件类型</typeparam>
-        /// <param name="e">事件参数</param>
         public void SendEvent<TEvent>(TEvent e)
         {
             _typeEventSystem.Send<TEvent>(e);
         }
 
-        /// <summary>
-        /// 注册事件监听器。
-        /// </summary>
-        /// <typeparam name="TEvent">事件类型</typeparam>
-        /// <param name="onEvent">事件回调</param>
-        /// <param name="priority">优先级</param>
-        /// <returns>注销注册的接口</returns>
-        public IUnRegister RegisterEvent<TEvent>(Action<TEvent> onEvent, int priority)
+        public IUnRegister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority)
         {
             return _typeEventSystem.Register<TEvent>(onEvent, priority);
         }
-
-        /// <summary>
-        /// 注销事件监听器。
-        /// </summary>
-        /// <typeparam name="TEvent">事件类型</typeparam>
-        /// <param name="onEvent">事件回调</param>
+        
         public void UnRegisterEvent<TEvent>(Action<TEvent> onEvent)
         {
             _typeEventSystem.UnRegister<TEvent>(onEvent);
         }
 
-        /// <summary>
-        /// 反初始化架构，释放所有资源。
-        /// </summary>
         public void Deinit()
         {
             OnDeinit(); // 调用反初始化事件
@@ -240,7 +175,7 @@ namespace Framework3.Core
             foreach (var model in _iocContainer.GetInstancesByType<IModel>().Where<IModel>(m => m.Initialized)) { model.Deinit(); }
 
             _iocContainer.Clear(); // 清空 IOC 容器
-            _inited = false; // 设置初始化状态为 false
+            _initialized = false; // 设置初始化状态为 false
         }
 
     #endregion
@@ -253,19 +188,19 @@ namespace Framework3.Core
 
         protected virtual TResult ExecuteCommand<TResult>(ICommand<TResult> command)
         {
-            command.SetArchitecture(this);
+            command.Architecture = this;
             return command.Execute();
         }
 
         protected virtual void ExecuteCommand(ICommand command)
         {
-            command.SetArchitecture(this);
+            command.Architecture = this;
             command.Execute();
         }
 
         protected virtual TResult DoQuery<TResult>(IQuery<TResult> query)
         {
-            query.SetArchitecture(this);
+            query.Architecture = this;
             return query.Do();
         }
 

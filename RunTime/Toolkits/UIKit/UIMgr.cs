@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.UIKit
     using System;
     using System.Collections.Generic;
     using ResKit;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
     using UnityEngine.ResourceManagement.AsyncOperations;
 

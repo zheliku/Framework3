@@ -13,8 +13,8 @@ namespace Framework3.Core
     /// </summary>
     public sealed class UnRegisterOnDisableTrigger : UnRegisterTrigger
     {
-        private void OnDisable()
-        { // OnDisable 时触发注销
+        private void OnDisable() // OnDisable 时触发注销
+        {
             UnRegister();
         }
     }

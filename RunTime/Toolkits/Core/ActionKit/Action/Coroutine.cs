@@ -41,10 +41,7 @@ namespace Framework3.Toolkits.ActionKit
         public override void OnStart()
         {
             // 协程执行完后，结束 Action
-            ActionKitMonoBehaviourEvent.Instance.ExecuteCoroutine(_coroutineGetter(), () =>
-            {
-                this.Finish();
-            });
+            ActionKitMonoBehaviourEvent.Instance.ExecuteCoroutine(_coroutineGetter(), this.Finish);
         }
 
         public override void OnExecute(float deltaTime) { }

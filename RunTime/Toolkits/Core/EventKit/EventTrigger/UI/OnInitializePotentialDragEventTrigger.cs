@@ -29,13 +29,13 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnInitializePotentialDragEventTriggerExtension
     {
-        public static IUnRegister OnInitializePotentialDragEvent<T>(this T self, Action<PointerEventData> onInitializePotentialDrag, int priority = 0)
+        public static IUnRegister OnInitializePotentialDragEvent<T>(this T self, Action<PointerEventData> onInitializePotentialDrag, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnInitializePotentialDragEventTrigger>().OnInitializePotentialDragEvent.Register(onInitializePotentialDrag, priority);
         }
 
-        public static IUnRegister OnInitializePotentialDragEvent(this GameObject self, Action<PointerEventData> onInitializePotentialDrag, int priority = 0)
+        public static IUnRegister OnInitializePotentialDragEvent(this GameObject self, Action<PointerEventData> onInitializePotentialDrag, float priority = 0)
         {
             return self.GetOrAddComponent<OnInitializePotentialDragEventTrigger>().OnInitializePotentialDragEvent.Register(onInitializePotentialDrag, priority);
         }

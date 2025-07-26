@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.EventKit
 
         protected EnumEventSystem() { }
 
-        public IUnRegister Register<TEnum>(TEnum key, Action<TEnum, object[]> onEvent, int priority = 0) where TEnum : Enum
+        public IUnRegister Register<TEnum>(TEnum key, Action<TEnum, object[]> onEvent, float priority = 0) where TEnum : Enum
         {
             if (_events.TryGetValue(key, out var e))
             {

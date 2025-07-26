@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// Command 接口
+    /// Command 接口，无返回值
     /// </summary>
     public interface ICommand : // IBelongToArchitecture,
         ICanGetModel,           // ICommand 可获取 Model
@@ -20,11 +20,6 @@ namespace Framework3.Core
         ICanSendEvent,          // ICommand 可发送 Event
         ICanSendQuery           // ICommand 可发送 Query
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // void SetArchitecture(IArchitecture architecture);
-        // *************** 继承的接口 ↑ *****************
-
         /// <summary>
         /// 执行 Command
         /// </summary>
@@ -32,7 +27,7 @@ namespace Framework3.Core
     }
 
     /// <summary>
-    /// Command 接口
+    /// Command&lt;TResult&gt; 接口，有返回值
     /// </summary>
     public interface ICommand<out TResult> : // IBelongToArchitecture, 
         ICanGetModel,                        // ICommand 可获取 Model
@@ -43,11 +38,6 @@ namespace Framework3.Core
         ICanSendEvent,                       // ICommand 可发送 Event
         ICanSendQuery                        // ICommand 可发送 Query
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // void SetArchitecture(IArchitecture architecture);
-        // *************** 继承的接口 ↑ *****************
-
         /// <summary>
         /// 执行 Command
         /// </summary>

@@ -8,8 +8,7 @@
 
 namespace Framework3.Core
 {
-    using global::System;
-    using global::System.Collections.Generic;
+    using System;
     using Sirenix.OdinInspector;
 
     [HideReferenceObjectPicker]
@@ -17,19 +16,19 @@ namespace Framework3.Core
     {
         // 定义一个 Action 类型的私有变量，初始值为空
         [ShowInInspector] [HideLabel]
-        private PrioritySortedList<Action, int> _onEvent = new PrioritySortedList<Action, int>();
+        private PrioritySortedList<Action, float> _onEvent = new();
         
         public int EventCount { get => _onEvent.Count; }
 
         // 注册事件，返回 IUnRegister 接口
-        public IUnRegister Register(Action onEvent, int priority = 0)
+        public IUnRegister Register(Action onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
             return new CustomUnRegister(() => { UnRegister(onEvent); }); // 返回自定义 UnRegister 接口，用于注销事件，lambda 表达式使用了闭包
         }
         
         // 注册并调用事件
-        public IUnRegister RegisterWithTrigger(Action onEvent, int priority = 0)
+        public IUnRegister RegisterWithTrigger(Action onEvent, float priority = 0)
         {
             onEvent?.Invoke();
             return Register(onEvent, priority);
@@ -63,17 +62,17 @@ namespace Framework3.Core
     public class EasyEvent<TArg> : IEasyEvent
     {
         [ShowInInspector] [HideLabel]
-        private PrioritySortedList<Action<TArg>, int> _onEvent = new PrioritySortedList<Action<TArg>, int>();
+        private PrioritySortedList<Action<TArg>, float> _onEvent = new();
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg> onEvent, int priority = 0)
+        public IUnRegister Register(Action<TArg> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
             return new CustomUnRegister(() => { UnRegister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg> onEvent, TArg t, int priority = 0)
+        public IUnRegister RegisterWithTrigger(Action<TArg> onEvent, TArg t, float priority = 0)
         {
             onEvent?.Invoke(t);
             return Register(onEvent, priority);
@@ -101,7 +100,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, int priority)
+        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg _) => onEvent(), priority);
         }
@@ -111,17 +110,17 @@ namespace Framework3.Core
     public class EasyEvent<TArg1, TArg2> : IEasyEvent
     {
         [ShowInInspector] [HideLabel]
-        private PrioritySortedList<Action<TArg1, TArg2>, int> _onEvent = new PrioritySortedList<Action<TArg1, TArg2>, int>();
+        private PrioritySortedList<Action<TArg1, TArg2>, float> _onEvent = new();
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg1, TArg2> onEvent, int priority = 0)
+        public IUnRegister Register(Action<TArg1, TArg2> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
             return new CustomUnRegister(() => { UnRegister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2> onEvent, TArg1 t1, TArg2 t2, int priority = 0)
+        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2> onEvent, TArg1 t1, TArg2 t2, float priority = 0)
         {
             onEvent?.Invoke(t1, t2);
             return Register(onEvent, priority);
@@ -149,7 +148,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, int priority)
+        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg1 _, TArg2 _) => onEvent(), priority);
         }
@@ -159,17 +158,17 @@ namespace Framework3.Core
     public class EasyEvent<TArg1, TArg2, TArg3> : IEasyEvent
     {
         [ShowInInspector] [HideLabel]
-        private PrioritySortedList<Action<TArg1, TArg2, TArg3>, int> _onEvent = new PrioritySortedList<Action<TArg1, TArg2, TArg3>, int>();
+        private PrioritySortedList<Action<TArg1, TArg2, TArg3>, float> _onEvent = new();
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg1, TArg2, TArg3> onEvent, int priority = 0)
+        public IUnRegister Register(Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
             return new CustomUnRegister(() => { UnRegister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2, TArg3> onEvent, TArg1 t1, TArg2 t2, TArg3 t3, int priority = 0)
+        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2, TArg3> onEvent, TArg1 t1, TArg2 t2, TArg3 t3, float priority = 0)
         {
             onEvent?.Invoke(t1, t2, t3);
             return Register(onEvent, priority);
@@ -197,7 +196,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, int priority)
+        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg1 _, TArg2 _, TArg3 _) => onEvent(), priority);
         }

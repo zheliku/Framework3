@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnTriggerEnterEventTriggerExtension
     {
-        public static IUnRegister OnTriggerEnterEvent<T>(this T self, Action<Collider> onTriggerEnter, int priority = 0)
+        public static IUnRegister OnTriggerEnterEvent<T>(this T self, Action<Collider> onTriggerEnter, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnTriggerEnterEventTrigger>().OnTriggerEnterEvent

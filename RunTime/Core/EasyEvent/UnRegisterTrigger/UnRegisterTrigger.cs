@@ -18,7 +18,7 @@ namespace Framework3.Core
     public abstract class UnRegisterTrigger : MonoBehaviour
     {
         [ShowInInspector]
-        private readonly HashSet<IUnRegister> _unRegisters = new HashSet<IUnRegister>(); // 存储 IUnRegister 接口的实现类
+        private readonly HashSet<IUnRegister> _unRegisters = new(); // 存储 IUnRegister 接口的实现类
 
         /// <summary>
         /// 添加注销器

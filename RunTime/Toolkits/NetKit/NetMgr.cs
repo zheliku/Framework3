@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.NetKit
 {
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
 
     [MonoSingletonPath("Framework/NetKit")]

@@ -11,12 +11,8 @@ namespace Framework3.Core
     /// <summary>
     /// 继承该接口，即可设置 Architecture
     /// </summary>
-    public interface ICanSetArchitecture
+    public interface ICanSetArchitecture : IBelongToArchitecture
     {
-        /// <summary>
-        /// 设置 Architecture
-        /// </summary>
-        /// <param name="architecture">IArchitecture 实例</param>
-        void SetArchitecture(IArchitecture architecture);
+        new IArchitecture Architecture { set; }
     }
 }

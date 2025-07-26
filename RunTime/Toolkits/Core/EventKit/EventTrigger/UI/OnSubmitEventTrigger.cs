@@ -28,13 +28,13 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnSubmitEventTriggerExtension
     {
-        public static IUnRegister OnSubmitEvent<T>(this T self, Action<BaseEventData> onSubmit, int priority = 0)
+        public static IUnRegister OnSubmitEvent<T>(this T self, Action<BaseEventData> onSubmit, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnSubmitEventTrigger>().OnSubmitEvent.Register(onSubmit, priority);
         }
 
-        public static IUnRegister OnSubmitEvent(this GameObject self, Action<BaseEventData> onSubmit, int priority = 0)
+        public static IUnRegister OnSubmitEvent(this GameObject self, Action<BaseEventData> onSubmit, float priority = 0)
         {
             return self.GetOrAddComponent<OnSubmitEventTrigger>().OnSubmitEvent.Register(onSubmit, priority);
         }

@@ -19,17 +19,17 @@ namespace Framework3.Toolkits.AudioKit
 
         public AudioClip Clip { get => Handle.Result; }
 
-        public AudioClip LoadClip(string audioName)
+        public AudioClip LoadClip(string clipName)
         {
             // 默认通过 ResKit 加载音频
-            Handle = ResKit.LoadAsset<AudioClip>(audioName);
+            Handle = ResKit.LoadAsset<AudioClip>(clipName);
             return Handle.Result;
         }
 
-        public void LoadClipAsync(string audioName, Action<bool, AudioClip> onLoad = null)
+        public void LoadClipAsync(string clipName, Action<bool, AudioClip> onLoad = null)
         {
             // 默认通过 ResKit 加载音频
-            Handle = ResKit.LoadAssetAsync<AudioClip>(audioName, clip =>
+            Handle = ResKit.LoadAssetAsync<AudioClip>(clipName, clip =>
             {
                 onLoad?.Invoke(true, clip);
             });

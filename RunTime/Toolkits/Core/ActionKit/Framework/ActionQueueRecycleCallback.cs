@@ -8,24 +8,24 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using PoolKit;
+    using UnityEngine.Pool;
 
     public struct ActionQueueRecycleCallback<T> : IActionQueueCallback where T : class, IAction
     {
         /// <summary>
         /// 需要回收倒哪个 Pool 中
         /// </summary>
-        public ObjectPool<T> Pool;
+        private ObjectPool<T> _pool;
 
         /// <summary>
         /// 哪个 Action 需要回收
         /// </summary>
-        public T Action;
+        private T _action;
 
         public ActionQueueRecycleCallback(ObjectPool<T> pool, T action)
         {
-            Pool = pool;
-            Action = action;
+            _pool = pool;
+            _action = action;
         }
         
         /// <summary>
@@ -33,9 +33,9 @@ namespace Framework3.Toolkits.ActionKit
         /// </summary>
         public void Call()
         {
-            Pool.Release(Action);
-            Pool   = null;
-            Action = default;
+            _pool.Release(_action);
+            _pool   = null;
+            _action = null;
         }
     }
 }

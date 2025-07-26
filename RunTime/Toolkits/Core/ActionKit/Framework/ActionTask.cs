@@ -8,6 +8,8 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
+    using System;
+
     /// <summary>
     /// 包括 Action、Controller 和 OnFinish 回调
     /// </summary>
@@ -17,7 +19,7 @@ namespace Framework3.Toolkits.ActionKit
 
         public IActionController Controller;
 
-        public System.Action<IActionController> OnFinish;
+        public Action<IActionController> OnFinish;
 
         public void Recycle()
         {

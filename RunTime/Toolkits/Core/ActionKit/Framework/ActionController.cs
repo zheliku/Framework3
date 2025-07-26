@@ -8,26 +8,27 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using PoolKit;
+    using UnityEngine.Pool;
 
     public class ActionController : IActionController
     {
-        private static readonly ObjectPool<IActionController> _POOL = new ObjectPool<IActionController>(
-            () => new ActionController(),
-            null,
-            controller =>
+        private static readonly ObjectPool<IActionController> s_pool = new(
+            createFunc: () => new ActionController(),
+            actionOnGet: null,
+            actionOnRelease: controller =>
             {
                 controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
                 controller.ActionID   = 0;
                 controller.Action     = null;
             },
-            null,
-            true,
-            10);
-        
+            actionOnDestroy: null,
+            collectionCheck: true,
+            defaultCapacity: 10,
+            maxSize: 100);
+
         public static IActionController Spawn()
         {
-            return _POOL.Get() as ActionController;
+            return s_pool.Get() as ActionController;
         }
 
         public ulong ActionID { get; set; }
@@ -60,7 +61,7 @@ namespace Framework3.Toolkits.ActionKit
 
         public void Recycle()
         {
-            _POOL.Release(this);
+            s_pool.Release(this);
         }
     }
 }

@@ -8,15 +8,15 @@
 
 namespace Framework3.Core
 {
-    using global::System;
-    using global::System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 级联事件
     /// </summary>
     public sealed class OrEvent : IUnRegisterList
     {
-        public List<IUnRegister> UnregisterList { get; } = new List<IUnRegister>(); // 待注销列表
+        public List<IUnRegister> UnregisterList { get; } = new(); // 待注销列表
 
         private Action _onEvent = () => { }; // OrEvent 事件
 

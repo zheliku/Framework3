@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.AudioKit
     using System.Linq;
     using Framework3.Core;
     using PoolKit;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
     using UnityEngine;
     

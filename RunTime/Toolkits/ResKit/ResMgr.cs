@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.ResKit
     using System;
     using System.Collections.Generic;
     using FluentAPI;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;

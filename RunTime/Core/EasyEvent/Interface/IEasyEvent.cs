@@ -8,7 +8,7 @@
 
 namespace Framework3.Core
 {
-    using global::System;
+    using System;
 
     /// <summary>
     /// 轻量级事件
@@ -21,7 +21,7 @@ namespace Framework3.Core
         /// <param name="onEvent">事件方法</param>
         /// <param name="priority">事件优先级</param>
         /// <returns>注销器</returns>
-        IUnRegister Register(Action onEvent, int priority = 0);
+        IUnRegister Register(Action onEvent, float priority = 0);
 
         /// <summary>
         /// 注销所有事件

@@ -20,7 +20,7 @@ namespace Framework3.Core
     public sealed class IOCContainer
     {
         [ShowInInspector]
-        private Dictionary<Type, object> _instances = new Dictionary<Type, object>();
+        private Dictionary<Type, object> _instances = new();
 
         /// <summary>
         /// 注册实例
@@ -30,7 +30,6 @@ namespace Framework3.Core
         public void Register<T>(T instance)
         {
             var key = typeof(T);
-
             _instances[key] = instance; // 存在，则覆盖；否则，添加
         }
 

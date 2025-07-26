@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.ActionKit
 {
     using System.Collections.Generic;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     public class ActionQueue : MonoBehaviour, ISingleton
     {
         [ShowInInspector]
-        private static ActionQueue _Instance { get => MonoSingletonProperty<ActionQueue>.Instance; }
+        private static ActionQueue s_instance { get => MonoSingletonProperty<ActionQueue>.Instance; }
 
         /// <summary>
         /// 回收列表
@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.ActionKit
 
         public static void AddCallback(IActionQueueCallback actionQueueCallback)
         {
-            _Instance._actionQueueCallbacks.Add(actionQueueCallback);
+            s_instance._actionQueueCallbacks.Add(actionQueueCallback);
         }
 
         // Update is called once per frame

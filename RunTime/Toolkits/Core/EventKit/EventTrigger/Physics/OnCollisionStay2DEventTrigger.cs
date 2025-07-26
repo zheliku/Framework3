@@ -27,14 +27,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnCollisionStay2DEventTriggerExtension
     {
-        public static IUnRegister OnCollisionStay2DEvent<T>(this T self, Action<Collision2D> onCollisionStay2D, int priority = 0)
+        public static IUnRegister OnCollisionStay2DEvent<T>(this T self, Action<Collision2D> onCollisionStay2D, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnCollisionStay2DEventTrigger>().OnCollisionStay2DEvent
                        .Register(onCollisionStay2D, priority);
         }
 
-        public static IUnRegister OnCollisionStay2DEvent(this GameObject self, Action<Collision2D> onCollisionStay2D, int priority = 0)
+        public static IUnRegister OnCollisionStay2DEvent(this GameObject self, Action<Collision2D> onCollisionStay2D, float priority = 0)
         {
             return self.GetOrAddComponent<OnCollisionStay2DEventTrigger>().OnCollisionStay2DEvent
                        .Register(onCollisionStay2D, priority);

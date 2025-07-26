@@ -15,9 +15,9 @@ namespace Framework3.Toolkits.AudioKit
     {
         AudioClip Clip { get; }
 
-        AudioClip LoadClip(string audioName);
+        AudioClip LoadClip(string clipName);
 
-        void LoadClipAsync(string audioName, Action<bool, AudioClip> onLoad = null);
+        void LoadClipAsync(string clipName, Action<bool, AudioClip> onLoad = null);
 
         void Unload();
     }

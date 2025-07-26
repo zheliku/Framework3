@@ -8,68 +8,49 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
+    using System;
     using UnityEngine;
 
     public static class IActionExtension
     {
-        public static IActionController Start(this IAction self, Component component, System.Action<IActionController> onFinish = null)
+        public static IActionController Start(this IAction self, Component component, Action<IActionController> onFinish = null)
         {
-            var controller = ActionController.Spawn();
-            controller.ActionID   = self.ActionID;
-            controller.Action     = self;
-            controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
-            component.ExecuteByUpdate(self, controller, onFinish);
-            return controller;
+            return StartInternal(self, component.gameObject, onFinish);
         }
 
-        public static IActionController Start(this IAction self, Component component, System.Action onFinish)
+        public static IActionController Start(this IAction self, Component component, Action onFinish)
         {
-            var controller = ActionController.Spawn();
-            controller.ActionID   = self.ActionID;
-            controller.Action     = self;
-            controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
-            component.ExecuteByUpdate(self, controller, _ => onFinish());
-            return controller;
-        }
-        
-        public static IActionController Start(this IAction self, GameObject gameObject, System.Action<IActionController> onFinish = null)
-        {
-            var controller = ActionController.Spawn();
-            controller.ActionID   = self.ActionID;
-            controller.Action     = self;
-            controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
-            gameObject.ExecuteByUpdate(self, controller, onFinish);
-            return controller;
+            return StartInternal(self, component.gameObject, _ => onFinish());
         }
 
-        public static IActionController Start(this IAction self, GameObject gameObject, System.Action onFinish)
+        public static IActionController Start(this IAction self, GameObject gameObject, Action<IActionController> onFinish = null)
         {
-            var controller = ActionController.Spawn();
-            controller.ActionID   = self.ActionID;
-            controller.Action     = self;
-            controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
-            gameObject.ExecuteByUpdate(self, controller, _ => onFinish());
-            return controller;
+            return StartInternal(self, gameObject, onFinish);
         }
 
-        public static IActionController StartCurrentScene(this IAction self, System.Action<IActionController> onFinish = null)
+        public static IActionController Start(this IAction self, GameObject gameObject, Action onFinish)
         {
-            return self.Start(ActionKitCurrentScene.SceneComponent, onFinish);
+            return StartInternal(self, gameObject, _ => onFinish());
         }
 
-        public static IActionController StartCurrentScene(this IAction self, System.Action onFinish)
+        public static IActionController StartCurrentScene(this IAction self, Action<IActionController> onFinish = null)
         {
-            return self.Start(ActionKitCurrentScene.SceneComponent, onFinish);
+            return StartInternal(self, ActionKitCurrentScene.SceneComponent.gameObject, onFinish);
         }
 
-        public static IActionController StartGlobal(this IAction self, System.Action<IActionController> onFinish = null)
+        public static IActionController StartCurrentScene(this IAction self, Action onFinish)
         {
-            return self.Start(ActionKitMonoBehaviourEvent.Instance, onFinish);
+            return StartInternal(self, ActionKitCurrentScene.SceneComponent.gameObject, _ => onFinish());
         }
 
-        public static IActionController StartGlobal(this IAction self, System.Action onFinish)
+        public static IActionController StartGlobal(this IAction self, Action<IActionController> onFinish = null)
         {
-            return self.Start(ActionKitMonoBehaviourEvent.Instance, onFinish);
+            return StartInternal(self, ActionKitMonoBehaviourEvent.Instance.gameObject, onFinish);
+        }
+
+        public static IActionController StartGlobal(this IAction self, Action onFinish)
+        {
+            return StartInternal(self, ActionKitMonoBehaviourEvent.Instance.gameObject, _ => onFinish());
         }
 
         public static void Pause(this IActionController self)
@@ -132,6 +113,16 @@ namespace Framework3.Toolkits.ActionKit
             }
 
             return false;
+        }
+
+        private static IActionController StartInternal(IAction action, GameObject gameObject, Action<IActionController> onFinish = null)
+        {
+            var controller = ActionController.Spawn();
+            controller.ActionID   = action.ActionID;
+            controller.Action     = action;
+            controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
+            gameObject.ExecuteByUpdate(action, controller, onFinish);
+            return controller;
         }
     }
 }

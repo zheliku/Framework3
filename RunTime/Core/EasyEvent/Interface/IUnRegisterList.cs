@@ -8,7 +8,7 @@
 
 namespace Framework3.Core
 {
-    using global::System.Collections.Generic;
+    using System.Collections.Generic;
 
     /// <summary>
     /// 注销器列表接口

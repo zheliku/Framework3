@@ -63,7 +63,7 @@ namespace Framework3.Core
         /// <returns>注销器</returns>
         public static IUnRegister UnRegisterWhenGameObjectDestroyed<TComponent>(this IUnRegister self, TComponent component) where TComponent : Component
         {
-            return self.UnRegisterWhenGameObjectDestroyed(component.gameObject);
+            return GetOrAddComponent<UnRegisterOnDestroyTrigger>(component.gameObject).AddUnRegister(self); // 添加到 UnRegisterOnDestroyTrigger 中
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Framework3.Core
         /// <returns>注销器</returns>
         public static IUnRegister UnRegisterWhenGameObjectDisabled<TComponent>(this IUnRegister self, TComponent component) where TComponent : Component
         {
-            return self.UnRegisterWhenGameObjectDisabled(component.gameObject);
+            return GetOrAddComponent<UnRegisterOnDisableTrigger>(component.gameObject).AddUnRegister(self); // 添加到 UnRegisterOnDisableTrigger 中
         }
 
 

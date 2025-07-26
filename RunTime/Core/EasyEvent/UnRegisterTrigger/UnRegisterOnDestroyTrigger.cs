@@ -13,8 +13,8 @@ namespace Framework3.Core
     /// </summary>
     public sealed class UnRegisterOnDestroyTrigger : UnRegisterTrigger
     {
-        private void OnDestroy()
-        { // OnDestroy 时触发注销
+        private void OnDestroy() // OnDestroy 时触发注销
+        {
             UnRegister();
         }
     }

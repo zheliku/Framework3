@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using PoolKit;
+    using UnityEngine.Pool;
 
     /// <summary>
     /// Action 基类
@@ -16,28 +16,27 @@ namespace Framework3.Toolkits.ActionKit
     /// <typeparam name="TAction"></typeparam>
     public abstract class AbstractAction<TAction> : IAction where TAction : AbstractAction<TAction>, new()
     {
-        protected AbstractAction() { }
-
-        private static readonly ObjectPool<TAction> _POOL = new ObjectPool<TAction>(
-            () => new TAction(),
-            action =>
+        private static readonly ObjectPool<TAction> s_pool = new(
+            createFunc: () => new TAction(),
+            actionOnGet: action =>
             {
                 action.ActionID = ActionKit.IDGenerator++;
                 action.Deinited = false;
                 action.OnCreate();
                 action.Reset();
             },
-            null,
-            null,
-            true,
-            10);
+            actionOnRelease: null,
+            actionOnDestroy: null,
+            collectionCheck: true,
+            defaultCapacity: 10,
+            maxSize: 100);
 
         protected static TAction CreateInternal()
         {
-            return _POOL.Get();
+            return s_pool.Get();
         }
-        
-        public ulong ActionID { get; set; }
+
+        public ulong ActionID { get; protected set; }
 
         public ActionStatus Status { get; set; }
 
@@ -85,9 +84,11 @@ namespace Framework3.Toolkits.ActionKit
 
                 // 调用 OnDeinit() 方法
                 OnDeinit();
+                
+                s_pool.Release(this as TAction);
 
                 // 将当前对象添加到 ActionQueue 中，以便在适当的时候进行回收
-                ActionQueue.AddCallback(new ActionQueueRecycleCallback<TAction>(_POOL, this as TAction));
+                // ActionQueue.AddCallback(new ActionQueueRecycleCallback<TAction>(s_pool, this as TAction));
             }
         }
     }

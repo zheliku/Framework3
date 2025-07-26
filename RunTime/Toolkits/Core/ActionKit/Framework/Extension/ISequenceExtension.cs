@@ -15,9 +15,9 @@ namespace Framework3.Toolkits.ActionKit
     {
         public static ISequence Sequence(this ISequence self, Action<ISequence> sequenceSetting)
         {
-            var repeat = Toolkits.ActionKit.Sequence.Create();
-            sequenceSetting(repeat);
-            return self.Append(repeat);
+            var sequence = Toolkits.ActionKit.Sequence.Create();
+            sequenceSetting(sequence);
+            return self.Append(sequence);
         }
 
         public static ISequence DelayFrame(this ISequence self, int frameCount, Action onDelayFinish = null)

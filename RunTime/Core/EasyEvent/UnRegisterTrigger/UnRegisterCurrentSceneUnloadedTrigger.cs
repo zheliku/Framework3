@@ -16,26 +16,24 @@ namespace Framework3.Core
     /// </summary>
     public sealed class UnRegisterCurrentSceneUnloadedTrigger : UnRegisterTrigger
     {
-        private static UnRegisterCurrentSceneUnloadedTrigger _Default;
+        private static UnRegisterCurrentSceneUnloadedTrigger s_default;
 
-        public static UnRegisterCurrentSceneUnloadedTrigger Default
-        { // 单例模式
+        public static UnRegisterCurrentSceneUnloadedTrigger Default // 单例模式
+        {
             get
             {
-                if (!_Default)
+                if (!s_default)
                 {
-                    _Default = new GameObject("UnRegisterCurrentSceneUnloadedTrigger").AddComponent<UnRegisterCurrentSceneUnloadedTrigger>();
+                    s_default = new GameObject("UnRegisterCurrentSceneUnloadedTrigger").AddComponent<UnRegisterCurrentSceneUnloadedTrigger>();
                 }
 
-                return _Default;
+                return s_default;
             }
         }
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
-
-            // hideFlags =  HideFlags.HideInHierarchy;
             SceneManager.sceneUnloaded += OnSceneUnloaded; // 注册场景卸载事件
         }
 

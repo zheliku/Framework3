@@ -8,8 +8,8 @@
 
 namespace Framework3.Core
 {
-    using global::System;
-    using global::System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
     using Sirenix.OdinInspector;
 
     /// <summary>
@@ -17,10 +17,10 @@ namespace Framework3.Core
     /// </summary>
     public sealed class EasyEvents
     {
-        private static readonly EasyEvents GLOBAL_EVENTS = new EasyEvents();
+        private static readonly EasyEvents s_globalEvents = new();
 
         [ShowInInspector]
-        private readonly Dictionary<Type, IEasyEvent> _typeEvents = new Dictionary<Type, IEasyEvent>();
+        private readonly Dictionary<Type, IEasyEvent> _typeEvents = new();
 
         /// <summary>
         /// 获取 EasyEvent，用于 GLOBAL_EVENTS
@@ -29,7 +29,7 @@ namespace Framework3.Core
         /// <returns>EasyEvent 实例</returns>
         public static TEasyEvent Get<TEasyEvent>() where TEasyEvent : IEasyEvent
         {
-            return GLOBAL_EVENTS.GetEvent<TEasyEvent>();
+            return s_globalEvents.GetEvent<TEasyEvent>();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Framework3.Core
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         public static void Register<TEasyEvent>() where TEasyEvent : IEasyEvent, new()
         {
-            GLOBAL_EVENTS.AddEvent<TEasyEvent>();
+            s_globalEvents.AddEvent<TEasyEvent>();
         }
 
         /// <summary>

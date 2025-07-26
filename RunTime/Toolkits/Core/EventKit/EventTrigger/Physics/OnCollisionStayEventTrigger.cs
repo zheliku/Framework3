@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnCollisionStayEventTriggerExtension
     {
-        public static IUnRegister OnCollisionStayEvent<T>(this T self, Action<Collision> onCollisionStay, int priority = 0)
+        public static IUnRegister OnCollisionStayEvent<T>(this T self, Action<Collision> onCollisionStay, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnCollisionStayEventTrigger>().OnCollisionStayEvent

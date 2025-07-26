@@ -8,17 +8,16 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using FluentAPI;
     using UnityEngine;
 
     public class ScreenTransitionFade : AbstractAction<ScreenTransitionFade>
     {
-        private Color _color          = UnityEngine.Color.black;
-        private float _fromAlpha      = 0;
-        private float _toAlpha        = 0;
-        private float _duration       = 1.0f;
+        private Color _color = UnityEngine.Color.black;
+        private float _fromAlpha = 0;
+        private float _toAlpha = 0;
+        private float _duration = 1.0f;
         private float _currentSeconds = 0;
-        
+
         public static ScreenTransitionFade Create()
         {
             return CreateInternal();
@@ -52,8 +51,12 @@ namespace Framework3.Toolkits.ActionKit
 
         public override void OnStart()
         {
-            ScreenTransitionCanvas.Instance.ColorImage.color = _color;
-            ScreenTransitionCanvas.Instance.ColorImage.SetColor(a: _fromAlpha);
+            ScreenTransitionCanvas.Instance.ColorImage.color = new Color(
+                _color.r,
+                _color.g,
+                _color.b,
+                _fromAlpha
+            );
             _currentSeconds = 0;
         }
 
@@ -62,7 +65,12 @@ namespace Framework3.Toolkits.ActionKit
             _currentSeconds += dt;
 
             var alpha = Mathf.Lerp(_fromAlpha, _toAlpha, _currentSeconds / _duration);
-            ScreenTransitionCanvas.Instance.ColorImage.SetColor(a: alpha);
+            ScreenTransitionCanvas.Instance.ColorImage.color = new Color(
+                _color.r,
+                _color.g,
+                _color.b,
+                alpha
+            );
 
             if (_currentSeconds >= _duration)
             {
@@ -72,7 +80,12 @@ namespace Framework3.Toolkits.ActionKit
 
         public override void OnFinish()
         {
-            ScreenTransitionCanvas.Instance.ColorImage.SetColor(a: _toAlpha);
+            ScreenTransitionCanvas.Instance.ColorImage.color = new Color(
+                _color.r,
+                _color.g,
+                _color.b,
+                _toAlpha
+            );
         }
 
         protected override void OnReset() { }

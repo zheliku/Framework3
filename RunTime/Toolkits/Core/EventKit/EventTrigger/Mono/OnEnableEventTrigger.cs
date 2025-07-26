@@ -19,14 +19,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnEnableEventTriggerExtension
     {
-        public static IUnRegister OnEnableEvent<T>(this T self, Action onEnable, int priority = 0)
+        public static IUnRegister OnEnableEvent<T>(this T self, Action onEnable, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnEnableEventTrigger>().OnEnableEvent
                        .Register(onEnable, priority);
         }
 
-        public static IUnRegister OnEnableEvent(this GameObject self, Action onEnable, int priority = 0)
+        public static IUnRegister OnEnableEvent(this GameObject self, Action onEnable, float priority = 0)
         {
             return self.GetOrAddComponent<OnEnableEventTrigger>().OnEnableEvent
                        .Register(onEnable, priority);

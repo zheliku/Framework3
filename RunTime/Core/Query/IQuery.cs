@@ -18,11 +18,6 @@ namespace Framework3.Core
         ICanSetArchitecture,               // IQuery 可设置 Architecture
         ICanSendQuery                      // IQuery 可发送 Query
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // void SetArchitecture(IArchitecture architecture);
-        // *************** 继承的接口 ↑ *****************
-
         /// <summary>
         /// 执行查询
         /// </summary>

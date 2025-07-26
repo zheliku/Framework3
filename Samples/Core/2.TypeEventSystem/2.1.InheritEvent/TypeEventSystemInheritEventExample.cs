@@ -23,7 +23,7 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
 
         private void Start()
         {
-            TypeEventSystem.GLOBAL.Register<IEventA>(Debug.Log)
+            TypeEventSystem.Global.Register<IEventA>(Debug.Log)
                            .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -31,13 +31,13 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
         {
             if (GUILayout.Button("Send<IEventA>(new EventB())", GUILayout.Width(200), GUILayout.Height(50)))
             {
-                TypeEventSystem.GLOBAL.Send<IEventA>(new EventB());
+                TypeEventSystem.Global.Send<IEventA>(new EventB());
             }
 
             if (GUILayout.Button("Send<EventB>()", GUILayout.Width(200), GUILayout.Height(50)))
             {
                 // 无效，因为注册的是 EasyEvent<IEventA>，而不是 EasyEvent<EventB>
-                TypeEventSystem.GLOBAL.Send<EventB>();
+                TypeEventSystem.Global.Send<EventB>();
             }
         }
     }

@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.PoolKit
     using System;
     using System.Collections.Generic;
     using Framework3.Core;
-    using SingletonKit;
+    using Core;
 
     /// <summary>
     /// 对象必须继承 IPoolable

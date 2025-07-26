@@ -28,13 +28,13 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnPointerClickEventTriggerExtension
     {
-        public static IUnRegister OnPointerClickEvent<T>(this T self, Action<PointerEventData> onPointerClick, int priority = 0)
+        public static IUnRegister OnPointerClickEvent<T>(this T self, Action<PointerEventData> onPointerClick, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnPointerClickEventTrigger>().OnPointerClickEvent.Register(onPointerClick, priority);
         }
 
-        public static IUnRegister OnPointerClickEvent(this GameObject self, Action<PointerEventData> onPointerClick, int priority = 0)
+        public static IUnRegister OnPointerClickEvent(this GameObject self, Action<PointerEventData> onPointerClick, float priority = 0)
         {
             return self.GetOrAddComponent<OnPointerClickEventTrigger>().OnPointerClickEvent.Register(onPointerClick, priority);
         }

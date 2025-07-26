@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnTriggerExit2DEventTriggerExtension
     {
-        public static IUnRegister OnTriggerExit2DEvent<T>(this T self, Action<Collider2D> onTriggerExit2D, int priority = 0)
+        public static IUnRegister OnTriggerExit2DEvent<T>(this T self, Action<Collider2D> onTriggerExit2D, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnTriggerExit2DEventTrigger>().OnTriggerExit2DEvent

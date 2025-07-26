@@ -15,29 +15,24 @@ namespace Framework3.Toolkits.ActionKit
     /// </summary>
     public class ActionKitCurrentScene : MonoBehaviour
     {
-        private static ActionKitCurrentScene _SceneComponent = null;
+        private static ActionKitCurrentScene s_sceneComponent = null;
 
         public static ActionKitCurrentScene SceneComponent
         {
             get
             {
-                if (!_SceneComponent)
+                if (!s_sceneComponent)
                 {
-                    _SceneComponent = new GameObject(nameof(ActionKitCurrentScene)).AddComponent<ActionKitCurrentScene>();
+                    s_sceneComponent = new GameObject(nameof(ActionKitCurrentScene)).AddComponent<ActionKitCurrentScene>();
                 }
 
-                return _SceneComponent;
+                return s_sceneComponent;
             }
-        }
-
-        private void Awake()
-        {
-            // hideFlags = HideFlags.HideInHierarchy;
         }
 
         private void OnDestroy()
         {
-            _SceneComponent = null;
+            s_sceneComponent = null;
         }
     }
 }

@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using SingletonKit;
+    using Core;
     using UnityEngine;
     using UnityEngine.UI;
 

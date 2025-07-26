@@ -24,7 +24,6 @@ namespace Framework3.Core
             AbstractViewExtension.BindHierarchyComponent(this);
         }
         
-        // 仅能通过 IBelongToArchitecture 接口访问 Architecture 属性
         IArchitecture IBelongToArchitecture.Architecture
         {
             get => _Architecture;

@@ -28,14 +28,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnPointerDownEventTriggerExtension
     {
-        public static IUnRegister OnPointerDownEvent<T>(this T self, Action<PointerEventData> onPointerDownEvent, int priority = 0)
+        public static IUnRegister OnPointerDownEvent<T>(this T self, Action<PointerEventData> onPointerDownEvent, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnPointerDownEventTrigger>().OnPointerDownEvent
                        .Register(onPointerDownEvent, priority);
         }
 
-        public static IUnRegister OnPointerDownEvent(this GameObject self, Action<PointerEventData> onPointerDownEvent, int priority = 0)
+        public static IUnRegister OnPointerDownEvent(this GameObject self, Action<PointerEventData> onPointerDownEvent, float priority = 0)
         {
             return self.GetOrAddComponent<OnPointerDownEventTrigger>().OnPointerDownEvent
                        .Register(onPointerDownEvent, priority);

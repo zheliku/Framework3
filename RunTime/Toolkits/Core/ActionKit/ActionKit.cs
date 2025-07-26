@@ -6,13 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.ActionKit
 {
     using System;
     using System.Collections;
-    using Framework3.Core;
+    using Core;
 
     public partial class ActionKit : AbstractArchitecture<ActionKit>
     {
@@ -39,7 +37,7 @@ namespace Framework3.Toolkits.ActionKit
         /// // Sequence Finish: 0.984723
         /// ]]>
         /// </code> </example>
-        public static IAction Callback(global::System.Action callback)
+        public static IAction Callback(Action callback)
         {
             return Toolkits.ActionKit.Callback.Create(callback);
         }
@@ -60,7 +58,7 @@ namespace Framework3.Toolkits.ActionKit
         /// // End Time: 1.986583
         /// ]]>
         /// </code> </example>
-        public static IAction Delay(float seconds, global::System.Action callback)
+        public static IAction Delay(float seconds, Action callback)
         {
             return Toolkits.ActionKit.Delay.Create(seconds, callback);
         }
@@ -108,7 +106,7 @@ namespace Framework3.Toolkits.ActionKit
         /// // Sequence Delay FrameCount: 11
         /// ]]>
         /// </code> </example>
-        public static IAction DelayFrame(int frameCount, global::System.Action onDelayFinish = null)
+        public static IAction DelayFrame(int frameCount, Action onDelayFinish = null)
         {
             return Toolkits.ActionKit.DelayFrame.Create(frameCount, onDelayFinish);
         }
@@ -126,7 +124,7 @@ namespace Framework3.Toolkits.ActionKit
         ///          .Start(this);
         /// ]]>
         /// </code> </example>
-        public static IAction NextFrame(global::System.Action onDelayFinish = null)
+        public static IAction NextFrame(Action onDelayFinish = null)
         {
             return Toolkits.ActionKit.DelayFrame.Create(1, onDelayFinish);
         }
@@ -298,12 +296,12 @@ namespace Framework3.Toolkits.ActionKit
             return Toolkits.ActionKit.Coroutine.Create(coroutineGetter);
         }
 
-        public static IAction Lerp(float a, float b, float duration, global::System.Action<float> onLerp, global::System.Action onLerpFinish = null)
+        public static IAction Lerp(float a, float b, float duration, Action<float> onLerp, Action onLerpFinish = null)
         {
             return Toolkits.ActionKit.Lerp.Create(a, b, duration, onLerp, onLerpFinish);
         }
 
-        public static IAction Lerp01(float duration, global::System.Action<float> onLerp, global::System.Action onLerpFinish = null)
+        public static IAction Lerp01(float duration, Action<float> onLerp, Action onLerpFinish = null)
         {
             return Toolkits.ActionKit.Lerp.Create(0, 1, duration, onLerp, onLerpFinish);
         }
@@ -349,7 +347,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent OnUpdate { get => ActionKitMonoBehaviourEvent.Instance.OnUpdate; }
+        public static EasyEvent OnUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnUpdate;
+        }
 
         /// <summary>
         /// OnFixedUpdate 生命周期支持
@@ -363,7 +364,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent OnFixedUpdate { get => ActionKitMonoBehaviourEvent.Instance.OnFixedUpdate; }
+        public static EasyEvent OnFixedUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnFixedUpdate;
+        }
 
         /// <summary>
         /// OnLateUpdate 生命周期支持
@@ -377,7 +381,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent OnLateUpdate { get => ActionKitMonoBehaviourEvent.Instance.OnLateUpdate; }
+        public static EasyEvent OnLateUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnLateUpdate;
+        }
 
         /// <summary>
         /// OnGUI 生命周期支持
@@ -391,7 +398,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent OnGUI { get => ActionKitMonoBehaviourEvent.Instance.OnGUIEvent; }
+        public static EasyEvent OnGUI
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnGUIEvent;
+        }
 
         /// <summary>
         /// OnApplicationQuit 生命周期支持
@@ -404,7 +414,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent OnApplicationQuit { get => ActionKitMonoBehaviourEvent.Instance.OnApplicationQuitEvent; }
+        public static EasyEvent OnApplicationQuit
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationQuitEvent;
+        }
 
         /// <summary>
         /// OnApplicationPause 生命周期支持
@@ -417,7 +430,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent<bool> OnApplicationPause { get => ActionKitMonoBehaviourEvent.Instance.OnApplicationPauseEvent; }
+        public static EasyEvent<bool> OnApplicationPause
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationPauseEvent;
+        }
 
         /// <summary>
         /// OnApplicationFocus 生命周期支持
@@ -430,7 +446,10 @@ namespace Framework3.Toolkits.ActionKit
         /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
-        public static EasyEvent<bool> OnApplicationFocus { get => ActionKitMonoBehaviourEvent.Instance.OnApplicationFocusEvent; }
+        public static EasyEvent<bool> OnApplicationFocus
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationFocusEvent;
+        }
 
         public static void ClearGlobal()
         {

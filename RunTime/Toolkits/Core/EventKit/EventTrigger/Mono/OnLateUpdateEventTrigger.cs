@@ -17,7 +17,7 @@
 
     public static class OnLateUpdateEventTriggerExtension
     {
-        public static IUnRegister OnLateUpdateEvent<T>(this T self, Action update, int priority = 0)
+        public static IUnRegister OnLateUpdateEvent<T>(this T self, Action update, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnLateUpdateEventTrigger>().LateUpdateEvent

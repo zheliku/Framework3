@@ -9,11 +9,12 @@
 namespace Framework3.Toolkits.ActionKit
 {
     public interface IAction : IAction<ActionStatus>
-    { }
+    {
+    }
 
     public interface IAction<TStatus>
     {
-        ulong ActionID { get; set; }
+        ulong ActionID { get; }
 
         TStatus Status { get; set; }
 

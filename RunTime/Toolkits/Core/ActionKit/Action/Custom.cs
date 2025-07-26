@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.ActionKit
 {
     using System;
-    using PoolKit;
+    using UnityEngine.Pool;
 
     public interface ICustomAPI<TData>
     {
@@ -24,7 +24,7 @@ namespace Framework3.Toolkits.ActionKit
         void Finish();
     }
 
-    internal class Custom<TData> : AbstractAction<Custom<TData>>, ICustomAPI<TData>
+    public class Custom<TData> : AbstractAction<Custom<TData>>, ICustomAPI<TData>
     {
     #region Static
 
@@ -37,9 +37,9 @@ namespace Framework3.Toolkits.ActionKit
 
     #region 字段
 
-        protected Action        _onStart;
+        protected Action _onStart;
         protected Action<float> _onExecute;
-        protected Action        _onFinish;
+        protected Action _onFinish;
 
     #endregion
 
@@ -100,25 +100,26 @@ namespace Framework3.Toolkits.ActionKit
     #endregion
     }
 
-    internal class Custom : Custom<object>
+    public class Custom : Custom<object>
     {
         protected Custom() { }
 
-        private static readonly ObjectPool<Custom> _OBJECT_POOL = new ObjectPool<Custom>(
-            () => new Custom(),
-            custom =>
+        private static readonly ObjectPool<Custom> s_objectPool = new(
+            createFunc: () => new Custom(),
+            actionOnGet: custom =>
             {
                 custom.Deinited = false;
                 custom.Reset();
             },
-            null,
-            null,
-            true,
-            10);
+            actionOnRelease: null,
+            actionOnDestroy: null,
+            collectionCheck: true,
+            defaultCapacity: 10,
+            maxSize: 100);
 
         public new static Custom Create()
         {
-            return _OBJECT_POOL.Get();
+            return s_objectPool.Get();
         }
 
         public new void Deinit()
@@ -130,7 +131,7 @@ namespace Framework3.Toolkits.ActionKit
                 _onExecute = null;
                 _onFinish  = null;
 
-                _OBJECT_POOL.Release(this);
+                s_objectPool.Release(this);
             }
         }
     }

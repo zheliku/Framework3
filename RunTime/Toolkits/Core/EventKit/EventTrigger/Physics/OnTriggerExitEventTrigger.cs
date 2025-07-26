@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnTriggerExitEventTriggerExtension
     {
-        public static IUnRegister OnTriggerExitEvent<T>(this T self, Action<Collider> onTriggerExit, int priority = 0)
+        public static IUnRegister OnTriggerExitEvent<T>(this T self, Action<Collider> onTriggerExit, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnTriggerExitEventTrigger>().OnTriggerExitEvent

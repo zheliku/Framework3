@@ -17,12 +17,5 @@ namespace Framework3.Core
         ICanSetArchitecture,  // IModel 可设置 Architecture
         ICanSendEvent         // IModel 可发送 Event
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // void SetArchitecture(IArchitecture architecture);
-        // bool Initialized { get; set; }
-        // void Init();
-        // void Deinit();
-        // *************** 继承的接口 ↑ *****************
     }
 }

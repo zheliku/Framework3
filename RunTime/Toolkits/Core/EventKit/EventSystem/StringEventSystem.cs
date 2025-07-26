@@ -23,7 +23,7 @@ namespace Framework3.Toolkits.EventKit
         [ShowInInspector]
         private readonly Dictionary<string, IEasyEvent> _events = new Dictionary<string, IEasyEvent>(50);
 
-        public IUnRegister Register(string key, Action onEvent, int priority = 0)
+        public IUnRegister Register(string key, Action onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -38,7 +38,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
 
-        public IUnRegister Register<TArg>(string key, Action<TArg> onEvent, int priority = 0)
+        public IUnRegister Register<TArg>(string key, Action<TArg> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -53,7 +53,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
         
-        public IUnRegister Register<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent, int priority = 0)
+        public IUnRegister Register<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
         
-        public IUnRegister Register<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent, int priority = 0)
+        public IUnRegister Register<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {

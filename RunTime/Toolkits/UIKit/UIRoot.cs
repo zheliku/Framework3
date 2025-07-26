@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.UIKit
 {
     using ResKit;
-    using SingletonKit;
+    using Core;
     using UnityEngine;
     using UnityEngine.UI;
 

@@ -21,15 +21,15 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._2.UnRegister
 
         private void Start()
         {
-            TypeEventSystem.GLOBAL.Register<EventA>(OnEventA);                                         // 需要手动注销事件
-            TypeEventSystem.GLOBAL.Register<EventB>(b => { }).UnRegisterWhenGameObjectDestroyed(this); // 自动注销事件
+            TypeEventSystem.Global.Register<EventA>(OnEventA);                                         // 需要手动注销事件
+            TypeEventSystem.Global.Register<EventB>(b => { }).UnRegisterWhenGameObjectDestroyed(this); // 自动注销事件
         }
 
         void OnEventA(EventA e) { }
 
         private void OnDestroy()
         {
-            TypeEventSystem.GLOBAL.UnRegister<EventA>(OnEventA); // 在 OnDestroy 中手动注销事件
+            TypeEventSystem.Global.UnRegister<EventA>(OnEventA); // 在 OnDestroy 中手动注销事件
         }
     }
 }

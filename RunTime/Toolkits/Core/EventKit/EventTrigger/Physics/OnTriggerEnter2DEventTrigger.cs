@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnTriggerEnter2DEventTriggerExtension
     {
-        public static IUnRegister OnTriggerEnter2DEvent<T>(this T self, Action<Collider2D> onTriggerEnter2D, int priority = 0)
+        public static IUnRegister OnTriggerEnter2DEvent<T>(this T self, Action<Collider2D> onTriggerEnter2D, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnTriggerEnter2DEventTrigger>().OnTriggerEnter2DEvent

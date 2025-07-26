@@ -17,7 +17,7 @@
 
     public static class OnFixedUpdateEventTriggerExtension
     {
-        public static IUnRegister OnFixedUpdateEvent<T>(this T self, Action update, int priority = 0)
+        public static IUnRegister OnFixedUpdateEvent<T>(this T self, Action update, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnFixedUpdateEventTrigger>().FixedUpdateEvent

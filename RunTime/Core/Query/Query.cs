@@ -19,9 +19,15 @@ namespace Framework3.Core
     {
         private IArchitecture _architecture;
 
-        public IArchitecture Architecture => _architecture;
+        public IArchitecture Architecture
+        {
+            get => _architecture;
+        }
 
-        public void SetArchitecture(IArchitecture architecture) { _architecture = architecture; }
+        IArchitecture ICanSetArchitecture.Architecture
+        {
+            set => _architecture = value;
+        }
 
         public TResult Do() { return OnDo(); }
 

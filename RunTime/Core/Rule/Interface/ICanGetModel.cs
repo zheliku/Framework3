@@ -13,8 +13,5 @@ namespace Framework3.Core
     /// </summary>
     public interface ICanGetModel : IBelongToArchitecture
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // *************** 继承的接口 ↑ *****************
     }
 }

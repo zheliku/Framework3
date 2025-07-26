@@ -9,7 +9,6 @@
 namespace Framework3.Toolkits.ActionKit
 {
     using System.Collections.Generic;
-    using PoolKit;
 
     /// <summary>
     /// 并行 Action
@@ -30,7 +29,7 @@ namespace Framework3.Toolkits.ActionKit
 
     #region 字段
 
-        private List<IAction> _actions = new List<IAction>();
+        private readonly List<IAction> _actions = new();
 
         private int _finishedCount; // 已完成的 Action 数量
 

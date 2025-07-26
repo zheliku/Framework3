@@ -19,8 +19,5 @@ namespace Framework3.Core
         ICanSendCommand,     // IView 可发送 Command
         ICanSendQuery        // IView 可发送 Query
     {
-        // *************** 继承的接口 ↓ *****************
-        // IArchitecture Architecture { get; }
-        // *************** 继承的接口 ↑ *****************
     }
 }

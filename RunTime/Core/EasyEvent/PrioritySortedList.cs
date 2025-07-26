@@ -21,11 +21,9 @@ namespace Framework3.Core
     public class PrioritySortedList<TElement, TPriority> : IEnumerable<TElement>
     {
         [ShowInInspector]
-        private readonly List<Entry> _elements = new List<Entry>();
+        private readonly List<Entry> _elements = new();
 
         private int _sequenceCounter;
-
-        private readonly IComparer<TPriority> _priorityComparer;
 
         private readonly EntryComparer _entryComparer;
 
@@ -33,8 +31,8 @@ namespace Framework3.Core
 
         public PrioritySortedList(IComparer<TPriority> priorityComparer)
         {
-            _priorityComparer = priorityComparer ?? throw new ArgumentNullException(nameof(priorityComparer));
-            _entryComparer    = new EntryComparer(_priorityComparer);
+            var priorityComparer1 = priorityComparer ?? throw new ArgumentNullException(nameof(priorityComparer));
+            _entryComparer    = new EntryComparer(priorityComparer1);
         }
 
         public void Add(TElement element, TPriority priority)

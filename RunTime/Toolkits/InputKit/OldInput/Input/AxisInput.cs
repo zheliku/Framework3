@@ -6,16 +6,14 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using System.Collections.Generic;
-using Framework3.Toolkits.SingletonKit;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
 namespace Framework3.Toolkits.InputKit
 {
     using System;
-    using Framework3.Core;
-
+    using Core;
+    using System.Collections.Generic;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
+    
     [MonoSingletonPath("Framework/InputKit/OldInput/AxisInput")]
     public class AxisInput : MonoSingleton<AxisInput>
     {

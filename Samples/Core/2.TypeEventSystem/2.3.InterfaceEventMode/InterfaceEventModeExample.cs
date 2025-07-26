@@ -53,12 +53,12 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._3.InterfaceEventMode
         {
             if (GUILayout.Button("Send<InterfaceEventA>()", GUILayout.Width(200), GUILayout.Height(50)))
             {
-                TypeEventSystem.GLOBAL.Send<InterfaceEventA>();
+                TypeEventSystem.Global.Send<InterfaceEventA>();
             }
 
             if (GUILayout.Button("Send<InterfaceEventB>()", GUILayout.Width(200), GUILayout.Height(50)))
             {
-                TypeEventSystem.GLOBAL.Send<InterfaceEventB>();
+                TypeEventSystem.Global.Send<InterfaceEventB>();
             }
         }
     }

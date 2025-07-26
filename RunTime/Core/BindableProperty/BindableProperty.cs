@@ -80,7 +80,7 @@ namespace Framework3.Core
         protected TProperty _value;
 
         [ShowInInspector] [PropertyOrder(1)]
-        protected EasyEvent<TProperty, TProperty> _onValueChanged = new EasyEvent<TProperty, TProperty>();
+        protected EasyEvent<TProperty, TProperty> _onValueChanged = new();
 
     #endregion
 
@@ -93,7 +93,7 @@ namespace Framework3.Core
             set
             {
                 var oldValue = _value;
-                
+
                 if (value == this)
                 {
                     if (_triggerWhenSameValue)
@@ -103,34 +103,43 @@ namespace Framework3.Core
 
                     return;
                 }
-                
+
                 SetValue(value);
 
                 _onValueChanged.Trigger(oldValue, value);
             }
         }
-        
-        public int EventCount { get => _onValueChanged.EventCount; }
 
-        public void SetValueWithoutEvent(TProperty newValue) { _value = newValue; }
+        public int EventCount
+        {
+            get => _onValueChanged.EventCount;
+        }
 
-        public IUnRegister RegisterWithInitValue(Action<TProperty, TProperty> onValueChanged, int priority = 0)
+        public void SetValueWithoutEvent(TProperty newValue)
+        {
+            _value = newValue;
+        }
+
+        public IUnRegister RegisterWithInitValue(Action<TProperty, TProperty> onValueChanged, float priority = 0)
         {
             onValueChanged(_value, _value);
             return Register(onValueChanged, priority);
         }
 
-        public void UnRegister(Action<TProperty, TProperty> onValueChanged) { _onValueChanged.UnRegister(onValueChanged); }
+        public void UnRegister(Action<TProperty, TProperty> onValueChanged)
+        {
+            _onValueChanged.UnRegister(onValueChanged);
+        }
 
         public void UnRegisterAll() { _onValueChanged.UnRegisterAll(); }
 
-        public IUnRegister Register(Action<TProperty, TProperty> onValueChanged, int priority = 0)
+        public IUnRegister Register(Action<TProperty, TProperty> onValueChanged, float priority = 0)
         {
             return _onValueChanged.Register(onValueChanged, priority);
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, int priority) { return Register((_, _) => onEvent()); }
+        IUnRegister IEasyEvent.Register(Action onEvent, float priority) { return Register((_, _) => onEvent()); }
 
     #endregion
 
@@ -166,7 +175,7 @@ namespace Framework3.Core
 
             if (obj is BindableProperty<TProperty> bindableProperty)
             {
-                return Equals(Value, (TProperty) bindableProperty);
+                return Equals(Value, (TProperty)bindableProperty);
             }
 
             return false;
@@ -179,7 +188,7 @@ namespace Framework3.Core
                 return Value is null;
             }
 
-            return Equals(Value, (TProperty) other);
+            return Equals(Value, (TProperty)other);
         }
 
         public override int GetHashCode()

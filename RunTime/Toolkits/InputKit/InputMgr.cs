@@ -10,7 +10,7 @@ namespace Framework3.Toolkits.InputKit
 {
     using System.Collections.Generic;
     using FluentAPI;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;
 

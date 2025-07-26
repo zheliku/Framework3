@@ -8,8 +8,10 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
+    using System;
+
     public interface IActionExecutor
     {
-        void Execute(IActionController controller, System.Action<IActionController> onFinish = null);
+        void Execute(IActionController controller, Action<IActionController> onFinish = null);
     }
 }

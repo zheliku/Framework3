@@ -366,7 +366,7 @@ namespace Framework3.Toolkits.FluentAPI
             return component.gameObject.GetOrAddComponent(type);
         }
 
-        public static GameObject DestroyWhenGameObjectDisabled(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DestroyWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
@@ -375,7 +375,7 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
-        public static GameObject DestroyWhenGameObjectDestroyed(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DestroyWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
@@ -384,7 +384,7 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
-        public static GameObject DestroyGracefullyWhenGameObjectDisabled(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DestroyGracefullyWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
@@ -393,7 +393,7 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
-        public static GameObject DestroyGracefullyWhenGameObjectDestroyed(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DestroyGracefullyWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
@@ -402,7 +402,7 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
-        public static GameObject DisableWhenGameObjectDisabled(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DisableWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
@@ -411,7 +411,7 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
-        public static GameObject DisableWhenGameObjectDestroyed(this GameObject self, GameObject target, int priority = 0)
+        public static GameObject DisableWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {

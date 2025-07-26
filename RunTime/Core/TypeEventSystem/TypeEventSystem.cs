@@ -8,7 +8,7 @@
 
 namespace Framework3.Core
 {
-    using global::System;
+    using System;
     using Sirenix.OdinInspector;
 
     /// <summary>
@@ -17,9 +17,9 @@ namespace Framework3.Core
     public sealed class TypeEventSystem
     {
         [ShowInInspector]
-        private readonly EasyEvents _events = new EasyEvents();
+        private readonly EasyEvents _events = new();
 
-        public static readonly TypeEventSystem GLOBAL = new TypeEventSystem();
+        public static readonly TypeEventSystem Global = new();
 
         /// <summary>
         /// 发送 Event，参数使用默认构造函数 new() 传入
@@ -47,7 +47,7 @@ namespace Framework3.Core
         /// <param name="onEvent">事件触发时的回调函数</param>
         /// <param name="priority">事件优先级</param>
         /// <returns>IUnRegister 接口，用于取消注册</returns>
-        public IUnRegister Register<TEvent>(Action<TEvent> onEvent, int priority = 0)
+        public IUnRegister Register<TEvent>(Action<TEvent> onEvent, float priority = 0)
         {
             return _events.GetOrAddEvent<EasyEvent<TEvent>>().Register(onEvent, priority);
         }

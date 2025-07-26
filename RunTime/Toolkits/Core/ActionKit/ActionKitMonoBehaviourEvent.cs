@@ -6,14 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.ActionKit
 {
     using System;
     using System.Collections;
-    using Framework3.Core;
-    using SingletonKit;
+    using Core;
     using Sirenix.OdinInspector;
 
     /// <summary>
@@ -22,30 +19,25 @@ namespace Framework3.Toolkits.ActionKit
     public class ActionKitMonoBehaviourEvent : MonoSingleton<ActionKitMonoBehaviourEvent>
     {
         [ShowInInspector]
-        internal readonly EasyEvent OnUpdate = new EasyEvent();
+        public readonly EasyEvent OnUpdate = new EasyEvent();
 
         [ShowInInspector]
-        internal readonly EasyEvent OnFixedUpdate = new EasyEvent();
+        public readonly EasyEvent OnFixedUpdate = new EasyEvent();
 
         [ShowInInspector]
-        internal readonly EasyEvent OnLateUpdate = new EasyEvent();
+        public readonly EasyEvent OnLateUpdate = new EasyEvent();
 
         [ShowInInspector]
-        internal readonly EasyEvent OnGUIEvent = new EasyEvent();
+        public readonly EasyEvent OnGUIEvent = new EasyEvent();
 
         [ShowInInspector]
-        internal readonly EasyEvent<bool> OnApplicationFocusEvent = new EasyEvent<bool>();
+        public readonly EasyEvent<bool> OnApplicationFocusEvent = new EasyEvent<bool>();
 
         [ShowInInspector]
-        internal readonly EasyEvent<bool> OnApplicationPauseEvent = new EasyEvent<bool>();
+        public readonly EasyEvent<bool> OnApplicationPauseEvent = new EasyEvent<bool>();
 
         [ShowInInspector]
-        internal readonly EasyEvent OnApplicationQuitEvent = new EasyEvent();
-
-        private void Awake()
-        {
-            // hideFlags = HideFlags.HideInHierarchy;
-        }
+        public readonly EasyEvent OnApplicationQuitEvent = new EasyEvent();
 
         protected override void Update()
         {
