@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Framework3.Toolkits.CodeGenKit
+namespace Framework3.Toolkits.CodeGenKit.Editor
 {
     using System.Diagnostics;
     using UnityEngine;
@@ -16,7 +16,7 @@ namespace Framework3.Toolkits.CodeGenKit
 
     public class CodeGenKit
     {
-        public static readonly string PIPE_LINE_PATH = "Assets/Framework3_Data/CodeGenKitPipeline.asset";
+        public static readonly string PipeLinePath = "Assets/Framework3_Data/CodeGenKitPipeline.asset";
 
         public static void OpenFile(string path)
         {

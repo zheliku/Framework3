@@ -14,8 +14,8 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
     {
         void Start()
         {
-            EnumEventSystem.GLOBAL.Register(TestEventA.Test, OnEventA);
-            EnumEventSystem.GLOBAL.Register(TestEventB.Test, OnEventB);
+            EnumEventSystem.Global.Register(TestEventA.Test, OnEventA);
+            EnumEventSystem.Global.Register(TestEventB.Test, OnEventB);
         }
 
         void OnEventA(TestEventA key, params object[] obj)
@@ -32,20 +32,20 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
         {
             if (GUILayout.Button("TestEventA", GUILayout.Width(150), GUILayout.Height(50)))
             {
-                EnumEventSystem.GLOBAL.Send(TestEventA.Test, "Hello World!");
+                EnumEventSystem.Global.Send(TestEventA.Test, "Hello World!");
             }
 
             if (GUILayout.Button("TestEventB", GUILayout.Width(150), GUILayout.Height(50)))
             {
-                EnumEventSystem.GLOBAL.Send(TestEventB.Test, "Hello World!");
+                EnumEventSystem.Global.Send(TestEventB.Test, "Hello World!");
 
             }
         }
 
         private void OnDestroy()
         {
-            EnumEventSystem.GLOBAL.UnRegister(TestEventA.Test, OnEventA);
-            EnumEventSystem.GLOBAL.UnRegister(TestEventB.Test, OnEventB);
+            EnumEventSystem.Global.UnRegister(TestEventA.Test, OnEventA);
+            EnumEventSystem.Global.UnRegister(TestEventB.Test, OnEventB);
         }
     }
 

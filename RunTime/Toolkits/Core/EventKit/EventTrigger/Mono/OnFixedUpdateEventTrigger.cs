@@ -1,8 +1,17 @@
-﻿namespace Framework3.Toolkits.EventKit
+﻿// ------------------------------------------------------------
+// @file       OnFixedUpdateEventTrigger.cs
+// @brief
+// @author     zheliku
+// @Modified   2025-08-25 02:37:40
+// @Copyright  Copyright (c) 2025, zheliku
+// ------------------------------------------------------------
+
+
+namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;
-    using Framework3.Core;
+    using Core;
     using UnityEngine;
 
     public class OnFixedUpdateEventTrigger : MonoBehaviour

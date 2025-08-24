@@ -10,6 +10,7 @@ namespace Framework3.Toolkits.FluentAPI
 {
     using System;
     using UnityEngine;
+    using Object = UnityEngine.Object;
 
     /// <summary>
     /// 针对 <see cref="UnityEngine.Transform"/> 提供的链式扩展
@@ -48,23 +49,46 @@ namespace Framework3.Toolkits.FluentAPI
             return self;
         }
         
+        /// <summary>
+        /// 设置当前组件的父对象为指定的 GameObject。
+        /// </summary>
+        /// <typeparam name="T">当前组件的类型。</typeparam>
+        /// <param name="self">当前组件实例。</param>
+        /// <param name="parent">目标父对象的 GameObject。</param>
+        /// <returns>返回当前组件实例。</returns>
         public static T SetParent<T>(this T self, GameObject parent) where T : Component
         {
             self.transform.SetParent(parent?.transform);
             return self;
         }
         
+        /// <summary>
+        /// 设置当前 GameObject 的父对象为指定的 GameObject。
+        /// </summary>
+        /// <param name="self">当前 GameObject 实例。</param>
+        /// <param name="parent">目标父对象的 GameObject。</param>
+        /// <returns>返回当前 GameObject 实例。</returns>
         public static GameObject SetParent(this GameObject self, GameObject parent)
         {
             self.transform.SetParent(parent?.transform);
             return self;
         }
         
+        /// <summary>
+        /// 获取当前 GameObject 的父对象的 Transform。
+        /// </summary>
+        /// <param name="self">当前 GameObject 实例。</param>
+        /// <returns>返回父对象的 Transform，如果没有父对象则返回 null。</returns>
         public static Transform GetParent(this GameObject self)
         {
             return self.transform.parent;
         }
         
+        /// <summary>
+        /// 获取当前组件的父对象的 Transform。
+        /// </summary>
+        /// <param name="self">当前组件实例。</param>
+        /// <returns>返回父对象的 Transform，如果没有父对象则返回 null。</returns>
         public static Transform GetParent(this Component self)
         {
             return self.transform.parent;
@@ -77,10 +101,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// component.AsRootTransform();
+        /// component.SetRoot();
         /// ]]>
         /// </code> </example>
-        public static T AsRoot<T>(this T self) where T : Component
+        public static T SetRoot<T>(this T self) where T : Component
         {
             self.transform.SetParent(null);
             return self;
@@ -93,10 +117,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.AsRootTransform();
+        /// gameObject.SetRoot();
         /// ]]>
         /// </code> </example>
-        public static GameObject AsRoot(this GameObject self)
+        public static GameObject SetRoot(this GameObject self)
         {
             self.transform.SetParent(null);
             return self;
@@ -107,10 +131,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// myScript.LocalIdentity();
+        /// myScript.SetLocalIdentity();
         /// ]]>
         /// </code> </example>
-        public static T LocalIdentity<T>(this T self) where T : Component
+        public static T SetLocalIdentity<T>(this T self) where T : Component
         {
             self.transform.localPosition = Vector3.zero;
             self.transform.localRotation = Quaternion.identity;
@@ -123,10 +147,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.LocalIdentity();
+        /// gameObject.SetLocalIdentity();
         /// ]]>
         /// </code> </example>
-        public static GameObject LocalIdentity(this GameObject self)
+        public static GameObject SetLocalIdentity(this GameObject self)
         {
             self.transform.localPosition = Vector3.zero;
             self.transform.localRotation = Quaternion.identity;
@@ -139,10 +163,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// component.Identity();
+        /// component.SetIdentity();
         /// ]]>
         /// </code> </example>
-        public static T Identity<T>(this T selfComponent) where T : Component
+        public static T SetIdentity<T>(this T selfComponent) where T : Component
         {
             selfComponent.transform.position   = Vector3.zero;
             selfComponent.transform.rotation   = Quaternion.identity;
@@ -155,10 +179,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.Identity();
+        /// gameObject.SetIdentity();
         /// ]]>
         /// </code> </example>
-        public static GameObject Identity(this GameObject self)
+        public static GameObject SetIdentity(this GameObject self)
         {
             self.transform.position   = Vector3.zero;
             self.transform.rotation   = Quaternion.identity;
@@ -167,43 +191,25 @@ namespace Framework3.Toolkits.FluentAPI
         }
         
         /// <summary>
-        /// Destroy 所有子 GameObject
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// rootTransform.DestroyChildren();
-        /// ]]>
-        /// </code> </example>
-        public static T DestroyChildren<T>(this T selfComponent) where T : Component
-        {
-            var childCount = selfComponent.transform.childCount;
-
-            for (var i = childCount - 1; i >= 0; i--)
-            {
-                selfComponent.transform.GetChild(i).DestroyGameObjectGracefully();
-            }
-
-            return selfComponent;
-        }
-        
-        /// <summary>
         /// 根据条件 Destroy 所有子 GameObject
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// rootTransform.DestroyChildrenWithCondition(child => child != other);
+        /// rootTransform.DestroyChildren();
+        ///  
+        /// rootTransform.DestroyChildren(child => child != other);
         /// ]]>
         /// </code> </example>
-        public static T DestroyChildren<T>(this T selfComponent, Func<Transform, bool> condition) where T : Component
+        public static T DestroyChildren<T>(this T selfComponent, Func<Transform, bool> condition = null) where T : Component
         {
             var childCount = selfComponent.transform.childCount;
 
             for (var i = childCount - 1; i >= 0; i--)
             {
                 var child = selfComponent.transform.GetChild(i);
-                if (condition(child))
+                if (condition == null || condition(child))
                 {
-                    child.DestroyGameObjectGracefully();
+                    Object.Destroy(child);
                 }
             }
 
@@ -211,43 +217,25 @@ namespace Framework3.Toolkits.FluentAPI
         }
         
         /// <summary>
-        /// Destroy 所有子 GameObject
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// rootGameObject.DestroyChildren();
-        /// ]]>
-        /// </code> </example>
-        public static GameObject DestroyChildren(this GameObject selfGameObj)
-        {
-            var childCount = selfGameObj.transform.childCount;
-
-            for (var i = childCount - 1; i >= 0; i--)
-            {
-                selfGameObj.transform.GetChild(i).DestroyGameObjectGracefully();
-            }
-
-            return selfGameObj;
-        }
-        
-        /// <summary>
         /// 根据条件 Destroy 所有子 GameObject
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
+        /// rootGameObject.DestroyChildrenWithCondition();
+        ///  
         /// rootGameObject.DestroyChildrenWithCondition(child => child != other);
         /// ]]>
         /// </code> </example>
-        public static GameObject DestroyChildren(this GameObject selfGameObject, Func<Transform, bool> condition)
+        public static GameObject DestroyChildren(this GameObject selfGameObject, Func<Transform, bool> condition = null)
         {
             var childCount = selfGameObject.transform.childCount;
 
             for (var i = childCount - 1; i >= 0; i--)
             {
                 var child = selfGameObject.transform.GetChild(i);
-                if (condition(child))
+                if (condition == null || condition(child))
                 {
-                    child.DestroyGameObjectGracefully();
+                    Object.Destroy(child);
                 }
             }
 
@@ -261,10 +249,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// myScript.AsLastSibling();
+        /// myScript.SetAsLastSibling();
         /// ]]>
         /// </code> </example>
-        public static T AsLastSibling<T>(this T selfComponent) where T : Component
+        public static T SetAsLastSibling<T>(this T selfComponent) where T : Component
         {
             selfComponent.transform.SetAsLastSibling();
             return selfComponent;
@@ -277,10 +265,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.AsLastSibling();
+        /// gameObject.SetAsLastSibling();
         /// ]]>
         /// </code> </example>
-        public static GameObject AsLastSibling(this GameObject self)
+        public static GameObject SetAsLastSibling(this GameObject self)
         {
             self.transform.SetAsLastSibling();
             return self;
@@ -293,10 +281,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// myScript.AsFirstSibling();
+        /// myScript.SetAsFirstSibling();
         /// ]]>
         /// </code> </example>
-        public static T AsFirstSibling<T>(this T selfComponent) where T : Component
+        public static T SetAsFirstSibling<T>(this T selfComponent) where T : Component
         {
             selfComponent.transform.SetAsFirstSibling();
             return selfComponent;
@@ -309,10 +297,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.AsFirstSibling();
+        /// gameObject.SetAsFirstSibling();
         /// ]]>
         /// </code> </example>
-        public static GameObject AsFirstSibling(this GameObject self)
+        public static GameObject SetAsFirstSibling(this GameObject self)
         {
             self.transform.SetAsFirstSibling();
             return self;
@@ -325,10 +313,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// myScript.SiblingIndex(10);
+        /// myScript.SetSiblingIndex(10);
         /// ]]>
         /// </code> </example>
-        public static T SiblingIndex<T>(this T selfComponent, int index) where T : Component
+        public static T SetSiblingIndex<T>(this T selfComponent, int index) where T : Component
         {
             selfComponent.transform.SetSiblingIndex(index);
             return selfComponent;
@@ -341,49 +329,88 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// gameObject.SiblingIndex(10);
+        /// gameObject.SetSiblingIndex(10);
         /// ]]>
         /// </code> </example>
-        public static GameObject SiblingIndex(this GameObject selfComponent, int index)
+        public static GameObject SetSiblingIndex(this GameObject selfComponent, int index)
         {
             selfComponent.transform.SetSiblingIndex(index);
             return selfComponent;
         }
 
-        public static GameObject SetTransformRight(this GameObject self, Vector3 right)
-        {
-            self.transform.right = right;
-            return self;
-        }
-        
-        public static T SetTransformRight<T>(this T self, Vector3 right) where T : Component
-        {
-            self.transform.right = right;
-            return self;
-        }
-        
-        public static GameObject SetTransformUp(this GameObject self, Vector3 up)
-        {
-            self.transform.up = up;
-            return self;
-        }
-        
-        public static T SetTransformUp<T>(this T self, Vector3 up) where T : Component
-        {
-            self.transform.up = up;
-            return self;
-        }
-        
-        public static GameObject SetTransformForward(this GameObject self, Vector3 forward)
-        {
-            self.transform.forward = forward;
-            return self;
-        }
-        
-        public static T SetTransformForward<T>(this T self, Vector3 forward) where T : Component
-        {
-            self.transform.forward = forward;
-            return self;
-        }
+        /// <summary>
+            /// 设置当前 GameObject 的 Transform 的 right 向量。
+            /// </summary>
+            /// <param name="self">当前 GameObject 实例。</param>
+            /// <param name="right">要设置的 right 向量。</param>
+            /// <returns>返回当前 GameObject 实例。</returns>
+            public static GameObject SetTransformRight(this GameObject self, Vector3 right)
+            {
+                self.transform.right = right;
+                return self;
+            }
+            
+            /// <summary>
+            /// 设置当前组件的 Transform 的 right 向量。
+            /// </summary>
+            /// <typeparam name="T">当前组件的类型。</typeparam>
+            /// <param name="self">当前组件实例。</param>
+            /// <param name="right">要设置的 right 向量。</param>
+            /// <returns>返回当前组件实例。</returns>
+            public static T SetTransformRight<T>(this T self, Vector3 right) where T : Component
+            {
+                self.transform.right = right;
+                return self;
+            }
+            
+            /// <summary>
+            /// 设置当前 GameObject 的 Transform 的 up 向量。
+            /// </summary>
+            /// <param name="self">当前 GameObject 实例。</param>
+            /// <param name="up">要设置的 up 向量。</param>
+            /// <returns>返回当前 GameObject 实例。</returns>
+            public static GameObject SetTransformUp(this GameObject self, Vector3 up)
+            {
+                self.transform.up = up;
+                return self;
+            }
+            
+            /// <summary>
+            /// 设置当前组件的 Transform 的 up 向量。
+            /// </summary>
+            /// <typeparam name="T">当前组件的类型。</typeparam>
+            /// <param name="self">当前组件实例。</param>
+            /// <param name="up">要设置的 up 向量。</param>
+            /// <returns>返回当前组件实例。</returns>
+            public static T SetTransformUp<T>(this T self, Vector3 up) where T : Component
+            {
+                self.transform.up = up;
+                return self;
+            }
+            
+            /// <summary>
+            /// 设置当前 GameObject 的 Transform 的 forward 向量。
+            /// </summary>
+            /// <param name="self">当前 GameObject 实例。</param>
+            /// <param name="forward">要设置的 forward 向量。</param>
+            /// <returns>返回当前 GameObject 实例。</returns>
+            public static GameObject SetTransformForward(this GameObject self, Vector3 forward)
+            {
+                self.transform.forward = forward;
+                return self;
+            }
+            
+            /// <summary>
+            /// 设置当前组件的 Transform 的 forward 向量。
+            /// </summary>
+            /// <typeparam name="T">当前组件的类型。</typeparam>
+            /// <param name="self">当前组件实例。</param>
+            /// <param name="forward">要设置的 forward 向量。</param>
+            /// <returns>返回当前组件实例。</returns>
+            public static T SetTransformForward<T>(this T self, Vector3 forward) where T : Component
+            {
+                self.transform.forward = forward;
+                return self;
+            }
     }
 }

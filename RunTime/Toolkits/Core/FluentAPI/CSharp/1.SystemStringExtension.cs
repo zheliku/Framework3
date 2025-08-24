@@ -31,7 +31,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return string.IsNullOrEmpty(self);
         }
-        
+
         /// <summary>
         /// 检测是否为 Not Null 且 Not Empty
         /// </summary>
@@ -44,7 +44,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return !string.IsNullOrEmpty(self);
         }
-        
+
         /// <summary>
         /// 检测是否为 Null，或去掉两端空格后为 Empty
         /// </summary>
@@ -57,7 +57,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self == null || self.Trim() == string.Empty;
         }
-        
+
         /// <summary>
         /// 检测是否为 Not Null，且去掉两端空格后为 Not Empty
         /// </summary>
@@ -70,53 +70,68 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self != null && self.Trim() != string.Empty;
         }
-        
+
         /// <summary>
         /// 字符串分割
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// ""1.2.3.4.5"".Split('.').ForEach(str => Debug.Log(str)); // 1 2 3 4 5
+        /// "1.2.3.4.5".Split('.').ForEach(str => Debug.Log(str)); // 1 2 3 4 5
         /// ]]>
         /// </code> </example>
         public static string[] Split(this string self, char splitSymbol, StringSplitOptions options = StringSplitOptions.None)
         {
             return self.Split(splitSymbol, options);
         }
-        
+
         /// <summary>
         /// 依据 delimiter 拆分字符串，并转换为 float 数组
         /// </summary>
-        public static float[] SplitToFloat(this string self, char delimiter) {
+        public static float[] SplitToFloat(this string self, char delimiter)
+        {
             string[] strs = self.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
 
             if (strs.Length == 0) return Array.Empty<float>(); // 判空
 
             return Array.ConvertAll<string, float>(strs, float.Parse); // 转换 float
         }
-        
+
         /// <summary>
         /// 依据 delimiter 拆分字符串，并转换为 float 数组
         /// </summary>
-        public static float[] SplitToFloat(this string self, string delimiter) {
+        public static float[] SplitToFloat(this string self, string delimiter)
+        {
             string[] strs = self.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
 
             if (strs.Length == 0) return Array.Empty<float>(); // 判空
 
             return Array.ConvertAll<string, float>(strs, float.Parse); // 转换 float
         }
-        
+
         /// <summary>
         /// 依据 delimiter 拆分字符串，并转换为 int 数组
         /// </summary>
-        public static int[] SplitToInt(this string self, string delimiter) {
+        public static int[] SplitToInt(this string self, char delimiter)
+        {
             string[] strs = self.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
 
             if (strs.Length == 0) return Array.Empty<int>(); // 判空
 
             return Array.ConvertAll<string, int>(strs, int.Parse); // 转换 int
         }
-        
+
+        /// <summary>
+        /// 依据 delimiter 拆分字符串，并转换为 int 数组
+        /// </summary>
+        public static int[] SplitToInt(this string self, string delimiter)
+        {
+            string[] strs = self.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+
+            if (strs.Length == 0) return Array.Empty<int>(); // 判空
+
+            return Array.ConvertAll<string, int>(strs, int.Parse); // 转换 int
+        }
+
         /// <summary>
         /// 格式化字符串填充参数
         /// </summary>
@@ -130,7 +145,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return string.Format(self, args);
         }
-        
+
         /// <summary>
         /// 返回包含此字符串的 StringBuilder
         /// </summary>
@@ -145,7 +160,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return new StringBuilder(self);
         }
-        
+
         /// <summary>
         /// StringBuilder 添加前缀
         /// </summary>
@@ -160,7 +175,7 @@ namespace Framework3.Toolkits.FluentAPI
             self.Insert(0, prefixString);
             return self;
         }
-        
+
         /// <summary>
         /// 字符串解析成 int（不安全）
         /// </summary>
@@ -174,7 +189,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return int.TryParse(self, out var value) ? value : defaultValue;
         }
-        
+
         /// <summary>
         /// 字符串解析成 float（不安全）
         /// </summary>
@@ -188,7 +203,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return float.TryParse(self, out var value) ? value : defaultValue;
         }
-        
+
         /// <summary>
         /// 字符串解析成 DateTime（不安全）
         /// </summary>
@@ -201,7 +216,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return DateTime.TryParse(self, out var value) ? value : defaultValue;
         }
-        
+
         /// <summary>
         /// 是否存在中文字符
         /// </summary>
@@ -214,7 +229,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return Regex.IsMatch(self, @"[\u4e00-\u9fa5]");
         }
-        
+
         /// <summary>
         /// 是否存在空格
         /// </summary>
@@ -227,7 +242,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self.Contains(' ');
         }
-        
+
         /// <summary>
         /// 从 self 中依次移除 targets 内的字符串
         /// </summary>
@@ -240,7 +255,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return targets.Aggregate(self, (current, t) => current.Replace(t, string.Empty));
         }
-        
+
         /// <summary>
         /// join string
         /// </summary>
@@ -253,16 +268,33 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return string.Join(separator, self);
         }
-        
-        public static string TrimStart(this string source, string value) {
-            if (source.StartsWith(value)) {
+
+        /// <summary>
+        /// 从字符串开头移除指定字符串（如果存在）。
+        /// </summary>
+        /// <param name="source">源字符串。</param>
+        /// <param name="value">要移除的开头字符串。</param>
+        /// <returns>移除指定字符串后的新字符串，如果开头没有该字符串则返回原字符串。</returns>
+        public static string TrimStart(this string source, string value)
+        {
+            if (source.StartsWith(value))
+            {
                 return source.Substring(value.Length);
             }
             return source;
         }
 
-        public static string TrimEnd(this string source, string value) {
-            if (source.EndsWith(value)) {
+        
+        /// <summary>
+        /// 从字符串末尾移除指定字符串（如果存在）。
+        /// </summary>
+        /// <param name="source">源字符串。</param>
+        /// <param name="value">要移除的末尾字符串。</param>
+        /// <returns>移除指定字符串后的新字符串，如果末尾没有该字符串则返回原字符串。</returns>
+        public static string TrimEnd(this string source, string value)
+        {
+            if (source.EndsWith(value))
+            {
                 return source.Substring(0, source.Length - value.Length);
             }
             return source;

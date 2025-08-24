@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------
-// @file       CodeGenTemplate.cs$
+// @file       CodeGenTemplate.cs
 // @brief
 // @author     zheliku
 // @Modified   2025-07-20 04:09:16

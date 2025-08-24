@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             {
                 if (_Default) return _Default;
 
-                var filePath = CodeGenKit.PIPE_LINE_PATH;
+                var filePath = CodeGenKit.PipeLinePath;
                 var directoryPath = Path.GetDirectoryName(filePath);
 
                 if (File.Exists(filePath))

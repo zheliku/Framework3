@@ -11,54 +11,11 @@ namespace Framework3.Toolkits.FluentAPI
     using System;
     using EventKit;
     using UnityEngine;
+    using Object = UnityEngine.Object;
 
     /// <summary>
     /// 针对 <see cref="UnityEngine.GameObject"/> 提供的链式扩展
     /// </summary>
-    /// <example> <code>
-    /// <![CDATA[
-    /// var gameObject  = new GameObject();
-    /// var transform   = gameObject.transform;
-    /// var selfScript  = gameObject.AddComponent<MonoBehaviour>();
-    /// var boxCollider = gameObject.AddComponent<BoxCollider>();
-    ///  
-    /// gameObject.Enable();           // gameObject.SetActive(true)
-    /// selfScript.Enable();           // this.gameObject.SetActive(true)
-    /// boxCollider.Enable();          // boxCollider.gameObject.SetActive(true)
-    /// gameObject.transform.Enable(); // transform.gameObject.SetActive(true)
-    ///  
-    /// gameObject.Disable();  // gameObject.SetActive(false)
-    /// selfScript.Disable();  // this.gameObject.SetActive(false)
-    /// boxCollider.Disable(); // boxCollider.gameObject.SetActive(false)
-    /// transform.Disable();   // transform.gameObject.SetActive(false)
-    ///  
-    /// selfScript.DestroyGameObject();
-    /// boxCollider.DestroyGameObject();
-    ///     .transform.DestroyGameObject();
-    ///  
-    /// selfScript.DestroyGameObjectGracefully();
-    /// boxCollider.DestroyGameObjectGracefully();
-    /// transform.DestroyGameObjectGracefully();
-    ///  
-    /// selfScript.DestroyGameObject(1.0f);
-    /// boxCollider.DestroyGameObject(1.0f);
-    /// transform.DestroyGameObject(1.0f);
-    ///  
-    /// selfScript.DestroyGameObjectGracefully(1.0f);
-    /// boxCollider.DestroyGameObjectGracefully(1.0f);
-    /// transform.DestroyGameObjectGracefully(1.0f);
-    ///  
-    /// gameObject.Layer(0);
-    /// selfScript.Layer(0);
-    /// boxCollider.Layer(0);
-    /// transform.Layer(0);
-    ///  
-    /// gameObject.Layer("Default");
-    /// selfScript.Layer("Default");
-    /// boxCollider.Layer("Default");
-    /// transform.Layer("Default");
-    /// ]]>
-    /// </code> </example>
     public static class UnityEngineGameObjectExtension
     {
         /// <summary>
@@ -75,9 +32,24 @@ namespace Framework3.Toolkits.FluentAPI
             return selfObj;
         }
         
+        /// <summary>
+        /// 检查 GameObject 是否在场景中处于激活状态。
+        /// </summary>
+        /// <param name="selfObj">要检查的 GameObject 实例。</param>
+        /// <returns>如果 GameObject 在场景中处于激活状态，则返回 true；否则返回 false。</returns>
         public static bool IsEnabled(this GameObject selfObj)
         {
             return selfObj.activeInHierarchy;
+        }
+        
+        /// <summary>
+        /// 检查 GameObject 自身是否处于激活状态（不考虑父对象的激活状态）。
+        /// </summary>
+        /// <param name="selfObj">要检查的 GameObject 实例。</param>
+        /// <returns>如果 GameObject 自身处于激活状态，则返回 true；否则返回 false。</returns>
+        public static bool IsEnabledSelf(this GameObject selfObj)
+        {
+            return selfObj.activeSelf;
         }
 
         /// <summary>
@@ -120,9 +92,24 @@ namespace Framework3.Toolkits.FluentAPI
             return selfObj;
         }
         
+        /// <summary>
+        /// 检查 GameObject 是否在场景中未激活状态。
+        /// </summary>
+        /// <param name="selfObj">要检查的 GameObject 实例。</param>
+        /// <returns>如果 GameObject 在场景中未激活状态，则返回 true；否则返回 false。</returns>
         public static bool IsDisabled(this GameObject selfObj)
         {
             return !selfObj.activeInHierarchy;
+        }
+        
+        /// <summary>
+        /// 检查 GameObject 自身是否未激活状态（不考虑父对象的激活状态）。
+        /// </summary>
+        /// <param name="selfObj">要检查的 GameObject 实例。</param>
+        /// <returns>如果 GameObject 自身未激活状态，则返回 true；否则返回 false。</returns>
+        public static bool IsDisabledSelf(this GameObject selfObj)
+        {
+            return !selfObj.activeSelf;
         }
 
         /// <summary>
@@ -163,7 +150,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// </code> </example>
         public static void DestroyGameObject<T>(this T selfBehaviour) where T : Component
         {
-            selfBehaviour.gameObject.Destroy();
+            Object.Destroy(selfBehaviour.gameObject);
         }
 
         /// <summary>
@@ -227,10 +214,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// new GameObject().Layer(0);
+        /// new GameObject().SetLayer(0);
         /// ]]>
         /// </code> </example>
-        public static GameObject Layer(this GameObject selfObj, int layer)
+        public static GameObject SetLayer(this GameObject selfObj, int layer)
         {
             selfObj.layer = layer;
             return selfObj;
@@ -243,10 +230,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// rigidbody2D.Layer(0);
+        /// rigidbody2D.SetLayer(0);
         /// ]]>
         /// </code> </example>
-        public static T Layer<T>(this T selfComponent, int layer) where T : Component
+        public static T SetLayer<T>(this T selfComponent, int layer) where T : Component
         {
             selfComponent.gameObject.layer = layer;
             return selfComponent;
@@ -259,10 +246,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// new GameObject().Layer("Default");
+        /// new GameObject().SetLayer("Default");
         /// ]]>
         /// </code> </example>
-        public static GameObject Layer(this GameObject selfObj, string layerName)
+        public static GameObject SetLayer(this GameObject selfObj, string layerName)
         {
             selfObj.layer = LayerMask.NameToLayer(layerName);
             return selfObj;
@@ -275,10 +262,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// spriteRenderer.Layer("Default");
+        /// spriteRenderer.SetLayer("Default");
         /// ]]>
         /// </code> </example>
-        public static T Layer<T>(this T selfComponent, string layerName) where T : Component
+        public static T SetLayer<T>(this T selfComponent, string layerName) where T : Component
         {
             selfComponent.gameObject.layer = LayerMask.NameToLayer(layerName);
             return selfComponent;
@@ -309,7 +296,9 @@ namespace Framework3.Toolkits.FluentAPI
         /// </code> </example>
         public static bool IsInLayerMask<T>(this T selfComponent, LayerMask layerMask) where T : Component
         {
-            return selfComponent.gameObject.IsInLayerMask(layerMask);
+            // 根据 Layer 数值进行移位获得用于运算的 Mask 值
+            var objLayerMask = 1 << selfComponent.gameObject.layer;
+            return (layerMask.value & objLayerMask) == objLayerMask;
         }
 
         /// <summary>
@@ -363,59 +352,108 @@ namespace Framework3.Toolkits.FluentAPI
         /// </code> </example>
         public static Component GetOrAddComponent(this Component component, Type type)
         {
-            return component.gameObject.GetOrAddComponent(type);
+            var comp = component.gameObject.GetComponent(type);
+            return comp ? comp : component.gameObject.AddComponent(type);
         }
 
+        /// <summary>
+        /// 当目标 GameObject 被禁用时销毁当前 GameObject。
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DestroyWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.Destroy();
+                Object.Destroy(self);
             }, priority);
             return self;
         }
         
+        /// <summary>
+        /// 当目标 GameObject 被销毁时销毁当前 GameObject。
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DestroyWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.Destroy();
+                Object.Destroy(self);
             }, priority);
             return self;
         }
         
+        /// <summary>
+        /// 当目标 GameObject 被禁用时优雅地销毁当前 GameObject（检查当前 GameObject 是否存在）。 
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DestroyGracefullyWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.DestroyGracefully();
+                if (self)
+                {
+                    Object.Destroy(self);
+                }
             }, priority);
             return self;
         }
         
+        /// <summary>
+        /// 当目标 GameObject 被销毁时优雅地销毁当前 GameObject（检查当前 GameObject 是否存在）。
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DestroyGracefullyWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.DestroyGracefully();
+                if (self)
+                {
+                    Object.Destroy(self);
+                }
             }, priority);
             return self;
         }
         
+        /// <summary>
+        /// 当目标 GameObject 被禁用时禁用当前 GameObject。
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DisableWhenGameObjectDisabled(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.Disable();
+                self.SetActive(false);
             }, priority);
             return self;
         }
         
+        /// <summary>
+        /// 当目标 GameObject 被销毁时禁用当前 GameObject。
+        /// </summary>
+        /// <param name="self">当前 GameObject。</param>
+        /// <param name="target">目标 GameObject。</param>
+        /// <param name="priority">事件触发的优先级。</param>
+        /// <returns>返回当前 GameObject。</returns>
         public static GameObject DisableWhenGameObjectDestroyed(this GameObject self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.Disable();
+                self.SetActive(false);
             }, priority);
             return self;
         }

@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.FluentAPI
     /// <summary>
     /// 针对 <see cref="UnityEngine.Behaviour"/> 提供的链式扩展
     /// </summary>
-    public static class UnityEngineMonoBehaviourExtension
+    public static class UnityEngineBehaviourExtension
     {
         /// <summary>
         /// <c> <![CDATA[

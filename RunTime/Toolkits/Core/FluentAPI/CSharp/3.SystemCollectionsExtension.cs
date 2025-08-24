@@ -24,8 +24,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// <![CDATA[
         /// int[] testArray = null;
         /// Debug.Log(testArray.IsNullOrEmpty()); // true
+        ///  
         /// testArray = new int[0];
         /// Debug.Log(testArray.IsNullOrEmpty()); // true
+        ///  
         /// testArray = new int[] { 1, 2, 3 };
         /// Debug.Log(testArray.IsNullOrEmpty()); // false
         /// ]]>
@@ -50,8 +52,10 @@ namespace Framework3.Toolkits.FluentAPI
         /// <![CDATA[
         /// List<int> testList = null;
         /// Debug.Log(testList.IsNullOrEmpty()); // true
+        ///  
         /// testList = new List<int>();
         /// Debug.Log(testList.IsNullOrEmpty()); // true
+        ///  
         /// testList = new List<int>() { 1, 2, 3 };
         /// Debug.Log(testList.IsNullOrEmpty()); // false
         /// ]]>
@@ -62,27 +66,36 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 判断 IList 是否不为空
+        /// 判断 IList 是否不为空。
         /// </summary>
+        /// <typeparam name="T">IList 中元素的类型。</typeparam>
+        /// <param name="collection">要检查的 IList 集合。</param>
+        /// <returns>如果集合不为空则返回 true，否则返回 false。</returns>
         public static bool IsNotNullAndNotEmpty<T>(this IList<T> collection)
         {
-            return !IsNullOrEmpty(collection);
+            return collection is { Count: >= 0 };
         }
 
         /// <summary>
-        /// 判断 IEnumerable 是否为空
+        /// 判断 IEnumerable 是否为空。
         /// </summary>
+        /// <typeparam name="T">IEnumerable 中元素的类型。</typeparam>
+        /// <param name="collection">要检查的 IEnumerable 集合。</param>
+        /// <returns>如果集合为空或为 null，则返回 true；否则返回 false。</returns>
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
         {
             return collection == null || !collection.Any();
         }
 
         /// <summary>
-        /// 判断 IEnumerable 是否不为空
+        /// 判断 IEnumerable 是否不为空。
         /// </summary>
+        /// <typeparam name="T">IEnumerable 中元素的类型。</typeparam>
+        /// <param name="collection">要检查的 IEnumerable 集合。</param>
+        /// <returns>如果集合不为空，则返回 true；否则返回 false。</returns>
         public static bool IsNotNullAndNotEmpty<T>(this IEnumerable<T> collection)
         {
-            return !IsNullOrEmpty(collection);
+            return collection != null && collection.Any();
         }
 
         /// <summary>
@@ -131,7 +144,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// // 3
         /// ]]>
         /// </code> </example>
-        public static IEnumerable<T> ForEach<T>(this List<T> self, Action<T> action)
+        public static IList<T> ForEach<T>(this IList<T> self, Action<T> action)
         {
             foreach (var item in self)
             {
@@ -154,7 +167,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// // 1
         /// ]]>
         /// </code> </example>
-        public static IEnumerable<T> ForEachReverse<T>(this List<T> self, Action<T> action)
+        public static IList<T> ForEachReverse<T>(this IList<T> self, Action<T> action)
         {
             for (var i = self.Count - 1; i >= 0; --i)
                 action(self[i]);
@@ -176,7 +189,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// // key: company, value: DaMingGame")]
         /// ]]>
         /// </code> </example>
-        public static void ForEach<TKey, TValue>(this Dictionary<TKey, TValue> dict, Action<TKey, TValue> action)
+        public static void ForEach<TKey, TValue>(this IDictionary<TKey, TValue> dict, Action<TKey, TValue> action)
         {
             var dictE = dict.GetEnumerator();
 
@@ -202,8 +215,8 @@ namespace Framework3.Toolkits.FluentAPI
         /// // 3: 4
         /// ]]>
         /// </code> </example>
-        public static Dictionary<TKey, TValue> Merge<TKey, TValue>(this   Dictionary<TKey, TValue>   dictionary,
-                                                                   params Dictionary<TKey, TValue>[] dictionaries)
+        public static IDictionary<TKey, TValue> Merge<TKey, TValue>(this   IDictionary<TKey, TValue>   dictionary,
+                                                                    params IDictionary<TKey, TValue>[] dictionaries)
         {
             return dictionaries.Aggregate(dictionary,
                                           (current, dict) =>
@@ -222,7 +235,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// // 1: 4
         /// ]]>
         /// </code> </example>
-        public static void AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dict, Dictionary<TKey, TValue> addInDict, bool isOverride = false)
+        public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> dict, IDictionary<TKey, TValue> addInDict, bool isOverride = false)
         {
             var enumerator = addInDict.GetEnumerator();
 
@@ -232,7 +245,9 @@ namespace Framework3.Toolkits.FluentAPI
                 if (dict.ContainsKey(current.Key))
                 {
                     if (isOverride)
+                    {
                         dict[current.Key] = current.Value;
+                    }
                     continue;
                 }
 
@@ -240,63 +255,6 @@ namespace Framework3.Toolkits.FluentAPI
             }
 
             enumerator.Dispose();
-        }
-
-        /// <summary>
-        /// 生成从 (from.x, from.y) 到 (to.x, to.y) 的坐标（[from, to]）
-        /// </summary>
-        /// <param name="from">起始坐标</param>
-        /// <param name="to">终止坐标</param>
-        /// <returns>每个坐标值，依次 +1</returns>
-        public static IEnumerable<(int i, int j)> StepTo(this (int x, int y) from, (int x, int y) to)
-        {
-            for (int i = from.x; i <= to.x; i++)
-            {
-                for (int j = from.y; j <= to.y; j++)
-                {
-                    yield return (i, j);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 生成从 (from.x, from.y) 到 (toX, toY) 的坐标（[from, to]）
-        /// </summary>
-        /// <param name="from">起始坐标</param>
-        /// <param name="toX">终止 X 坐标</param>
-        /// <param name="toY">终止 Y 坐标</param>
-        /// <returns>每个坐标值，依次 +1</returns>
-        public static IEnumerable<(int i, int j)> StepTo(this (int x, int y) from, int toX, int toY)
-        {
-            for (int i = from.x; i <= toX; i++)
-            {
-                for (int j = from.y; j <= toY; j++)
-                {
-                    yield return (i, j);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 生成从 from 到 to 的步长为 1 的序列（[from, to]）
-        /// </summary>
-        /// <param name="from">起始数</param>
-        /// <param name="to">中止数</param>
-        /// <returns>序列</returns>
-        public static IEnumerable<int> StepTo(this int from, int to)
-        {
-            for (int i = from; i <= to; i++)
-            {
-                yield return i;
-            }
-        }
-        
-        /// <summary>
-        /// 转换为 List
-        /// </summary>
-        public static List<T> ToList<T>(this Array array)
-        {
-            return array.Cast<T>().ToList();
         }
     }
 }

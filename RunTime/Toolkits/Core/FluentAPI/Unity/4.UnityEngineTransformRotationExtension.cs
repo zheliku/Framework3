@@ -152,7 +152,7 @@ namespace Framework3.Toolkits.FluentAPI
             float?          y = null,
             float?          z = null)
         {
-            var localEulerAngles = self.transform.localEulerAngles;
+            var localEulerAngles    = self.transform.localEulerAngles;
             var newLocalEulerAngles = new Vector3(x ?? localEulerAngles.x, y ?? localEulerAngles.y, z ?? localEulerAngles.z);
             self.transform.localRotation = Quaternion.Euler(newLocalEulerAngles);
             return self;
@@ -421,9 +421,9 @@ namespace Framework3.Toolkits.FluentAPI
             float? z = null
         ) where T : Component
         {
-            var eulerAngles = selfComponent.transform.eulerAngles;
+            var eulerAngles    = selfComponent.transform.eulerAngles;
             var newEulerAngles = new Vector3(x ?? eulerAngles.x, y ?? eulerAngles.y, z ?? eulerAngles.z);
-            selfComponent.transform.localRotation = Quaternion.Euler(newEulerAngles);
+            selfComponent.transform.rotation = Quaternion.Euler(newEulerAngles);
             return selfComponent;
         }
 
@@ -445,7 +445,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             var eulerAngles    = self.transform.eulerAngles;
             var newEulerAngles = new Vector3(x ?? eulerAngles.x, y ?? eulerAngles.y, z ?? eulerAngles.z);
-            self.transform.localRotation = Quaternion.Euler(newEulerAngles);
+            self.transform.rotation = Quaternion.Euler(newEulerAngles);
             return self;
         }
 
@@ -597,6 +597,134 @@ namespace Framework3.Toolkits.FluentAPI
         public static float GetEulerAnglesZ(this GameObject self)
         {
             return self.transform.eulerAngles.z;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// to.transform.rotation = self.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// component1.CopyRotationTo(component2);
+        /// ]]>
+        /// </code> </example>
+        public static T CopyRotationTo<T>(this T self, Component to) where T : Component
+        {
+            to.transform.rotation = self.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// to.transform.rotation = self.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// gameObject.CopyRotationTo(component);
+        /// ]]>
+        /// </code> </example>
+        public static GameObject CopyRotationTo(this GameObject self, Component to)
+        {
+            to.transform.rotation = self.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// to.transform.rotation = self.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// component.CopyRotationTo(gameObject);
+        /// ]]>
+        /// </code> </example>
+        public static T CopyRotationTo<T>(this T self, GameObject to) where T : Component
+        {
+            to.transform.rotation = self.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// to.transform.rotation = self.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// gameObject1.CopyRotationTo(gameObject2);
+        /// ]]>
+        /// </code> </example>
+        public static GameObject CopyRotationTo(this GameObject self, GameObject to)
+        {
+            to.transform.rotation = self.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// self.transform.rotation = from.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// component1.CopyRotationFrom(component2);
+        /// ]]>
+        /// </code> </example>
+        public static T CopyRotationFrom<T>(this T self, Component from) where T : Component
+        {
+            self.transform.rotation = from.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// self.transform.rotation = from.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// component.CopyRotationFrom(gameObject);
+        /// ]]>
+        /// </code> </example>
+        public static T CopyRotationFrom<T>(this T self, GameObject from) where T : Component
+        {
+            self.transform.rotation = from.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// self.transform.rotation = from.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// gameObject.CopyRotationFrom(component);
+        /// ]]>
+        /// </code> </example>
+        public static GameObject CopyRotationFrom(this GameObject self, Component from)
+        {
+            self.transform.rotation = from.transform.rotation;
+            return self;
+        }
+
+        /// <summary>
+        /// <c> <![CDATA[
+        /// self.transform.rotation = from.transform.rotation;
+        /// ]]> </c>
+        /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// gameObject1.CopyRotationFrom(gameObject2);
+        /// ]]>
+        /// </code> </example>
+        public static GameObject CopyRotationFrom(this GameObject self, GameObject from)
+        {
+            self.transform.rotation = from.transform.rotation;
+            return self;
         }
     }
 }

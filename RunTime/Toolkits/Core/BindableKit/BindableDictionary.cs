@@ -40,22 +40,40 @@ namespace Framework3.Toolkits.BindableKit
 
     #region 属性
 
-        public EasyEvent<int> OnCountChanged => _onCountChanged ??= new EasyEvent<int>();
+        public EasyEvent<int> OnCountChanged
+        {
+            get => _onCountChanged ??= new EasyEvent<int>();
+        }
 
-        public EasyEvent OnClear => _onClear ??= new EasyEvent();
+        public EasyEvent OnClear
+        {
+            get => _onClear ??= new EasyEvent();
+        }
 
-        public EasyEvent<TKey, TValue> OnAdd => _onAdd ??= new EasyEvent<TKey, TValue>();
+        public EasyEvent<TKey, TValue> OnAdd
+        {
+            get => _onAdd ??= new EasyEvent<TKey, TValue>();
+        }
 
-        public EasyEvent<TKey, TValue> OnRemove => _onRemove ??= new EasyEvent<TKey, TValue>();
+        public EasyEvent<TKey, TValue> OnRemove
+        {
+            get => _onRemove ??= new EasyEvent<TKey, TValue>();
+        }
 
         /// <summary>
         /// TKey:key
         /// TValue:oldValue
         /// TValue:newValue
         /// </summary>
-        public EasyEvent<TKey, TValue, TValue> OnReplace => _onReplace ??= new EasyEvent<TKey, TValue, TValue>();
+        public EasyEvent<TKey, TValue, TValue> OnReplace
+        {
+            get => _onReplace ??= new EasyEvent<TKey, TValue, TValue>();
+        }
 
-        public int Count => _inner.Count;
+        public int Count
+        {
+            get => _inner.Count;
+        }
 
         public TValue this[TKey key]
         {
@@ -76,9 +94,15 @@ namespace Framework3.Toolkits.BindableKit
             }
         }
 
-        public Dictionary<TKey, TValue>.KeyCollection Keys => _inner.Keys;
+        public Dictionary<TKey, TValue>.KeyCollection Keys
+        {
+            get => _inner.Keys;
+        }
 
-        public Dictionary<TKey, TValue>.ValueCollection Values => _inner.Values;
+        public Dictionary<TKey, TValue>.ValueCollection Values
+        {
+            get => _inner.Values;
+        }
 
     #endregion
 
@@ -90,23 +114,50 @@ namespace Framework3.Toolkits.BindableKit
             set => this[(TKey) key] = (TValue) value;
         }
 
-        bool IDictionary.IsFixedSize => ((IDictionary) _inner).IsFixedSize;
+        bool IDictionary.IsFixedSize
+        {
+            get => ((IDictionary) _inner).IsFixedSize;
+        }
 
-        bool IDictionary.IsReadOnly => ((IDictionary) _inner).IsReadOnly;
+        bool IDictionary.IsReadOnly
+        {
+            get => ((IDictionary) _inner).IsReadOnly;
+        }
 
-        bool ICollection.IsSynchronized => ((IDictionary) _inner).IsSynchronized;
+        bool ICollection.IsSynchronized
+        {
+            get => ((IDictionary) _inner).IsSynchronized;
+        }
 
-        ICollection IDictionary.Keys => ((IDictionary) _inner).Keys;
+        ICollection IDictionary.Keys
+        {
+            get => ((IDictionary) _inner).Keys;
+        }
 
-        object ICollection.SyncRoot => ((IDictionary) _inner).SyncRoot;
+        object ICollection.SyncRoot
+        {
+            get => ((IDictionary) _inner).SyncRoot;
+        }
 
-        ICollection IDictionary.Values => ((IDictionary) _inner).Values;
+        ICollection IDictionary.Values
+        {
+            get => ((IDictionary) _inner).Values;
+        }
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => ((ICollection<KeyValuePair<TKey, TValue>>) _inner).IsReadOnly;
+        bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
+        {
+            get => ((ICollection<KeyValuePair<TKey, TValue>>) _inner).IsReadOnly;
+        }
 
-        ICollection<TKey> IDictionary<TKey, TValue>.Keys => _inner.Keys;
+        ICollection<TKey> IDictionary<TKey, TValue>.Keys
+        {
+            get => _inner.Keys;
+        }
 
-        ICollection<TValue> IDictionary<TKey, TValue>.Values => _inner.Values;
+        ICollection<TValue> IDictionary<TKey, TValue>.Values
+        {
+            get => _inner.Values;
+        }
 
         void IDictionary.Add(object key, object value)
         {

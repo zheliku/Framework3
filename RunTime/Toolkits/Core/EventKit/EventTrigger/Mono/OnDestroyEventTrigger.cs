@@ -1,10 +1,17 @@
-﻿using Framework3.Core;
+﻿// ------------------------------------------------------------
+// @file       OnDestroyEventTrigger.cs
+// @brief
+// @author     zheliku
+// @Modified   2025-08-25 02:37:08
+// @Copyright  Copyright (c) 2025, zheliku
+// ------------------------------------------------------------
+
 
 namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;
-    using Framework3.Core;
+    using Core;
     using UnityEngine;
 
     public class OnDestroyEventTrigger : MonoBehaviour

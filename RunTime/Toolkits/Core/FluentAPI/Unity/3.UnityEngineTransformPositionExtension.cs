@@ -367,7 +367,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return selfComponent.transform.position;
         }
-        
+
         /// <summary>
         /// <c> <![CDATA[
         /// return component.transform.position;
@@ -380,7 +380,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// </code> </example>
         public static Vector2 GetPosition2D<T>(this T selfComponent) where T : Component
         {
-            return selfComponent.transform.position;
+            return (Vector2) selfComponent.transform.position;
         }
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self.transform.position;
         }
-        
+
         /// <summary>
         /// <c> <![CDATA[
         /// return gameObject.transform.position;
@@ -410,7 +410,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// </code> </example>
         public static Vector2 GetPosition2D(this GameObject self)
         {
-            return self.transform.position;
+            return (Vector2) self.transform.position;
         }
 
         /// <summary>

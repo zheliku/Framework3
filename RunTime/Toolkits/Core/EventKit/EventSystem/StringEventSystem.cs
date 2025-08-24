@@ -13,12 +13,12 @@ namespace Framework3.Toolkits.EventKit
     using System;
     using System.Collections.Generic;
     using FluentAPI;
-    using Framework3.Core;
+    using Core;
     using Sirenix.OdinInspector;
 
     public class StringEventSystem
     {
-        public static readonly StringEventSystem GLOBAL = new StringEventSystem();
+        public static readonly StringEventSystem Global = new StringEventSystem();
 
         [ShowInInspector]
         private readonly Dictionary<string, IEasyEvent> _events = new Dictionary<string, IEasyEvent>(50);

@@ -47,7 +47,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
             Debug.Log("OnNameListAdd: " + index + ", " + item);
 
             _txtNameTemplate.Instantiate(_contentRoot)
-                            .SiblingIndex(index)
+                            .SetSiblingIndex(index)
                             .EnableGameObject()
                             .text = item;
         }
@@ -56,7 +56,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
         {
             Debug.Log("OnNameListMove: " + oldIndex + ", " + newIndex + ", " + item);
 
-            _contentRoot.GetChild(oldIndex).SiblingIndex(newIndex);
+            _contentRoot.GetChild(oldIndex).SetSiblingIndex(newIndex);
         }
 
         private void OnNameListOnRemove(int index, string item)

@@ -50,7 +50,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// new A().ReflectionCallPrivateMethod(""Say""); // I'm A!
         /// ]]>
         /// </code> </example>
-        public static object ReflectionCallPrivateMethod<T>(this T self, string methodName, params object[] args)
+        public static object CallPrivateMethod<T>(this T self, string methodName, params object[] args)
         {
             var methodInfo = typeof(T).GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
 
@@ -69,9 +69,11 @@ namespace Framework3.Toolkits.FluentAPI
         /// Debug.Log(new A().ReflectionCallPrivateMethod("Add", 1, 2)); // 3
         /// ]]>
         /// </code> </example>
-        public static TReturnType ReflectionCallPrivateMethod<T, TReturnType>(this T self, string methodName, params object[] args)
+        public static TReturnType CallPrivateMethod<T, TReturnType>(this T self, string methodName, params object[] args)
         {
-            return (TReturnType) self.ReflectionCallPrivateMethod(methodName, args);
+            var methodInfo = typeof(T).GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+            return (TReturnType) methodInfo?.Invoke(self, args);
         }
 
         /// <summary>
@@ -245,22 +247,29 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return prop.GetCustomAttributes(attributeType, inherit).FirstOrDefault();
         }
-        
+
         /// <summary>
-        /// 依据类型名称获取类型
+        /// 根据类型名称获取类型实例。
         /// </summary>
-        public static Type GetTypeByName(this string name) {
+        /// <param name="name">类型的完全限定名称。</param>
+        /// <returns>
+        /// 如果找到匹配的类型，则返回该类型的实例；
+        /// 如果未找到匹配的类型，则返回 null。
+        /// </returns>
+        public static Type GetTypeByName(this string name)
+        {
             var type = Type.GetType(name);
             if (type != null)
                 return type;
-
+        
             Assembly[] assembly = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (Assembly ass in assembly) {
+            foreach (Assembly ass in assembly)
+            {
                 type = ass.GetType(name);
                 if (type != null)
                     return type;
             }
-
+        
             return null;
         }
     }

@@ -248,22 +248,40 @@ namespace Framework3.Toolkits.FluentAPI
             return selfObj;
         }
 
-        public static T DebugLog<T>(this T selfObj)
-        {
-            Debug.Log(selfObj);
-            return selfObj;
-        }
-
-        public static T DebugLogWarning<T>(this T selfObj)
-        {
-            Debug.LogWarning(selfObj);
-            return selfObj;
-        }
-
-        public static T DebugLogError<T>(this T selfObj)
-        {
-            Debug.LogError(selfObj);
-            return selfObj;
-        }
+        /// <summary>
+            /// 使用 <see cref="Debug.Log(object)"/> 输出调试信息。
+            /// </summary>
+            /// <typeparam name="T">要输出的对象类型。</typeparam>
+            /// <param name="selfObj">要输出的对象。</param>
+            /// <returns>返回输入的对象本身。</returns>
+            public static T DebugLog<T>(this T selfObj)
+            {
+                Debug.Log(selfObj);
+                return selfObj;
+            }
+            
+            /// <summary>
+            /// 使用 <see cref="Debug.LogWarning(object)"/> 输出警告信息。
+            /// </summary>
+            /// <typeparam name="T">要输出的对象类型。</typeparam>
+            /// <param name="selfObj">要输出的对象。</param>
+            /// <returns>返回输入的对象本身。</returns>
+            public static T DebugLogWarning<T>(this T selfObj)
+            {
+                Debug.LogWarning(selfObj);
+                return selfObj;
+            }
+            
+            /// <summary>
+            /// 使用 <see cref="Debug.LogError(object)"/> 输出错误信息。
+            /// </summary>
+            /// <typeparam name="T">要输出的对象类型。</typeparam>
+            /// <param name="selfObj">要输出的对象。</param>
+            /// <returns>返回输入的对象本身。</returns>
+            public static T DebugLogError<T>(this T selfObj)
+            {
+                Debug.LogError(selfObj);
+                return selfObj;
+            }
     }
 }

@@ -10,7 +10,6 @@ namespace Framework3.Toolkits.PoolKit
 {
     using System;
     using System.Collections.Generic;
-    using Framework3.Core;
     using Core;
 
     /// <summary>

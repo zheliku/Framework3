@@ -28,7 +28,7 @@ namespace Framework3.Core
 
         public static explicit operator BindableProperty<TProperty>(TProperty property)
         {
-            return new BindableProperty<TProperty>(property);
+            return new(property);
         }
 
         public static bool operator ==(TProperty property, BindableProperty<TProperty> bindableProperty)

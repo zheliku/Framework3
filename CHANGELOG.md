@@ -1,3 +1,8 @@
+# v0.0.5
+1. 微调BindableKit、DataKit、EventKit、FluentAPI、FSMKit、GridKit、PoolKit、SingletonKit、TimerKit、UIKit、UtilityKit
+2. 添加使用注释
+3. 优化代码结构
+
 # v0.0.4
 1. EasyEvent优先级支持float类型
 2. 调整Singleton为Core包中

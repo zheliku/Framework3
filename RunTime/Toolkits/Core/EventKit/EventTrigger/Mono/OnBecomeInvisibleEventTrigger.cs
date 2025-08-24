@@ -1,18 +1,17 @@
-﻿/****************************************************************************
- * Copyright (c) 2015 - 2023 liangxiegame UNDER MIT License
- *
- * https://qframework.cn
- * https://github.com/liangxiegame/QFramework
- * https://gitee.com/liangxiegame/QFramework
- ****************************************************************************/
+﻿// ------------------------------------------------------------
+// @file       OnBecomeInvisibleEventTrigger.cs
+// @brief
+// @author     zheliku
+// @Modified   2025-08-25 02:37:02
+// @Copyright  Copyright (c) 2025, zheliku
+// ------------------------------------------------------------
 
-using Framework3.Core;
 
 namespace Framework3.Toolkits.EventKit
 {
     using System;
     using FluentAPI;
-    using Framework3.Core;
+    using Core;
     using UnityEngine;
 
     public class OnBecomeInvisibleEventTrigger : MonoBehaviour

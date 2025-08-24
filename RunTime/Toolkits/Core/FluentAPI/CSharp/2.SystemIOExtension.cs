@@ -10,7 +10,6 @@ namespace Framework3.Toolkits.FluentAPI
 {
     using System.Collections.Generic;
     using System.IO;
-    using Framework3.Core;
 
     /// <summary>
     /// 针对 System.IO 提供的链式扩展，主要是文件和文件夹的 IO 操作
@@ -20,18 +19,23 @@ namespace Framework3.Toolkits.FluentAPI
         /// <summary>
         /// 确保文件路径中的扩展名正确，不正确或没有扩展名，则修改或添加
         /// </summary>
+        /// <example> <code>
+        /// <![CDATA[
+        /// ChangeExtension("C:\mydir\myfile.com.extension", ".old") --> "C:\mydir\myfile.com.old"
+        /// ChangeExtension("C:\mydir\myfile.com.extension", "")     --> "C:\mydir\myfile.com."
+        /// ChangeExtension("C:\mydir\", ".old")                     --> "C:\mydir\.old"
+        /// ]]>
+        /// </code> </example>
         public static string ChangeExtension(this string filePath, string extension)
         {
-            // This code produces output similar to the following:
-            // ChangeExtension(C:\mydir\myfile.com.extension, '.old') returns 'C:\mydir\myfile.com.old'
-            // ChangeExtension(C:\mydir\myfile.com.extension, '') returns 'C:\mydir\myfile.com.'
-            // ChangeExtension(C:\mydir\, '.old') returns 'C:\mydir\.old'
             return Path.ChangeExtension(filePath, extension);
         }
-
+        
         /// <summary>
-        /// 移除扩展名
+        /// 移除文件路径中的扩展名。
         /// </summary>
+        /// <param name="filePath">包含扩展名的文件路径。</param>
+        /// <returns>移除扩展名后的文件路径。</returns>
         public static string RemoveExtension(this string filePath)
         {
             var withDot = Path.ChangeExtension(filePath, ""); // 结果末尾会留有 "."
@@ -45,33 +49,34 @@ namespace Framework3.Toolkits.FluentAPI
         /// <![CDATA[
         /// var fileName ="/abc/def/b.txt".GetFileNameWithoutExtension();
         /// Debug.Log(fileName); // /abc/def
+        ///  
+        /// GetDirectoryName("C:\MyDir\MySubDir\myfile.ext") --> "C:\MyDir\MySubDir"
+        /// GetDirectoryName("C:\MyDir\MySubDir")            --> "C:\MyDir"
+        /// GetDirectoryName("C:\MyDir\")                    --> "C:\MyDir"
+        /// GetDirectoryName("C:\MyDir")                     --> "C:\"
+        /// GetDirectoryName("C:\")                          --> ""
         /// ]]>
         /// </code> </example>
         public static string GetDirectoryName(this string path)
         {
-            /*This code produces the following output:
-            GetDirectoryName('C:\MyDir\MySubDir\myfile.ext') returns 'C:\MyDir\MySubDir'
-            GetDirectoryName('C:\MyDir\MySubDir') returns 'C:\MyDir'
-            GetDirectoryName('C:\MyDir\') returns 'C:\MyDir'
-            GetDirectoryName('C:\MyDir') returns 'C:\'
-            GetDirectoryName('C:\') returns ''
-            */
             return Path.GetDirectoryName(path);
         }
-
+        
         /// <summary>
-        /// 确认文件路径中的文件夹存在，不存在则创建
+        /// 确保文件路径中的文件夹存在，如果不存在则创建。
         /// </summary>
+        /// <param name="path">文件路径或文件夹路径。</param>
+        /// <returns>原始路径。</returns>
         public static string EnsureDirectoryExist(this string path)
         {
-            var dir = path.HasExtension() ? path.GetDirectoryName() : path;
-
+            var dir = path.HasExtension() ? Path.GetDirectoryName(path) : path;
+        
             // 如果文件夹不存在，则创建
-            if (!Directory.Exists(dir))
+            if (dir != null && !Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
-
+        
             return path;
         }
 
@@ -151,15 +156,15 @@ namespace Framework3.Toolkits.FluentAPI
         /// <![CDATA[
         /// var fileName ="/abc/def/b.txt".GetFileName();
         /// Debug.Log(fileName); // b.txt
+        ///  
+        /// GetFileName("C:\mydir\myfile.ext")        --> "myfile.ext"
+        /// GetFileName("C:\mydir\")                  --> ""
+        /// GetFileName("C:\mydir\myfile.ext", false) --> "myfile"
+        /// GetFileName("C:\mydir\")                  --> ""
         /// ]]>
         /// </code> </example>
         public static string GetFileName(this string filePath, bool withExtension = true)
         {
-            // This code produces output similar to the following:
-            // GetFileName('C:\mydir\myfile.ext') returns 'myfile.ext'
-            // GetFileName('C:\mydir\') returns ''
-            // GetFileNameWithoutExtension('C:\mydir\myfile.ext') returns 'myfile'
-            // GetFileName('C:\mydir\') returns ''
             return withExtension ? Path.GetFileName(filePath) : Path.GetFileNameWithoutExtension(filePath);
         }
 
@@ -203,7 +208,7 @@ namespace Framework3.Toolkits.FluentAPI
         public static string ConvertToCurrentEnvironmentPath(this string filePath)
         {
             return filePath.Replace("/", Path.DirectorySeparatorChar.ToString())
-               .Replace("\\", Path.DirectorySeparatorChar.ToString());
+                           .Replace("\\", Path.DirectorySeparatorChar.ToString());
         }
 
         /// <summary>
@@ -211,7 +216,7 @@ namespace Framework3.Toolkits.FluentAPI
         /// </summary>
         /// <example> <code>
         /// <![CDATA[
-        /// var rooted ="/abc/def/b.txt".HasExtension();
+        /// var rooted ="/abc/def/b.txt".IsPathRooted();
         /// Debug.Log(rooted); // false
         /// ]]>
         /// </code> </example>
@@ -220,18 +225,27 @@ namespace Framework3.Toolkits.FluentAPI
             return Path.IsPathRooted(filePath);
         }
 
+        /// <summary>
+        /// 判断指定文件是否存在。
+        /// </summary>
+        /// <param name="filePath">要检查的文件路径。</param>
+        /// <returns>如果文件存在则返回 true，否则返回 false。</returns>
         public static bool ExistsFile(this string filePath)
         {
             return File.Exists(filePath);
         }
 
         /// <summary>
-        /// 获取文件夹下所有文件，包括子文件夹中的文件
+        /// 获取文件夹下所有文件，包括子文件夹中的文件。
         /// </summary>
+        /// <param name="directoryPath">要搜索的文件夹路径。</param>
+        /// <param name="searchPattern">搜索模式（默认为 "*"，匹配所有文件）。</param>
+        /// <param name="localPath">是否返回相对于 <paramref name="directoryPath"/> 的本地路径。</param>
+        /// <returns>包含所有文件路径的列表。</returns>
         public static List<string> GetAllFiles(this string directoryPath, string searchPattern = "*", bool localPath = false)
         {
             var fileList = new List<string>();
-            
+        
             foreach (var filePath in Directory.GetFiles(directoryPath, searchPattern, SearchOption.AllDirectories))
             {
                 var path = filePath;
