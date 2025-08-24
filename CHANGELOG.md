@@ -1,4 +1,4 @@
-# v0.0.5
+# v0.1.0
 1. 微调BindableKit、DataKit、EventKit、FluentAPI、FSMKit、GridKit、PoolKit、SingletonKit、TimerKit、UIKit、UtilityKit
 2. 添加使用注释
 3. 优化代码结构
