@@ -1,11 +1,11 @@
-﻿namespace Framework3.Core.Example._16.UnRegisterWhenCurrentSceneUnloaded
+﻿namespace Framework3.Core.Example._16.UnregisterWhenCurrentSceneUnloaded
 {
     using global::System;
     using global::System.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
-    public class UnRegisterWhenCurrentSceneUnloadedExample : MonoBehaviour
+    public class UnregisterWhenCurrentSceneUnloadedExample : MonoBehaviour
     {
         private static bool _Registered = false;
 
@@ -20,14 +20,14 @@
                 _EXAMPLE_EVENT.Register(() =>
                 {
                     Debug.Log("Received When Scene Not Changed");
-                }).UnRegisterWhenCurrentSceneUnloaded();
+                }).UnregisterWhenCurrentSceneUnloaded();
 
                 var gameObj = new GameObject("gameObj");
                 DontDestroyOnLoad(gameObj);
                 _EXAMPLE_EVENT.Register(() =>
                 {
                     Debug.Log("Received When GameObj Not Destroyed");
-                }).UnRegisterWhenGameObjectDestroyed(gameObj);
+                }).UnregisterWhenGameObjectDestroyed(gameObj);
 
                 _EXAMPLE_EVENT.Register(() =>
                 {

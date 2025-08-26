@@ -20,7 +20,7 @@ namespace Framework3.Core.Example._4.BindableProperty
             _someValue.Register((oldValue, newValue) =>
             {
                 _someValueContent = $"SomeValue: {newValue}";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             Debug.Log("new BindableProperty<int>(5) == 5: " + (new BindableProperty<int>(5) == 5));
             Debug.Log("new BindableProperty<int>(5) == 6: " + (new BindableProperty<int>(5) == 6));

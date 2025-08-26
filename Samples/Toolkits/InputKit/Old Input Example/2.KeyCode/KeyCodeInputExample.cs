@@ -8,8 +8,6 @@
 
 namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
 {
-    using System;
-    using FluentAPI;
     using UnityEngine;
 
     public class KeyCodeInputExample : MonoBehaviour
@@ -20,7 +18,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
 
         private void Start()
         {
-            InputKit.RegisterKeyCode(KeyCode.W, (oldValue, value) =>
+            OldInputKit.RegisterKeyCode(KeyCode.W, (oldValue, value) =>
             {
                 if (value)
                 {
@@ -28,7 +26,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                 }
             }, InputType.Hold);
             
-            InputKit.RegisterKeyCode(KeyCode.S, (oldValue, value) =>
+            OldInputKit.RegisterKeyCode(KeyCode.S, (oldValue, value) =>
             {
                 if (value)
                 {
@@ -36,7 +34,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                 }
             }, InputType.Hold);
             
-            InputKit.RegisterKeyCode(KeyCode.A, (oldValue, value) =>
+            OldInputKit.RegisterKeyCode(KeyCode.A, (oldValue, value) =>
             {
                 if (value)
                 {
@@ -44,7 +42,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                 }
             }, InputType.Hold);
             
-            InputKit.RegisterKeyCode(KeyCode.D, (oldValue, value) =>
+            OldInputKit.RegisterKeyCode(KeyCode.D, (oldValue, value) =>
             {
                 if (value)
                 {
@@ -52,11 +50,11 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                 }
             }, InputType.Hold);
 
-            InputKit.RegisterKeyCode(KeyCode.Space, (oldValue, value) =>
+            OldInputKit.RegisterKeyCode(KeyCode.Space, (oldValue, value) =>
             {
                 if (value)
                 {
-                    InputKit.UnRegisterKeyCode(KeyCode.A);
+                    OldInputKit.UnregisterKeyCode(KeyCode.A);
                 }
             }, InputType.Press);
         }

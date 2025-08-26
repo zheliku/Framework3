@@ -21,9 +21,9 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View
         {
             _enemies = transform.Find("Enemies");
 
-            this.RegisterEvent<GameStartEvent>(OnGameStart).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<OnCountDownEndEvent>(OnCountDownEnd).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<GameWinEvent>(OnGameWin).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<GameStartEvent>(OnGameStart).UnregisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<OnCountDownEndEvent>(OnCountDownEnd).UnregisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<GameWinEvent>(OnGameWin).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnGameStart(GameStartEvent e)

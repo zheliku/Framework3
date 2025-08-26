@@ -11,16 +11,13 @@ namespace Framework3.Toolkits.InputKit
     using System;
     using Core;
     using System.Collections.Generic;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
     
-    [MonoSingletonPath("Framework/InputKit/OldInput/AxisInput")]
+    [MonoSingletonPath("Framework/InputKit/AxisInput")]
     public class AxisInput : MonoSingleton<AxisInput>
     {
-    #region 常量
-
-    #endregion
-
     #region Static
 
         public static string Horizontal = "Horizontal";
@@ -45,10 +42,6 @@ namespace Framework3.Toolkits.InputKit
 
     #endregion
 
-    #region 属性
-
-    #endregion
-
     #region 公共方法
 
         public void Register(string axisName, Action<float, float> action, bool isRaw = false)
@@ -60,14 +53,14 @@ namespace Framework3.Toolkits.InputKit
                 _axisInputProperties[axisName] = value;
             }
 
-            value.Register(action).UnRegisterWhenGameObjectDestroyed(Instance);
+            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
         }
 
-        public void UnRegister(string axisName, Action<float, float> action)
+        public void Unregister(string axisName, Action<float, float> action)
         {
             if (_axisInputProperties.TryGetValue(axisName, out var value))
             {
-                value.UnRegister(action);
+                value.Unregister(action);
 
                 if (value.EventCount == 0)
                 {
@@ -76,11 +69,11 @@ namespace Framework3.Toolkits.InputKit
             }
         }
 
-        public void UnRegister(string axisName)
+        public void Unregister(string axisName)
         {
             if (_axisInputProperties.TryGetValue(axisName, out var value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _axisInputProperties.Remove(axisName);
             }
         }
@@ -91,38 +84,38 @@ namespace Framework3.Toolkits.InputKit
                 ? _horizontalAndVerticalRawProperty
                 : _horizontalAndVerticalProperty;
 
-            value.Register(action).UnRegisterWhenGameObjectDestroyed(Instance);
+            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
         }
 
-        public void UnRegisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
+        public void UnregisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
         {
             var value = isRaw
                 ? _horizontalAndVerticalRawProperty
                 : _horizontalAndVerticalProperty;
 
-            value.UnRegister(action);
+            value.Unregister(action);
         }
 
-        public void UnRegisterHorizontalAndVertical(bool isRaw)
+        public void UnregisterHorizontalAndVertical(bool isRaw)
         {
             var value = isRaw
                 ? _horizontalAndVerticalRawProperty
                 : _horizontalAndVerticalProperty;
 
-            value.UnRegisterAll();
+            value.UnregisterAll();
         }
 
-        public void UnRegisterHorizontalAndVertical()
+        public void UnregisterHorizontalAndVertical()
         {
-            _horizontalAndVerticalRawProperty.UnRegisterAll();
-            _horizontalAndVerticalProperty.UnRegisterAll();
+            _horizontalAndVerticalRawProperty.UnregisterAll();
+            _horizontalAndVerticalProperty.UnregisterAll();
         }
 
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             foreach (var pair in _axisInputProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
 
             _axisInputProperties.Clear();
@@ -140,7 +133,7 @@ namespace Framework3.Toolkits.InputKit
         {
             base.Update();
 
-            if (!InputKit.EnableAxis)
+            if (!OldInputKit.EnableAxis)
             {
                 return;
             }

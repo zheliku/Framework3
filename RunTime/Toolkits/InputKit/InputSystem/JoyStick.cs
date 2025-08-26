@@ -47,7 +47,7 @@ namespace Game
             Handle.OnPointerUpEvent((e) =>
             {
                 Bg.Disable();
-            }).UnRegisterWhenGameObjectDisabled(Bg);
+            }).UnregisterWhenGameObjectDisabled(Bg);
 
             Bg.SetPosition(eventData.position);
 

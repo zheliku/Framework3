@@ -38,8 +38,8 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
             _txtLifeValue      = transform.Find("Life/Value").GetComponent<TextMeshProUGUI>();
             _txtGoldValue      = transform.Find("Gold/Value").GetComponent<TextMeshProUGUI>();
 
-            _gameModel.Gold.RegisterWithInitValue(OnGoldValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _gameModel.Life.RegisterWithInitValue(OnLifeValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+            _gameModel.Gold.RegisterWithInitValue(OnGoldValueChanged).UnregisterWhenGameObjectDestroyed(gameObject);
+            _gameModel.Life.RegisterWithInitValue(OnLifeValueChanged).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _btnStart.onClick.AddListener(OnBtnStartClick);
             _btnBuyLife.onClick.AddListener(OnBtnBuyLifeClick);

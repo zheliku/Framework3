@@ -24,7 +24,7 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
         private void Start()
         {
             TypeEventSystem.Global.Register<IEventA>(Debug.Log)
-                           .UnRegisterWhenGameObjectDestroyed(gameObject);
+                           .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnGUI()

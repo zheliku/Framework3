@@ -10,6 +10,7 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.Command
 {
     using Model;
 
+    // 减少计数命令，继承自 AbstractCommand
     public class DecreaseCountCommand : AbstractCommand
     {
         protected override void OnExecute()

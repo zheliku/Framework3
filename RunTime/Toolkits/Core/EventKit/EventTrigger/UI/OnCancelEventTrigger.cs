@@ -27,13 +27,13 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnCancelEventTriggerExtension
     {
-        public static IUnRegister OnCancelEvent<T>(this T self, Action<BaseEventData> onCancel, float priority = 0)
+        public static IUnregister OnCancelEvent<T>(this T self, Action<BaseEventData> onCancel, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnCancelEventTrigger>().OnCancelEvent.Register(onCancel, priority);
         }
 
-        public static IUnRegister OnCancelEvent(this GameObject self, Action<BaseEventData> onCancel, float priority = 0)
+        public static IUnregister OnCancelEvent(this GameObject self, Action<BaseEventData> onCancel, float priority = 0)
         {
             return self.GetOrAddComponent<OnCancelEventTrigger>().OnCancelEvent.Register(onCancel, priority);
         }

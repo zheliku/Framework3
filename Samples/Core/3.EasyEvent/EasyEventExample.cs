@@ -40,28 +40,28 @@ namespace Framework3.Core.Example._3.EasyEvent
             _easyEvent.Register(() =>
             {
                 _easyEventContent = "Clicked!";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _easyEvent.Register(() =>
             {
                 Debug.Log("Clicked! 1");
-            }, 2).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }, 2).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _easyEvent.Register(() =>
             {
                 Debug.Log("Clicked! 2");
-            }, 1).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }, 1).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _easyEventInt.Register(value =>
             {
                 _easyEventIntContent = $"Value: {value}";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
 
             _eventA.Register((a, b) =>
             {
                 _eventAContent = $"Value: {a}, {b}";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnGUI()

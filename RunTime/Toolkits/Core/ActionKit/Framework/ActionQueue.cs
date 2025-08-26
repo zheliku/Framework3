@@ -10,6 +10,7 @@ namespace Framework3.Toolkits.ActionKit
 {
     using System.Collections.Generic;
     using Core;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
 

@@ -20,28 +20,28 @@ namespace Framework3.Core
         
         public int EventCount { get => _onEvent.Count; }
 
-        // 注册事件，返回 IUnRegister 接口
-        public IUnRegister Register(Action onEvent, float priority = 0)
+        // 注册事件，返回 IUnregister 接口
+        public IUnregister Register(Action onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
-            return new CustomUnRegister(() => { UnRegister(onEvent); }); // 返回自定义 UnRegister 接口，用于注销事件，lambda 表达式使用了闭包
+            return new CustomUnregister(() => { Unregister(onEvent); }); // 返回自定义 Unregister 接口，用于注销事件，lambda 表达式使用了闭包
         }
         
         // 注册并调用事件
-        public IUnRegister RegisterWithTrigger(Action onEvent, float priority = 0)
+        public IUnregister RegisterWithTrigger(Action onEvent, float priority = 0)
         {
             onEvent?.Invoke();
             return Register(onEvent, priority);
         }
 
         // 注销事件
-        public void UnRegister(Action onEvent)
+        public void Unregister(Action onEvent)
         {
             _onEvent.Remove(onEvent);
         }
         
         // 注销所有事件
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _onEvent.Clear();
         }
@@ -66,25 +66,25 @@ namespace Framework3.Core
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg> onEvent, float priority = 0)
+        public IUnregister Register(Action<TArg> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
-            return new CustomUnRegister(() => { UnRegister(onEvent); });
+            return new CustomUnregister(() => { Unregister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg> onEvent, TArg t, float priority = 0)
+        public IUnregister RegisterWithTrigger(Action<TArg> onEvent, TArg t, float priority = 0)
         {
             onEvent?.Invoke(t);
             return Register(onEvent, priority);
         }
 
-        public void UnRegister(Action<TArg> onEvent)
+        public void Unregister(Action<TArg> onEvent)
         {
             _onEvent.Remove(onEvent);
         }
         
         // 注销所有事件
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _onEvent.Clear();
         }
@@ -100,7 +100,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
+        IUnregister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg _) => onEvent(), priority);
         }
@@ -114,25 +114,25 @@ namespace Framework3.Core
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg1, TArg2> onEvent, float priority = 0)
+        public IUnregister Register(Action<TArg1, TArg2> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
-            return new CustomUnRegister(() => { UnRegister(onEvent); });
+            return new CustomUnregister(() => { Unregister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2> onEvent, TArg1 t1, TArg2 t2, float priority = 0)
+        public IUnregister RegisterWithTrigger(Action<TArg1, TArg2> onEvent, TArg1 t1, TArg2 t2, float priority = 0)
         {
             onEvent?.Invoke(t1, t2);
             return Register(onEvent, priority);
         }
 
-        public void UnRegister(Action<TArg1, TArg2> onEvent)
+        public void Unregister(Action<TArg1, TArg2> onEvent)
         {
             _onEvent.Remove(onEvent);
         }
         
         // 注销所有事件
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _onEvent.Clear();
         }
@@ -148,7 +148,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
+        IUnregister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg1 _, TArg2 _) => onEvent(), priority);
         }
@@ -162,25 +162,25 @@ namespace Framework3.Core
 
         public int EventCount { get => _onEvent.Count; }
 
-        public IUnRegister Register(Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
+        public IUnregister Register(Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
         {
             _onEvent.Add(onEvent, priority);
-            return new CustomUnRegister(() => { UnRegister(onEvent); });
+            return new CustomUnregister(() => { Unregister(onEvent); });
         }
         
-        public IUnRegister RegisterWithTrigger(Action<TArg1, TArg2, TArg3> onEvent, TArg1 t1, TArg2 t2, TArg3 t3, float priority = 0)
+        public IUnregister RegisterWithTrigger(Action<TArg1, TArg2, TArg3> onEvent, TArg1 t1, TArg2 t2, TArg3 t3, float priority = 0)
         {
             onEvent?.Invoke(t1, t2, t3);
             return Register(onEvent, priority);
         }
 
-        public void UnRegister(Action<TArg1, TArg2, TArg3> onEvent)
+        public void Unregister(Action<TArg1, TArg2, TArg3> onEvent)
         {
             _onEvent.Remove(onEvent);
         }
         
         // 注销所有事件
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _onEvent.Clear();
         }
@@ -196,7 +196,7 @@ namespace Framework3.Core
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, float priority)
+        IUnregister IEasyEvent.Register(Action onEvent, float priority)
         {
             return Register((TArg1 _, TArg2 _, TArg3 _) => onEvent(), priority);
         }

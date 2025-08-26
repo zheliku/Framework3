@@ -43,27 +43,27 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnApplicationFocusEventTriggerExtension
     {
-        public static IUnRegister OnApplicationFocusEvent<T>(this T self, Action onApplicationFocus, int priority = 0)
+        public static IUnregister OnApplicationFocusEvent<T>(this T self, Action onApplicationFocus, int priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationFocusEventTrigger>().OnApplicationFocusEvent
                .Register(onApplicationFocus, priority);
         }
 
-        public static IUnRegister OnApplicationFocusEvent(this GameObject self, Action onApplicationFocus, int priority = 0)
+        public static IUnregister OnApplicationFocusEvent(this GameObject self, Action onApplicationFocus, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationFocusEventTrigger>().OnApplicationFocusEvent
                .Register(onApplicationFocus, priority);
         }
         
-        public static IUnRegister OnApplicationUnFocusEvent<T>(this T self, Action onApplicationUnFocus, int priority = 0)
+        public static IUnregister OnApplicationUnFocusEvent<T>(this T self, Action onApplicationUnFocus, int priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationFocusEventTrigger>().OnApplicationUnFocusEvent
                .Register(onApplicationUnFocus, priority);
         }
 
-        public static IUnRegister OnApplicationUnFocusEvent(this GameObject self, Action onApplicationUnFocus, int priority = 0)
+        public static IUnregister OnApplicationUnFocusEvent(this GameObject self, Action onApplicationUnFocus, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationFocusEventTrigger>().OnApplicationUnFocusEvent
                .Register(onApplicationUnFocus, priority);

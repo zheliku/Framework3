@@ -26,7 +26,7 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._0.Basic
             TypeEventSystem.Global.Register<TestEventA>(e =>
             {
                 Debug.Log(e);
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnGUI()

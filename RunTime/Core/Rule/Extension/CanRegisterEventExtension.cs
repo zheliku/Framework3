@@ -22,8 +22,8 @@ namespace Framework3.Core
         /// <param name="self">ICanRegisterEvent 实例</param>
         /// <param name="onEvent">事件触发时的回调函数</param>
         /// <param name="priority">事件优先级</param>
-        /// <returns>IUnRegister 接口，用于取消注册事件</returns>
-        public static IUnRegister RegisterEvent<TEvent>(this ICanRegisterEvent self, Action<TEvent> onEvent, float priority = 0)
+        /// <returns>IUnregister 接口，用于取消注册事件</returns>
+        public static IUnregister RegisterEvent<TEvent>(this ICanRegisterEvent self, Action<TEvent> onEvent, float priority = 0)
         {
             return self.Architecture.RegisterEvent<TEvent>(onEvent, priority); // 调用 Architecture 类的 RegisterEvent 方法
         }
@@ -34,9 +34,9 @@ namespace Framework3.Core
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="self">ICanRegisterEvent 实例</param>
         /// <param name="onEvent">要注销的回调函数</param>
-        public static void UnRegisterEvent<TEvent>(this ICanRegisterEvent self, Action<TEvent> onEvent)
+        public static void UnregisterEvent<TEvent>(this ICanRegisterEvent self, Action<TEvent> onEvent)
         {
-            self.Architecture.UnRegisterEvent<TEvent>(onEvent); // 调用 Architecture 类的 UnRegisterEvent 方法
+            self.Architecture.UnregisterEvent<TEvent>(onEvent); // 调用 Architecture 类的 UnregisterEvent 方法
         }
     }
 }

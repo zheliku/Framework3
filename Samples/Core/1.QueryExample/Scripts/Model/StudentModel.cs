@@ -8,7 +8,7 @@
 
 namespace Framework3.Core.Example._1.QueryExample.Scripts.Model
 {
-    using global::System.Collections.Generic;
+    using System.Collections.Generic;
 
     public class StudentModel : AbstractModel
     {

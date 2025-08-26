@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 1947980953}
   - component: {fileID: 1947980952}
   m_Layer: 0
-  m_Name: UnRegisterWhenGameObjectDisabledExample
+  m_Name: UnregisterWhenGameObjectDisabledExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

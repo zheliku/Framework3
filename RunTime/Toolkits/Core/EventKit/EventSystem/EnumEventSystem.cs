@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.EventKit
 
         protected EnumEventSystem() { }
 
-        public IUnRegister Register<TEnum>(TEnum key, Action<TEnum, object[]> onEvent, float priority = 0) where TEnum : Enum
+        public IUnregister Register<TEnum>(TEnum key, Action<TEnum, object[]> onEvent, float priority = 0) where TEnum : Enum
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -40,23 +40,23 @@ namespace Framework3.Toolkits.EventKit
             }
         }
 
-        public bool UnRegister<TEnum>(TEnum key, Action<TEnum, object[]> onEvent) where TEnum : Enum
+        public bool Unregister<TEnum>(TEnum key, Action<TEnum, object[]> onEvent) where TEnum : Enum
         {
             if (_events.TryGetValue(key, out var e))
             {
-                e.As<EasyEvent<TEnum, object[]>>()?.UnRegister(onEvent);
+                e.As<EasyEvent<TEnum, object[]>>()?.Unregister(onEvent);
                 return true;
             }
             
             return false;
         }
 
-        public bool UnRegister<TEnum>(TEnum key) where TEnum : Enum
+        public bool Unregister<TEnum>(TEnum key) where TEnum : Enum
         {
             return _events.Remove(key);
         }
 
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _events.Clear();
         }

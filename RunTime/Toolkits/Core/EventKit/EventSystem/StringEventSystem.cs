@@ -23,7 +23,7 @@ namespace Framework3.Toolkits.EventKit
         [ShowInInspector]
         private readonly Dictionary<string, IEasyEvent> _events = new Dictionary<string, IEasyEvent>(50);
 
-        public IUnRegister Register(string key, Action onEvent, float priority = 0)
+        public IUnregister Register(string key, Action onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -38,7 +38,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
 
-        public IUnRegister Register<TArg>(string key, Action<TArg> onEvent, float priority = 0)
+        public IUnregister Register<TArg>(string key, Action<TArg> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -53,7 +53,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
         
-        public IUnRegister Register<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent, float priority = 0)
+        public IUnregister Register<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.EventKit
             }
         }
         
-        public IUnRegister Register<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
+        public IUnregister Register<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
             {
@@ -83,60 +83,60 @@ namespace Framework3.Toolkits.EventKit
             }
         }
 
-        public bool UnRegister(string key, Action onEvent)
+        public bool Unregister(string key, Action onEvent)
         {
             if (_events.TryGetValue(key, out var e))
             {
                 var easyEvent = e.As<EasyEvent>();
-                easyEvent?.UnRegister(onEvent);
+                easyEvent?.Unregister(onEvent);
                 return true;
             }
 
             return false;
         }
 
-        public bool UnRegister<TArg>(string key, Action<TArg> onEvent)
+        public bool Unregister<TArg>(string key, Action<TArg> onEvent)
         {
             if (_events.TryGetValue(key, out var e))
             {
                 var easyEvent = e.As<EasyEvent<TArg>>();
-                easyEvent?.UnRegister(onEvent);
+                easyEvent?.Unregister(onEvent);
                 return true;
             }
 
             return false;
         }
         
-        public bool UnRegister<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent)
+        public bool Unregister<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent)
         {
             if (_events.TryGetValue(key, out var e))
             {
                 var easyEvent = e.As<EasyEvent<TArg1, TArg2>>();
-                easyEvent?.UnRegister(onEvent);
+                easyEvent?.Unregister(onEvent);
                 return true;
             }
 
             return false;
         }
         
-        public bool UnRegister<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent)
+        public bool Unregister<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent)
         {
             if (_events.TryGetValue(key, out var e))
             {
                 var easyEvent = e.As<EasyEvent<TArg1, TArg2, TArg3>>();
-                easyEvent?.UnRegister(onEvent);
+                easyEvent?.Unregister(onEvent);
                 return true;
             }
 
             return false;
         }
         
-        public bool UnRegister(string key)
+        public bool Unregister(string key)
         {
             return _events.Remove(key);
         }
         
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             _events.Clear();
         }

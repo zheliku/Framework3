@@ -46,8 +46,8 @@ namespace Framework3.Core
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">事件触发时的回调函数</param>
         /// <param name="priority">事件优先级</param>
-        /// <returns>IUnRegister 接口，用于取消注册</returns>
-        public IUnRegister Register<TEvent>(Action<TEvent> onEvent, float priority = 0)
+        /// <returns>IUnregister 接口，用于取消注册</returns>
+        public IUnregister Register<TEvent>(Action<TEvent> onEvent, float priority = 0)
         {
             return _events.GetOrAddEvent<EasyEvent<TEvent>>().Register(onEvent, priority);
         }
@@ -57,10 +57,10 @@ namespace Framework3.Core
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">要注销的回调函数</param>
-        public void UnRegister<TEvent>(Action<TEvent> onEvent)
+        public void Unregister<TEvent>(Action<TEvent> onEvent)
         {
             var e = _events.GetEvent<EasyEvent<TEvent>>();
-            e?.UnRegister(onEvent);
+            e?.Unregister(onEvent);
         }
     }
 }

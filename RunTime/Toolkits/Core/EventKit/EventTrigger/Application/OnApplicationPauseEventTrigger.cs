@@ -43,27 +43,27 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnApplicationPauseEventTriggerExtension
     {
-        public static IUnRegister OnApplicationPauseEvent<T>(this T self, Action onApplicationPause, int priority = 0)
+        public static IUnregister OnApplicationPauseEvent<T>(this T self, Action onApplicationPause, int priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationPauseEventTrigger>().OnApplicationPauseEvent
                .Register(onApplicationPause, priority);
         }
 
-        public static IUnRegister OnApplicationPauseEvent(this GameObject self, Action onApplicationPause, int priority = 0)
+        public static IUnregister OnApplicationPauseEvent(this GameObject self, Action onApplicationPause, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationPauseEventTrigger>().OnApplicationPauseEvent
                .Register(onApplicationPause, priority);
         }
 
-        public static IUnRegister OnApplicationUnPauseEvent<T>(this T self, Action onApplicationUnPause, int priority = 0)
+        public static IUnregister OnApplicationUnPauseEvent<T>(this T self, Action onApplicationUnPause, int priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationPauseEventTrigger>().OnApplicationUnPauseEvent
                .Register(onApplicationUnPause, priority);
         }
 
-        public static IUnRegister OnApplicationUnPauseEvent(this GameObject self, Action onApplicationUnPause, int priority = 0)
+        public static IUnregister OnApplicationUnPauseEvent(this GameObject self, Action onApplicationUnPause, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationPauseEventTrigger>().OnApplicationUnPauseEvent
                .Register(onApplicationUnPause, priority);

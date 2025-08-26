@@ -280,7 +280,7 @@ namespace Framework3.Toolkits.AudioKit
 
         public void OnRelease()
         {
-            Volume?.UnRegister(OnAudioSettingVolumeChanged);
+            Volume?.Unregister(OnAudioSettingVolumeChanged);
             Volume = null;
 
             _onStart    = null;
@@ -292,7 +292,7 @@ namespace Framework3.Toolkits.AudioKit
 
         public void OnDestroy() { }
 
-        public void RecycleToCache()
+        public void Recycle2Pool()
         {
             if (!SingletonObjectPool<AudioPlayer>.Instance.Release(this))
             {
@@ -317,7 +317,7 @@ namespace Framework3.Toolkits.AudioKit
             if (_timer != null) // 回收 _timer
             {
                 _timer.Cancel();
-                _timer.RecycleToCache();
+                _timer.Recycle2Pool();
                 _timer = null;
             }
 
@@ -346,7 +346,7 @@ namespace Framework3.Toolkits.AudioKit
 
             if (UsedCache)
             {
-                RecycleToCache();
+                Recycle2Pool();
             }
         }
 

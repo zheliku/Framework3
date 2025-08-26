@@ -1,16 +1,16 @@
 ﻿// ------------------------------------------------------------
-// @file       UnRegisterWhenDisabledExample.cs
+// @file       UnregisterWhenDisabledExample.cs
 // @brief
 // @author     zheliku
 // @Modified   2024-10-15 23:10:14
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-namespace Framework3.Core.Example._14.UnRegisterWhenGameObjectDisabled
+namespace Framework3.Core.Example._14.UnregisterWhenGameObjectDisabled
 {
     using UnityEngine;
 
-    public class UnRegisterWhenGameObjectDisabledExample : MonoBehaviour
+    public class UnregisterWhenGameObjectDisabledExample : MonoBehaviour
     {
         private void Awake()
         {
@@ -20,7 +20,7 @@ namespace Framework3.Core.Example._14.UnRegisterWhenGameObjectDisabled
             eventA.Register(() =>
             {
                 Debug.Log("Received");
-            }).UnRegisterWhenGameObjectDisabled(receivedGameObj);
+            }).UnregisterWhenGameObjectDisabled(receivedGameObj);
 
             eventA.Trigger(); // Received
             eventA.Trigger(); // Received

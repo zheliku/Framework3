@@ -25,14 +25,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnApplicationQuitEventTriggerExtension
     {
-        public static IUnRegister OnApplicationQuitEventEvent<T>(this T self, Action onApplicationQuitEvent, int priority = 0)
+        public static IUnregister OnApplicationQuitEventEvent<T>(this T self, Action onApplicationQuitEvent, int priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationQuitEventTrigger>().OnApplicationQuitEvent
                        .Register(onApplicationQuitEvent, priority);
         }
 
-        public static IUnRegister OnApplicationQuitEventEvent(this GameObject self, Action onApplicationQuitEvent, int priority = 0)
+        public static IUnregister OnApplicationQuitEventEvent(this GameObject self, Action onApplicationQuitEvent, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationQuitEventTrigger>().OnApplicationQuitEvent
                        .Register(onApplicationQuitEvent, priority);

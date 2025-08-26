@@ -9,30 +9,18 @@
 namespace Framework3.Toolkits.InputKit
 {
     using System.Collections.Generic;
-    using FluentAPI;
     using Core;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;
 
     [MonoSingletonPath("Framework/InputKit")]
     public class InputMgr : MonoSingleton<InputMgr>
     {
-    #region 常量
-
-    #endregion
-
-    #region Static
-
-    #endregion
-
     #region 字段
 
         [ShowInInspector]
-        public Dictionary<string, InputActionMap> ActionMaps { get; } = new Dictionary<string, InputActionMap>();
-
-    #endregion
-
-    #region 属性
+        public Dictionary<string, InputActionMapTracker> ActionMapTrackerDict { get; } = new();
 
     #endregion
 
@@ -44,7 +32,12 @@ namespace Framework3.Toolkits.InputKit
             var inputActionAsset = InputSystem.actions;
             foreach (var map in inputActionAsset.actionMaps)
             {
-                ActionMaps.TryAdd(map.name, map);
+                var tracker = new InputActionMapTracker();
+                foreach (var action in map)
+                {
+                    tracker.InputActions[action.name] = new InputActionTracker();
+                }
+                ActionMapTrackerDict.TryAdd(map.name, tracker);
             }
         }
 
@@ -53,9 +46,9 @@ namespace Framework3.Toolkits.InputKit
         /// </summary>
         /// <param name="action">输入行为</param>
         /// <returns>InputAction 对应的 Mono</returns>
-        public InputActionMono GetInputActionMono(InputAction action)
+        public static InputActionTracker GetInputActionTracker(InputAction action)
         {
-            return $"InputSystem/{action.actionMap.name}/{action.name}".GetOrAddComponentInHierarchy<InputActionMono>(transform);
+            return Instance.ActionMapTrackerDict[action.actionMap.name].InputActions[action.name];
         }
         
         /// <summary>
@@ -63,9 +56,9 @@ namespace Framework3.Toolkits.InputKit
         /// </summary>
         /// <param name="action">输入行为</param>
         /// <returns>InputAction 对应的 MapMono</returns>
-        public InputActionMapMono GetInputActionMapMono(InputAction action)
+        public static InputActionMapTracker GetInputActionMapTracker(InputAction action)
         {
-            return $"InputSystem/{action.actionMap.name}".GetOrAddComponentInHierarchy<InputActionMapMono>(transform);
+            return Instance.ActionMapTrackerDict[action.actionMap.name];
         }
         
         /// <summary>
@@ -73,18 +66,10 @@ namespace Framework3.Toolkits.InputKit
         /// </summary>
         /// <param name="actionMap">输入行为地图</param>
         /// <returns>InputAction 对应的 MapMono</returns>
-        public InputActionMapMono GetInputActionMapMono(InputActionMap actionMap)
+        public static InputActionMapTracker GetInputActionMapTracker(InputActionMap actionMap)
         {
-            return $"InputSystem/{actionMap.name}".GetOrAddComponentInHierarchy<InputActionMapMono>(transform);
+            return Instance.ActionMapTrackerDict[actionMap.name];
         }
-
-    #endregion
-
-    #region 其他方法
-
-    #endregion
-
-    #region Unity 事件
 
     #endregion
     }

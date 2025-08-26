@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------
-// @file       SafeObjectPool.cs
+// @file       SingletonObjectPool.cs
 // @brief
 // @author     zheliku
 // @Modified   2024-10-23 22:10:42
@@ -11,6 +11,7 @@ namespace Framework3.Toolkits.PoolKit
     using System;
     using System.Collections.Generic;
     using Core;
+    using SingletonKit;
 
     /// <summary>
     /// 对象必须继承 IPoolable

@@ -24,10 +24,10 @@ namespace Framework3.Example.Toolkits.InputKit.InputSystem_Example._1.EventUse
         {
             Cube = "Cube".GetGameObjectInHierarchy();
 
-            InputKit.BindPerformed("Move", context =>
+            InputKit.RegisterPerformed("Move", context =>
             {
                 _moveDir = context.ReadValue<Vector2>();
-            }).BindCanceled(context =>
+            }).RegisterCanceled(context =>
             {
                 _moveDir = Vector2.zero;
             });

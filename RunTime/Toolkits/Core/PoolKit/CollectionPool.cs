@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.PoolKit
 
     public class CollectionPool<TCollection, TItem> where TCollection : class, ICollection<TItem>, new()
     {
-        public static readonly ObjectPool<TCollection> POOL = new(
+        public static readonly ObjectPool<TCollection> Pool = new(
             () => new TCollection(),
             actionOnGet: null,
             actionOnRelease: l => l.Clear(),
@@ -23,12 +23,12 @@ namespace Framework3.Toolkits.PoolKit
 
         public static TCollection Get()
         {
-            return POOL.Get();
+            return Pool.Get();
         }
 
         public static void Release(TCollection toRelease)
         {
-            POOL.Release(toRelease);
+            Pool.Release(toRelease);
         }
     }
 }

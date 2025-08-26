@@ -10,6 +10,7 @@ namespace Framework3.Toolkits.AudioKit
 {
     using BindableKit;
     using Core;
+    using SingletonKit;
     using Sirenix.OdinInspector;
 
     [MonoSingletonPath("Framework/AudioKit/AudioKitSetting")]

@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.ResKit
 {
-    using Framework3.Core;
+    using Core;
     using Object = UnityEngine.Object;
 
     /// <summary>

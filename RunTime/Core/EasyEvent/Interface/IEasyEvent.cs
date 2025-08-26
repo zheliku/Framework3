@@ -21,12 +21,12 @@ namespace Framework3.Core
         /// <param name="onEvent">事件方法</param>
         /// <param name="priority">事件优先级</param>
         /// <returns>注销器</returns>
-        IUnRegister Register(Action onEvent, float priority = 0);
+        IUnregister Register(Action onEvent, float priority = 0);
 
         /// <summary>
         /// 注销所有事件
         /// </summary>
-        void UnRegisterAll();
+        void UnregisterAll();
         
         int EventCount { get; }
     }

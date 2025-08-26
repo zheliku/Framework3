@@ -18,7 +18,7 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
         public List<List<int>> Lists = new();
 
         [ShowInInspector]
-        public ObjectPool<List<int>> ListPool = ListPool<int>.POOL;
+        public ObjectPool<List<int>> ListPool = ListPool<int>.Pool;
 
         private void OnGUI()
         {

@@ -11,10 +11,11 @@ namespace Framework3.Toolkits.InputKit
     using System;
     using Core;
     using System.Collections.Generic;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/InputKit/OldInput/KeyCodeInput")]
+    [MonoSingletonPath("Framework/InputKit/KeyCodeInput")]
     public class KeyCodeInput : MonoSingleton<KeyCodeInput>
     {
     #region 常量
@@ -58,16 +59,16 @@ namespace Framework3.Toolkits.InputKit
                 dic.Add(keyCode, value);
             }
 
-            value.Register(action).UnRegisterWhenGameObjectDestroyed(Instance);
+            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
         }
         
-        public void UnRegister(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
+        public void Unregister(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
         {
             var dic = GetMouseDic(inputType);
 
             if (dic.TryGetValue(keyCode, out var value))
             {
-                value.UnRegister(action);
+                value.Unregister(action);
                 
                 if (value.EventCount == 0)
                 {
@@ -76,53 +77,53 @@ namespace Framework3.Toolkits.InputKit
             }
         }
         
-        public void UnRegister(KeyCode keyCode, InputType inputType)
+        public void Unregister(KeyCode keyCode, InputType inputType)
         {
             var dic = GetMouseDic(inputType);
 
             if (dic.TryGetValue(keyCode, out var value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 dic.Remove(keyCode);
             }
         }
         
-        public void UnRegister(KeyCode keyCode)
+        public void Unregister(KeyCode keyCode)
         {
             if (_keyCodePressProperties.TryGetValue(keyCode, out var value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _keyCodePressProperties.Remove(keyCode);
             }
             
             if (_keyCodeHoldProperties.TryGetValue(keyCode, out value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _keyCodeHoldProperties.Remove(keyCode);
             }
             
             if (_keyCodeReleaseProperties.TryGetValue(keyCode, out value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _keyCodeReleaseProperties.Remove(keyCode);
             }
         }
 
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             foreach (var pair in _keyCodePressProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             foreach (var pair in _keyCodeHoldProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             foreach (var pair in _keyCodeReleaseProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             _keyCodePressProperties.Clear();
@@ -153,7 +154,7 @@ namespace Framework3.Toolkits.InputKit
         {
             base.Update();
 
-            if (!InputKit.EnableKeyCode)
+            if (!OldInputKit.EnableKeyCode)
             {
                 return;
             }

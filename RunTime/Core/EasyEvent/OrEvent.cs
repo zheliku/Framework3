@@ -14,9 +14,9 @@ namespace Framework3.Core
     /// <summary>
     /// 级联事件
     /// </summary>
-    public sealed class OrEvent : IUnRegisterList
+    public sealed class OrEvent : IUnregisterList
     {
-        public List<IUnRegister> UnregisterList { get; } = new(); // 待注销列表
+        public List<IUnregister> UnregisterList { get; } = new(); // 待注销列表
 
         private Action _onEvent = () => { }; // OrEvent 事件
 
@@ -37,10 +37,10 @@ namespace Framework3.Core
         /// </summary>
         /// <param name="onEvent">事件</param>
         /// <returns>注销器</returns>
-        public IUnRegister Register(Action onEvent)
+        public IUnregister Register(Action onEvent)
         {
             _onEvent += onEvent;
-            return new CustomUnRegister(() => { UnRegister(onEvent); });
+            return new CustomUnregister(() => { Unregister(onEvent); });
         }
         
         /// <summary>
@@ -48,7 +48,7 @@ namespace Framework3.Core
         /// </summary>
         /// <param name="onEvent">事件</param>
         /// <returns>注销器</returns>
-        public IUnRegister RegisterWithTrigger(Action onEvent)
+        public IUnregister RegisterWithTrigger(Action onEvent)
         {
             onEvent?.Invoke();
             return Register(onEvent);
@@ -58,10 +58,10 @@ namespace Framework3.Core
         /// 注销事件
         /// </summary>
         /// <param name="onEvent">事件</param>
-        public void UnRegister(Action onEvent)
+        public void Unregister(Action onEvent)
         {
             _onEvent -= onEvent;
-            this.UnRegisterAll();
+            this.UnregisterAll();
         }
 
         private void Trigger()

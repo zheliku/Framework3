@@ -27,13 +27,13 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnDragEventTriggerExtension
     {
-        public static IUnRegister OnDragEvent<T>(this T self, Action<PointerEventData> onDrag, float priority = 0)
+        public static IUnregister OnDragEvent<T>(this T self, Action<PointerEventData> onDrag, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnDragEventTrigger>().OnDragEvent.Register(onDrag, priority);
         }
 
-        public static IUnRegister OnDragEvent(this GameObject self, Action<PointerEventData> onDrag, float priority = 0)
+        public static IUnregister OnDragEvent(this GameObject self, Action<PointerEventData> onDrag, float priority = 0)
         {
             return self.GetOrAddComponent<OnDragEventTrigger>().OnDragEvent.Register(onDrag, priority);
         }

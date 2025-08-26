@@ -27,12 +27,12 @@ namespace Framework3.Toolkits.EventKit.Example._2.EventTriggerExample
             _ground.OnCollisionEnter2DEvent(collider2D1 =>
             {
                 Debug.Log(collider2D1.gameObject.name + ": entered");
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _image.OnPointerDownEvent(data =>
             {
                 Debug.Log("Click");
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
     }
 }

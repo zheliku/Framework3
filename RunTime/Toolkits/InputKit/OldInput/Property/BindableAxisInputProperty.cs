@@ -6,11 +6,9 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.InputKit
 {
-    using Framework3.Core;
+    using Core;
     using UnityEngine;
 
     public class BindableAxisInputProperty : BindableProperty<float>

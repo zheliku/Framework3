@@ -20,7 +20,7 @@ namespace Framework3.Core
         /// <param name="priority">事件优先级</param>
         /// <typeparam name="TEvent">Event 类型</typeparam>
         /// <returns>注销器</returns>
-        public static IUnRegister RegisterEvent<TEvent>(this IOnEvent<TEvent> self, float priority = 0)
+        public static IUnregister RegisterEvent<TEvent>(this IOnEvent<TEvent> self, float priority = 0)
         {
             return TypeEventSystem.Global.Register<TEvent>(self.OnEvent, priority);
         }
@@ -30,9 +30,9 @@ namespace Framework3.Core
         /// </summary>
         /// <param name="self">IOnEvent 实例</param>
         /// <typeparam name="TEvent">Event 类型</typeparam>
-        public static void UnRegisterEvent<TEvent>(this IOnEvent<TEvent> self)
+        public static void UnregisterEvent<TEvent>(this IOnEvent<TEvent> self)
         {
-            TypeEventSystem.Global.UnRegister<TEvent>(self.OnEvent);
+            TypeEventSystem.Global.Unregister<TEvent>(self.OnEvent);
         }
     }
 }

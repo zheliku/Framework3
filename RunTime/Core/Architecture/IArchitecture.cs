@@ -99,15 +99,15 @@ namespace Framework3.Core
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">事件触发时的回调函数</param>
         /// <param name="priority">事件优先级</param>
-        /// <returns>IUnRegister 接口，用于取消注册</returns>
-        IUnRegister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority);
+        /// <returns>IUnregister 接口，用于取消注册</returns>
+        IUnregister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority);
 
         /// <summary>
         /// 注销事件监听
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">要注销的回调函数</param>
-        void UnRegisterEvent<TEvent>(Action<TEvent> onEvent);
+        void UnregisterEvent<TEvent>(Action<TEvent> onEvent);
 
         /// <summary>
         /// 反初始化，用于清理或关闭架构

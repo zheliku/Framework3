@@ -11,10 +11,11 @@ namespace Framework3.Toolkits.InputKit
     using System;
     using Core;
     using System.Collections.Generic;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/InputKit/OldInput/MouseInput")]
+    [MonoSingletonPath("Framework/InputKit/MouseInput")]
     public class MouseInput : MonoSingleton<MouseInput>
     {
     #region 常量
@@ -58,16 +59,16 @@ namespace Framework3.Toolkits.InputKit
                 dic.Add(mouseType, value);
             }
 
-            value.Register(action).UnRegisterWhenGameObjectDestroyed(Instance);
+            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
         }
         
-        public void UnRegister(MouseInputType mouseType, Action<bool, bool> action, InputType inputType)
+        public void Unregister(MouseInputType mouseType, Action<bool, bool> action, InputType inputType)
         {
             var dic = GetMouseDic(inputType);
 
             if (dic.TryGetValue(mouseType, out var value))
             {
-                value.UnRegister(action);
+                value.Unregister(action);
                 
                 if (value.EventCount == 0)
                 {
@@ -76,53 +77,53 @@ namespace Framework3.Toolkits.InputKit
             }
         }
         
-        public void UnRegister(MouseInputType mouseType, InputType inputType)
+        public void Unregister(MouseInputType mouseType, InputType inputType)
         {
             var dic = GetMouseDic(inputType);
 
             if (dic.TryGetValue(mouseType, out var value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 dic.Remove(mouseType);
             }
         }
         
-        public void UnRegister(MouseInputType mouseType)
+        public void Unregister(MouseInputType mouseType)
         {
             if (_mousePressProperties.TryGetValue(mouseType, out var value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _mousePressProperties.Remove(mouseType);
             }
             
             if (_mouseHoldProperties.TryGetValue(mouseType, out value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _mouseHoldProperties.Remove(mouseType);
             }
             
             if (_mouseReleaseProperties.TryGetValue(mouseType, out value))
             {
-                value.UnRegisterAll();
+                value.UnregisterAll();
                 _mouseReleaseProperties.Remove(mouseType);
             }
         }
 
-        public void UnRegisterAll()
+        public void UnregisterAll()
         {
             foreach (var pair in _mousePressProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             foreach (var pair in _mouseHoldProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             foreach (var pair in _mouseReleaseProperties)
             {
-                pair.Value.UnRegisterAll();
+                pair.Value.UnregisterAll();
             }
             
             _mousePressProperties.Clear();
@@ -153,7 +154,7 @@ namespace Framework3.Toolkits.InputKit
         {
             base.Update();
 
-            if (!InputKit.EnableMouse)
+            if (!OldInputKit.EnableMouse)
             {
                 return;
             }

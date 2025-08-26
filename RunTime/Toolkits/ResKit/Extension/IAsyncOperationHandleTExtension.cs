@@ -10,7 +10,7 @@ namespace Framework3.Toolkits.ResKit
 {
     using System;
     using System.Collections.Generic;
-    using Framework3.Core;
+    using Core;
     using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
 

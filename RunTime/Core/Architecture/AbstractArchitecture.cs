@@ -154,14 +154,14 @@ namespace Framework3.Core
             _typeEventSystem.Send<TEvent>(e);
         }
 
-        public IUnRegister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority)
+        public IUnregister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority)
         {
             return _typeEventSystem.Register<TEvent>(onEvent, priority);
         }
         
-        public void UnRegisterEvent<TEvent>(Action<TEvent> onEvent)
+        public void UnregisterEvent<TEvent>(Action<TEvent> onEvent)
         {
-            _typeEventSystem.UnRegister<TEvent>(onEvent);
+            _typeEventSystem.Unregister<TEvent>(onEvent);
         }
 
         public void Deinit()

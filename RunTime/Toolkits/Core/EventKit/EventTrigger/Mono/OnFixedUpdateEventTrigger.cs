@@ -26,14 +26,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnFixedUpdateEventTriggerExtension
     {
-        public static IUnRegister OnFixedUpdateEvent<T>(this T self, Action update, float priority = 0)
+        public static IUnregister OnFixedUpdateEvent<T>(this T self, Action update, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnFixedUpdateEventTrigger>().FixedUpdateEvent
                        .Register(update, priority);
         }
 
-        public static IUnRegister OnFixedUpdateEvent(this GameObject self, Action update, int priority = 0)
+        public static IUnregister OnFixedUpdateEvent(this GameObject self, Action update, int priority = 0)
         {
             return self.GetOrAddComponent<OnFixedUpdateEventTrigger>().FixedUpdateEvent
                        .Register(update, priority);

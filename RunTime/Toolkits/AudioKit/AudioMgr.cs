@@ -13,6 +13,7 @@ namespace Framework3.Toolkits.AudioKit
     using System.Linq;
     using Core;
     using PoolKit;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
     
@@ -85,7 +86,7 @@ namespace Framework3.Toolkits.AudioKit
                 {
                     MusicPlayer.Stop();
                 }
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             AudioKit.Setting.IsNarrationOn.Register((oldValue, narrationOn) =>
             {
@@ -101,7 +102,7 @@ namespace Framework3.Toolkits.AudioKit
                 {
                     NarrationPlayer.Stop();
                 }
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             AudioKit.Setting.IsSoundOn.Register((oldValue, soundOn) =>
             {
@@ -112,7 +113,7 @@ namespace Framework3.Toolkits.AudioKit
                 {
                     ForEachSound(soundPlayer => soundPlayer.Stop());
                 }
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         /// <summary>

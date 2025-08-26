@@ -39,14 +39,14 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._3.InterfaceEventMode
         private void Start()
         {
             this.RegisterEvent<InterfaceEventA>()               // 注册监听，默认注册到 TypeEventSystem.GLOBAL 中
-                .UnRegisterWhenGameObjectDestroyed(gameObject); // 自动注销
+                .UnregisterWhenGameObjectDestroyed(gameObject); // 自动注销
 
             this.RegisterEvent<InterfaceEventB>();
         }
 
         private void OnDestroy()
         {
-            this.UnRegisterEvent<InterfaceEventB>(); // 手动注销
+            this.UnregisterEvent<InterfaceEventB>(); // 手动注销
         }
 
         private void OnGUI()

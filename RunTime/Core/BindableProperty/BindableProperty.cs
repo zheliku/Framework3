@@ -120,26 +120,26 @@ namespace Framework3.Core
             _value = newValue;
         }
 
-        public IUnRegister RegisterWithInitValue(Action<TProperty, TProperty> onValueChanged, float priority = 0)
+        public IUnregister RegisterWithInitValue(Action<TProperty, TProperty> onValueChanged, float priority = 0)
         {
             onValueChanged(_value, _value);
             return Register(onValueChanged, priority);
         }
 
-        public void UnRegister(Action<TProperty, TProperty> onValueChanged)
+        public void Unregister(Action<TProperty, TProperty> onValueChanged)
         {
-            _onValueChanged.UnRegister(onValueChanged);
+            _onValueChanged.Unregister(onValueChanged);
         }
 
-        public void UnRegisterAll() { _onValueChanged.UnRegisterAll(); }
+        public void UnregisterAll() { _onValueChanged.UnregisterAll(); }
 
-        public IUnRegister Register(Action<TProperty, TProperty> onValueChanged, float priority = 0)
+        public IUnregister Register(Action<TProperty, TProperty> onValueChanged, float priority = 0)
         {
             return _onValueChanged.Register(onValueChanged, priority);
         }
 
         // 仅能通过 IEasyEvent 接口使用 Register(Action onEvent) 方法
-        IUnRegister IEasyEvent.Register(Action onEvent, float priority) { return Register((_, _) => onEvent()); }
+        IUnregister IEasyEvent.Register(Action onEvent, float priority) { return Register((_, _) => onEvent()); }
 
     #endregion
 

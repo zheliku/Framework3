@@ -13,29 +13,29 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
 
     public class SyncUseExample : MonoBehaviour
     {
-        private SyncUseExamplePanel _panel;
+        private SyncUseExamplePanel2D _panel2D;
         
         private void OnEnable()
         {
-            _panel = UIKit.LoadPanel<SyncUseExamplePanel>();
+            _panel2D = UI2DKit.LoadPanel<SyncUseExamplePanel2D>();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                UIKit.ShowPanel<SyncUseExamplePanel>();
+                UI2DKit.ShowPanel<SyncUseExamplePanel2D>();
             }
             
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                _panel.Hide();
+                _panel2D.Hide();
             }
         }
 
         private void OnDisable()
         {
-            UIKit.UnloadPanel<AsyncUseExamplePanel>();
+            UI2DKit.UnloadPanel<AsyncUseExamplePanel2D>();
         }
     }
 }

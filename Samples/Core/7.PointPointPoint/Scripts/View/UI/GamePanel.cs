@@ -37,9 +37,9 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
             _txtCountDownValue = transform.Find("CountDown/Value").GetComponent<TextMeshProUGUI>();
 
             // 注册 UI 更新事件
-            _gameModel.Score.RegisterWithInitValue(OnScoreValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _gameModel.Life.RegisterWithInitValue(OnLifeValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _gameModel.Gold.RegisterWithInitValue(OnGoldValueChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
+            _gameModel.Score.RegisterWithInitValue(OnScoreValueChanged).UnregisterWhenGameObjectDestroyed(gameObject);
+            _gameModel.Life.RegisterWithInitValue(OnLifeValueChanged).UnregisterWhenGameObjectDestroyed(gameObject);
+            _gameModel.Gold.RegisterWithInitValue(OnGoldValueChanged).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void Update()

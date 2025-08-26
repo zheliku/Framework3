@@ -12,6 +12,7 @@ namespace Framework3.Toolkits.ResKit
     using System.Collections.Generic;
     using FluentAPI;
     using Core;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
@@ -20,10 +21,6 @@ namespace Framework3.Toolkits.ResKit
     [MonoSingletonPath("Framework/ResKit")]
     public class ResMgr : MonoSingleton<ResMgr>
     {
-    #region 常量
-
-    #endregion
-
     #region Static
 
         /// <summary>
@@ -50,10 +47,6 @@ namespace Framework3.Toolkits.ResKit
 
         public Transform ResourcesMonoParent;   // 用于挂载 ResourcesMono 的父节点
         public Transform AddressableMonoParent; // 用于挂载 AddressableMono 的父节点
-
-    #endregion
-
-    #region 属性
 
     #endregion
 

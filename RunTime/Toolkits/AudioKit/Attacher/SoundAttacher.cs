@@ -9,6 +9,7 @@
 namespace Framework3.Toolkits.AudioKit
 {
     using Core;
+    using SingletonKit;
 
     /// <summary>
     /// 仅用于挂载 Sound 的 AudioSource

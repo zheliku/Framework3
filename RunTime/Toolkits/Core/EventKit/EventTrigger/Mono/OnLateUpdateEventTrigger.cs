@@ -26,14 +26,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnLateUpdateEventTriggerExtension
     {
-        public static IUnRegister OnLateUpdateEvent<T>(this T self, Action update, float priority = 0)
+        public static IUnregister OnLateUpdateEvent<T>(this T self, Action update, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnLateUpdateEventTrigger>().LateUpdateEvent
                        .Register(update, priority);
         }
 
-        public static IUnRegister OnLateUpdateEvent(this GameObject self, Action update, int priority = 0)
+        public static IUnregister OnLateUpdateEvent(this GameObject self, Action update, int priority = 0)
         {
             return self.GetOrAddComponent<OnLateUpdateEventTrigger>().LateUpdateEvent
                        .Register(update, priority);

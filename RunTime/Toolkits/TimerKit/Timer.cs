@@ -112,13 +112,9 @@ namespace Framework3.Toolkits.TimerKit
         [ShowInInspector]
         public bool Paused
         {
-            get
-            {
-                return _paused;
-            }
+            get => _paused;
             set
             {
-                
                 if (value)
                 {
                     _pausedProgress = CurrentTime - LastTickTime;
@@ -189,25 +185,11 @@ namespace Framework3.Toolkits.TimerKit
         public void OnDestroy() { }
 
 
-        public void RecycleToCache()
+        public void Recycle2Pool()
         {
             SingletonObjectPool<Timer>.Instance.Release(this);
         }
 
     #endregion
-    }
-
-    public class TimerComparer : IComparer<Timer>
-    {
-        public int Compare(Timer x, Timer y)
-        {
-            if (ReferenceEquals(x, y)) return 0;
-            if (y is null) return 1;
-            if (x is null) return -1;
-
-            // if (x.Paused && !y.Paused) return 1;
-            // if (!x.Paused && y.Paused) return -1;
-            return x.TargetTime.CompareTo(y.TargetTime);
-        }
     }
 }

@@ -19,24 +19,23 @@ namespace Framework3.Toolkits.InputKit
     /// </summary>
     public static class InputActionExtension
     {
-        public static InputAction BindPerformed(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction RegisterPerformed(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.performed += action;
-            InputMgr.Instance.GetInputActionMapMono(self).Init(self.actionMap);
-            InputMgr.Instance.GetInputActionMono(self).PerformedActions.Add(action);
+            InputMgr.GetInputActionTracker(self).PerformedActions.Add(action);
             return self;
         }
 
-        public static InputAction UnBindPerformed(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction UnregisterPerformed(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.performed -= action;
-            InputMgr.Instance.GetInputActionMono(self).PerformedActions.Remove(action);
+            InputMgr.GetInputActionTracker(self).PerformedActions.Remove(action);
             return self;
         }
 
-        public static InputAction UnBindAllPerformed(this InputAction self)
+        public static InputAction UnregisterPerformedAll(this InputAction self)
         {
-            var actions = InputMgr.Instance.GetInputActionMono(self).PerformedActions;
+            var actions = InputMgr.GetInputActionTracker(self).PerformedActions;
             foreach (var action in actions)
             {
                 self.performed -= action;
@@ -45,24 +44,23 @@ namespace Framework3.Toolkits.InputKit
             return self;
         }
 
-        public static InputAction BindStarted(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction RegisterStarted(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.started += action;
-            InputMgr.Instance.GetInputActionMapMono(self).Init(self.actionMap);
-            InputMgr.Instance.GetInputActionMono(self).StartedActions.Add(action);
+            InputMgr.GetInputActionTracker(self).StartedActions.Add(action);
             return self;
         }
 
-        public static InputAction UnBindStarted(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction UnregisterStarted(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.started -= action;
-            InputMgr.Instance.GetInputActionMono(self).StartedActions.Remove(action);
+            InputMgr.GetInputActionTracker(self).StartedActions.Remove(action);
             return self;
         }
 
-        public static InputAction UnBindAllStarted(this InputAction self)
+        public static InputAction UnregisterStartedAll(this InputAction self)
         {
-            var actions = InputMgr.Instance.GetInputActionMono(self).StartedActions;
+            var actions = InputMgr.GetInputActionTracker(self).StartedActions;
             foreach (var action in actions)
             {
                 self.started -= action;
@@ -71,24 +69,23 @@ namespace Framework3.Toolkits.InputKit
             return self;
         }
 
-        public static InputAction BindCanceled(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction RegisterCanceled(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.canceled += action;
-            InputMgr.Instance.GetInputActionMapMono(self).Init(self.actionMap);
-            InputMgr.Instance.GetInputActionMono(self).CanceledActions.Add(action);
+            InputMgr.GetInputActionTracker(self).CanceledActions.Add(action);
             return self;
         }
 
-        public static InputAction UnBindCanceled(this InputAction self, Action<InputAction.CallbackContext> action)
+        public static InputAction UnregisterCanceled(this InputAction self, Action<InputAction.CallbackContext> action)
         {
             self.canceled -= action;
-            InputMgr.Instance.GetInputActionMono(self).CanceledActions.Remove(action);
+            InputMgr.GetInputActionTracker(self).CanceledActions.Remove(action);
             return self;
         }
 
-        public static InputAction UnBindAllCanceled(this InputAction self)
+        public static InputAction UnregisterCanceledAll(this InputAction self)
         {
-            var actions = InputMgr.Instance.GetInputActionMono(self).CanceledActions;
+            var actions = InputMgr.GetInputActionTracker(self).CanceledActions;
             foreach (var action in actions)
             {
                 self.canceled -= action;
@@ -97,292 +94,264 @@ namespace Framework3.Toolkits.InputKit
             return self;
         }
 
-        public static InputAction UnBindAll(this InputAction self)
+        public static InputAction UnregisterAll(this InputAction self)
         {
-            self.UnBindAllPerformed();
-            self.UnBindAllStarted();
-            self.UnBindAllCanceled();
+            self.UnregisterPerformedAll();
+            self.UnregisterStartedAll();
+            self.UnregisterCanceledAll();
             return self;
         }
 
-        public static InputAction Activate(this InputAction self)
-        {
-            self.Enable();
-            InputMgr.Instance.GetInputActionMono(self).EnableGameObject();
-            return self;
-        }
-
-        public static InputAction Deactivate(this InputAction self)
-        {
-            self.Disable();
-            InputMgr.Instance.GetInputActionMono(self).DisableGameObject();
-            return self;
-        }
-
-        public static InputActionMap Activate(this InputActionMap self)
-        {
-            self.Enable();
-            InputMgr.Instance.GetInputActionMapMono(self).EnableGameObject();
-            return self;
-        }
-
-        public static InputActionMap Deactivate(this InputActionMap self)
-        {
-            self.Disable();
-            InputMgr.Instance.GetInputActionMapMono(self).DisableGameObject();
-            return self;
-        }
-
-        public static InputAction UnBindPerformedWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext>
+        public static InputAction UnregisterPerformedWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext>
                                                                             action,            int        priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindPerformed(action);
+                self.UnregisterPerformed(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindPerformedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext>
+        public static InputAction UnregisterPerformedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext>
                                                                             action,            int       priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindPerformed(action);
+                self.UnregisterPerformed(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindPerformedWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterPerformedWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindPerformed(action);
+                self.UnregisterPerformed(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindPerformedWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterPerformedWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindPerformed(action);
+                self.UnregisterPerformed(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllPerformedWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterPerformedAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllPerformed();
+                self.UnregisterPerformedAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllPerformedWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterPerformedAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllPerformed();
+                self.UnregisterPerformedAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllPerformedWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterPerformedAllWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllPerformed();
+                self.UnregisterPerformedAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllPerformedWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterPerformedAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllPerformed();
+                self.UnregisterPerformedAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindStartedWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterStartedWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindStarted(action);
+                self.UnregisterStarted(action);
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindStartedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterStartedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindStarted(action);
+                self.UnregisterStarted(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindStartedWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterStartedWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindStarted(action);
+                self.UnregisterStarted(action);
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindStartedWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterStartedWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindStarted(action);
+                self.UnregisterStarted(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllStartedWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterStartedAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllStarted();
+                self.UnregisterStartedAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllStartedWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterStartedAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllStarted();
+                self.UnregisterStartedAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllStartedWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterStartedAllWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllStarted();
+                self.UnregisterStartedAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllStartedWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterStartedAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllStarted();
+                self.UnregisterStartedAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindCanceledWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterCanceledWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindCanceled(action);
+                self.UnregisterCanceled(action);
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindCanceledWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterCanceledWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindCanceled(action);
+                self.UnregisterCanceled(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindCanceledWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterCanceledWhenGameObjectDestroyed(this InputAction self, GameObject target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindCanceled(action);
+                self.UnregisterCanceled(action);
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindCanceledWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
+        public static InputAction UnregisterCanceledWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindCanceled(action);
+                self.UnregisterCanceled(action);
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllCanceledWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterCanceledAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllCanceled();
+                self.UnregisterCanceledAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllCanceledWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterCanceledAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAllCanceled();
+                self.UnregisterCanceledAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllCanceledWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterCanceledAllWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllCanceled();
+                self.UnregisterCanceledAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllCanceledWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterCanceledAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAllCanceled();
+                self.UnregisterCanceledAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAll();
+                self.UnregisterAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
-                self.UnBindAll();
+                self.UnregisterAll();
             }, priority);
             return self;
         }
 
-        public static InputAction UnBindAllWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
+        public static InputAction UnregisterAllWhenGameObjectDestroyed(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAll();
+                self.UnregisterAll();
             }, priority);
             return self;
         }
         
-        public static InputAction UnBindAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
+        public static InputAction UnregisterAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
             {
-                self.UnBindAll();
+                self.UnregisterAll();
             }, priority);
             return self;
         }

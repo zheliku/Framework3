@@ -27,6 +27,7 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts
             this.RegisterUtility<IStorage>(new Storage());
         }
 
+        // 重写 ExecuteCommand 方法以添加日志功能
         protected override void ExecuteCommand(ICommand command)
         {
             Debug.Log("Before " + command.GetType().Name + "Execute");

@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.InputKit.Example._0.Axis
 {
-    using System;
     using UnityEngine;
 
     public class AxisInputExample : MonoBehaviour
@@ -19,12 +18,12 @@ namespace Framework3.Toolkits.InputKit.Example._0.Axis
 
         private void Start()
         {
-            InputKit.RegisterAxis("Horizontal", (oldValue, value) =>
+            OldInputKit.RegisterAxis("Horizontal", (oldValue, value) =>
             {
                 Cube.transform.Translate(Vector3.right * (Speed * value * Time.deltaTime));
             });
             
-            InputKit.RegisterAxis("Vertical", (oldValue, value) =>
+            OldInputKit.RegisterAxis("Vertical", (oldValue, value) =>
             {
                 Cube.transform.Translate(Vector3.up * (Speed * value * Time.deltaTime));
             });
@@ -34,7 +33,7 @@ namespace Framework3.Toolkits.InputKit.Example._0.Axis
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                InputKit.UnRegisterAxis("Vertical");
+                OldInputKit.UnregisterAxis("Vertical");
             }
         }
     }

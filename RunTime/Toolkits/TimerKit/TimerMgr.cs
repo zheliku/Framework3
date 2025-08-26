@@ -12,6 +12,7 @@ namespace Framework3.Toolkits.TimerKit
     using System.Collections.Generic;
     using PoolKit;
     using Core;
+    using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
@@ -35,7 +36,7 @@ namespace Framework3.Toolkits.TimerKit
             get => Time.unscaledTime;
         }
 
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Framework3.Toolkits.TimerKit
         public SingletonObjectPool<Timer> TimerPool { get => SingletonObjectPool<Timer>.Instance; }
 
         [ShowInInspector]
-        public Dictionary<int, float> TimeDict { get; } = new Dictionary<int, float>();
+        public Dictionary<int, float> TimeDict { get; } = new();
 
         #region 公共方法
 
@@ -72,7 +73,7 @@ namespace Framework3.Toolkits.TimerKit
                 {
                     if (!timer.Enabled)
                     {
-                        if (!timer.IsInPool) timer.RecycleToCache();
+                        if (!timer.IsInPool) timer.Recycle2Pool();
                         return true;
                     }
 
@@ -81,7 +82,7 @@ namespace Framework3.Toolkits.TimerKit
                         timer.Tick();
                         if (!timer.TryRepeat())
                         {
-                            if (!timer.IsInPool) timer.RecycleToCache();
+                            if (!timer.IsInPool) timer.Recycle2Pool();
                             return true;
                         }
                     }

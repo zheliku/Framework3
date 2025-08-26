@@ -44,8 +44,8 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
 
         private void OnDestroy()
         {
-            EnumEventSystem.Global.UnRegister(TestEventA.Test, OnEventA);
-            EnumEventSystem.Global.UnRegister(TestEventB.Test, OnEventB);
+            EnumEventSystem.Global.Unregister(TestEventA.Test, OnEventA);
+            EnumEventSystem.Global.Unregister(TestEventB.Test, OnEventB);
         }
     }
 

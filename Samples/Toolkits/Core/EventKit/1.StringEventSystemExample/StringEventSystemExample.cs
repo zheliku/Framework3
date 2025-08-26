@@ -15,10 +15,10 @@ namespace Framework3.Toolkits.EventKit.Example._1.StringEventSystemExample
     {
         void Start()
         {
-            StringEventSystem.Global.Register<string>(nameof(OnEventA), OnEventA).UnRegisterWhenGameObjectDestroyed(gameObject);
+            StringEventSystem.Global.Register<string>(nameof(OnEventA), OnEventA).UnregisterWhenGameObjectDestroyed(gameObject);
 
             // 事件 + 参数
-            StringEventSystem.Global.Register<string, int>(nameof(OnEventB), OnEventB).UnRegisterWhenGameObjectDestroyed(gameObject);
+            StringEventSystem.Global.Register<string, int>(nameof(OnEventB), OnEventB).UnregisterWhenGameObjectDestroyed(gameObject);
         }
         
         private void OnGUI()

@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 1486444331}
   - component: {fileID: 1486444332}
   m_Layer: 0
-  m_Name: BasicExample
+  m_Name: EventUseExample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,10 +160,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1486444329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a621e80bde43f28877d80df1d603ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ae16fcd59622da419ef2ec13c79ea0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Cube: {fileID: 0}
+  Speed: 5
+  _moveDir: {x: 0, y: 0}
 --- !u!1 &1645537729
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,8 +27,13 @@ namespace Framework3.Toolkits.TimerKit
         {
             return TimerMgr.Instance.CreateTimer(onTick, duration, repeat, timerType);
         }
-
-        public static bool HasPassedInterval(int id, float interval)
+        
+        public static bool PassIntervalTime(object id, float interval)
+        {
+            return PassIntervalTime(id.GetHashCode(), interval);
+        }
+        
+        private static bool PassIntervalTime(int id, float interval)
         {
             var timeDict = TimerMgr.Instance.TimeDict;
             if (timeDict.TryGetValue(id, out var time))
@@ -40,14 +45,9 @@ namespace Framework3.Toolkits.TimerKit
                 }
                 return false;
             }
-            
+
             timeDict[id] = Time.time;
             return false;
-        }
-
-        public static bool HasPassedInterval(object id, float interval)
-        {
-            return HasPassedInterval(id.GetHashCode(), interval);
         }
     }
 }

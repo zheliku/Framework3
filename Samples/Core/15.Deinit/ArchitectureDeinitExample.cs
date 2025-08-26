@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Framework3.Core.Example._15.Deinit
 {
-    using global::System.Collections;
+    using System.Collections;
 
     public class ArchitectureDeinitExample : MonoBehaviour
     {

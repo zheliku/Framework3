@@ -9,6 +9,7 @@
 namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
 {
     using System.Collections;
+    using System.Collections.Generic;
     using Sirenix.OdinInspector;
     using UnityEngine;
 

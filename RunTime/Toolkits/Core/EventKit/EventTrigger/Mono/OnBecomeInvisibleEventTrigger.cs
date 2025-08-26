@@ -26,14 +26,14 @@ namespace Framework3.Toolkits.EventKit
 
     public static class OnBecameInvisibleEventTriggerExtension
     {
-        public static IUnRegister OnBecameInvisibleEvent<T>(this T self, Action onBecameInvisible, float priority = 0)
+        public static IUnregister OnBecameInvisibleEvent<T>(this T self, Action onBecameInvisible, float priority = 0)
             where T : Component
         {
             return self.GetOrAddComponent<OnBecomeInvisibleEventTrigger>().OnBecameInvisibleEvent
                        .Register(onBecameInvisible, priority);
         }
 
-        public static IUnRegister OnBecameInvisibleEvent(this GameObject self, Action onBecameInvisible, float priority = 0)
+        public static IUnregister OnBecameInvisibleEvent(this GameObject self, Action onBecameInvisible, float priority = 0)
         {
             return self.GetOrAddComponent<OnBecomeInvisibleEventTrigger>().OnBecameInvisibleEvent
                        .Register(onBecameInvisible, priority);

@@ -21,7 +21,7 @@ namespace Framework3.Core.Example._13.OrEventExample
         {
             _propertyA.Or(_event).Or(_propertyB)
                       .Register(() => { Debug.Log("Event Received!"); })
-                      .UnRegisterWhenGameObjectDestroyed(gameObject);
+                      .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         void OnGUI()

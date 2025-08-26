@@ -13,6 +13,6 @@ namespace Framework3.Toolkits.PoolKit
     /// </summary>
     public interface IPoolType
     {
-        void RecycleToCache();
+        void Recycle2Pool();
     }
 }

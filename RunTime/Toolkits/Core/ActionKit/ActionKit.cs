@@ -344,7 +344,7 @@ namespace Framework3.Toolkits.ActionKit
         ///     {
         ///         Debug.Log("Update");
         ///     }
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent OnUpdate
@@ -361,7 +361,7 @@ namespace Framework3.Toolkits.ActionKit
         /// {
         ///     // fixed update code here
         ///     // 这里写 fixed update 相关代码
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent OnFixedUpdate
@@ -378,7 +378,7 @@ namespace Framework3.Toolkits.ActionKit
         /// {
         ///     // late update code here
         ///     // 这里写 late update 相关代码
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent OnLateUpdate
@@ -395,7 +395,7 @@ namespace Framework3.Toolkits.ActionKit
         /// {
         ///     GUILayout.Label("See Example Code");
         ///     GUILayout.Label("请查看示例代码");
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent OnGUI
@@ -411,7 +411,7 @@ namespace Framework3.Toolkits.ActionKit
         /// ActionKit.OnApplicationQuit.Register(() =>
         /// {
         ///     Debug.Log("quit");
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent OnApplicationQuit
@@ -427,7 +427,7 @@ namespace Framework3.Toolkits.ActionKit
         /// ActionKit.OnApplicationPause.Register(pause =>
         /// {
         ///     Debug.Log("pause: " + pause);
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent<bool> OnApplicationPause
@@ -443,7 +443,7 @@ namespace Framework3.Toolkits.ActionKit
         /// ActionKit.OnApplicationFocus.Register(focus =>
         /// {
         ///     Debug.Log("focus: " + focus);
-        /// }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
         /// ]]>
         /// </code> </example>
         public static EasyEvent<bool> OnApplicationFocus

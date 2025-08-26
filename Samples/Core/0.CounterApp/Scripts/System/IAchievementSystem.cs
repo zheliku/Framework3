@@ -8,6 +8,7 @@
 
 namespace Framework3.Core.Example._0.CounterApp.Scripts.System
 {
+    // 成就系统接口，继承自 ISystem
     public interface IAchievementSystem : ISystem
     { }
 }

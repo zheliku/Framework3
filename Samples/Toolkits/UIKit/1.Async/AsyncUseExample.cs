@@ -15,9 +15,9 @@ namespace Framework3.Toolkits.UIKit.Example._1.Async
     {
         private void OnEnable()
         {
-            UIKit.LoadPanelAsync<AsyncUseExamplePanel>(panel =>
+            UI2DKit.LoadPanelAsync<AsyncUseExamplePanel2D>(panel =>
             {
-                Debug.Log("AsyncUseExamplePanel loaded");
+                Debug.Log("AsyncUseExamplePanel2D loaded");
             });
         }
 
@@ -25,18 +25,18 @@ namespace Framework3.Toolkits.UIKit.Example._1.Async
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                UIKit.ShowPanelAsync<AsyncUseExamplePanel>();
+                UI2DKit.ShowPanelAsync<AsyncUseExamplePanel2D>();
             }
             
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                UIKit.HidePanel<AsyncUseExamplePanel>();
+                UI2DKit.HidePanel<AsyncUseExamplePanel2D>();
             }
         }
 
         private void OnDisable()
         {
-            UIKit.UnloadPanel<AsyncUseExamplePanel>();
+            UI2DKit.UnloadPanel<AsyncUseExamplePanel2D>();
         }
     }
 }

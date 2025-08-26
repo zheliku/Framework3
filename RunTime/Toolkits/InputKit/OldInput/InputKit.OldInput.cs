@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.InputKit
         Release
     }
 
-    public partial class InputKit
+    public partial class OldInputKit
     {
         public static bool EnableAxis { get; set; } = true;
 
@@ -48,34 +48,34 @@ namespace Framework3.Toolkits.InputKit
             AxisInput.Instance.RegisterHorizontalAndVertical(action, isRaw);
         }
 
-        public static void UnRegisterAxis(string axisName, Action<float, float> action)
+        public static void UnregisterAxis(string axisName, Action<float, float> action)
         {
-            AxisInput.Instance.UnRegister(axisName, action);
+            AxisInput.Instance.Unregister(axisName, action);
         }
 
-        public static void UnRegisterAxis(string axisName)
+        public static void UnregisterAxis(string axisName)
         {
-            AxisInput.Instance.UnRegister(axisName);
+            AxisInput.Instance.Unregister(axisName);
         }
 
-        public static void UnRegisterAxisAll()
+        public static void UnregisterAxisAll()
         {
-            AxisInput.Instance.UnRegisterAll();
+            AxisInput.Instance.UnregisterAll();
         }
 
-        public void UnRegisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
+        public void UnregisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
         {
-            AxisInput.Instance.UnRegisterHorizontalAndVertical(action, isRaw);
+            AxisInput.Instance.UnregisterHorizontalAndVertical(action, isRaw);
         }
 
-        public void UnRegisterHorizontalAndVertical(bool isRaw)
+        public void UnregisterHorizontalAndVertical(bool isRaw)
         {
-            AxisInput.Instance.UnRegisterHorizontalAndVertical(isRaw);
+            AxisInput.Instance.UnregisterHorizontalAndVertical(isRaw);
         }
 
-        public void UnRegisterHorizontalAndVertical()
+        public void UnregisterHorizontalAndVertical()
         {
-            AxisInput.Instance.UnRegisterHorizontalAndVertical();
+            AxisInput.Instance.UnregisterHorizontalAndVertical();
         }
 
         public static void RegisterMouse(MouseInputType mouseType, Action<bool, bool> action, InputType inputType = InputType.Press)
@@ -83,24 +83,24 @@ namespace Framework3.Toolkits.InputKit
             MouseInput.Instance.Register(mouseType, action, inputType);
         }
 
-        public static void UnRegisterMouse(MouseInputType mouseType, Action<bool, bool> action, InputType inputType = InputType.Press)
+        public static void UnregisterMouse(MouseInputType mouseType, Action<bool, bool> action, InputType inputType = InputType.Press)
         {
-            MouseInput.Instance.UnRegister(mouseType, action, inputType);
+            MouseInput.Instance.Unregister(mouseType, action, inputType);
         }
 
-        public static void UnRegisterMouse(MouseInputType mouseType, InputType inputType)
+        public static void UnregisterMouse(MouseInputType mouseType, InputType inputType)
         {
-            MouseInput.Instance.UnRegister(mouseType, inputType);
+            MouseInput.Instance.Unregister(mouseType, inputType);
         }
 
-        public static void UnRegisterMouse(MouseInputType mouseType)
+        public static void UnregisterMouse(MouseInputType mouseType)
         {
-            MouseInput.Instance.UnRegister(mouseType);
+            MouseInput.Instance.Unregister(mouseType);
         }
 
-        public static void UnRegisterMouseAll()
+        public static void UnregisterMouseAll()
         {
-            MouseInput.Instance.UnRegisterAll();
+            MouseInput.Instance.UnregisterAll();
         }
 
         public static void RegisterKeyCode(KeyCode keyCode, Action<bool, bool> action, InputType inputType = InputType.Press)
@@ -108,24 +108,24 @@ namespace Framework3.Toolkits.InputKit
             KeyCodeInput.Instance.Register(keyCode, action, inputType);
         }
 
-        public static void UnRegisterKeyCode(KeyCode keyCode, Action<bool, bool> action, InputType inputType = InputType.Press)
+        public static void UnregisterKeyCode(KeyCode keyCode, Action<bool, bool> action, InputType inputType = InputType.Press)
         {
-            KeyCodeInput.Instance.UnRegister(keyCode, action, inputType);
+            KeyCodeInput.Instance.Unregister(keyCode, action, inputType);
         }
 
-        public static void UnRegisterKeyCode(KeyCode keyCode, InputType inputType)
+        public static void UnregisterKeyCode(KeyCode keyCode, InputType inputType)
         {
-            KeyCodeInput.Instance.UnRegister(keyCode, inputType);
+            KeyCodeInput.Instance.Unregister(keyCode, inputType);
         }
 
-        public static void UnRegisterKeyCode(KeyCode keyCode)
+        public static void UnregisterKeyCode(KeyCode keyCode)
         {
-            KeyCodeInput.Instance.UnRegister(keyCode);
+            KeyCodeInput.Instance.Unregister(keyCode);
         }
 
-        public static void UnRegisterKeyCodeAll()
+        public static void UnregisterKeyCodeAll()
         {
-            KeyCodeInput.Instance.UnRegisterAll();
+            KeyCodeInput.Instance.UnregisterAll();
         }
     }
 }

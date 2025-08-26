@@ -29,12 +29,12 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
 
             UnityEngineGameObjectExtension.DisableGameObject(_txtNameTemplate);
 
-            _nameList.OnCountChanged.Register(OnNameListCountChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameList.OnAdd.Register(OnNameListAdd).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameList.OnMove.Register(OnNameListMove).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameList.OnRemove.Register(OnNameListOnRemove).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameList.OnReplace.Register(OnNameListOnReplace).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameList.OnClear.Register(OnNameListOnClear).UnRegisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnCountChanged.Register(OnNameListCountChanged).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnAdd.Register(OnNameListAdd).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnMove.Register(OnNameListMove).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnRemove.Register(OnNameListOnRemove).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnReplace.Register(OnNameListOnReplace).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameList.OnClear.Register(OnNameListOnClear).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnNameListCountChanged(int oldCount, int count)

@@ -26,11 +26,11 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
             _winPanel   = transform.Find("Canvas/WinPanel").GetComponent<WinPanel>();
             _losePanel  = transform.Find("Canvas/LosePanel").GetComponent<LosePanel>();
 
-            this.RegisterEvent<GameStartEvent>(OnGameStart).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<GameWinEvent>(OnGameWin).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<GameLoseEvent>(OnGameLose).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<OnCountDownEndEvent>(OnCountDownEnd).UnRegisterWhenGameObjectDestroyed(gameObject); // 计时结束，即游戏失败
-            this.RegisterEvent<OnReturnMenuEvent>(OnReturnMenu).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<GameStartEvent>(OnGameStart).UnregisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<GameWinEvent>(OnGameWin).UnregisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<GameLoseEvent>(OnGameLose).UnregisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<OnCountDownEndEvent>(OnCountDownEnd).UnregisterWhenGameObjectDestroyed(gameObject); // 计时结束，即游戏失败
+            this.RegisterEvent<OnReturnMenuEvent>(OnReturnMenu).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnGameStart(GameStartEvent e)

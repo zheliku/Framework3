@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.InputKit.Example._1.Mouse
 {
-    using System;
     using FluentAPI;
     using UnityEngine;
 
@@ -18,16 +17,16 @@ namespace Framework3.Toolkits.InputKit.Example._1.Mouse
 
         private void Start()
         {
-           InputKit.RegisterMouse(MouseInputType.Left, (oldValue, value) =>
-           {
-               if (value)
-               {
-                   Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition.Set(z: 10));
-                   Cube.SetPosition(mousePos);
-               }
-           });
+            OldInputKit.RegisterMouse(MouseInputType.Left, (oldValue, value) =>
+            {
+                if (value)
+                {
+                    Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition.Set(z: 10));
+                    Cube.SetPosition(mousePos);
+                }
+            });
            
-            InputKit.RegisterMouse(MouseInputType.Right, (oldValue, value) =>
+            OldInputKit.RegisterMouse(MouseInputType.Right, (oldValue, value) =>
             {
                 if (value)
                 {

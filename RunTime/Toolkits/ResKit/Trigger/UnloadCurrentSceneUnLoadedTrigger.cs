@@ -21,7 +21,7 @@ namespace Framework3.Toolkits.ResKit
             {
                 if (!_Default)
                 {
-                    _Default = new GameObject("UnRegisterCurrentSceneUnloadedTrigger").AddComponent<UnloadCurrentSceneUnLoadedTrigger>();
+                    _Default = new GameObject("UnregisterCurrentSceneUnloadedTrigger").AddComponent<UnloadCurrentSceneUnLoadedTrigger>();
                 }
 
                 return _Default;

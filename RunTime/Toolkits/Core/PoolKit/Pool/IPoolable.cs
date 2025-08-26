@@ -22,7 +22,7 @@ namespace Framework3.Toolkits.PoolKit
         bool IsInPool { get; set; }
     }
 
-    public static class IPooableExtension
+    public static class IPoolableExtension
     {
         public static void Release2Pool<T>(this T poolable) where T : IPoolable, new()
         {

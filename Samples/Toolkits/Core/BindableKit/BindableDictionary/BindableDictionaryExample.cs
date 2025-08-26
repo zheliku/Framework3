@@ -33,11 +33,11 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
 
             UnityEngineGameObjectExtension.DisableGameObject(_txtNameTemplate);
 
-            _nameDict.OnCountChanged.Register(OnNameDictCountChanged).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameDict.OnAdd.Register(OnNameDictAdd).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameDict.OnRemove.Register(OnNameDictOnRemove).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameDict.OnReplace.Register(OnNameDictOnReplace).UnRegisterWhenGameObjectDestroyed(gameObject);
-            _nameDict.OnClear.Register(OnNameDictOnClear).UnRegisterWhenGameObjectDestroyed(gameObject);
+            _nameDict.OnCountChanged.Register(OnNameDictCountChanged).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameDict.OnAdd.Register(OnNameDictAdd).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameDict.OnRemove.Register(OnNameDictOnRemove).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameDict.OnReplace.Register(OnNameDictOnReplace).UnregisterWhenGameObjectDestroyed(gameObject);
+            _nameDict.OnClear.Register(OnNameDictOnClear).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnNameDictCountChanged(int count)
