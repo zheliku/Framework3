@@ -1,3 +1,6 @@
+# v0.3.2
+1. 修复DestroyChildren删除transform而不是gameobject的问题
+
 # v0.3.1
 1. 测试sample使用textmeshpro
 

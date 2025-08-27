@@ -8,27 +8,42 @@
 
 namespace Framework3.Core.Example._1.QueryExample.Scripts.View
 {
-    using Framework3.Core;
+    using Core;
+    using Model;
     using Query;
-    using UnityEngine;
+    using TMPro;
+    using Toolkits.FluentAPI;
 
     public class QueryExampleView : AbstractView
     {
+        [HierarchyPath("/Canvas/Txt_Info")] // 使用特性绑定，"/Canvas/Txt_Info" 是组件在场景中的路径
+        private TextMeshProUGUI _textInfo;
+        
+        [HierarchyPath("/Canvas/Txt_Result")] // 使用特性绑定，"/Canvas/Txt_Result" 是组件在场景中的路径
+        private TextMeshProUGUI _textResult;
+
         protected override IArchitecture _Architecture
         {
             get => QueryExampleApp.Architecture;
         }
 
-        private int _allPersonCount = 0;
-
-        private void OnGUI()
+        private void Awake()
         {
-            if (GUILayout.Button("查询学校总人数", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _allPersonCount = this.SendQuery(new SchoolAllPersonCountQuery());
-            }
+            this.BindHierarchyComponent(); // 绑定组件
+        }
 
-            GUILayout.Label($"All Person Count: {_allPersonCount}");
+        public void StartQuery()
+        {
+            var studentModel = this.GetModel<StudentModel>();
+            var teacherModel = this.GetModel<TeacherModel>();
+
+            _textInfo.text = "Students:\n"
+                       + studentModel.Students.Join("\n")
+                       + "\n\nTeachers:\n"
+                       + teacherModel.Teachers.Join("\n");
+
+            var allPersonCount = this.SendQuery(new SchoolAllPersonCountQuery());
+            _textResult.text = $"All Person Count: {allPersonCount}";
         }
     }
 }

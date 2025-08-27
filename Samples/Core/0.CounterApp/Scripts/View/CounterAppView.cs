@@ -10,9 +10,9 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.View
 {
     using Command;
     using Core;
-    using global::System;
     using Model;
     using Sirenix.OdinInspector;
+    using TMPro;
     using UnityEngine.UI;
 
     public class CounterAppView : AbstractView
@@ -22,8 +22,8 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.View
             get => CounterApp.Architecture;
         }
 
-        [HierarchyPath("/Canvas/TxtCount")] // View 组件获取（方式 1），使用特性绑定，"/Canvas/TxtCount" 是组件在场景中的路径
-        private Text _txtCount;
+        [HierarchyPath("/Canvas/Txt_Count")] // View 组件获取（方式 1），使用特性绑定，"/Canvas/Txt_Count" 是组件在场景中的路径
+        private TextMeshProUGUI _txtCount;
 
         [ShowInInspector]
         private ICounterAppModel _model;

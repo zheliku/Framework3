@@ -28,21 +28,18 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._0.Basic
                 Debug.Log(e);
             }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
-
-        private void OnGUI()
+        
+        public void SendEventA1()
         {
-            if (GUILayout.Button("Send(new TestEventA())", GUILayout.Width(200), GUILayout.Height(50)))
+            TypeEventSystem.Global.Send(new TestEventA()
             {
-                TypeEventSystem.Global.Send(new TestEventA()
-                {
-                    Age = 18
-                });
-            }
-
-            if (GUILayout.Button("Send<TestEventA>()", GUILayout.Width(200), GUILayout.Height(50)))
-            {
-                TypeEventSystem.Global.Send<TestEventA>();
-            }
+                Age = 20
+            });
+        }
+        
+        public void SendEventA2()
+        {
+            TypeEventSystem.Global.Send<TestEventA>();
         }
     }
 }

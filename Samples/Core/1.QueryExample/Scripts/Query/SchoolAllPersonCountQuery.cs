@@ -12,6 +12,7 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.Query
 
     public class SchoolAllPersonCountQuery : Query<int>
     {
+        // 查询学校所有人员数量（学生+老师）
         protected override int OnDo()
         {
             return this.GetModel<StudentModel>().Students.Count +

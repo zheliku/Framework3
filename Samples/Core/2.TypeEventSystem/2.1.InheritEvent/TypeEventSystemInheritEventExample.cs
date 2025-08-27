@@ -27,18 +27,15 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
                            .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
-        private void OnGUI()
+        public void SendEventBByNew()
         {
-            if (GUILayout.Button("Send<IEventA>(new EventB())", GUILayout.Width(200), GUILayout.Height(50)))
-            {
-                TypeEventSystem.Global.Send<IEventA>(new EventB());
-            }
+            TypeEventSystem.Global.Send<IEventA>(new EventB());
+        }
 
-            if (GUILayout.Button("Send<EventB>()", GUILayout.Width(200), GUILayout.Height(50)))
-            {
-                // 无效，因为注册的是 EasyEvent<IEventA>，而不是 EasyEvent<EventB>
-                TypeEventSystem.Global.Send<EventB>();
-            }
+        public void SendEventBInvalid()
+        {
+            // 无效，因为注册的是 EasyEvent<IEventA>，而不是 EasyEvent<EventB>
+            TypeEventSystem.Global.Send<EventB>();
         }
     }
 }

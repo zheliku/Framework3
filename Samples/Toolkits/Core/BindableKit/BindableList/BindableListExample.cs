@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
             _txtNameTemplate = GameObject.Find("Canvas/txtName").GetComponent<TextMeshProUGUI>();
             _contentRoot     = GameObject.Find("Canvas/ContentRoot").transform;
 
-            UnityEngineGameObjectExtension.DisableGameObject(_txtNameTemplate);
+            _txtNameTemplate.DisableGameObject();
 
             _nameList.OnCountChanged.Register(OnNameListCountChanged).UnregisterWhenGameObjectDestroyed(gameObject);
             _nameList.OnAdd.Register(OnNameListAdd).UnregisterWhenGameObjectDestroyed(gameObject);

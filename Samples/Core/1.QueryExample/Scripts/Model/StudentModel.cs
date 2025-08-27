@@ -14,10 +14,10 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.Model
     {
         public List<string> Students { get; } = new List<string>()
         {
-            "张三",
-            "李四"
+            "zhang san",
+            "li si"
         };
-
+        
         protected override void OnInit() { }
     }
 
@@ -25,8 +25,8 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.Model
     {
         public List<string> Teachers { get; } = new List<string>()
         {
-            "王五",
-            "赵六"
+            "wang wu",
+            "zhao liu"
         };
 
         protected override void OnInit() { }

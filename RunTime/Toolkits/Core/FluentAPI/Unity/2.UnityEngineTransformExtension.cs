@@ -209,7 +209,7 @@ namespace Framework3.Toolkits.FluentAPI
                 var child = selfComponent.transform.GetChild(i);
                 if (condition == null || condition(child))
                 {
-                    Object.Destroy(child);
+                    Object.Destroy(child.gameObject);
                 }
             }
 
@@ -235,7 +235,7 @@ namespace Framework3.Toolkits.FluentAPI
                 var child = selfGameObject.transform.GetChild(i);
                 if (condition == null || condition(child))
                 {
-                    Object.Destroy(child);
+                    Object.Destroy(child.gameObject);
                 }
             }
 
