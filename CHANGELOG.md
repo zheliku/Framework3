@@ -1,3 +1,10 @@
+# v0.3.1
+1. 测试sample使用textmeshpro
+
+# v0.3.0
+1. 优化代码结构：BindableKit、DataKit、EventKit、FluentAPI、FSMKit、GridKit、PoolKit、SingletonKit、TimerKit、UIKit、UtilityKit
+2. 修改部分api
+
 # v0.2.0
 1. 测试Unity包版本显示
 
