@@ -8,18 +8,26 @@
 
 namespace Framework3.Core.Example._4.BindableProperty
 {
+    using TMPro;
     using UnityEngine;
 
-    public class BindablePropertyExample : MonoBehaviour
+    public class BindablePropertyExample : AbstractView
     {
-        private BindableProperty<int> _someValue        = new BindableProperty<int>(0);
-        private string                _someValueContent = "Some Value: 0";
+        [HierarchyPath("/Canvas/SomeValue/Txt_Info")]
+        private TextMeshProUGUI _someValueText;
+
+        private readonly BindableProperty<int> _someValue = new(0);
+
+        private void Awake()
+        {
+            this.BindHierarchyComponent();
+        }
 
         void Start()
         {
             _someValue.Register((oldValue, newValue) =>
             {
-                _someValueContent = $"SomeValue: {newValue}";
+                _someValueText.text = $"SomeValue: {newValue}";
             }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             Debug.Log("new BindableProperty<int>(5) == 5: " + (new BindableProperty<int>(5) == 5));
@@ -29,18 +37,22 @@ namespace Framework3.Core.Example._4.BindableProperty
             Debug.Log("new BindableProperty<Test>(new Test()) == new Test()): " + (new BindableProperty<Test>(new Test()) == new Test()));
             Debug.Log("new BindableProperty<Test>(new Test()) == new Test(1)): " + (new BindableProperty<Test>(new Test()) == new Test(1)));
             Debug.Log("new BindableProperty<Test>(new Test(1)) == new Test(1)): " + (new BindableProperty<Test>(new Test(1)) == new Test(1)));
+
+            // ReSharper disable ConditionIsAlwaysTrueOrFalse
             Debug.Log("new BindableProperty<Test>(null) == null): " + (new BindableProperty<Test>(null) == null));
+            // ReSharper disable EqualExpressionComparison
             Debug.Log("new BindableProperty<Test>(null) == new BindableProperty<Test>(null)): " + (new BindableProperty<Test>(null) == new BindableProperty<Test>(null)));
             Debug.Log("null == new BindableProperty<Test>(null)): " + (null == new BindableProperty<Test>(null)));
         }
 
-        private void OnGUI()
+        public void SomeValuePlusPlus()
         {
-            if (GUILayout.Button("SomeValue++", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _someValue.Value++;
-            }
-            GUILayout.Label(_someValueContent, GUILayout.Width(150), GUILayout.Height(50));
+            _someValue.Value++;
+        }
+
+        protected override IArchitecture _Architecture
+        {
+            get => null;
         }
     }
 
@@ -72,7 +84,7 @@ namespace Framework3.Core.Example._4.BindableProperty
             {
                 return false;
             }
-            
+
             return Value == other.Value;
         }
 

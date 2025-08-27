@@ -9,37 +9,48 @@
 namespace Framework3.Core.Example._3.EasyEvent
 {
     using Sirenix.OdinInspector;
+    using TMPro;
     using UnityEngine;
+    using UnityEngine.UI;
     using EasyEvent = Core.EasyEvent;
+    using Random = UnityEngine.Random;
 
     public class EventA : EasyEvent<int, int>
     { }
 
-    public class EasyEventExample : MonoBehaviour
+    public class EasyEventExample : AbstractView
     {
+        [HierarchyPath("/Canvas/EasyEvent/Txt_Info")]
+        private TextMeshProUGUI _easyEventText;
+
+        [HierarchyPath("/Canvas/EasyEventInt/Txt_Info")]
+        private TextMeshProUGUI _easyEventIntText;
+
+        [HierarchyPath("/Canvas/EventA/Txt_Info")]
+        private TextMeshProUGUI _eventAText;
+
+        [HierarchyPath("/Canvas/EasyEventInt/Scrollbar")]
+        private Scrollbar _easyEventIntScrollbar;
+
         [ShowInInspector]
         private EasyEvent _easyEvent = new EasyEvent();
-
-        private string _easyEventContent = "Waiting...";
 
         [ShowInInspector]
         private EasyEvent<int> _easyEventInt = new EasyEvent<int>();
 
-        private int    _easyEventIntValue   = 0;
-        private string _easyEventIntContent = "Value: 0";
-
         [ShowInInspector]
         private EventA _eventA = new EventA();
 
-        private int    _eventAValue1  = 0;
-        private int    _eventAValue2  = 0;
-        private string _eventAContent = "Value: 0, 0";
+        private void Awake()
+        {
+            this.BindHierarchyComponent();
+        }
 
         private void Start()
         {
             _easyEvent.Register(() =>
             {
-                _easyEventContent = "Clicked!";
+                _easyEventText.text = "Clicked!";
             }).UnregisterWhenGameObjectDestroyed(gameObject);
 
             _easyEvent.Register(() =>
@@ -54,52 +65,34 @@ namespace Framework3.Core.Example._3.EasyEvent
 
             _easyEventInt.Register(value =>
             {
-                _easyEventIntContent = $"Value: {value}";
+                _easyEventIntText.text = $"Value: {value}";
             }).UnregisterWhenGameObjectDestroyed(gameObject);
-
 
             _eventA.Register((a, b) =>
             {
-                _eventAContent = $"Value: {a}, {b}";
+                _eventAText.text = $"Value: {a}, {b}";
             }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
-        private void OnGUI()
+        public void SendEasyEvent()
         {
-            GUILayout.BeginHorizontal();
+            _easyEvent.Trigger();
+        }
 
-            GUILayout.BeginVertical();
-            if (GUILayout.Button("EasyEvent", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _easyEvent.Trigger();
-            }
-            GUILayout.Label(_easyEventContent);
-            GUILayout.EndVertical();
+        public void SendEasyEventInt()
+        {
+            var intValue = (int) (_easyEventIntScrollbar.value * 10);
+            _easyEventInt.Trigger(intValue);
+        }
 
-            GUILayout.Space(40);
+        public void SendEventA()
+        {
+            _eventA.Trigger(Random.Range(0, 10), Random.Range(0, 10));
+        }
 
-            GUILayout.BeginVertical();
-            if (GUILayout.Button("EasyEventInt", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _easyEventInt.Trigger(_easyEventIntValue);
-            }
-            _easyEventIntValue = (int) GUILayout.HorizontalSlider(_easyEventIntValue, 0f, 10f);
-            GUILayout.Label(_easyEventIntContent);
-            GUILayout.EndVertical();
-
-            GUILayout.Space(40);
-
-            GUILayout.BeginVertical();
-            if (GUILayout.Button("EventA", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _eventA.Trigger(_eventAValue1, _eventAValue2);
-            }
-            _eventAValue1 = (int) GUILayout.HorizontalSlider(_eventAValue1, 0f, 10f);
-            _eventAValue2 = (int) GUILayout.HorizontalSlider(_eventAValue2, 0f, 10f);
-            GUILayout.Label(_eventAContent);
-            GUILayout.EndVertical();
-
-            GUILayout.EndHorizontal();
+        protected override IArchitecture _Architecture
+        {
+            get => null;
         }
     }
 }

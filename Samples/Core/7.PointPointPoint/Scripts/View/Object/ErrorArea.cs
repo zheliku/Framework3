@@ -9,7 +9,7 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.Object
 {
     using Command;
-    using Framework3.Core;
+    using Core;
 
     public class ErrorArea : AbstractView
     {

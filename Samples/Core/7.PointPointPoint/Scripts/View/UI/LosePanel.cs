@@ -9,7 +9,7 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
     using Command;
-    using Framework3.Core;
+    using Core;
     using UnityEngine.UI;
 
     public class LosePanel : AbstractView

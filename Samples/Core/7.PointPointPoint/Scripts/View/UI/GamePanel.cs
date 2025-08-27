@@ -9,7 +9,7 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
     using System.CountSownSystem;
-    using Framework3.Core;
+    using Core;
     using Model;
     using TMPro;
     using UnityEngine;
