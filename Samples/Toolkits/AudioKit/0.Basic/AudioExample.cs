@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.AudioKit.Example._0.Basic
 {
-    using System;
     using UnityEngine;
     using UnityEngine.UI;
 

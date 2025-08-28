@@ -27,19 +27,15 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
         {
             Debug.Log($"TestEventB_{key}: {obj[0]}");
         }
-
-        private void OnGUI()
+        
+        public void SendTestEventA()
         {
-            if (GUILayout.Button("TestEventA", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                EnumEventSystem.Global.Send(TestEventA.Test, "Hello World!");
-            }
-
-            if (GUILayout.Button("TestEventB", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                EnumEventSystem.Global.Send(TestEventB.Test, "Hello World!");
-
-            }
+            EnumEventSystem.Global.Send(TestEventA.Test, "Hello World!");
+        }
+        
+        public void SendTestEventB()
+        {
+            EnumEventSystem.Global.Send(TestEventB.Test, "Hello World!");
         }
 
         private void OnDestroy()

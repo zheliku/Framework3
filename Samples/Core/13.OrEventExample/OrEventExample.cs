@@ -24,20 +24,19 @@ namespace Framework3.Core.Example._13.OrEventExample
                       .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
-        void OnGUI()
+        public void PropertyAPlusPlus()
         {
-            if (GUILayout.Button("PropertyA", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _propertyA.Value++;
-            }
-            if (GUILayout.Button("PropertyB", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _propertyB.Value++;
-            }
-            if (GUILayout.Button("Event", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _event.Trigger();
-            }
+            _propertyA.Value++;
+        }
+        
+        public void PropertyBPlusPlus()
+        {
+            _propertyB.Value++;
+        }
+        
+        public void TriggerEvent()
+        {
+            _event.Trigger();
         }
     }
 }

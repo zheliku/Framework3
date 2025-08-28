@@ -21,31 +21,33 @@ namespace Framework3.Toolkits.Core.DataKit.Example._1Json
         public string FileName  = "example";
         public string SheetName = "example";
 
-        private void OnGUI()
+        public void SaveExcel()
         {
-            if (GUILayout.Button("SaveExcel", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                Sheet[3, 2] = "hello world";
-                Sheet.Save(FileName, SheetName);
-            }
-
-            if (GUILayout.Button("LoadExcel", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                Sheet.Load(FileName, SheetName);
-                Debug.Log($"{Sheet.Start} -> {Sheet.End}");
-            }
-            
-            if (GUILayout.Button("SaveCsv", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                Sheet[2, 4] = "hello world";
-                Sheet.Save(FileName, SheetName, ExcelFormat.Csv);
-            }
-
-            if (GUILayout.Button("LoadCsv", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                Sheet.Load(FileName, SheetName, ExcelFormat.Csv);
-                Debug.Log($"{Sheet.Start} -> {Sheet.End}");
-            }
+            Sheet[3, 2] = "hello world";
+            Sheet.Save(FileName, SheetName);
+        }
+        
+        public void LoadExcel()
+        {
+            Sheet.Load(FileName, SheetName);
+            Debug.Log($"{Sheet.Start} -> {Sheet.End}");
+        }
+        
+        public void SaveCsv()
+        {
+            Sheet[2, 4] = "hello world";
+            Sheet.Save(FileName, SheetName, ExcelFormat.Csv);
+        }
+        
+        public void LoadCsv()
+        {
+            Sheet.Load(FileName, SheetName, ExcelFormat.Csv);
+            Debug.Log($"{Sheet.Start} -> {Sheet.End}");
+        }
+        
+        public void OpenFolder()
+        {
+            ExcelSheet.OpenExcelSavePath();
         }
     }
 }

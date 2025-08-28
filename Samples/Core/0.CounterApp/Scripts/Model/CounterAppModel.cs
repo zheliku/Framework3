@@ -22,7 +22,7 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.Model
             var storage = this.GetUtility<IStorage>();
 
             // 设置初始值（不触发事件）
-            Count.SetValueWithoutEvent(storage.LoadInt(nameof(Count)));
+            Count.SetValueWithoutNotify(storage.LoadInt(nameof(Count)));
 
             // 当数据变更时 存储数据
             Count.Register((oldValue, newCount) =>

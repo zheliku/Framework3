@@ -23,6 +23,6 @@ namespace Framework3.Core
         /// 设置 Property 值，但不触发绑定事件
         /// </summary>
         /// <param name="newValue">新值</param>
-        void SetValueWithoutEvent(TProperty newValue);
+        void SetValueWithoutNotify(TProperty newValue);
     }
 }

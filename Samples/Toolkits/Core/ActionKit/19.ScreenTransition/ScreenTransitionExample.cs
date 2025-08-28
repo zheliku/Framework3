@@ -12,68 +12,51 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class ScreenTransitionExample : MonoBehaviour
     {
-        private void OnGUI()
+        public void FadeIn()
         {
-            GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("FadeIn", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeIn()
-                   .Start(this);
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("FadeOut", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeOut()
-                   .Start(this);
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("FadeInOut", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeInOut(intervalTime: 1)
-                   .OnInFinish(() => { Debug.Log("Loading scene..."); })
-                   .OnOutFinish(() => { Debug.Log("Load Finished."); })
-                   .Start(this);
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("FadeIn White", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeIn(color: Color.white) // 参数设置
-                   .Start(this);
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("FadeOut Red", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeOut()
-                   .Color(Color.red) // 方法设置
-                   .Start(this);
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("FadeInOut 0.5s in green out blue", GUILayout.Width(200), GUILayout.Height(50)))
-            {
-                ActionKit.ScreenTransition
-                   .FadeInOut(fadeInDuration: 0.5f, fadeOutDuration: 0.5f)
-                   .In(fadeIn => fadeIn.Color(Color.green))
-                   .Out(fadeOut => fadeOut.Color(Color.blue))
-                   .Start(this);
-            }
-
-            GUILayout.EndHorizontal();
+            ActionKit.ScreenTransition
+               .FadeIn()
+               .Start(this);
+        }
+        
+        public void FadeOut()
+        {
+            ActionKit.ScreenTransition
+               .FadeOut()
+               .Start(this);
+        }
+        
+        public void FadeInOut()
+        {
+            ActionKit.ScreenTransition
+               .FadeInOut(intervalTime: 1)
+               .OnInFinish(() => { Debug.Log("Loading scene..."); })
+               .OnOutFinish(() => { Debug.Log("Load Finished."); })
+               .Start(this);
+        }
+        
+        public void FadeInWhite()
+        {
+            ActionKit.ScreenTransition
+               .FadeIn(color: Color.white) // 参数设置
+               .Start(this);
+        }
+        
+        public void FadeOutRed()
+        {
+            ActionKit.ScreenTransition
+               .FadeOut()
+               .Color(Color.red) // 方法设置
+               .Start(this);
+        }
+        
+        public void FadeInOutSpecial()
+        {
+            ActionKit.ScreenTransition
+               .FadeInOut(fadeInDuration: 0.5f, fadeOutDuration: 0.5f)
+               .In(fadeIn => fadeIn.Color(Color.green))
+               .Out(fadeOut => fadeOut.Color(Color.blue))
+               .Start(this);
         }
     }
 }

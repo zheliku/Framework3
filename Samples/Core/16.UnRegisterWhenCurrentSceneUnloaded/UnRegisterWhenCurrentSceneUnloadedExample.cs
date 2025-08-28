@@ -1,50 +1,50 @@
 ﻿namespace Framework3.Core.Example._16.UnregisterWhenCurrentSceneUnloaded
 {
-    using global::System;
-    using global::System.Threading.Tasks;
+    using System;
+    using System.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
     public class UnregisterWhenCurrentSceneUnloadedExample : MonoBehaviour
     {
-        private static bool _Registered = false;
+        private static bool s_registered = false;
 
-        private static readonly EasyEvent _EXAMPLE_EVENT = new EasyEvent();
+        private static readonly EasyEvent example_event = new EasyEvent();
 
         async void Start()
         {
-            if (!_Registered)
+            if (!s_registered)
             {
-                _Registered = true;
+                s_registered = true;
 
-                _EXAMPLE_EVENT.Register(() =>
+                example_event.Register(() =>
                 {
                     Debug.Log("Received When Scene Not Changed");
                 }).UnregisterWhenCurrentSceneUnloaded();
 
                 var gameObj = new GameObject("gameObj");
                 DontDestroyOnLoad(gameObj);
-                _EXAMPLE_EVENT.Register(() =>
+                example_event.Register(() =>
                 {
                     Debug.Log("Received When GameObj Not Destroyed");
                 }).UnregisterWhenGameObjectDestroyed(gameObj);
 
-                _EXAMPLE_EVENT.Register(() =>
+                example_event.Register(() =>
                 {
                     Debug.Log("Received Forever");
                 });
                 Debug.Log("@@@@ In Current Scene @@@@");
-                _EXAMPLE_EVENT.Trigger();
+                example_event.Trigger();
 
                 Debug.Log("@@@@ After GameObject Destroyed @@@@");
                 Destroy(gameObj);
                 await Task.Delay(TimeSpan.FromSeconds(0.1f));
-                _EXAMPLE_EVENT.Trigger();
+                example_event.Trigger();
 
                 Debug.Log("@@@@ After Scene Unloaded/Changed @@@@");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 await Task.Delay(TimeSpan.FromSeconds(0.1f));
-                _EXAMPLE_EVENT.Trigger();
+                example_event.Trigger();
             }
         }
     }

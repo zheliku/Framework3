@@ -15,39 +15,29 @@ namespace Framework3.Toolkits.EventKit.Example._1.StringEventSystemExample
     {
         void Start()
         {
-            StringEventSystem.Global.Register<string>(nameof(OnEventA), OnEventA).UnregisterWhenGameObjectDestroyed(gameObject);
+            StringEventSystem.Global.Register<string>(nameof(OnEventA), OnEventA)
+               .UnregisterWhenGameObjectDestroyed(gameObject);
 
             // 事件 + 参数
-            StringEventSystem.Global.Register<string, int>(nameof(OnEventB), OnEventB).UnregisterWhenGameObjectDestroyed(gameObject);
-        }
-        
-        private void OnGUI()
-        {
-            if (GUILayout.Button("TestEventA", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                StringEventSystem.Global.Send<string>(nameof(OnEventA), "OnEventA");
-            }
-
-            if (GUILayout.Button("TestEventB", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                StringEventSystem.Global.Send<string, int>(nameof(OnEventB), "OnEventB", 10);
-            }
+            StringEventSystem.Global.Register<string, int>(nameof(OnEventB), OnEventB)
+               .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
-        private void Update()
+        public void SendOnEventA()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                StringEventSystem.Global.Send("TEST_ONE");
-                StringEventSystem.Global.Send("TEST_TWO", 10);
-            }
+            StringEventSystem.Global.Send<string>(nameof(OnEventA), "Hello World!");
         }
-        
+
+        public void SendOnEventB()
+        {
+            StringEventSystem.Global.Send<string, int>(nameof(OnEventB), "Hello World!", 111);
+        }
+
         void OnEventA(string obj)
         {
             Debug.Log($"OnEventA: {obj}");
         }
-        
+
         void OnEventB(string obj, int i)
         {
             Debug.Log($"OnEventB: {obj}, {i}");

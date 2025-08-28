@@ -8,7 +8,7 @@
 
 namespace Framework3.Toolkits.FSMKit.Example._2.FrameCount
 {
-    using Framework3.Toolkits.FluentAPI;
+    using FluentAPI;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.UI;

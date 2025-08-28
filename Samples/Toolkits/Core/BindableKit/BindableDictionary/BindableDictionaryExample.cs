@@ -29,7 +29,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
         private void Awake()
         {
             _txtNameTemplate = GameObject.Find("Canvas/txtName").GetComponent<TextMeshProUGUI>();
-            _contentRoot     = GameObject.Find("Canvas/ContentRoot").transform;
+            _contentRoot = GameObject.Find("Canvas/ContentRoot").transform;
 
             UnityEngineGameObjectExtension.DisableGameObject(_txtNameTemplate);
 
@@ -79,33 +79,30 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
             _contentRoot.DestroyChildren();
         }
 
-        private void OnGUI()
+        public void Add()
         {
-            if (GUILayout.Button("Add", GUILayout.Width(150), GUILayout.Height(60)))
+            _nameDict.Add("Key " + ++_count, Random.Range(0, 100).ToString());
+        }
+        
+        public void Remove()
+        {
+            if (_nameDict.Count > 0)
             {
-                _nameDict.Add("Key " + ++_count, Random.Range(0, 100).ToString());
+                _nameDict.Remove(_nameDict.Keys.First());
             }
-
-            if (GUILayout.Button("Remove", GUILayout.Width(150), GUILayout.Height(60)))
+        }
+        
+        public void Replace()
+        {
+            if (_nameDict.Count > 0)
             {
-                if (_nameDict.Count > 0)
-                {
-                    _nameDict.Remove(_nameDict.Keys.First());
-                }
+                _nameDict[_nameDict.Keys.First()] = _nameDict.Keys.First() + ": " + Random.Range(0, 100);
             }
-
-            if (GUILayout.Button("Replace", GUILayout.Width(150), GUILayout.Height(60)))
-            {
-                if (_nameDict.Count > 0)
-                {
-                    _nameDict[_nameDict.Keys.First()] = _nameDict.Keys.First() + ": " + Random.Range(0, 100);
-                }
-            }
-
-            if (GUILayout.Button("Clear", GUILayout.Width(150), GUILayout.Height(60)))
-            {
-                _nameDict.Clear();
-            }
+        }
+        
+        public void Clear()
+        {
+            _nameDict.Clear();
         }
     }
 }

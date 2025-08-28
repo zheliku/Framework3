@@ -1,5 +1,9 @@
 # v0.3.2
 1. 修复DestroyChildren删除transform而不是gameobject的问题
+2. 完善Samples示例场景
+3. 添加EventsPro插件支持
+4. 更新api：
+   - BindableProperty的SetValueWithoutEvent改为SetValueWithoutNotify
 
 # v0.3.1
 1. 测试sample使用textmeshpro

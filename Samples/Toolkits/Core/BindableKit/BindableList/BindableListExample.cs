@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
         private void Awake()
         {
             _txtNameTemplate = GameObject.Find("Canvas/txtName").GetComponent<TextMeshProUGUI>();
-            _contentRoot     = GameObject.Find("Canvas/ContentRoot").transform;
+            _contentRoot = GameObject.Find("Canvas/ContentRoot").transform;
 
             _txtNameTemplate.DisableGameObject();
 
@@ -80,38 +80,38 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
             _contentRoot.DestroyChildren();
         }
 
-        private void OnGUI()
+        public void Add()
         {
-            if (GUILayout.Button("Add", GUILayout.Width(150), GUILayout.Height(60)))
+            _nameList.Add("Name " + _nameList.Count);
+        }
+        
+        public void Move0To1()
+        {
+            if (_nameList.Count > 1)
             {
-                _nameList.Add("Name " + _nameList.Count);
+                _nameList.Move(0, 1);
             }
-
-            if (GUILayout.Button("Move 0 -> 1", GUILayout.Width(150), GUILayout.Height(60)))
+        }
+        
+        public void RemoveAt0()
+        {
+            if (_nameList.Count > 0)
             {
-                if (_nameList.Count > 1)
-                {
-                    _nameList.Move(0, 1);
-                }
+                _nameList.RemoveAt(0);
             }
-
-            if (GUILayout.Button("Remove at 0", GUILayout.Width(150), GUILayout.Height(60)))
-            {
-                if (_nameList.Count > 0)
-                {
-                    _nameList.RemoveAt(0);
-                }
-            }
-
-            if (GUILayout.Button("Replace at 0", GUILayout.Width(150), GUILayout.Height(60)))
+        }
+        
+        public void ReplaceAt0()
+        {
+            if (_nameList.Count > 0)
             {
                 _nameList[0] = "Name " + _nameList.Count;
             }
-
-            if (GUILayout.Button("Clear", GUILayout.Width(150), GUILayout.Height(60)))
-            {
-                _nameList.Clear();
-            }
+        }
+        
+        public void Clear()
+        {
+            _nameList.Clear();
         }
     }
 }

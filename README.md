@@ -15,6 +15,7 @@
 		|-- FSMKit
 		|-- GridKit
 		|-- PoolKit
+		|-- SingletonKit
 		|-- TableKit
 		|-- TreeKit
 	|-- AudioKit

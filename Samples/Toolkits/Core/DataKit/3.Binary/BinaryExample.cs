@@ -25,22 +25,24 @@ namespace Framework3.Toolkits.Core.DataKit.Example._1Json
 
     public class BinaryExample : MonoBehaviour
     {
-        private void OnGUI()
+        public void SaveBinary()
         {
-            if (GUILayout.Button("SaveBinary", GUILayout.Width(160), GUILayout.Height(60)))
+            DataKit.SaveBinary("example", new BinaryData()
             {
-                DataKit.SaveBinary("example", new BinaryData()
-                {
-                    Name = "hello",
-                    Age  = 18
-                });
-            }
+                Name = "hello",
+                Age = 18
+            });
+        }
 
-            if (GUILayout.Button("LoadBinary", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                var data = DataKit.LoadBinary<BinaryData>("example");
-                Debug.Log(data);
-            }
+        public void LoadBinary()
+        {
+            var data = DataKit.LoadBinary<BinaryData>("example");
+            Debug.Log(data);
+        }
+
+        public void OpenFolder()
+        {
+            BinaryHelper.OpenBinarySavePath();
         }
     }
 }

@@ -13,19 +13,27 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class StartCurrentSceneExample : MonoBehaviour
     {
+        private static bool s_loaded;
+
         void Start()
         {
             ActionKit.Sequence()
                      .Delay(1.0f)
                      .Callback(() =>
                       {
-                          Debug.Log("printed");
-                          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                          Debug.Log("printed"); // 只会打印 2 次
+
+                          if (!s_loaded)
+                          {
+                              s_loaded = true;
+                              // 重新加载当前场景
+                              SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                          }
                       })
                      .Delay(1.0f)
                      .Callback(() =>
                       {
-                          Debug.Log("Not print"); // 永远不会输出代码中的 Not print, 因为当场景变更时，会自动停止动作序列的执行。
+                          Debug.Log("Scene Loaded!");
                       })
                      .StartCurrentScene();
         }

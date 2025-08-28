@@ -25,22 +25,24 @@ namespace Framework3.Toolkits.Core.DataKit.Example._1Json
 
     public class JsonExample : MonoBehaviour
     {
-        private void OnGUI()
+        public void Save()
         {
-            if (GUILayout.Button("SaveJson", GUILayout.Width(160), GUILayout.Height(60)))
+            DataKit.SaveJson("example", new JsonData()
             {
-                DataKit.SaveJson("example", new JsonData()
-                {
-                    Name = "hello",
-                    Age  = 18
-                });
-            }
-
-            if (GUILayout.Button("LoadJson", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                var data = DataKit.LoadJson<JsonData>("example");
-                Debug.Log(data);
-            }
+                Name = "hello",
+                Age  = 18
+            });
+        }
+        
+        public void Load()
+        {
+            var data = DataKit.LoadJson<JsonData>("example");
+            Debug.Log(data);
+        }
+        
+        public void OpenFolder()
+        {
+            JsonHelper.OpenJsonSavePath();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace Framework3.Core.Example._12.Coroutine_Task_ResultCommand
 {
-    using global::System;
-    using global::System.Collections;
-    using global::System.Threading.Tasks;
+    using System;
+    using System.Collections;
+    using System.Threading.Tasks;
     using UnityEngine;
 
     public class CommandWithResultExample : MonoBehaviour

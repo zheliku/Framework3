@@ -115,7 +115,7 @@ namespace Framework3.Core
             get => _onValueChanged.EventCount;
         }
 
-        public void SetValueWithoutEvent(TProperty newValue)
+        public void SetValueWithoutNotify(TProperty newValue)
         {
             _value = newValue;
         }

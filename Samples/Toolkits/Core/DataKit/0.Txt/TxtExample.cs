@@ -10,23 +10,28 @@ using UnityEngine;
 
 namespace Framework3.Toolkits.Core.DataKit.Example._0.Txt
 {
-    using System;
+    using TMPro;
     using Toolkits.DataKit;
 
     public class TxtExample : MonoBehaviour
     {
-        private void OnGUI()
+        [SerializeField]
+        private TMP_InputField _inputField;
+        
+        public void Save()
         {
-            if (GUILayout.Button("SaveTxt", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                DataKit.SaveTxt("example", "hello");
-            }
-            
-            if (GUILayout.Button("LoadTxt", GUILayout.Width(160), GUILayout.Height(60)))
-            {
-                var txt = DataKit.LoadTxt("example");
-                Debug.Log(txt);
-            }
+            DataKit.SaveTxt("example", _inputField.text);
+        }
+        
+        public void Load()
+        {
+            var txt = DataKit.LoadTxt("example");
+            Debug.Log(txt);
+        }
+        
+        public void OpenFolder()
+        {
+            TxtHelper.OpenTxtSavePath();
         }
     }
 }
