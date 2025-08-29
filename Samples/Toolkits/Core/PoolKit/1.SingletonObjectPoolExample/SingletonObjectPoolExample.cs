@@ -8,49 +8,50 @@
 
 namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
 {
-    using System.Collections;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class SingletonObjectPoolExample : MonoBehaviour
     {
         [ShowInInspector]
-        private SingletonObjectPool<Bullet> _pool;
-        
+        private ObjectPool<ImageItem> _pool;
+    
+        [SerializeField]
+        private ImageItem _imageItem;
+
+        [SerializeField]
+        private Transform _useParent;
+
         private void Start()
         {
-            _pool = SingletonObjectPool<Bullet>.Instance;
-            
-            SingletonObjectPool<Bullet>.Instance.SetObjectFactory(new CustomObjectFactory<Bullet>(() =>
-            {
-                var bullet = new Bullet();
-                Debug.Log("Create Bullet");
-                return bullet;
-            }));
-            
-            SingletonObjectPool<Bullet>.Instance.Init(5, 10);
-        }
-
-        private void OnGUI()
-        {
-            if (GUILayout.Button("Spawn GameObject", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                var bullet = SingletonObjectPool<Bullet>.Instance.Get();
-                StartCoroutine(Recycle(bullet));
-            }
-
-            if (GUILayout.Button("Clear GameObject", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                SingletonObjectPool<Bullet>.Instance.Clear();
-            }
-        }
+            _pool = SingletonPool<ImageItem>.Pool;
         
-        private IEnumerator Recycle(Bullet bullet)
+            // 设置对象池的工厂方法，实例化 ImageItem 并激活
+            SingletonPool<ImageItem>.Pool.SetObjectFactory(new CustomObjectFactory<ImageItem>(() =>
+            {
+                var item = Instantiate(_imageItem);
+                item.gameObject.SetActive(true);
+                return item;
+            }));
+        }
+
+        public void GetGameObjectFromPool()
         {
-            yield return new WaitForSeconds(1);
-            
-            // SingletonObjectPool<Bullet>.Instance.Release(bullet);
-            bullet.Release2Pool();
+            SingletonPool<ImageItem>.Get();
+        }
+
+        public void ReleaseGameObjectToPool()
+        {
+            if (_useParent.childCount > 0)
+            {
+                var item = _useParent.GetChild(0).GetComponent<ImageItem>();
+                item.Release2Pool();
+            }
+        }
+
+        public void ClearGameObjectPool()
+        {
+            SingletonPool<ImageItem>.Clear();
         }
     }
 }

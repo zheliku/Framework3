@@ -69,7 +69,7 @@ namespace Framework3.Toolkits.ActionKit
             foreach (var controller in _tobeRemovedActions)
             {
                 _executingTasks.Remove(controller.Action);
-                controller.Recycle(); // 回收 controller 到对应的 Pool 中
+                controller.Recycle(); // 回收 controller 到对应的 ObjectPool 中
             }
 
             _tobeRemovedActions.Clear();

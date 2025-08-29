@@ -63,7 +63,7 @@ namespace Framework3.Toolkits.ActionKit.Example
             // 4
             // Finished
 
-            // 还支持 Sequence、Repeat、Spawn 等
+            // 还支持 Sequence、Repeat、Create 等
             // Also support sequence repeat spawn
             // ActionKit.Sequence()
             //     .Custom(c =>

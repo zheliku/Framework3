@@ -13,14 +13,14 @@ namespace Framework3.Toolkits.PoolKit
     public readonly struct PooledObject<T> : IDisposable where T : class
     {
         private readonly T        _toReturn;
-        private readonly IPool<T> _pool;
+        private readonly IObjectPool<T> _objectPool;
 
-        void IDisposable.Dispose() => _pool.Release(_toReturn);
+        void IDisposable.Dispose() => _objectPool.Release(_toReturn);
 
-        public PooledObject(T value, IPool<T> pool)
+        public PooledObject(T value, IObjectPool<T> objectPool)
         {
             _toReturn = value;
-            _pool = pool;
+            _objectPool = objectPool;
         }
     }
 }

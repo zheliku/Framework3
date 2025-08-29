@@ -23,7 +23,7 @@ namespace Framework3.Toolkits.AudioKit
 
         public static AudioPlayer Create(BindableProperty<float> volume)
         {
-            var player = SingletonObjectPool<AudioPlayer>.Instance.Get();
+            var player = SingletonPool<AudioPlayer>.Get();
             player.Volume = volume; // 指向 AudioKitSetting 中的 Volume
             player._onStart = null;
             player._onFinish = null;
@@ -291,7 +291,7 @@ namespace Framework3.Toolkits.AudioKit
 
         public void Recycle2Pool()
         {
-            if (!SingletonObjectPool<AudioPlayer>.Instance.Release(this))
+            if (!SingletonPool<AudioPlayer>.Release(this))
             {
                 // 如果无法回收，则直接销毁 AudioSource
                 if (AudioSource)

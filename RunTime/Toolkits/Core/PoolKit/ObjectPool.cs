@@ -1,8 +1,8 @@
 ﻿// ------------------------------------------------------------
 // @file       ObjectPool.cs
-// @brief
+// @brief      实现一个通用的对象池，用于管理对象的创建、获取、释放和销毁。
 // @author     zheliku
-// @Modified   2024-10-23 21:10:44
+// @Modified   2024-10-23 21:10:03
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
@@ -12,17 +12,97 @@ namespace Framework3.Toolkits.PoolKit
     using System.Collections.Generic;
     using Sirenix.OdinInspector;
 
-    public sealed class ObjectPool<T> : Pool<T>
+    /// <summary>
+    /// 通用对象池类，用于管理对象的生命周期，减少频繁创建和销毁对象的开销。
+    /// </summary>
+    /// <typeparam name="T">对象池中管理的对象类型。</typeparam>
+    [HideReferenceObjectPicker]
+    public class ObjectPool<T> : IObjectPool<T>
     {
+        /// <summary>
+        /// 用于存储对象的栈。
+        /// </summary>
+        [ShowInInspector]
+        protected Stack<T> _cacheStack;
+
+        /// <summary>
+        /// 对象工厂，用于创建新对象。
+        /// </summary>
+        [ShowInInspector]
+        protected IObjectFactory<T> _factory;
+
+        /// <summary>
+        /// 对象池的最大容量，默认值为 100。
+        /// </summary>
+        [ShowInInspector]
+        protected int _maxSize;
+
+        /// <summary>
+        /// 对象池中所有对象的总数。
+        /// </summary>
+        protected int _countAll;
+
+        /// <summary>
+        /// 是否启用重复释放检查。
+        /// </summary>
+        protected readonly bool _collectionCheck = false;
+
+        /// <summary>
+        /// 获取对象时执行的操作。
+        /// </summary>
         [ShowInInspector]
         private readonly Action<T> _actionOnGet;
 
+        /// <summary>
+        /// 释放对象时执行的操作。
+        /// </summary>
         [ShowInInspector]
         private readonly Action<T> _actionOnRelease;
 
+        /// <summary>
+        /// 销毁对象时执行的操作。
+        /// </summary>
         [ShowInInspector]
         private readonly Action<T> _actionOnDestroy;
 
+        /// <summary>
+        /// 获取对象池中所有对象的总数。
+        /// </summary>
+        [ShowInInspector]
+        public int CountAll { get => _countAll; }
+
+        /// <summary>
+        /// 获取当前未使用的对象数量。
+        /// </summary>
+        [ShowInInspector]
+        public int CountInactive { get => _cacheStack.Count; }
+
+        /// <summary>
+        /// 获取当前正在使用的对象数量。
+        /// </summary>
+        [ShowInInspector]
+        public int CountActive { get => _countAll - _cacheStack.Count; }
+
+        /// <summary>
+        /// 设置对象工厂。
+        /// </summary>
+        /// <param name="factory">实现 IObjectFactory 接口的对象工厂实例。</param>
+        public void SetObjectFactory(IObjectFactory<T> factory)
+        {
+            _factory = factory;
+        }
+
+        /// <summary>
+        /// 初始化对象池。
+        /// </summary>
+        /// <param name="createFunc">用于创建新对象的委托。</param>
+        /// <param name="actionOnGet">获取对象时执行的操作。</param>
+        /// <param name="actionOnRelease">释放对象时执行的操作。</param>
+        /// <param name="actionOnDestroy">销毁对象时执行的操作。</param>
+        /// <param name="collectionCheck">是否启用重复释放检查。</param>
+        /// <param name="defaultCapacity">对象池的初始容量。</param>
+        /// <param name="maxSize">对象池的最大容量。</param>
+        /// <param name="preCreate">是否在初始化时预创建对象。</param>
         public ObjectPool(
             Func<T>   createFunc,
             Action<T> actionOnGet     = null,
@@ -30,35 +110,58 @@ namespace Framework3.Toolkits.PoolKit
             Action<T> actionOnDestroy = null,
             bool      collectionCheck = false,
             int       defaultCapacity = 10,
-            int       maxSize         = 100)
+            int       maxSize         = 100,
+            bool      preCreate       = false)
         {
-            _factory         = new CustomObjectFactory<T>(createFunc);
-            _actionOnGet     = actionOnGet;
+            _factory = new CustomObjectFactory<T>(createFunc);
+            _actionOnGet = actionOnGet;
             _actionOnRelease = actionOnRelease;
             _actionOnDestroy = actionOnDestroy;
             _collectionCheck = collectionCheck;
-            _maxSize         = maxSize;
-            _cacheStack      = new Stack<T>(defaultCapacity);
+            _maxSize = maxSize;
+            _cacheStack = new Stack<T>(defaultCapacity);
 
-            for (var i = 0; i < defaultCapacity; i++)
+            if (preCreate)
             {
-                _cacheStack.Push(_factory.Create());
+                for (var i = 0; i < defaultCapacity; i++)
+                {
+                    _cacheStack.Push(_factory.Create());
+                }
+                _countAll = defaultCapacity;
             }
-            _countAll = defaultCapacity;
         }
 
-        public override T Get()
+        /// <summary>
+        /// 从对象池中获取一个对象。
+        /// </summary>
+        /// <returns>获取的对象。</returns>
+        public T Get()
         {
-            var item = base.Get();
+            T item;
+            if (_cacheStack.Count > 0)
+            {
+                item = _cacheStack.Pop();
+            }
+            else
+            {
+                item = _factory.Create();
+                ++_countAll;
+            }
             _actionOnGet?.Invoke(item);
             return item;
         }
 
-        public override bool Release(T obj)
+        /// <summary>
+        /// 将对象释放回对象池。
+        /// </summary>
+        /// <param name="obj">要释放的对象。</param>
+        /// <returns>如果对象成功释放到池中返回 true，否则返回 false。</returns>
+        /// <exception cref="InvalidOperationException">当启用重复释放检查时，尝试释放已存在于池中的对象会抛出此异常。</exception>
+        public bool Release(T obj)
         {
             if (_collectionCheck && _cacheStack.Contains(obj))
             {
-                throw new InvalidOperationException("Trying to release an object that has already been released to the pool.");
+                throw new InvalidOperationException("Trying to release an object that has already been released to the objectPool.");
             }
 
             _actionOnRelease?.Invoke(obj);
@@ -76,7 +179,11 @@ namespace Framework3.Toolkits.PoolKit
             }
         }
 
-        public override void Clear(Action<T> onClear = null)
+        /// <summary>
+        /// 清空对象池，并可选地对每个对象执行清理操作。
+        /// </summary>
+        /// <param name="onClear">清理时对每个对象执行的操作。</param>
+        public void Clear(Action<T> onClear = null)
         {
             if (onClear != null)
             {
@@ -94,7 +201,8 @@ namespace Framework3.Toolkits.PoolKit
                 }
             }
 
-            base.Clear(onClear);
+            _cacheStack.Clear();
+            _countAll = 0;
         }
     }
 }

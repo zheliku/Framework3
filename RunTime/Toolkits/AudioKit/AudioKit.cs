@@ -30,8 +30,7 @@ namespace Framework3.Toolkits.AudioKit
         public static AudioKitSetting Setting { get => AudioKitSetting.Instance; }
 
         public static ObjectPool<IAudioLoader> AudioLoaderPool { get; set; } = new ObjectPool<IAudioLoader>(
-            () => new DefaultAudioLoader(),
-            defaultCapacity: 10
+            () => new AddressablesAudioLoader()
         );
 
         public static AudioPlayer MusicPlayer { get => AudioMgr.Instance.MusicPlayer; }
@@ -386,7 +385,7 @@ namespace Framework3.Toolkits.AudioKit
             {
                 return CanPlaySoundInIgnoreSameSoundInSoundFramesMode(soundName);
             }
-            
+
             if (SoundMode == SoundMode.IgnoreSameSoundInGlobalTimes)
             {
                 return CanPlaySoundInIgnoreSameSoundInGlobalTimesMode(soundName);
@@ -399,7 +398,7 @@ namespace Framework3.Toolkits.AudioKit
 
             return false;
         }
-        
+
         private static bool CanPlaySoundInIgnoreSameSoundInGlobalFramesMode(string soundName)
         {
             // 判断当前帧数与全局帧数的差值是否小于等于忽略相同声音的全局帧数
@@ -421,7 +420,7 @@ namespace Framework3.Toolkits.AudioKit
 
             return true;
         }
-        
+
         private static bool CanPlaySoundInIgnoreSameSoundInSoundFramesMode(string soundName)
         {
             // 判断当前帧数与声音帧数的差值是否小于等于忽略相同声音的声音帧数
@@ -444,7 +443,7 @@ namespace Framework3.Toolkits.AudioKit
 
             return true;
         }
-        
+
         private static bool CanPlaySoundInIgnoreSameSoundInGlobalTimesMode(string soundName)
         {
             // 判断当前时间与全局时间的差值是否小于等于忽略相同声音的全局时间

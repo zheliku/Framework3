@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.AudioKit
     #region Static
 
         [ShowInInspector]
-        private static Dictionary<string, List<AudioPlayer>> _SoundPlayerInPlaying = new Dictionary<string, List<AudioPlayer>>(30);
+        private static Dictionary<string, List<AudioPlayer>> s_soundPlayerInPlaying = new Dictionary<string, List<AudioPlayer>>(30);
 
     #endregion
 
@@ -58,8 +58,6 @@ namespace Framework3.Toolkits.AudioKit
 
         public override void OnSingletonInit()
         {
-            SingletonObjectPool<AudioPlayer>.Instance.Init(2, 20);
-
             // 与 AudioKit.Setting.MusicVolume 绑定
             MusicPlayer           = AudioPlayer.Create(AudioKit.Setting.MusicVolume);
             MusicPlayer.UsedCache = false;
@@ -132,7 +130,7 @@ namespace Framework3.Toolkits.AudioKit
         /// <param name="operation">每个 Sound 执行的方法</param>
         public void ForEachSound(Action<AudioPlayer> operation)
         {
-            foreach (var audioPlayer in _SoundPlayerInPlaying.SelectMany(keyValuePair => keyValuePair.Value))
+            foreach (var audioPlayer in s_soundPlayerInPlaying.SelectMany(keyValuePair => keyValuePair.Value))
             {
                 operation(audioPlayer);
             }
@@ -140,24 +138,24 @@ namespace Framework3.Toolkits.AudioKit
 
         public void AddSoundPlayerToPool(AudioPlayer audioPlayer)
         {
-            if (_SoundPlayerInPlaying.ContainsKey(audioPlayer.AudioClipName))
+            if (s_soundPlayerInPlaying.ContainsKey(audioPlayer.AudioClipName))
             {
-                _SoundPlayerInPlaying[audioPlayer.AudioClipName].Add(audioPlayer);
+                s_soundPlayerInPlaying[audioPlayer.AudioClipName].Add(audioPlayer);
             }
             else
             {
-                _SoundPlayerInPlaying.Add(audioPlayer.AudioClipName, new List<AudioPlayer> { audioPlayer });
+                s_soundPlayerInPlaying.Add(audioPlayer.AudioClipName, new List<AudioPlayer> { audioPlayer });
             }
         }
 
         public void RemoveSoundPlayerFromPool(AudioPlayer audioPlayer)
         {
-            _SoundPlayerInPlaying[audioPlayer.AudioClipName].Remove(audioPlayer);
+            s_soundPlayerInPlaying[audioPlayer.AudioClipName].Remove(audioPlayer);
         }
 
         public void ClearAllPlayingSound()
         {
-            _SoundPlayerInPlaying.Clear();
+            s_soundPlayerInPlaying.Clear();
         }
 
     #endregion

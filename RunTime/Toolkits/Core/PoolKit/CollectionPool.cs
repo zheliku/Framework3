@@ -8,6 +8,7 @@
 
 namespace Framework3.Toolkits.PoolKit
 {
+    using System;
     using System.Collections.Generic;
 
     public class CollectionPool<TCollection, TItem> where TCollection : class, ICollection<TItem>, new()
@@ -16,7 +17,7 @@ namespace Framework3.Toolkits.PoolKit
             () => new TCollection(),
             actionOnGet: null,
             actionOnRelease: l => l.Clear(),
-            actionOnDestroy: l => l.Clear(),
+            actionOnDestroy: null,
             defaultCapacity: 5,
             maxSize: 20
         );
@@ -29,6 +30,11 @@ namespace Framework3.Toolkits.PoolKit
         public static void Release(TCollection toRelease)
         {
             Pool.Release(toRelease);
+        }
+        
+        public static void Clear(Action<TCollection> onClear = null)
+        {
+            Pool.Clear(onClear);
         }
     }
 }

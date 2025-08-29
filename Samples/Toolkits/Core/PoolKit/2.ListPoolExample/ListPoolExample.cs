@@ -20,23 +20,20 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
         [ShowInInspector]
         public ObjectPool<List<int>> ListPool = ListPool<int>.Pool;
 
-        private void OnGUI()
+        public void GetList()
         {
-            if (GUILayout.Button("Get List", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                Lists.Add(ListPool<int>.Get());
-            }
-
-            if (GUILayout.Button("Release List", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                Lists[0].Release2Pool();
-                Lists.RemoveAt(0);
-            }
-
-            if (GUILayout.Button("Clear GameObject", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                Lists.Clear();
-            }
+            Lists.Add(ListPool<int>.Get());
+        }
+        
+        public void ReleaseList()
+        {
+            Lists[0].Release2Pool();
+            Lists.RemoveAt(0);
+        }
+        
+        public void ClearList()
+        {
+            ListPool<int>.Clear();
         }
     }
 }

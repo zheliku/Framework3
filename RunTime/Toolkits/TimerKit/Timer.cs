@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.TimerKit
 
         public static Timer Spawn(Action<Timer> onTick, float duration, int repeatCount = 1, TimerType timerType = TimerType.Scaled)
         {
-            var timer = SingletonObjectPool<Timer>.Instance.Get();
+            var timer = SingletonPool<Timer>.Get();
             timer.Enabled      = true;
             timer.TickCount    = 0;
             timer._onTickAction = onTick;
@@ -189,7 +189,7 @@ namespace Framework3.Toolkits.TimerKit
 
         public void Recycle2Pool()
         {
-            SingletonObjectPool<Timer>.Instance.Release(this);
+            SingletonPool<Timer>.Release(this);
         }
 
     #endregion

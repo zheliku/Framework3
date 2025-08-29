@@ -1,6 +1,10 @@
 # v0.3.3
 1. 完善Samples示例场景至PoolKit
 2. 更新PoolKit，添加GenericPool，待测试
+3. PoolKit：
+   - 修复SingletonPool.Get()不触发OnGet事件的问题
+   - 修复ObjectPool.Clear()不触发OnClear事件的问题
+   - 重构SingletonPool，更新TimerKit和AudioKit
 
 # v0.3.2
 1. 修复DestroyChildren删除transform而不是gameobject的问题

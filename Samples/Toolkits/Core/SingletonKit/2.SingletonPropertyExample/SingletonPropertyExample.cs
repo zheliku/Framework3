@@ -34,7 +34,10 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
         /// <summary>
         /// 通过属性返回静态单例，来实现单例模式
         /// </summary>
-        public static Class2SingletonProperty Instance => SingletonProperty<Class2SingletonProperty>.Instance;
+        public static Class2SingletonProperty Instance
+        {
+            get => SingletonProperty<Class2SingletonProperty>.Instance;
+        }
 
         private Class2SingletonProperty() { }
 

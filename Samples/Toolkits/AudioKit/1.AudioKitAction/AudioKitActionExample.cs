@@ -11,16 +11,20 @@ using UnityEngine;
 namespace Framework3.Toolkits.AudioKit.Example._1.AudioKitAction
 {
     using ActionKit;
+    using PoolKit;
 
     public class AudioKitActionExample : MonoBehaviour
     {
         private void Start()
         {
+            // 使用 ResourcesAudioLoader 作为音频加载器
+            AudioKit.AudioLoaderPool.SetObjectFactory(new CustomObjectFactory<IAudioLoader>(() => new ResourcesAudioLoader()));
+            
             ActionKit.Sequence()
                      .Delay(2)
-                     .PlaySound("HomeBg")
+                     .PlaySound("Music/HomeBg")
                      .Delay(2)
-                     .PlaySound("PillowTalk")
+                     .PlaySound("Music/PillowTalk")
                      .Start(this);
         }
     }

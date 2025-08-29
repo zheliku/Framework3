@@ -28,7 +28,7 @@ namespace Framework3.Toolkits.AudioKit
         private AudioClip _audioClip;
         private Action    _onFinish;
 
-        public static PlaySoundAction Spawn(string soundPath, Action onFinish = null)
+        public static PlaySoundAction Create(string soundPath, Action onFinish = null)
         {
             var playSoundAction = CreateInternal();
             playSoundAction._mode      = Mode.ByName;
@@ -37,7 +37,7 @@ namespace Framework3.Toolkits.AudioKit
             return playSoundAction;
         }
 
-        public static PlaySoundAction Spawn(AudioClip audioClip, Action onFinish = null)
+        public static PlaySoundAction Create(AudioClip audioClip, Action onFinish = null)
         {
             var playSoundAction = CreateInternal();
             playSoundAction._mode      = Mode.ByClip;
@@ -81,12 +81,12 @@ namespace Framework3.Toolkits.AudioKit
     {
         public static ISequence PlaySound(this ISequence self, string soundPath)
         {
-            return self.Append(PlaySoundAction.Spawn(soundPath));
+            return self.Append(PlaySoundAction.Create(soundPath));
         }
 
         public static ISequence PlaySound(this ISequence self, AudioClip clip)
         {
-            return self.Append(PlaySoundAction.Spawn(clip));
+            return self.Append(PlaySoundAction.Create(clip));
         }
     }
 }

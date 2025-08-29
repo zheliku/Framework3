@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------
-// @file       IPool.cs
+// @file       IObjectPool.cs
 // @brief
 // @author     zheliku
 // @Modified   2024-10-23 21:10:24
@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.PoolKit
     /// 对象池接口
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IPool<T>
+    public interface IObjectPool<T>
     {
         public int CountAll { get; }
 

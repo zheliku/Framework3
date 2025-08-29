@@ -621,7 +621,20 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: SetMusicVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &199426993
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +815,7 @@ GameObject:
   - component: {fileID: 232152707}
   - component: {fileID: 232152706}
   m_Layer: 5
-  m_Name: BtnPlayNarration
+  m_Name: Btn_PlayNarration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -871,7 +884,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 232152707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: PlayNarration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &232152707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,7 +1140,20 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: SetNarrationVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &436426973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,7 +1428,7 @@ GameObject:
   - component: {fileID: 947180600}
   - component: {fileID: 947180599}
   m_Layer: 5
-  m_Name: BtnPlayMusic
+  m_Name: Btn_PlayMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1458,7 +1497,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 947180600}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: PlayMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &947180600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,7 +1708,20 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: ToggleSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1007839716
 GameObject:
@@ -1826,7 +1891,20 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: SetSoundVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1210019473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2328,20 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: ToggleNarration
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1439567341
 GameObject:
@@ -2349,9 +2440,9 @@ RectTransform:
   - {fileID: 2060054428}
   - {fileID: 2071560686}
   - {fileID: 1342218015}
-  - {fileID: 2013791533}
   - {fileID: 947180598}
   - {fileID: 232152705}
+  - {fileID: 2013791533}
   - {fileID: 1700135359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2724,7 +2815,7 @@ GameObject:
   - component: {fileID: 1700135361}
   - component: {fileID: 1700135360}
   m_Layer: 5
-  m_Name: BtnStopAllSound
+  m_Name: Btn_StopAllSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2793,7 +2884,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1700135361}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: StopAllSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1700135361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3185,7 +3289,20 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: ToggleMusic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &2003648027
 GameObject:
@@ -3236,7 +3353,7 @@ GameObject:
   - component: {fileID: 2013791535}
   - component: {fileID: 2013791534}
   m_Layer: 5
-  m_Name: BtnPlaySound
+  m_Name: Btn_PlaySound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3305,7 +3422,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2013791535}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1812122681}
+        m_TargetAssemblyTypeName: Framework3.Toolkits.AudioKit.Example._0.Basic.AudioExample,
+          Framework.Example
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2013791535
 MonoBehaviour:
   m_ObjectHideFlags: 0

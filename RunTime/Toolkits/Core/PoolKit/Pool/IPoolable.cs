@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
-    /// 可放进 Pool 的对象接口.
+    /// 可放进 ObjectPool 的对象接口.
     /// </summary>
     public interface IPoolable
     {
@@ -26,9 +26,9 @@ namespace Framework3.Toolkits.PoolKit
 
     public static class IPoolableExtension
     {
-        public static void Release2Pool<T>(this T poolable) where T : IPoolable, new()
+        public static void Release2Pool<T>(this T poolable) where T : class, IPoolable, new()
         {
-            SingletonObjectPool<T>.Instance.Release(poolable);
+            SingletonPool<T>.Release(poolable);
         }
     }
 }
