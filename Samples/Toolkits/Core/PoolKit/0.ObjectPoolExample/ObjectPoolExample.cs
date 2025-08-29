@@ -31,20 +31,17 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
                 actionOnDestroy: Destroy,
                 defaultCapacity: 10);
         }
-
-        private void OnGUI()
+        
+        public void GetGameObjectFromPool()
         {
-            if (GUILayout.Button("Spawn GameObject", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                var obj = _objectPool.Get();
-                obj.SetActive(true);
-                StartCoroutine(Recycle(obj));
-            }
-
-            if (GUILayout.Button("Clear GameObject", GUILayout.Width(150), GUILayout.Height(50)))
-            {
-                _objectPool.Clear();
-            }
+            var obj = _objectPool.Get();
+            obj.SetActive(true);
+            StartCoroutine(Recycle(obj));
+        }
+        
+        public void ClearGameObjectPool()
+        {
+            _objectPool.Clear();
         }
 
         private IEnumerator Recycle(GameObject obj)

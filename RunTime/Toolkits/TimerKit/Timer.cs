@@ -171,6 +171,8 @@ namespace Framework3.Toolkits.TimerKit
             return false;
         }
 
+        public void OnCreate() { }
+
         public void OnGet() { }
 
         public void OnRelease()

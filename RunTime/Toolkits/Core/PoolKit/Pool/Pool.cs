@@ -19,13 +19,13 @@ namespace Framework3.Toolkits.PoolKit
         /// 存储相关数据的栈
         /// </summary>
         [ShowInInspector]
-        protected Stack<T> _cacheStack = new(50);
+        protected Stack<T> _cacheStack = new(10);
 
         [ShowInInspector]
         protected IObjectFactory<T> _factory;
 
         /// <summary>
-        /// default is 50
+        /// default is 100
         /// </summary>
         [ShowInInspector]
         protected int _maxSize = 100;

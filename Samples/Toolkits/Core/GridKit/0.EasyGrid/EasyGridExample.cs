@@ -21,37 +21,24 @@ namespace Framework3.Toolkits.GridKit.Example._0.Grid
             _grid = new EasyGrid<string>(3, 4);
         }
 
-        private void OnGUI()
+        public void Fill()
         {
-            GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("Fill", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid.Fill("Empty");
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("Set (2, 3)", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid[2, 3] = "@@@ Hello @@@";
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("Log", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid.ForEach((i, j, value) => Debug.Log($"({i}, {j}) = {value}"));
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("Resize", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid.Resize(1, 5, (i, j) => "New Value");
-            }
-
-            GUILayout.EndHorizontal();
+            _grid.Fill("Empty");
+        }
+        
+        public void SetValue()
+        {
+            _grid[2, 3] = "@@@ Hello @@@";
+        }
+        
+        public void LogAll()
+        {
+            _grid.ForEach((i, j, value) => Debug.Log($"({i}, {j}) = {value}"));
+        }
+        
+        public void Resize()
+        {
+            _grid.Resize(1, 5, (i, j) => "New Value");
         }
     }
 }

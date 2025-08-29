@@ -1,3 +1,7 @@
+# v0.3.3
+1. 完善Samples示例场景至PoolKit
+2. 更新PoolKit，添加GenericPool，待测试
+
 # v0.3.2
 1. 修复DestroyChildren删除transform而不是gameobject的问题
 2. 完善Samples示例场景至EventKit

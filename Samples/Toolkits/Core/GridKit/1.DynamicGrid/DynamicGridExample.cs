@@ -21,23 +21,14 @@ namespace Framework3.Toolkits.GridKit.Example._1.DynamicGrid
             _grid = new DynamicGrid<string>();
         }
 
-        private void OnGUI()
+        public void SetValue()
         {
-            GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("Set (2, 3)", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid[2, 3] = "@@@ Hello @@@";
-            }
-
-            GUILayout.Space(20);
-
-            if (GUILayout.Button("Log", GUILayout.Width(120), GUILayout.Height(50)))
-            {
-                _grid.ForEach((i, j, value) => Debug.Log($"({i}, {j}) = {value}"));
-            }
-
-            GUILayout.EndHorizontal();
+            _grid[2, 3] = "@@@ Hello @@@";
+        }
+        
+        public void LogAll()
+        {
+            _grid.ForEach((i, j, value) => Debug.Log($"({i}, {j}) = {value}"));
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Framework3.Toolkits.PoolKit
     /// </summary>
     public interface IPoolable
     {
+        void OnCreate() { }
+        
         void OnGet();
 
         void OnRelease();

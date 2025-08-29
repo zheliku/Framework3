@@ -12,6 +12,11 @@ namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
 
     public class Bullet : IPoolable
     {
+        public void OnCreate()
+        {
+            Debug.Log("Bullet OnCreate");
+        }
+        
         public void OnGet()
         {
             Debug.Log("Bullet OnSpawn");

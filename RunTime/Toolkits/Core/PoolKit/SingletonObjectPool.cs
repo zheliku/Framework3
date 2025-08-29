@@ -16,7 +16,6 @@ namespace Framework3.Toolkits.PoolKit
     /// <summary>
     /// 对象必须继承 IPoolable
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class SingletonObjectPool<T> : Pool<T>, ISingleton where T : IPoolable, new()
     {
         protected SingletonObjectPool()
@@ -51,7 +50,9 @@ namespace Framework3.Toolkits.PoolKit
 
             for (var i = 0; i < initCount; ++i)
             {
-                _cacheStack.Push(_factory.Create());
+                var obj = _factory.Create();
+                obj.OnCreate();
+                _cacheStack.Push(obj);
             }
             _countAll = initCount;
         }
@@ -61,7 +62,15 @@ namespace Framework3.Toolkits.PoolKit
         /// </summary>
         public override T Get()
         {
-            var result = base.Get();
+            if (_cacheStack.Count > 0)
+            {
+                return _cacheStack.Pop();
+            }
+
+            ++_countAll;
+            
+            var result = _factory.Create();
+            result.OnCreate();
             result.IsInPool = false;
             result.OnGet();
             return result;

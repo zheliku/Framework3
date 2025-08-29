@@ -25,7 +25,6 @@ namespace Framework3.Toolkits.PoolKit
             _factoryMethod = factoryMethod;
         }
 
-
         public T Create()
         {
             return _factoryMethod();

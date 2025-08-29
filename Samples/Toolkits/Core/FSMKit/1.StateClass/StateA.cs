@@ -14,20 +14,16 @@ namespace Framework3.Toolkits.FSMKit.Example._1.StateClass
     {
         public StateA(FSM<States> fsm, IStateClassExample owner) : base(fsm, owner)
         { }
+        
+        protected override void OnEnter()
+        {
+            Debug.Log("Enter A");
+            _owner.SetTextInfo("Current State: A");
+        }
 
         protected override bool OnCondition()
         {
             return _fsm.CurrentStateId == States.B;
-        }
-
-        public override void OnGUI()
-        {
-            GUILayout.Label("State A", GUILayout.Width(150), GUILayout.Height(60));
-
-            if (GUILayout.Button("To State B", GUILayout.Width(150), GUILayout.Height(60)))
-            {
-                _fsm.ChangeState(States.B);
-            }
         }
     }
 }

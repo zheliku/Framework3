@@ -19,20 +19,16 @@ namespace Framework3.Toolkits.AudioKit
     [HideReferenceObjectPicker]
     public class AudioPlayer : IPoolable, IPoolType
     {
-    #region 常量
-
-    #endregion
-
     #region Static
 
         public static AudioPlayer Create(BindableProperty<float> volume)
         {
             var player = SingletonObjectPool<AudioPlayer>.Instance.Get();
-            player.Volume         = volume; // 指向 AudioKitSetting 中的 Volume
-            player._onStart       = null;
-            player._onFinish      = null;
+            player.Volume = volume; // 指向 AudioKitSetting 中的 Volume
+            player._onStart = null;
+            player._onFinish = null;
             player._settingVolume = 1;
-            player._volumeScale   = 1;
+            player._volumeScale = 1;
 
             // 创建时，为 AudioKitSetting 中的 Volume 绑定事件：更改值时，同步更改 AudioSource 的音量
             player.Volume.RegisterWithInitValue(player.OnAudioSettingVolumeChanged);
@@ -171,7 +167,7 @@ namespace Framework3.Toolkits.AudioKit
             _loader = AudioKit.AudioLoaderPool.Get();
 
             // 记录设置
-            IsLoop        = loop;
+            IsLoop = loop;
             AudioClipName = clipName;
 
             _loader.LoadClipAsync(AudioClipName, (success, clip) =>
@@ -231,9 +227,9 @@ namespace Framework3.Toolkits.AudioKit
 
             ClearResources();
 
-            IsLoop        = loop;
+            IsLoop = loop;
             AudioClipName = clip.name;
-            AudioClip     = clip;
+            AudioClip = clip;
 
             PlayInternal();
         }
@@ -270,11 +266,12 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             _timer.Paused = false;
-            _isPaused     = false;
+            _isPaused = false;
 
             AudioSource.Play(); // 与 UnPause 方法相同
         }
 
+        public void OnCreate() { }
 
         public void OnGet() { }
 
@@ -283,8 +280,8 @@ namespace Framework3.Toolkits.AudioKit
             Volume?.Unregister(OnAudioSettingVolumeChanged);
             Volume = null;
 
-            _onStart    = null;
-            _onFinish   = null;
+            _onStart = null;
+            _onFinish = null;
             PlayedCount = 0;
 
             ClearResources();
@@ -312,7 +309,7 @@ namespace Framework3.Toolkits.AudioKit
         private void ClearResources()
         {
             AudioClipName = null;
-            _isPaused     = false;
+            _isPaused = false;
 
             if (_timer != null) // 回收 _timer
             {
