@@ -8,13 +8,33 @@
 
 namespace Framework3.Toolkits.SingletonKit.Example._7.PrefabSingletonPropertyExample
 {
+    using System;
+    using System.Collections;
     using UnityEngine;
 
     public class PrefabSingletonPropertyExample : MonoBehaviour
     {
+        private void Awake()
+        {
+            // optional: set custom loader
+            PrefabSingletonProperty<MyPrefabA>
+               .InstanceWithLoader(prefabName => Resources.Load<GameObject>("Prefabs/" + prefabName));
+        }
+
         private void Start()
         {
-            var prefabA = MyPrefabA.Instance;
+            PrefabSingletonProperty<MyPrefabA>.Instance.Log("Hello World!");
+
+            // delete current instance
+            PrefabSingletonProperty<MyPrefabA>.Dispose();
+
+            // new instance
+            PrefabSingletonProperty<MyPrefabA>.Instance.Log("Hello World!");
+        }
+
+        private void OnDestroy()
+        {
+            PrefabSingletonProperty<MyPrefabA>.Dispose();
         }
     }
 }

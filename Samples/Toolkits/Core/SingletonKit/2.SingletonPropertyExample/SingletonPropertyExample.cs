@@ -9,7 +9,6 @@
 namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
 {
     using UnityEngine;
-    using Framework3.Core;
 
     public class SingletonPropertyExample : MonoBehaviour
     {
@@ -23,6 +22,11 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
 
             // new instance
             Class2SingletonProperty.Instance.Log("Hello World!");
+        }
+        
+        private void OnDestroy()
+        {
+            Class2SingletonProperty.Instance.Dispose();
         }
     }
 
@@ -41,11 +45,11 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
 
         private Class2SingletonProperty() { }
 
-        private static int _Index = 0;
+        private static int s_index = 0;
 
         public void OnSingletonInit()
         {
-            _Index++;
+            s_index++;
         }
 
         public void Dispose()
@@ -55,7 +59,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
 
         public void Log(string content)
         {
-            Debug.Log("Class2SingletonProperty" + _Index + ": " + content);
+            Debug.Log("Class2SingletonProperty" + s_index + ": " + content);
         }
     }
 }

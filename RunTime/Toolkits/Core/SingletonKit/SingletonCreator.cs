@@ -80,7 +80,7 @@ namespace Framework3.Toolkits.SingletonKit
                     continue;
                 }
 
-                instance = CreateComponentOnGameObject<TMonoSingleton>(defineAttribute.PathInHierarchy, true);
+                instance = CreateComponentOnGameObject<TMonoSingleton>(defineAttribute.HierarchyPath, true);
 
                 // Object.DontDestroyOnLoad(instance.gameObject); 场景中的物体手动 DontDestroyOnLoad，因为必须满足为 root GameObject
 

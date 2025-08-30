@@ -10,18 +10,24 @@ namespace Framework3.Toolkits.SingletonKit.Example._1.MonoSingletonExample
 {
     using System.Collections;
     using UnityEngine;
-    using Framework3.Core;
 
     public class MonoSingletonExample : MonoBehaviour
     {
-        private IEnumerator Start()
+        private void Start()
         {
-            var instance = Class2MonoSingleton.Instance;
+            Class2MonoSingleton.Instance.Log("Hello World!");
 
-            yield return new WaitForSeconds(3.0f);
-			
-            instance.Dispose();
+            // delete current instance
+            Class2MonoSingleton.Instance.Dispose();
+
+            // new instance
+            Class2MonoSingleton.Instance.Log("Hello World!");
         }
+        
+        private void OnDestroy()
+        {
+            Class2MonoSingleton.Instance.Dispose();
+        }   
     }
 
     /// <summary> <![CDATA[
@@ -29,26 +35,16 @@ namespace Framework3.Toolkits.SingletonKit.Example._1.MonoSingletonExample
     /// ]]> </summary>
     internal class Class2MonoSingleton : MonoSingleton<Class2MonoSingleton>
     {
+        private static int s_index = 0;
+        
         public override void OnSingletonInit()
         {
-            Debug.Log(name + ": " + "OnSingletonInit");
+            s_index++;
         }
 
-        private void Awake()
+        public void Log(string content)
         {
-            Debug.Log(name + ": " + "Awake");
-        }
-
-        private void Start()
-        {
-            Debug.Log(name + ": " + "Start");
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            Debug.Log(name + ": " + "OnDestroy");
+            Debug.Log("Class2MonoSingleton" + s_index + ": " + content);
         }
     }
 }

@@ -9,7 +9,6 @@
 namespace Framework3.Toolkits.SingletonKit.Example._0.Singleton
 {
     using UnityEngine;
-    using Framework3.Core;
 
     public class SingletonExample : MonoBehaviour
     {
@@ -23,6 +22,11 @@ namespace Framework3.Toolkits.SingletonKit.Example._0.Singleton
             // a different instance
             Class2Singleton.Instance.Log("Hello World!");
         }
+        
+        private void OnDestroy()
+        {
+            Class2Singleton.Instance.Dispose();
+        }
     }
 
     /// <summary> <![CDATA[
@@ -30,18 +34,18 @@ namespace Framework3.Toolkits.SingletonKit.Example._0.Singleton
     /// ]]> </summary>
     internal class Class2Singleton : Singleton<Class2Singleton>
     {
-        private static int _Index = 0;
+        private static int s_index = 0;
 
         private Class2Singleton() { }
 
         public override void OnSingletonInit()
         {
-            _Index++;
+            s_index++;
         }
 
         public void Log(string content)
         {
-            Debug.Log("Class2Singleton" + _Index + ": " + content);
+            Debug.Log("Class2Singleton" + s_index + ": " + content);
         }
     }
 }

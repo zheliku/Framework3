@@ -8,49 +8,49 @@
 
 namespace Framework3.Toolkits.SingletonKit.Example._3.MonoSingletonPropertyExample
 {
-    using System.Collections;
     using UnityEngine;
-    using Framework3.Core;
 
     public class MonoSingletonPropertyExample : MonoBehaviour
     {
-        private IEnumerator Start()
+        private void Start()
         {
-            var instance = Class2MonoSingletonProperty.Instance;
+            Class2MonoSingletonProperty.Instance.Log("Hello World!");
 
-            yield return new WaitForSeconds(3.0f);
-			
-            instance.Dispose();
+            // delete current instance
+            Class2MonoSingletonProperty.Instance.Dispose();
+
+            // new instance
+            Class2MonoSingletonProperty.Instance.Log("Hello World!");
+        }
+        
+        private void OnDestroy()
+        {
+            Class2MonoSingletonProperty.Instance.Dispose();
         }
     }
 
     internal class Class2MonoSingletonProperty : MonoBehaviour, ISingleton
     {
-        public static Class2MonoSingletonProperty Instance => MonoSingletonProperty<Class2MonoSingletonProperty>.Instance;
+        public static Class2MonoSingletonProperty Instance
+        {
+            get => MonoSingletonProperty<Class2MonoSingletonProperty>.Instance;
+        }
+
+        private static int s_index = 0;
+
+        public void OnSingletonInit()
+        {
+            s_index++;
+        }
 
         public void Dispose()
         {
             MonoSingletonProperty<Class2MonoSingletonProperty>.Dispose();
         }
 
-        public void OnSingletonInit()
+        public void Log(string content)
         {
-            Debug.Log(name + ": " + "OnSingletonInit");
-        }
-
-        private void Awake()
-        {
-            Debug.Log(name + ": " + "Awake");
-        }
-
-        private void Start()
-        {
-            Debug.Log(name + ": " + "Start");
-        }
-
-        protected void OnDestroy()
-        {
-            Debug.Log(name + ": " + "OnDestroy");
+            Debug.Log("Class2MonoSingletonProperty" + s_index + ": " + content);
         }
     }
 }

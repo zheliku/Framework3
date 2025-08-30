@@ -8,48 +8,15 @@
 
 namespace Framework3.Toolkits.SingletonKit
 {
-    using Core;
     using UnityEngine;
 
     /// <summary>
     /// 当场景里包含两个 ReplaceableMonoSingleton，保留最后创建的
     /// </summary>
-    public class ReplaceableMonoSingleton<TSingleton> : MonoBehaviour where TSingleton : Component
+    public class ReplaceableMonoSingleton<TMonoSingleton> : MonoSingleton<TMonoSingleton> where TMonoSingleton : ReplaceableMonoSingleton<TMonoSingleton>
     {
-        protected static TSingleton s_instance;
-
         [SerializeField]
         private float _initializationTime;
-        
-        public static TSingleton Instance
-        {
-            get
-            {
-                if (s_instance == null)
-                {
-                    var singletons = FindObjectsByType<TSingleton>(FindObjectsSortMode.None);
-
-                    if (singletons.Length == 0)
-                    {
-                        throw new FrameworkException("No instance of " + typeof(TSingleton).Name + " found");
-                    }
-
-                    if (singletons.Length > 1)
-                    {
-                        throw new FrameworkException("More than one instance of " + typeof(TSingleton).Name + " found");
-                    }
-                    
-                    s_instance = singletons[0];
-                    if (s_instance == null)
-                    {
-                        var obj = new GameObject(typeof(TSingleton).Name);
-                        s_instance = obj.AddComponent<TSingleton>();
-                    }
-                }
-
-                return s_instance;
-            }
-        }
         
         protected virtual void Awake()
         {
@@ -63,13 +30,14 @@ namespace Framework3.Toolkits.SingletonKit
 
             DontDestroyOnLoad(gameObject);
 
-            var check = FindObjectsByType<TSingleton>(FindObjectsSortMode.None);
+            var check = FindObjectsByType<TMonoSingleton>(FindObjectsSortMode.None);
             foreach (var searched in check)
             {
                 // 如果查找到的对象是当前对象，则跳过
                 if (searched == this) continue;
+                
                 // 如果查找到的对象的初始化时间小于当前对象的初始化时间，则销毁该对象
-                if (searched.GetComponent<ReplaceableMonoSingleton<TSingleton>>()._initializationTime < _initializationTime)
+                if (searched.GetComponent<ReplaceableMonoSingleton<TMonoSingleton>>()._initializationTime <= _initializationTime)
                 {
                     Destroy(searched.gameObject);
                 }
@@ -78,7 +46,7 @@ namespace Framework3.Toolkits.SingletonKit
             // 如果_Instance为空，则将当前对象赋值给_Instance
             if (s_instance == null)
             {
-                s_instance = this as TSingleton;
+                s_instance = this as TMonoSingleton;
             }
         }
     }

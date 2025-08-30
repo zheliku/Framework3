@@ -21,7 +21,7 @@ namespace Framework3.Toolkits.SingletonKit
         {
             get
             {
-                if (null == s_instance)
+                if (!s_instance)
                 {
                     s_instance = SingletonCreator.CreateMonoSingleton<TSingleton>();
                 }
@@ -32,8 +32,7 @@ namespace Framework3.Toolkits.SingletonKit
 
         public static void Dispose()
         {
-            Object.Destroy(s_instance.gameObject);
-
+            Object.DestroyImmediate(s_instance.gameObject);
             s_instance = null;
         }
     }

@@ -10,7 +10,6 @@ namespace Framework3.Toolkits.SingletonKit.Example._5.PersistentMonoSingletonExa
 {
     using System.Collections;
     using UnityEngine;
-    using Framework3.Core;
 
     public class PersistentMonoSingletonExample : MonoBehaviour
     {
@@ -32,8 +31,14 @@ namespace Framework3.Toolkits.SingletonKit.Example._5.PersistentMonoSingletonExa
             // 保留最先创建的实例
             Debug.Log(instance == FindFirstObjectByType<GameManager>());
         }
+        
+        private void OnDestroy()
+        {
+            GameManager.Instance.Dispose();
+        }
     }
 
+    [MonoSingletonPath("GameMgr")]
     internal class GameManager : PersistentMonoSingleton<GameManager>
     { }
 }

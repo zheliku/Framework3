@@ -9,13 +9,17 @@
 namespace Framework3.Toolkits.SingletonKit.Example._4.MonoSingletonPathExample
 {
     using UnityEngine;
-    using Framework3.Core;
 
     public class MonoSingletonPathExample : MonoBehaviour
     {
         private void Start()
         {
-            var instance = ClassUseMonoSingletonPath.Instance;
+            Debug.Log(ClassUseMonoSingletonPath.Instance);
+        }
+        
+        private void OnDestroy()
+        {
+            ClassUseMonoSingletonPath.Instance.Dispose();
         }
 
         [MonoSingletonPath("[Example]/MonoSingletonPath")]

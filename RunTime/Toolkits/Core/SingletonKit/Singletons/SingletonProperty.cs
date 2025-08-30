@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.SingletonKit
         /// <summary>
         /// 静态 Lazy
         /// </summary>
-        private static readonly Lazy<TSingleton> s_lazyHolder = new(SingletonCreator.CreateSingleton<TSingleton>);
+        private static Lazy<TSingleton> s_lazyHolder = new(SingletonCreator.CreateSingleton<TSingleton>);
 
         /// <summary>
         /// 静态属性
@@ -33,6 +33,9 @@ namespace Framework3.Toolkits.SingletonKit
         /// 资源释放
         /// </summary>
         public static void Dispose()
-        { }
+        {
+            // 重新创建 Lazy 实例
+            s_lazyHolder = new(SingletonCreator.CreateSingleton<TSingleton>);
+        }
     }
 }

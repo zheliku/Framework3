@@ -10,7 +10,6 @@ namespace Framework3.Toolkits.SingletonKit.Example._6.ReplaceableMonoSingletonEx
 {
     using System.Collections;
     using UnityEngine;
-    using Framework3.Core;
 
     public class ReplaceableMonoSingletonExample : MonoBehaviour
     {
@@ -32,8 +31,14 @@ namespace Framework3.Toolkits.SingletonKit.Example._6.ReplaceableMonoSingletonEx
             // 最先创建的实例已经被删除
             Debug.Log(instance != FindFirstObjectByType<GameManager>());
         }
+        
+        private void OnDestroy()
+        {
+            GameManager.Instance.Dispose();
+        }
     }
 
+    [MonoSingletonPath("GameMgr")]
     internal class GameManager : ReplaceableMonoSingleton<GameManager>
     { }
 }

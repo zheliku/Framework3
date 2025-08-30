@@ -24,7 +24,7 @@ namespace Framework3.Toolkits.SingletonKit
         {
             get
             {
-                if (s_instance == null)
+                if (!s_instance)
                 {
                     s_instance = SingletonCreator.CreateMonoSingleton<TMonoSingleton>();
                 }
@@ -45,6 +45,7 @@ namespace Framework3.Toolkits.SingletonKit
         public virtual void Dispose()
         {
             Destroy(gameObject);
+            s_instance = null;
         }
 
         protected virtual void Update()
@@ -61,11 +62,11 @@ namespace Framework3.Toolkits.SingletonKit
         /// </summary>
         protected virtual void OnApplicationQuit()
         {
-            if (s_instance == null)
-                return;
-
-            Destroy(s_instance.gameObject);
-            s_instance = null;
+            if (s_instance)
+            {
+                Destroy(s_instance.gameObject);
+                s_instance = null;
+            }
         }
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace Framework3.Toolkits.SingletonKit
         {
             s_instance = null;
         }
-        
+
         /// <summary>
         /// 默认没有 _Architecture
         /// </summary>

@@ -21,27 +21,18 @@ namespace Framework3.Toolkits.TableKit.Example
 
         private void Start()
         {
-            _school.Add(new Student() { Age = 1, Level = 2, Name = "liangxie" });
+            _school.Add(new Student() { Age = 1, Level = 2, Name = "zheliku" });
             _school.Add(new Student() { Age = 2, Level = 2, Name = "ava" });
             _school.Add(new Student() { Age = 3, Level = 2, Name = "abc" });
             _school.Add(new Student() { Age = 3, Level = 3, Name = "efg" });
         }
 
-        private void OnGUI()
+        public void LogLevel2()
         {
-            GUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("Log Level 2", GUILayout.Width(120), GUILayout.Height(50)))
+            foreach (var student in _school.LevelIndex.Get(2).Where(s => s.Age < 3))
             {
-                foreach (var student in _school.LevelIndex.Get(2).Where(s => s.Age < 3))
-                {
-                    Debug.Log(student);
-                }
+                Debug.Log(student);
             }
-
-            GUILayout.Space(20);
-            
-            GUILayout.EndHorizontal();
         }
     }
 

@@ -9,14 +9,19 @@
 namespace Framework3.Toolkits.SingletonKit.Example._8.ScriptableSingletonPropertyExample
 {
     using UnityEngine;
-    using Framework3.Core;
 
     public class ScriptableSingletonPropertyExample : MonoBehaviour
     {
+        private void Awake()
+        {
+            ScriptableSingletonProperty<MyScriptableA>.InstanceWithLoader(
+                scriptableName => Resources.Load<MyScriptableA>("Scriptable/" + scriptableName));
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log(MyScriptableA.Instance.ScriptableKey);
+            Debug.Log("MyScriptableA.ScriptableKey: " + ScriptableSingletonProperty<MyScriptableA>.Instance.ScriptableKey);
         }
         
         private void OnDestroy()

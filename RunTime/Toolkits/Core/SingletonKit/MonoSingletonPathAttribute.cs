@@ -16,11 +16,11 @@ namespace Framework3.Toolkits.SingletonKit
     [AttributeUsage(AttributeTargets.Class)] // 这个特性只能标记在 Class 上
     public class MonoSingletonPathAttribute : Attribute
     {
-        public MonoSingletonPathAttribute(string pathInHierarchy)
+        public MonoSingletonPathAttribute(string hierarchyPath)
         {
-            PathInHierarchy = pathInHierarchy;
+            HierarchyPath = hierarchyPath;
         }
 
-        public string PathInHierarchy { get; private set; }
+        public string HierarchyPath { get; private set; }
     }
 }

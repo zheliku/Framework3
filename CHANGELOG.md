@@ -1,3 +1,9 @@
+# v0.3.4
+1. SingletonKit：
+   - 修复Dispose()方法失效的问题
+   - 重构PersistentMonoSingleton和ReplaceableMonoSingleton
+2. 更新Samples示例场景至SingletonKit
+
 # v0.3.3
 1. 完善Samples示例场景至PoolKit
 2. 更新PoolKit，添加GenericPool，待测试

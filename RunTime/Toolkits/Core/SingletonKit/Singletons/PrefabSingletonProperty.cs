@@ -48,8 +48,7 @@ namespace Framework3.Toolkits.SingletonKit
 
         public static void Dispose()
         {
-            Object.Destroy(s_instance.gameObject);
-
+            Object.DestroyImmediate(s_instance.gameObject);
             s_instance = null;
         }
     }

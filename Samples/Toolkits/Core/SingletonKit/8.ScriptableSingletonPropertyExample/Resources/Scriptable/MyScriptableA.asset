@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b471fe6c244ee384cd175b067658b2, type: 3}
   m_Name: MyScriptableA
   m_EditorClassIdentifier: 
-  ScriptableKey: "\uFFFD"
+  ScriptableKey: 123
