@@ -18,14 +18,6 @@ namespace Framework3.Toolkits.InputKit
     [MonoSingletonPath("Framework/InputKit/KeyCodeInput")]
     public class KeyCodeInput : MonoSingleton<KeyCodeInput>
     {
-    #region 常量
-
-    #endregion
-
-    #region Static
-
-    #endregion
-
     #region 字段
 
         [ShowInInspector] [LabelText("KeyCode Press")]

@@ -9,6 +9,7 @@
 namespace Framework3.Toolkits.ResKit
 {
     using Core;
+    using UnityEngine;
     using Object = UnityEngine.Object;
 
     /// <summary>
@@ -48,6 +49,14 @@ namespace Framework3.Toolkits.ResKit
         public static void Unload(this Object res)
         {
             ResKit.Unload(res);
+        }
+        
+        /// <summary>
+        /// 封装方法：卸载 Resources 并更新 Mono 显示
+        /// </summary>
+        public static void Unload(this ResourceRequest req)
+        {
+            ResKit.Unload(req.asset);
         }
     }
 }

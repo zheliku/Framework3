@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.InputKit
         Release
     }
 
-    public partial class OldInputKit
+    public class OldInputKit
     {
         public static bool EnableAxis { get; set; } = true;
 

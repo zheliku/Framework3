@@ -18,14 +18,6 @@ namespace Framework3.Toolkits.InputKit
     [MonoSingletonPath("Framework/InputKit/MouseInput")]
     public class MouseInput : MonoSingleton<MouseInput>
     {
-    #region 常量
-
-    #endregion
-
-    #region Static
-
-    #endregion
-
     #region 字段
 
         [ShowInInspector] [LabelText("Mouse Press")] [PropertySpace]

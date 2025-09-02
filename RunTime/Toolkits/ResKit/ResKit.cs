@@ -10,6 +10,7 @@ namespace Framework3.Toolkits.ResKit
 {
     using System;
     using System.Collections.Generic;
+    using Core;
     using FluentAPI;
     using UnityEngine;
     using UnityEngine.AddressableAssets;
@@ -35,6 +36,40 @@ namespace Framework3.Toolkits.ResKit
             ResMgr.Instance.GetResourcesMono(res).BindRes(res);
 
             return res;
+        }
+
+        /// <summary>
+        /// 使用 Resources 异步加载对象
+        /// </summary>
+        /// <param name="path">资源路径（Resources 文件夹下）</param>
+        /// <param name="callback">加载成功的回调函数</param>
+        /// <typeparam name="T">资源类型</typeparam>
+        /// <returns></returns>
+        public static ResourceRequest LoadFromResourcesAsync<T>(string path, Action<T> callback = null) where T : Object
+        {
+            var req = Resources.LoadAsync<T>(path);
+
+            if (req == null)
+            {
+                throw new FrameworkException("LoadFromResourcesAsync failed: " + path);
+            }
+            req.completed += operation =>
+            {
+                var resourceRequest = operation as ResourceRequest;
+                var res = resourceRequest?.asset as T;
+                if (res == null)
+                {
+                    throw new FrameworkException("LoadFromResourcesAsync failed: " + path);
+                }
+
+                // 更新 Mono 显示
+                ResMgr.ResourceAssetPathMap.TryAdd(res, path);
+                ResMgr.Instance.GetResourcesMono(res).BindRes(res);
+
+                callback?.Invoke(res);
+            };
+
+            return req;
         }
 
         /// <summary>

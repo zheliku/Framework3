@@ -13,18 +13,18 @@ namespace Framework3.Toolkits.ResKit
 
     public class UnloadCurrentSceneUnLoadedTrigger : UnloadTrigger
     {
-        private static UnloadCurrentSceneUnLoadedTrigger _Default;
+        private static UnloadCurrentSceneUnLoadedTrigger s_default;
 
         public static UnloadCurrentSceneUnLoadedTrigger Default
         { // 单例模式
             get
             {
-                if (!_Default)
+                if (!s_default)
                 {
-                    _Default = new GameObject("UnregisterCurrentSceneUnloadedTrigger").AddComponent<UnloadCurrentSceneUnLoadedTrigger>();
+                    s_default = new GameObject("UnregisterCurrentSceneUnloadedTrigger").AddComponent<UnloadCurrentSceneUnLoadedTrigger>();
                 }
 
-                return _Default;
+                return s_default;
             }
         }
 

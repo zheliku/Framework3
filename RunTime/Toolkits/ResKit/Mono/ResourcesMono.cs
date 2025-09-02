@@ -20,15 +20,13 @@ namespace Framework3.Toolkits.ResKit
     {
         [ShowInInspector]
         public Dictionary<string, ResourcesMonoInfo> ResMap = new Dictionary<string, ResourcesMonoInfo>();
-        
+
         public void BindRes(Object res)
         {
-            if (ResMap.TryAdd(res.AssetPath(), new ResourcesMonoInfo(res.AssetPath(), res)))
-            {
-                AddRef(res);
-            }
+            ResMap.TryAdd(res.AssetPath(), new ResourcesMonoInfo(res.AssetPath(), res));
+            AddRef(res);
         }
-        
+
         public void AddRef(Object res)
         {
             ResMap[res.AssetPath()].RefCount++;
@@ -59,13 +57,13 @@ namespace Framework3.Toolkits.ResKit
         /// </summary>
         [ShowInInspector] [LabelWidth(75)]
         public string AssetPath { get; private set; }
-        
+
         /// <summary>
         /// 显示 Resources 的资源
         /// </summary>
         [ShowInInspector] [LabelWidth(75)]
         public Object Asset { get; private set; }
-        
+
         /// <summary>
         /// 显示 Resources 的引用计数
         /// </summary>
@@ -75,7 +73,7 @@ namespace Framework3.Toolkits.ResKit
         public ResourcesMonoInfo(string assetPath, Object asset)
         {
             AssetPath = assetPath;
-            Asset = asset;
+            Asset     = asset;
         }
     }
 }

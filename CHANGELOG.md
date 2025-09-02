@@ -1,3 +1,8 @@
+# v0.3.5
+1. ResKit：
+   - 添加LoadFromResourcesAsync()方法
+   - 更新Samples示例场景至0.LoadFormResources
+
 # v0.3.4
 1. SingletonKit：
    - 修复Dispose()方法失效的问题
