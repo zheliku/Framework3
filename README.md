@@ -8,7 +8,6 @@
 	|-- Core
 		|-- ActionKit
 		|-- BindableKit
-		|-- CodeGenKit
 		|-- DataKit
 		|-- EventKit
 		|-- FluentAPl
@@ -20,12 +19,10 @@
 		|-- TreeKit
 	|-- AudioKit
 	|-- InputKit
-	|-- NetKit
 	|-- ResKit
 	|-- TimerKit
 	|-- UIKit
 ```
-
 
 
 - 此为[QFramework](https://qframework.cn/qf)的魔改版本

@@ -54,7 +54,7 @@ namespace Framework3.Toolkits.DataKit
         public const string EXTENSION = ".json";
 
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Framework/DataKit/Open Json Folder")]
+        [UnityEditor.MenuItem("Framework3/DataKit/Open Json Folder")]
         public static void OpenJsonSavePath()
         {
             DataKit.JsonSavePath.EnsureDirectoryExist();

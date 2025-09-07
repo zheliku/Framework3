@@ -15,7 +15,7 @@ namespace Framework3.Core
 
     public static class AbstractViewExtension
     {
-        private static readonly BindingFlags _FIELD_BINDING_FLAGS =
+        private static readonly BindingFlags field_binding_flags =
             BindingFlags.Public |
             BindingFlags.NonPublic |
             BindingFlags.Instance;
@@ -24,7 +24,7 @@ namespace Framework3.Core
         {
             if (view == null) return;
 
-            var fields = view.GetType().GetFields(_FIELD_BINDING_FLAGS);
+            var fields = view.GetType().GetFields(field_binding_flags);
 
             // 获取所有合格字段
             var targetFields = fields

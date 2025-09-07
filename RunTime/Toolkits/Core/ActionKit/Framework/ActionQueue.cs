@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.ActionKit
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/ActionKit/Queue")]
+    [MonoSingletonPath("Framework3/ActionKit/Queue")]
     public class ActionQueue : MonoBehaviour, ISingleton
     {
         [ShowInInspector]

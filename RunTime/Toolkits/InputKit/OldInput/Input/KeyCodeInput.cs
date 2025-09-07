@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.InputKit
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/InputKit/KeyCodeInput")]
+    [MonoSingletonPath("Framework3/InputKit/KeyCodeInput")]
     public class KeyCodeInput : MonoSingleton<KeyCodeInput>
     {
     #region 字段

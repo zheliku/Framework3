@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.ActionKit
     using UnityEngine;
     using UnityEngine.UI;
 
-    [MonoSingletonPath("Framework/ActionKit/ScreenTransitionCanvas")]
+    [MonoSingletonPath("Framework3/ActionKit/ScreenTransitionCanvas")]
     internal class ScreenTransitionCanvas : MonoBehaviour, ISingleton
     {
         internal static ScreenTransitionCanvas Instance

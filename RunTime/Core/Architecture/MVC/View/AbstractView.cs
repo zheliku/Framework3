@@ -19,14 +19,19 @@ namespace Framework3.Core
     public abstract class AbstractView : MonoBehaviour, IView
     {
         [Button] [PropertyOrder(100)]
-        private void BindHierarchyComponent()
+        private void BindComponent()
         {
-            AbstractViewExtension.BindHierarchyComponent(this);
+            this.BindHierarchyComponent();
         }
         
         IArchitecture IBelongToArchitecture.Architecture
         {
             get => _Architecture;
+        }
+
+        protected virtual void Awake()
+        {
+            this.BindHierarchyComponent();
         }
 
         /// <summary>

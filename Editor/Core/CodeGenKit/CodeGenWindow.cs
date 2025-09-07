@@ -134,7 +134,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             get => CodeGenPipeline.Default.GenerateViewCode();
         }
 
-        [MenuItem("Framework/CodeGen/Open CodeGen Window &V")]
+        [MenuItem("Framework3/CodeGen/Open CodeGen Window &V")]
         private static void OpenWindow()
         {
             var window = GetWindow<CodeGenWindow>();

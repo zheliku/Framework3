@@ -16,8 +16,10 @@ namespace Framework3.Toolkits.SingletonKit
     public abstract class PersistentMonoSingleton<TMonoSingleton> : MonoSingleton<TMonoSingleton> where TMonoSingleton : PersistentMonoSingleton<TMonoSingleton>
     {
         // 当场景里包含两个 PersistentMonoSingleton，保留先创建的
-        public virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             if (!Application.isPlaying)
             {
                 return;

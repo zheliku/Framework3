@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.AudioKit
     using SingletonKit;
     using Sirenix.OdinInspector;
 
-    [MonoSingletonPath("Framework/AudioKit/AudioKitSetting")]
+    [MonoSingletonPath("Framework3/AudioKit/AudioKitSetting")]
     public class AudioKitSetting : MonoSingleton<AudioKitSetting>
     {
         // 用来存储的 Key

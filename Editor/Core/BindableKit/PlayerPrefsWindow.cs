@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.BindableKit.Editor
 
     public class PlayerPrefsWindow : OdinEditorWindow
     {
-        [MenuItem("Framework/BindableKit/Open PlayerPrefs Window")]
+        [MenuItem("Framework3/BindableKit/Open PlayerPrefs Window")]
         private static void OpenWindow()
         {
             var window = GetWindow<PlayerPrefsWindow>();
@@ -27,7 +27,7 @@ namespace Framework3.Toolkits.BindableKit.Editor
             window.Show();
         }
 
-        [MenuItem("Framework/BindableKit/Open Registry Window")]
+        [MenuItem("Framework3/BindableKit/Open Registry Window")]
         private static void OpenRegistry()
         {
             // 获取PlayerSettings中的公司名和产品名

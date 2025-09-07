@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.InputKit
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/InputKit/MouseInput")]
+    [MonoSingletonPath("Framework3/InputKit/MouseInput")]
     public class MouseInput : MonoSingleton<MouseInput>
     {
     #region 字段

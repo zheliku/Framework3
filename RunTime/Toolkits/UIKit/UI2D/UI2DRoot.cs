@@ -9,12 +9,10 @@
 namespace Framework3.Toolkits.UIKit
 {
     using ResKit;
-    using Core;
     using SingletonKit;
     using UnityEngine;
     using UnityEngine.UI;
 
-    [MonoSingletonPath(nameof(UI2DRoot))]
     public class UI2DRoot : MonoBehaviour, ISingleton
     {
         private static GameObject s_asset;
@@ -39,6 +37,15 @@ namespace Framework3.Toolkits.UIKit
 
                     s_instance      = Instantiate(s_asset).GetComponent<UI2DRoot>(); // 实例化 UI2DRoot
                     s_instance.name = "UI2DRoot";
+
+                    // 寻找场景中的 "Framework3" 物体，将 UI2DRoot 作为其子物体
+                    var framework3 = GameObject.Find("Framework3");
+                    if (!framework3)
+                    {
+                        framework3 = new GameObject("Framework3");
+                    }
+                    s_instance.transform.SetParent(framework3.transform);
+
                     DontDestroyOnLoad(s_instance);
                 }
 
@@ -103,18 +110,18 @@ namespace Framework3.Toolkits.UIKit
         {
             switch (level)
             {
-                case UILevel.Bg:
-                    panel2D.Transform.SetParent(Bg, false);
-                    break;
-                case UILevel.Bottom:
-                    panel2D.Transform.SetParent(Bottom, false);
-                    break;
-                case UILevel.Common:
-                    panel2D.Transform.SetParent(Common, false);
-                    break;
-                case UILevel.Top:
-                    panel2D.Transform.SetParent(Top, false);
-                    break;
+            case UILevel.Bg:
+                panel2D.Transform.SetParent(Bg, false);
+                break;
+            case UILevel.Bottom:
+                panel2D.Transform.SetParent(Bottom, false);
+                break;
+            case UILevel.Common:
+                panel2D.Transform.SetParent(Common, false);
+                break;
+            case UILevel.Top:
+                panel2D.Transform.SetParent(Top, false);
+                break;
             }
         }
 

@@ -33,7 +33,7 @@ namespace Framework3.Toolkits.DataKit
         public const string EXTENSION = ".bytes";
 
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Framework/DataKit/Open Binary Folder")]
+        [UnityEditor.MenuItem("Framework3/DataKit/Open Binary Folder")]
         public static void OpenBinarySavePath()
         {
             DataKit.BinarySavePath.EnsureDirectoryExist();

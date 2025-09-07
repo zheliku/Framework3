@@ -24,7 +24,7 @@ namespace Framework3.Toolkits.DataKit
     public partial class ExcelSheet
     {
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Framework/DataKit/Open Excel Folder")]
+        [UnityEditor.MenuItem("Framework3/DataKit/Open Excel Folder")]
         public static void OpenExcelSavePath()
         {
             DataKit.ExcelSavePath.EnsureDirectoryExist();

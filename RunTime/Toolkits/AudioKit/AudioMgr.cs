@@ -21,7 +21,7 @@ namespace Framework3.Toolkits.AudioKit
     using UnityEditor;
 #endif
 
-    [MonoSingletonPath("Framework/AudioKit/AudioMgr")]
+    [MonoSingletonPath("Framework3/AudioKit/AudioMgr")]
     public class AudioMgr : MonoSingleton<AudioMgr>
     {
     #region Static

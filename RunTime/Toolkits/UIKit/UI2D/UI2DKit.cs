@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------
-// @file       UI2DKit.cs
+// @file       UI3DKit.cs
 // @brief
 // @author     zheliku
 // @Modified   2024-12-14 11:12:49
@@ -47,12 +47,17 @@ namespace Framework3.Toolkits.UIKit
 
         public static void UnloadPanel<T>(Action callback = null) where T : IPanel2D
         {
-            UnloadPanel(typeof(T).Name, callback);
+            UnloadPanel<T>(typeof(T).Name, callback);
         }
 
+        public static void UnloadPanel<T>(string panelName, Action callback = null) where T : IPanel2D
+        {
+             UI2DMgr.Instance.UnloadPanel<T>(panelName, callback);
+        }
+        
         public static void UnloadPanel(string panelName, Action callback = null)
         {
-             UI2DMgr.Instance.UnloadPanel(panelName, callback);
+            UI2DMgr.Instance.UnloadPanel(panelName, callback);
         }
 
         public static AsyncOperationHandle<GameObject> ShowPanelAsync<T>(Action<T> callback = null, UILevel level = UILevel.Common) where T : IPanel2D

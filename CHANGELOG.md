@@ -1,3 +1,10 @@
+# v1.0.0
+1. 重构UIKit，分为UI2DKit和UI3DKit
+2. TimerKit新增PassIntervalFrame()方法
+3. Framework重命名为Framework3
+4. 更新全部Samples示例场景
+5. 正式发布！！！
+
 # v0.3.5
 1. ResKit：
    - 添加LoadFromResourcesAsync()方法

@@ -18,7 +18,7 @@ namespace Framework3.Toolkits.UIKit
     using UnityEngine.ResourceManagement.AsyncOperations;
 
     [HideReferenceObjectPicker]
-    public class PanelInfo
+    public class Panel2DInfo
     {
         [LabelWidth(75)]
         public IPanel2D Panel2D;
@@ -26,14 +26,13 @@ namespace Framework3.Toolkits.UIKit
         [HideInInspector]
         public AsyncOperationHandle Handle;
 
-        public PanelInfo(IPanel2D panel2D, AsyncOperationHandle handle)
+        public Panel2DInfo(IPanel2D panel2D, AsyncOperationHandle handle)
         {
             Panel2D  = panel2D;
             Handle = handle;
         }
     }
 
-    [MonoSingletonPath("UI2DRoot/UI2DMgr")]
     public class UI2DMgr : MonoBehaviour, ISingleton
     {
     #region Static
@@ -50,7 +49,7 @@ namespace Framework3.Toolkits.UIKit
     #region 字段
 
         [ShowInInspector]
-        private Dictionary<string, PanelInfo> _panels = new Dictionary<string, PanelInfo>();
+        private Dictionary<string, Panel2DInfo> _panels = new Dictionary<string, Panel2DInfo>();
 
     #endregion
 
@@ -62,7 +61,7 @@ namespace Framework3.Toolkits.UIKit
             {
                 var handle = ResKit.InstantiateAsync(panelName);
 
-                value = new PanelInfo(null, handle);
+                value = new Panel2DInfo(null, handle);
                 _panels.Add(panelName, value);
 
                 handle.OnCompleted(obj =>
@@ -70,7 +69,6 @@ namespace Framework3.Toolkits.UIKit
                     obj.name = panelName;
                     var panel = obj.GetComponent<T>();
                     panel.Level = level;
-                    panel.Load();
                     value.Panel2D = panel;
                     callback?.Invoke(panel);
                 });
@@ -91,11 +89,27 @@ namespace Framework3.Toolkits.UIKit
             return default;
         }
 
+        public void UnloadPanel<T>(string panelName, Action callback = null) where T : IPanel2D
+        {
+            if (_panels.TryGetValue(panelName, out var value))
+            {
+                if (value.Panel2D is not T)
+                {
+                    Debug.LogError("Panel2D " + panelName + " is not of type " + typeof(T).Name);
+                    return;
+                }
+                
+                value.Handle.Release();
+                callback?.Invoke();
+                _panels.Remove(panelName);
+                Destroy(value.Panel2D.Transform.gameObject);
+            }
+        }
+        
         public void UnloadPanel(string panelName, Action callback = null)
         {
             if (_panels.TryGetValue(panelName, out var value))
             {
-                value.Panel2D.Unload();
                 value.Handle.Release();
                 callback?.Invoke();
                 _panels.Remove(panelName);

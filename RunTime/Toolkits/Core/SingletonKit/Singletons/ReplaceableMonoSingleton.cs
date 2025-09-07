@@ -18,8 +18,10 @@ namespace Framework3.Toolkits.SingletonKit
         [SerializeField]
         private float _initializationTime;
         
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             if (!Application.isPlaying)
             {
                 return;

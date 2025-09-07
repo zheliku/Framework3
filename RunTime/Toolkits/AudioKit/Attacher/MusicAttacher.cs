@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.AudioKit
     /// <summary>
     /// 仅用于挂载 Music 的 AudioSource
     /// </summary>
-    [MonoSingletonPath("Framework/AudioKit/AudioMgr/MusicAttacher")]
+    [MonoSingletonPath("Framework3/AudioKit/AudioMgr/MusicAttacher")]
     public class MusicAttacher : MonoSingleton<MusicAttacher>
     { }
 }

@@ -140,7 +140,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             Default?.OnDidReloadScripts();
         }
 
-        [MenuItem("Framework/CodeGen/Select CodeGen Pipeline &S")]
+        [MenuItem("Framework3/CodeGen/Select CodeGen Pipeline &S")]
         public static void SelectPipeline()
         {
             EditorGUIUtility.PingObject(Default);

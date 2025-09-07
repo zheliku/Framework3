@@ -18,7 +18,7 @@ namespace Framework3.Toolkits.ResKit
     using UnityEngine.ResourceManagement.AsyncOperations;
     using Object = UnityEngine.Object;
 
-    [MonoSingletonPath("Framework/ResKit")]
+    [MonoSingletonPath("Framework3/ResKit")]
     public class ResMgr : MonoSingleton<ResMgr>
     {
     #region Static

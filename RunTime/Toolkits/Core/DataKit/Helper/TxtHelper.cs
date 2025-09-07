@@ -31,7 +31,7 @@ namespace Framework3.Toolkits.DataKit
         public const string EXTENSION = ".txt";
 
 #if UNITY_EDITOR
-        [UnityEditor.MenuItem("Framework/DataKit/Open Txt Folder")]
+        [UnityEditor.MenuItem("Framework3/DataKit/Open Txt Folder")]
         public static void OpenTxtSavePath()
         {
             DataKit.TxtSavePath.EnsureDirectoryExist();

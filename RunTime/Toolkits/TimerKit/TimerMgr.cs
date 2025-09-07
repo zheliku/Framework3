@@ -11,12 +11,11 @@ namespace Framework3.Toolkits.TimerKit
     using System;
     using System.Collections.Generic;
     using PoolKit;
-    using Core;
     using SingletonKit;
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [MonoSingletonPath("Framework/TimerKit/TimerMgr")]
+    [MonoSingletonPath("Framework3/TimerKit/TimerMgr")]
     public class TimerMgr : MonoSingleton<TimerMgr>
     {
         #region 字段
@@ -44,7 +43,10 @@ namespace Framework3.Toolkits.TimerKit
         public ObjectPool<Timer> TimerPool { get => SingletonPool<Timer>.Pool; }
 
         [ShowInInspector]
-        public Dictionary<int, float> TimeDict { get; } = new();
+        public Dictionary<object, float> TimeDict { get; } = new();
+        
+        [ShowInInspector]
+        public Dictionary<object, float> FrameDict { get; } = new();
 
         #region 公共方法
 

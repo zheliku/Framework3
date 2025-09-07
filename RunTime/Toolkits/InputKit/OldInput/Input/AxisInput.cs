@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.InputKit
     using Sirenix.OdinInspector;
     using UnityEngine;
     
-    [MonoSingletonPath("Framework/InputKit/AxisInput")]
+    [MonoSingletonPath("Framework3/InputKit/AxisInput")]
     public class AxisInput : MonoSingleton<AxisInput>
     {
     #region Static

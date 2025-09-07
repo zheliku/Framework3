@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.InputKit
     using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;
 
-    [MonoSingletonPath("Framework/InputKit")]
+    [MonoSingletonPath("Framework3/InputKit")]
     public class InputMgr : MonoSingleton<InputMgr>
     {
     #region 字段
