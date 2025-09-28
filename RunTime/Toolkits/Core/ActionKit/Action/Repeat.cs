@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     public class Repeat : AbstractAction<Repeat>, IRepeat
     {
     #region Static
-        public static Repeat Create(int repeatCount = -1) // -1 表示无限次
+        internal static Repeat Create(int repeatCount = -1) // -1 表示无限次
         {
             var repeat = CreateInternal();
             repeat._repeatCount = repeatCount;

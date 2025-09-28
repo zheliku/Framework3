@@ -1,3 +1,7 @@
+# v1.0.1
+1. 重构AudioKit
+2. 将不必要的public类和方法改为internal
+
 # v1.0.0
 1. 重构UIKit，分为UI2DKit和UI3DKit
 2. TimerKit新增PassIntervalFrame()方法

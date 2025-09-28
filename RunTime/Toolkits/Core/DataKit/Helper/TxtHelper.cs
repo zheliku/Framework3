@@ -35,7 +35,7 @@ namespace Framework3.Toolkits.DataKit
         public static void OpenTxtSavePath()
         {
             DataKit.TxtSavePath.EnsureDirectoryExist();
-            System.Diagnostics.Process.Start("explorer.exe", DataKit.TxtSavePath.ConvertToCurrentEnvironmentPath());
+            UnityEditor.EditorUtility.RevealInFinder(DataKit.TxtSavePath.ConvertToCurrentEnvironmentPath());
         }
 #endif
 

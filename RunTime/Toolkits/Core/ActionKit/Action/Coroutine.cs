@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Coroutine Create(Func<IEnumerator> coroutineGetter)
+        internal static Coroutine Create(Func<IEnumerator> coroutineGetter)
         {
             var coroutine = CreateInternal();
             coroutine._coroutineGetter = coroutineGetter;

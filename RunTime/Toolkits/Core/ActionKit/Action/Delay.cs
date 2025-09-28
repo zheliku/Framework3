@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Delay Create(float delayTime, Action onDelayFinish = null)
+        internal static Delay Create(float delayTime, Action onDelayFinish = null)
         {
             var delay = CreateInternal();
             delay._delayTime     = delayTime;
@@ -26,7 +26,7 @@ namespace Framework3.Toolkits.ActionKit
             return delay;
         }
 
-        public static Delay Create(Func<float> delayTimeFactory, Action onDelayFinish = null)
+        internal static Delay Create(Func<float> delayTimeFactory, Action onDelayFinish = null)
         {
             var delay = CreateInternal();
             delay._delayTimeFactory = delayTimeFactory;

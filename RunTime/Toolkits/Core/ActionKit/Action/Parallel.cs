@@ -20,7 +20,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Parallel Create()
+        internal static Parallel Create()
         {
             return CreateInternal();
         }

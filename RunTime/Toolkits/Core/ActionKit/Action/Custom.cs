@@ -28,7 +28,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Custom<TData> Create()
+        internal static Custom<TData> Create()
         {
             return CreateInternal();
         }

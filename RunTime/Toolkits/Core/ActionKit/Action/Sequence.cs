@@ -20,7 +20,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Sequence Create()
+        internal static Sequence Create()
         {
             return CreateInternal();
         }

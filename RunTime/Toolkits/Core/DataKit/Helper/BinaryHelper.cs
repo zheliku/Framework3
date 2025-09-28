@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.DataKit
     using Sirenix.Serialization;
     using Debug = UnityEngine.Debug;
     using SerializationUtility = Sirenix.Serialization.SerializationUtility;
-    
+
     // 1. 引用命名空间
 #if UNITY_WEBGL && !UNITY_EDITOR
     using System.Runtime.InteropServices;
@@ -29,7 +29,7 @@ namespace Framework3.Toolkits.DataKit
         [DllImport("__Internal")]
         private static extern void SyncDB();
 #endif
-        
+
         public const string EXTENSION = ".bytes";
 
 #if UNITY_EDITOR
@@ -37,7 +37,7 @@ namespace Framework3.Toolkits.DataKit
         public static void OpenBinarySavePath()
         {
             DataKit.BinarySavePath.EnsureDirectoryExist();
-            System.Diagnostics.Process.Start("explorer.exe", DataKit.BinarySavePath.ConvertToCurrentEnvironmentPath());
+            UnityEditor.EditorUtility.RevealInFinder(DataKit.BinarySavePath.ConvertToCurrentEnvironmentPath());
         }
 #endif
 
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.DataKit
 #if UNITY_WEBGL && !UNITY_EDITOR
     	    SyncDB();
 #endif
-            
+
 #if UNITY_EDITOR
             UnityEditor.AssetDatabase.Refresh();
 #endif

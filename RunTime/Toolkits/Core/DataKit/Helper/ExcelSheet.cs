@@ -28,7 +28,7 @@ namespace Framework3.Toolkits.DataKit
         public static void OpenExcelSavePath()
         {
             DataKit.ExcelSavePath.EnsureDirectoryExist();
-            System.Diagnostics.Process.Start("explorer.exe", DataKit.ExcelSavePath.ConvertToCurrentEnvironmentPath());
+            UnityEditor.EditorUtility.RevealInFinder(DataKit.ExcelSavePath.ConvertToCurrentEnvironmentPath());
         }
 #endif
         

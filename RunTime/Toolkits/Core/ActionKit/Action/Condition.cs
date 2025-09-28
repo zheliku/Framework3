@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Condition Create(Func<bool> func)
+        internal static Condition Create(Func<bool> func)
         {
             var condition = CreateInternal();
             condition._condition = func;

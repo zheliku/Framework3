@@ -18,7 +18,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
         
-        public static DelayFrame Create(int frameCount, Action onDelayFinish = null)
+        internal static DelayFrame Create(int frameCount, Action onDelayFinish = null)
         {
             var delayFrame = CreateInternal();
             delayFrame._delayFrameCount = frameCount;

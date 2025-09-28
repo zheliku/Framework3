@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Lerp Create(float a, float b, float duration, System.Action<float> onLerp, System.Action onLerpFinished)
+        internal static Lerp Create(float a, float b, float duration, System.Action<float> onLerp, System.Action onLerpFinished)
         {
             var lerp = CreateInternal();
             lerp._a              = a;

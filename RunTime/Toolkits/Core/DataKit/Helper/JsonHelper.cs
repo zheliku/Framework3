@@ -58,7 +58,7 @@ namespace Framework3.Toolkits.DataKit
         public static void OpenJsonSavePath()
         {
             DataKit.JsonSavePath.EnsureDirectoryExist();
-            System.Diagnostics.Process.Start("explorer.exe", DataKit.JsonSavePath.ConvertToCurrentEnvironmentPath());
+            UnityEditor.EditorUtility.RevealInFinder(DataKit.JsonSavePath.ConvertToCurrentEnvironmentPath());
         }
 #endif
 

@@ -17,7 +17,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Callback Create(Action func)
+        internal static Callback Create(Action func)
         {
             var callback = CreateInternal();
             callback._callback = func;

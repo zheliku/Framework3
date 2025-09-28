@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.ActionKit
     {
     #region Static
 
-        public static Task Create(Func<SystemTask.Task> taskGetter)
+        internal static Task Create(Func<SystemTask.Task> taskGetter)
         {
             var task = CreateInternal();
             task._taskGetter = taskGetter;

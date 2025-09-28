@@ -8,8 +8,7 @@
 
 namespace Framework3.Toolkits.AudioKit
 {
-    using System;
-    using Framework3.Core;
+    using Core;
     using PoolKit;
     using Sirenix.OdinInspector;
     using TimerKit;
@@ -21,14 +20,17 @@ namespace Framework3.Toolkits.AudioKit
     {
     #region Static
 
-        public static AudioPlayer Create(BindableProperty<float> volume)
+        internal static AudioPlayer Create(BindableProperty<float> volume)
         {
             var player = SingletonPool<AudioPlayer>.Get();
             player.Volume = volume; // 指向 AudioKitSetting 中的 Volume
-            player._onStart = null;
-            player._onFinish = null;
-            player._settingVolume = 1;
-            player._volumeScale = 1;
+            player.playEvent = new AudioPlayerEvent(player)
+            {
+                onStart  = null,
+                onFinish = null,
+            };
+            player.settingVolume = 1;
+            player.volumeScale   = 1;
 
             // 创建时，为 AudioKitSetting 中的 Volume 绑定事件：更改值时，同步更改 AudioSource 的音量
             player.Volume.RegisterWithInitValue(player.OnAudioSettingVolumeChanged);
@@ -45,15 +47,11 @@ namespace Framework3.Toolkits.AudioKit
         [ShowInInspector]
         private Timer _timer;
 
-        [ShowInInspector]
-        private Action<AudioPlayer> _onStart; // 开始播放的回调
+        internal AudioPlayerEvent playEvent;
 
-        [ShowInInspector]
-        private Action<AudioPlayer> _onFinish; // 播放结束的回调
-
-        private bool  _isPaused;
-        private float _volumeScale = 1;
-        private float _settingVolume; // AudioKitSetting 中的 Volume，实际音量通过 _volumeScale 和 _settingVolume 共同控制
+        private  bool  _isPaused;
+        internal float volumeScale = 1;
+        internal float settingVolume; // AudioKitSetting 中的 Volume，实际音量通过 _volumeScale 和 _settingVolume 共同控制
 
     #endregion
 
@@ -87,51 +85,6 @@ namespace Framework3.Toolkits.AudioKit
 
     #region 公共方法
 
-        public AudioPlayer OnStart(Action<AudioPlayer> onStart)
-        {
-            if (onStart == null)
-            {
-                return this;
-            }
-
-            if (_onStart == null)
-            {
-                _onStart = onStart;
-            }
-            else
-            {
-                _onStart += onStart;
-            }
-
-            return this;
-        }
-
-        public AudioPlayer OnFinish(Action<AudioPlayer> onFinish)
-        {
-            if (onFinish == null)
-            {
-                return this;
-            }
-
-            if (_onFinish == null)
-            {
-                _onFinish = onFinish;
-            }
-            else
-            {
-                _onFinish += onFinish;
-            }
-
-            return this;
-        }
-
-        public AudioPlayer VolumeScale(float volumeScale)
-        {
-            _volumeScale = volumeScale;
-            UpdateAudioSourceVolume();
-            return this;
-        }
-
         /// <summary>
         /// 加载 Clip 并播放
         /// </summary>
@@ -147,17 +100,7 @@ namespace Framework3.Toolkits.AudioKit
                 return this;
             }
 
-            if (AudioSource == null)
-            {
-                if (attachedObject != null)
-                {
-                    AudioSource = attachedObject.AddComponent<AudioSource>();
-                }
-                else // 不指定 attachedObject，则默认挂载到 AudioManager.Instance.gameObject 上
-                {
-                    AudioSource = AudioMgr.Instance.gameObject.AddComponent<AudioSource>();
-                }
-            }
+            CheckAudioSource(attachedObject);
 
             // 防止卸载后立马加载的情况
             var preLoader = _loader;
@@ -167,7 +110,7 @@ namespace Framework3.Toolkits.AudioKit
             _loader = AudioKit.AudioLoaderPool.Get();
 
             // 记录设置
-            IsLoop = loop;
+            IsLoop        = loop;
             AudioClipName = clipName;
 
             _loader.LoadClipAsync(AudioClipName, (success, clip) =>
@@ -213,23 +156,13 @@ namespace Framework3.Toolkits.AudioKit
                 return;
             }
 
-            if (AudioSource == null)
-            {
-                if (attachedObject != null)
-                {
-                    AudioSource = attachedObject.AddComponent<AudioSource>();
-                }
-                else
-                {
-                    AudioSource = AudioMgr.Instance.gameObject.AddComponent<AudioSource>();
-                }
-            }
+            CheckAudioSource(attachedObject);
 
             ClearResources();
 
-            IsLoop = loop;
+            IsLoop        = loop;
             AudioClipName = clip.name;
-            AudioClip = clip;
+            AudioClip     = clip;
 
             PlayInternal();
         }
@@ -266,7 +199,7 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             _timer.Paused = false;
-            _isPaused = false;
+            _isPaused     = false;
 
             AudioSource.Play(); // 与 UnPause 方法相同
         }
@@ -280,9 +213,9 @@ namespace Framework3.Toolkits.AudioKit
             Volume?.Unregister(OnAudioSettingVolumeChanged);
             Volume = null;
 
-            _onStart = null;
-            _onFinish = null;
-            PlayedCount = 0;
+            playEvent.onStart  = null;
+            playEvent.onFinish = null;
+            PlayedCount        = 0;
 
             ClearResources();
         }
@@ -306,10 +239,25 @@ namespace Framework3.Toolkits.AudioKit
 
     #region 其他方法
 
+        private void CheckAudioSource(GameObject attachedObject)
+        {
+            if (AudioSource == null)
+            {
+                if (attachedObject != null)
+                {
+                    AudioSource = attachedObject.AddComponent<AudioSource>();
+                }
+                else
+                {
+                    AudioSource = AudioMgr.Instance.gameObject.AddComponent<AudioSource>();
+                }
+            }
+        }
+
         private void ClearResources()
         {
             AudioClipName = null;
-            _isPaused = false;
+            _isPaused     = false;
 
             if (_timer != null) // 回收 _timer
             {
@@ -354,7 +302,7 @@ namespace Framework3.Toolkits.AudioKit
         /// <param name="volume">更改后的音量</param>
         private void OnAudioSettingVolumeChanged(float oldValue, float volume)
         {
-            _settingVolume = volume;
+            settingVolume = volume;
 
             UpdateAudioSourceVolume();
         }
@@ -362,11 +310,11 @@ namespace Framework3.Toolkits.AudioKit
         /// <summary>
         /// 同步更改 AudioSource 的音量
         /// </summary>
-        private void UpdateAudioSourceVolume()
+        internal void UpdateAudioSourceVolume()
         {
             if (AudioSource)
             {
-                AudioSource.volume = _volumeScale * _settingVolume;
+                AudioSource.volume = volumeScale * settingVolume;
             }
         }
 
@@ -387,7 +335,8 @@ namespace Framework3.Toolkits.AudioKit
 
             _timer = TimerKit.CreateScaled(OnAudioClipPlayFinish, AudioClip.length, IsLoop ? -1 : 1);
 
-            _onStart?.Invoke(this);
+            playEvent.CallOnStart();
+            // _onStart?.Invoke(this);
 
             AudioSource.Play();
         }
@@ -400,7 +349,8 @@ namespace Framework3.Toolkits.AudioKit
         {
             PlayedCount++;
 
-            _onFinish?.Invoke(this);
+            playEvent.CallOnFinish();
+            // _onFinish?.Invoke(this);
 
             if (!IsLoop)
             {
