@@ -1,3 +1,6 @@
+# v1.0.2
+1. 修复 MultiTag 中包导入导致的错误
+
 # v1.0.1
 1. 重构AudioKit
 2. 将不必要的public类和方法改为internal

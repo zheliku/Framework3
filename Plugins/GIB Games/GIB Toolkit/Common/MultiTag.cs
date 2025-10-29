@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 /// <summary>
 /// Contains an array of strings that allow for an object to have more than one tag.
@@ -9,9 +8,9 @@ using Sirenix.OdinInspector;
 public class MultiTag : MonoBehaviour, ISerializationCallbackReceiver
 {
 #if !ODIN_INSPECTOR
-    [InfoBox("Beans!",EInfoBoxType.Warning)]
+    [GIB.Auspex.InfoBox("Beans!", GIB.Auspex.EInfoBoxType.Warning)]
 #else
-    [InfoBox("Beans!", InfoMessageType.Warning)]
+    [Sirenix.OdinInspector.InfoBox("Beans!", Sirenix.OdinInspector.InfoMessageType.Warning)]
 #endif
     // A hashSet is used on the backend to improve lookup performance.
     private HashSet<string> tags = new HashSet<string>();
