@@ -16,8 +16,8 @@ namespace Framework3.Core.Example._15.Deinit
         {
             Debug.Log("SimpleArchitecture Init");
 
-            this.RegisterModel(new MyModel());
-            this.RegisterSystem(new MySystem());
+            RegisterModel(new MyModel());
+            RegisterSystem(new MySystem());
         }
 
         protected override void OnDeinit()

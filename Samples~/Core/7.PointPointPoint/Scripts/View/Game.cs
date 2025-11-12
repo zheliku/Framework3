@@ -8,22 +8,21 @@
 
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View
 {
-    using Framework3.Core;
     using UnityEngine;
 
     public class Game : AbstractView
     {
+        private Transform _enemies;
+
         protected override IArchitecture _Architecture
         {
             get => PointGame.Architecture;
         }
 
-        private Transform _enemies;
-
         protected override void Awake()
         {
             base.Awake();
-            
+
             _enemies = transform.Find("Enemies");
 
             this.RegisterEvent<GameStartEvent>(OnGameStart).UnregisterWhenGameObjectDestroyed(gameObject);

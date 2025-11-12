@@ -12,18 +12,18 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.Model
 
     public class StudentModel : AbstractModel
     {
-        public List<string> Students { get; } = new List<string>()
+        public List<string> Students { get; } = new()
         {
             "zhang san",
             "li si"
         };
-        
+
         protected override void OnInit() { }
     }
 
     public class TeacherModel : AbstractModel
     {
-        public List<string> Teachers { get; } = new List<string>()
+        public List<string> Teachers { get; } = new()
         {
             "wang wu",
             "zhao liu"

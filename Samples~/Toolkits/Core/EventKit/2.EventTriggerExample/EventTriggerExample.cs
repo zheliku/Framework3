@@ -19,10 +19,10 @@ namespace Framework3.Toolkits.EventKit.Example._2.EventTriggerExample
         private void Awake()
         {
             _ground = GameObject.Find("Ground");
-            _image = GameObject.Find("Canvas/Image");
+            _image  = GameObject.Find("Canvas/Image");
         }
 
-        void Start()
+        private void Start()
         {
             _ground.OnCollisionEnter2DEvent(collider2D1 =>
             {

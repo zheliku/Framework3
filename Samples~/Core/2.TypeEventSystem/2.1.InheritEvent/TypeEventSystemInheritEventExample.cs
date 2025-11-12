@@ -13,18 +13,10 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
 
     public class TypeEventSystemInheritEventExample : MonoBehaviour
     {
-        public interface IEventA
-        { }
-
-        public struct EventB : IEventA
-        {
-            public override string ToString() { return $"{nameof(EventB)}"; }
-        }
-
         private void Start()
         {
             TypeEventSystem.Global.Register<IEventA>(Debug.Log)
-                           .UnregisterWhenGameObjectDestroyed(gameObject);
+               .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         public void SendEventBByNew()
@@ -36,6 +28,14 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._1.InheritEvent
         {
             // 无效，因为注册的是 EasyEvent<IEventA>，而不是 EasyEvent<EventB>
             TypeEventSystem.Global.Send<EventB>();
+        }
+
+        public interface IEventA
+        { }
+
+        public struct EventB : IEventA
+        {
+            public override string ToString() { return $"{nameof(EventB)}"; }
         }
     }
 }

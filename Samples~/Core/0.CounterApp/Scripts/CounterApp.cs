@@ -18,13 +18,13 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts
         protected override void Init()
         {
             // 注册 System 
-            this.RegisterSystem<IAchievementSystem>(new AchievementSystem());
+            RegisterSystem<IAchievementSystem>(new AchievementSystem());
 
             // 注册 Model
-            this.RegisterModel<ICounterAppModel>(new CounterAppModel());
+            RegisterModel<ICounterAppModel>(new CounterAppModel());
 
             // 注册存储工具的对象
-            this.RegisterUtility<IStorage>(new Storage());
+            RegisterUtility<IStorage>(new Storage());
         }
 
         // 重写 ExecuteCommand 方法以添加日志功能

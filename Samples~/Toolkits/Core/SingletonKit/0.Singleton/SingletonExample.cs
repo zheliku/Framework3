@@ -22,7 +22,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._0.Singleton
             // a different instance
             Class2Singleton.Instance.Log("Hello World!");
         }
-        
+
         private void OnDestroy()
         {
             Class2Singleton.Instance.Dispose();
@@ -34,7 +34,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._0.Singleton
     /// ]]> </summary>
     internal class Class2Singleton : Singleton<Class2Singleton>
     {
-        private static int s_index = 0;
+        private static int s_index;
 
         private Class2Singleton() { }
 

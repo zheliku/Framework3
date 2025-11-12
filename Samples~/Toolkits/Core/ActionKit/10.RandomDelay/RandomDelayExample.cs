@@ -13,12 +13,12 @@ namespace Framework3.Toolkits.ActionKit.Example
     public class RandomDelayExample : MonoBehaviour
     {
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             ActionKit.Repeat()
-                     .Delay(() => Random.Range(0.5f, 2.5f))
-                     .Callback(() => { Debug.Log("Time: " + Time.time); })
-                     .Start(this);
+               .Delay(() => Random.Range(0.5f, 2.5f))
+               .Callback(() => { Debug.Log("Time: " + Time.time); })
+               .Start(this);
         }
     }
 }

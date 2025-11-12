@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._5.PersistentMonoSingletonExa
     public class PersistentMonoSingletonExample : MonoBehaviour
     {
         // Use this for initialization
-        IEnumerator Start()
+        private IEnumerator Start()
         {
             // 创建一个单例
             var instance = GameManager.Instance;
@@ -31,7 +31,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._5.PersistentMonoSingletonExa
             // 保留最先创建的实例
             Debug.Log(instance == FindFirstObjectByType<GameManager>());
         }
-        
+
         private void OnDestroy()
         {
             GameManager.Instance.Dispose();

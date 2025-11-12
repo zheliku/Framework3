@@ -1,3 +1,7 @@
+# v1.1.1
+1. 修复 Events Pro 包导入后导致的错误
+2. 修复 Datakit 示例场景的导出错误
+
 # v1.1.0
 1. 重构包结构，将 OdinInspector 相关代码移至 Framework3.Odin 包
 2. 支持多种插件集成：

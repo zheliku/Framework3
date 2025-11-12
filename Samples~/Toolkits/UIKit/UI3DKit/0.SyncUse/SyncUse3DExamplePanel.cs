@@ -13,10 +13,11 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
 
     public class SyncUse3DExamplePanel : UIPanel3D
     {
+        protected override IArchitecture _Architecture { get; }
         protected override void Awake()
         {
             base.Awake();
-            
+
             Debug.Log("SyncUse3DExamplePanel Awake");
         }
 
@@ -37,7 +38,5 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
             base.OnDestroy();
             Debug.Log("SyncUse3DExamplePanel OnDestroy");
         }
-
-        protected override IArchitecture _Architecture { get; }
     }
 }

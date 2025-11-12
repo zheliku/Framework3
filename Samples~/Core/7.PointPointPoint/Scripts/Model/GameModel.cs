@@ -13,15 +13,20 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.Model
 
     public class GameModel : AbstractModel, IGameModel
     {
-        public BindableProperty<int> KillCount { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> KillCount { get; } = new()
+            { Value = 0 };
 
-        public BindableProperty<int> Gold { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> Gold { get; } = new()
+            { Value = 0 };
 
-        public BindableProperty<int> Score { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> Score { get; } = new()
+            { Value = 0 };
 
-        public BindableProperty<int> BestScore { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> BestScore { get; } = new()
+            { Value = 0 };
 
-        public BindableProperty<int> Life { get; } = new BindableProperty<int>() { Value = 0 };
+        public BindableProperty<int> Life { get; } = new()
+            { Value = 0 };
 
         protected override void OnInit()
         {
@@ -30,13 +35,13 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.Model
             Debug.Log(storage);
 
             // 初始化数据，绑定监听事件
-            BestScore.Value = storage.LoadInt(nameof(BestScore), 0);
+            BestScore.Value = storage.LoadInt(nameof(BestScore));
             BestScore.Register((oldValue, value) => storage.SaveInt(nameof(BestScore), value));
 
             Life.Value = storage.LoadInt(nameof(Life), 3);
             Life.Register((oldValue, value) => storage.SaveInt(nameof(Life), value));
 
-            Gold.Value = storage.LoadInt(nameof(Gold), 0);
+            Gold.Value = storage.LoadInt(nameof(Gold));
             Gold.Register((oldValue, value) => storage.SaveInt(nameof(Gold), value));
         }
     }

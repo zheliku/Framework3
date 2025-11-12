@@ -9,28 +9,26 @@
 namespace Framework3.Core.Example._0.CounterApp.Scripts.View
 {
     using Command;
-    using Core;
     using Model;
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using TMPro;
-    using UnityEngine.UI;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class CounterAppView : AbstractView
     {
-        protected override IArchitecture _Architecture
-        {
-            get => CounterApp.Architecture;
-        }
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private ICounterAppModel _model;
 
         [HierarchyPath("/Canvas/Txt_Count")] // View 组件获取（方式 1），使用特性绑定，"/Canvas/Txt_Count" 是组件在场景中的路径
         private TextMeshProUGUI _txtCount;
 
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private ICounterAppModel _model;
+        protected override IArchitecture _Architecture
+        {
+            get => CounterApp.Architecture;
+        }
 
         private void Start()
         {
@@ -43,30 +41,30 @@ using Sirenix.OdinInspector;
             // 绑定 Model 事件，更新视图
             // 每次 Count 变更时，都会调用 UpdateView 方法
             _model.Count.RegisterWithInitValue(UpdateView) // 一开始就更新一次视图
-                  .UnregisterWhenGameObjectDestroyed(gameObject);
-        }
-
-        private void UpdateView(int oldCount, int count)
-        {
-            _txtCount.text = count.ToString();
-        }
-        
-        // 用于按钮点击事件绑定
-        public void IncreaseCount()
-        {
-            this.SendCommand<IncreaseCountCommand>();
-        }
-        
-        // 用于按钮点击事件绑定
-        public void DecreaseCount()
-        {
-            this.SendCommand<DecreaseCountCommand>();
+               .UnregisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void OnDestroy()
         {
             // 可选，将 Model 置空
             // _model = null;
+        }
+
+        private void UpdateView(int oldCount, int count)
+        {
+            _txtCount.text = count.ToString();
+        }
+
+        // 用于按钮点击事件绑定
+        public void IncreaseCount()
+        {
+            this.SendCommand<IncreaseCountCommand>();
+        }
+
+        // 用于按钮点击事件绑定
+        public void DecreaseCount()
+        {
+            this.SendCommand<DecreaseCountCommand>();
         }
     }
 }

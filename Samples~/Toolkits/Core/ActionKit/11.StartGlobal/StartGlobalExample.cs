@@ -13,13 +13,13 @@ namespace Framework3.Toolkits.ActionKit.Example
     public class StartGlobalExample : MonoBehaviour
     {
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
 
             var action = ActionKit.Repeat()
-                                  .Delay(1.0f)
-                                  .Callback(() => Debug.Log("wait 1.0f"))
-                                  .StartGlobal();
+               .Delay(1.0f)
+               .Callback(() => Debug.Log("wait 1.0f"))
+               .StartGlobal();
 
             // action.Pause();
             // action.Resume();

@@ -6,16 +6,15 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.Core.DataKit.Example._1Json
 {
     using Toolkits.DataKit;
+    using UnityEngine;
 
     public class BinaryData
     {
-        public string Name;
         public int    Age;
+        public string Name;
 
         public override string ToString()
         {
@@ -27,10 +26,10 @@ namespace Framework3.Toolkits.Core.DataKit.Example._1Json
     {
         public void SaveBinary()
         {
-            DataKit.SaveBinary("example", new BinaryData()
+            DataKit.SaveBinary("example", new BinaryData
             {
                 Name = "hello",
-                Age = 18
+                Age  = 18
             });
         }
 
@@ -42,7 +41,9 @@ namespace Framework3.Toolkits.Core.DataKit.Example._1Json
 
         public void OpenFolder()
         {
+        #if UNITY_EDITOR
             BinaryHelper.OpenBinarySavePath();
+        #endif
         }
     }
 }

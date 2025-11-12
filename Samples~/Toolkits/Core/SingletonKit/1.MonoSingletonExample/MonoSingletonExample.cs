@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.SingletonKit.Example._1.MonoSingletonExample
 {
-    using System.Collections;
     using UnityEngine;
 
     public class MonoSingletonExample : MonoBehaviour
@@ -23,11 +22,11 @@ namespace Framework3.Toolkits.SingletonKit.Example._1.MonoSingletonExample
             // new instance
             Class2MonoSingleton.Instance.Log("Hello World!");
         }
-        
+
         private void OnDestroy()
         {
             Class2MonoSingleton.Instance.Dispose();
-        }   
+        }
     }
 
     /// <summary> <![CDATA[
@@ -35,8 +34,8 @@ namespace Framework3.Toolkits.SingletonKit.Example._1.MonoSingletonExample
     /// ]]> </summary>
     internal class Class2MonoSingleton : MonoSingleton<Class2MonoSingleton>
     {
-        private static int s_index = 0;
-        
+        private static int s_index;
+
         public override void OnSingletonInit()
         {
             s_index++;

@@ -14,9 +14,9 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class TaskExample : MonoBehaviour
     {
-        private DateTime _startTime;
         private float    _startSecond;
-        
+        private DateTime _startTime;
+
         private void Start()
         {
             // ActionKit.Task(SomeTask).Start(this);
@@ -24,9 +24,9 @@ namespace Framework3.Toolkits.ActionKit.Example
             // SomeTask().ToAction().Start(this);
 
             ActionKit.Sequence()
-                     .Task(SomeTask)
-                     .Start(this);
-            
+               .Task(SomeTask)
+               .Start(this);
+
             Debug.Log("Ready to wait 3s...");
         }
 
@@ -34,9 +34,9 @@ namespace Framework3.Toolkits.ActionKit.Example
         {
             _startTime   = DateTime.Now;
             _startSecond = Time.time;
-            
+
             await Task.Delay(TimeSpan.FromSeconds(3.0f)); // Time.time 有启动时间误差
-            
+
             Debug.Log("DateTime: " + (DateTime.Now - _startTime).ToString("ss") + "." + (DateTime.Now - _startTime).ToString("fff") + "s");
             Debug.Log("Time.time: " + (Time.time - _startSecond) + "s");
         }

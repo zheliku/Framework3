@@ -19,11 +19,11 @@ namespace Framework3.Toolkits.SingletonKit.Example._8.ScriptableSingletonPropert
         }
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             Debug.Log("MyScriptableA.ScriptableKey: " + ScriptableSingletonProperty<MyScriptableA>.Instance.ScriptableKey);
         }
-        
+
         private void OnDestroy()
         {
             ScriptableSingletonProperty<MyScriptableA>.Dispose();

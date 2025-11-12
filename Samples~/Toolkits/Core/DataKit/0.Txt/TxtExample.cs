@@ -6,32 +6,33 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.Core.DataKit.Example._0.Txt
 {
     using TMPro;
     using Toolkits.DataKit;
+    using UnityEngine;
 
     public class TxtExample : MonoBehaviour
     {
         [SerializeField]
         private TMP_InputField _inputField;
-        
+
         public void Save()
         {
             DataKit.SaveTxt("example", _inputField.text);
         }
-        
+
         public void Load()
         {
             var txt = DataKit.LoadTxt("example");
             Debug.Log(txt);
         }
-        
+
         public void OpenFolder()
         {
+        #if UNITY_EDITOR
             TxtHelper.OpenTxtSavePath();
+        #endif
         }
     }
 }

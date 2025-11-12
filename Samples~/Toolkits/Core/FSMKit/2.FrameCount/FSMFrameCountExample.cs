@@ -9,28 +9,18 @@
 namespace Framework3.Toolkits.FSMKit.Example._2.FrameCount
 {
     using FluentAPI;
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using UnityEngine;
     using UnityEngine.UI;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class FSMFrameCountExample : MonoBehaviour
     {
-        enum States
-        {
-            FadeAlphaIn,
-            FadeAlphaOut,
-            FadeColorBlue,
-            FadeColorRed,
-            Delay,
-            RotateTo
-        }
-
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private FSM<States> _fsm = new FSM<States>();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private FSM<States> _fsm = new();
 
         private Image _image;
 
@@ -39,89 +29,89 @@ using Sirenix.OdinInspector;
             _image = GameObject.Find("Canvas/Image").GetComponent<Image>();
         }
 
-        void Start()
+        private void Start()
         {
             Application.targetFrameRate = 60;
 
             _fsm.State(States.FadeAlphaIn)
-                .OnEnter(() => _image.SetColor(a: 0))
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState <= 60)
-                     {
-                         _image.SetColor(a: Mathf.Lerp(0, 1, _fsm.FrameCountOfCurrentState / 60.0f));
-                     }
-                     else
-                     {
-                         _fsm.ChangeState(States.FadeAlphaOut);
-                     }
-                 });
+               .OnEnter(() => _image.SetColor(a: 0))
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState <= 60)
+                    {
+                        _image.SetColor(a: Mathf.Lerp(0, 1, _fsm.FrameCountOfCurrentState / 60.0f));
+                    }
+                    else
+                    {
+                        _fsm.ChangeState(States.FadeAlphaOut);
+                    }
+                });
 
             _fsm.State(States.FadeAlphaOut)
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState <= 60)
-                     {
-                         _image.SetColor(a: Mathf.Lerp(1, 0, _fsm.FrameCountOfCurrentState / 60.0f));
-                     }
-                     else
-                     {
-                         _fsm.ChangeState(States.FadeColorBlue);
-                     }
-                 });
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState <= 60)
+                    {
+                        _image.SetColor(a: Mathf.Lerp(1, 0, _fsm.FrameCountOfCurrentState / 60.0f));
+                    }
+                    else
+                    {
+                        _fsm.ChangeState(States.FadeColorBlue);
+                    }
+                });
 
             _fsm.State(States.FadeColorBlue)
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState <= 60)
-                     {
-                         _image.color = Color.Lerp(new Color(1, 1, 1, 0), Color.blue,
-                                                  _fsm.FrameCountOfCurrentState / 60.0f);
-                     }
-                     else
-                     {
-                         _fsm.ChangeState(States.FadeColorRed);
-                     }
-                 });
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState <= 60)
+                    {
+                        _image.color = Color.Lerp(new Color(1, 1, 1, 0), Color.blue,
+                            _fsm.FrameCountOfCurrentState / 60.0f);
+                    }
+                    else
+                    {
+                        _fsm.ChangeState(States.FadeColorRed);
+                    }
+                });
 
             _fsm.State(States.FadeColorRed)
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState <= 60)
-                     {
-                         _image.color = Color.Lerp(Color.blue, Color.red,
-                                                  _fsm.FrameCountOfCurrentState / 60.0f);
-                     }
-                     else
-                     {
-                         _fsm.ChangeState(States.Delay);
-                     }
-                 });
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState <= 60)
+                    {
+                        _image.color = Color.Lerp(Color.blue, Color.red,
+                            _fsm.FrameCountOfCurrentState / 60.0f);
+                    }
+                    else
+                    {
+                        _fsm.ChangeState(States.Delay);
+                    }
+                });
 
             _fsm.State(States.Delay)
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState > 60)
-                     {
-                         _fsm.ChangeState(States.RotateTo);
-                     }
-                 });
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState > 60)
+                    {
+                        _fsm.ChangeState(States.RotateTo);
+                    }
+                });
 
             _fsm.State(States.RotateTo)
-                .OnUpdate(() =>
-                 {
-                     if (_fsm.FrameCountOfCurrentState <= 60)
-                     {
-                         _image.SetRotation(Quaternion.Lerp(Quaternion.identity, Quaternion.Euler(45, 45, 45),
-                                                           _fsm.FrameCountOfCurrentState / 60.0f));
-                     }
-                 });
+               .OnUpdate(() =>
+                {
+                    if (_fsm.FrameCountOfCurrentState <= 60)
+                    {
+                        _image.SetRotation(Quaternion.Lerp(Quaternion.identity, Quaternion.Euler(45, 45, 45),
+                            _fsm.FrameCountOfCurrentState / 60.0f));
+                    }
+                });
 
             _fsm.StartState(States.FadeAlphaIn);
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             _fsm.Update();
         }
@@ -130,6 +120,16 @@ using Sirenix.OdinInspector;
         {
             _fsm.Clear();
             _fsm = null;
+        }
+
+        private enum States
+        {
+            FadeAlphaIn,
+            FadeAlphaOut,
+            FadeColorBlue,
+            FadeColorRed,
+            Delay,
+            RotateTo
         }
     }
 }

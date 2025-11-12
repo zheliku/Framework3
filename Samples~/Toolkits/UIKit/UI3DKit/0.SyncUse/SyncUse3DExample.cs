@@ -13,13 +13,6 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
     public class SyncUse3DExample : MonoBehaviour
     {
         private SyncUse3DExamplePanel _panel;
-        
-        private void OnEnable()
-        {
-            // 默认加载名为 nameof(SyncUse3DExamplePanel) 的 prefab 并获取挂载在其上的 SyncUse3DExamplePanel 组件
-            _panel = UI3DKit.LoadPanel<SyncUse3DExamplePanel>();
-            _panel.Canvas.worldCamera = Camera.main;
-        }
 
         private void Update()
         {
@@ -27,11 +20,18 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
             {
                 UI3DKit.ShowPanel<SyncUse3DExamplePanel>();
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _panel.Hide();
             }
+        }
+
+        private void OnEnable()
+        {
+            // 默认加载名为 nameof(SyncUse3DExamplePanel) 的 prefab 并获取挂载在其上的 SyncUse3DExamplePanel 组件
+            _panel                    = UI3DKit.LoadPanel<SyncUse3DExamplePanel>();
+            _panel.Canvas.worldCamera = Camera.main;
         }
 
         private void OnDisable()

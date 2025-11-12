@@ -12,16 +12,15 @@ namespace Framework3.Toolkits.ResKit.Example._0.Basic
 
     public class LoadFormResourcesExample : MonoBehaviour
     {
-        private GameObject _res;
-        
         private ResourceRequest _req;
+        private GameObject      _res;
 
         private void Start()
         {
             // 同步加载
             _res = ResKit.LoadFromResources<GameObject>("Sphere");
             Instantiate(_res);
-            
+
             // 异步加载
             _req = ResKit.LoadFromResourcesAsync<GameObject>("Sphere", res =>
             {

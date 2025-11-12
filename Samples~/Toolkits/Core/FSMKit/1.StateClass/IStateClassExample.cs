@@ -8,12 +8,12 @@
 
 namespace Framework3.Toolkits.FSMKit.Example._1.StateClass
 {
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using TMPro;
     using UnityEngine;
-    
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
+
     public enum States
     {
         A, B, C
@@ -21,19 +21,18 @@ using Sirenix.OdinInspector;
 
     public class IStateClassExample : MonoBehaviour
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private FSM<States> _fsm = new FSM<States>();
-        
         [SerializeField]
         private TextMeshProUGUI _textInfo;
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private FSM<States> _fsm = new();
 
         private void Start()
         {
             _fsm.AddState(States.A, new StateA(_fsm, this));
             _fsm.AddState(States.B, new StateB(_fsm, this));
-            
+
             _fsm.StartState(States.A);
         }
 
@@ -41,7 +40,7 @@ using Sirenix.OdinInspector;
         {
             _fsm.Clear();
         }
-        
+
         public void ChangeToStateA()
         {
             _fsm.ChangeState(States.A);
@@ -51,7 +50,7 @@ using Sirenix.OdinInspector;
         {
             _fsm.ChangeState(States.B);
         }
-        
+
         public void SetTextInfo(string text)
         {
             _textInfo.text = text;

@@ -12,22 +12,17 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class CustomExample : MonoBehaviour
     {
-        class SomeData
-        {
-            public int ExecuteCount = 0;
-        }
-
         private void Start()
         {
             ActionKit.Custom(a =>
             {
                 a.OnStart(() => { Debug.Log("OnStart"); })
-                 .OnExecute(dt =>
-                  {
-                      Debug.Log("OnExecute");
-                      a.Finish();
-                  })
-                 .OnFinish(() => { Debug.Log("OnFinish"); });
+                   .OnExecute(dt =>
+                    {
+                        Debug.Log("OnExecute");
+                        a.Finish();
+                    })
+                   .OnFinish(() => { Debug.Log("OnFinish"); });
             }).Start(this);
 
             // OnStart
@@ -35,26 +30,26 @@ namespace Framework3.Toolkits.ActionKit.Example
             // OnFinish
 
             ActionKit.Custom<SomeData>(a =>
-                      {
-                          a.OnStart(() =>
+                {
+                    a.OnStart(() =>
+                        {
+                            a.Data = new SomeData
                             {
-                                a.Data = new SomeData()
-                                {
-                                    ExecuteCount = 0
-                                };
-                            })
-                           .OnExecute(dt =>
-                            {
-                                Debug.Log(a.Data.ExecuteCount);
-                                a.Data.ExecuteCount++;
+                                ExecuteCount = 0
+                            };
+                        })
+                       .OnExecute(dt =>
+                        {
+                            Debug.Log(a.Data.ExecuteCount);
+                            a.Data.ExecuteCount++;
 
-                                if (a.Data.ExecuteCount >= 5)
-                                {
-                                    a.Finish();
-                                }
-                            }).OnFinish(() => { Debug.Log("Finished"); });
-                      })
-                     .Start(this);
+                            if (a.Data.ExecuteCount >= 5)
+                            {
+                                a.Finish();
+                            }
+                        }).OnFinish(() => { Debug.Log("Finished"); });
+                })
+               .Start(this);
 
             // 0
             // 1
@@ -70,6 +65,11 @@ namespace Framework3.Toolkits.ActionKit.Example
             //     {
             //         c.OnStart(() => c.Finish());
             //     }).Start(this);
+        }
+
+        private class SomeData
+        {
+            public int ExecuteCount;
         }
     }
 }

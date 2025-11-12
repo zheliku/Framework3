@@ -8,28 +8,27 @@
 
 namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
 {
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class SingletonObjectPoolExample : MonoBehaviour
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private ObjectPool<ImageItem> _pool;
-    
         [SerializeField]
         private ImageItem _imageItem;
 
         [SerializeField]
         private Transform _useParent;
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private ObjectPool<ImageItem> _pool;
 
         private void Start()
         {
             _pool = SingletonPool<ImageItem>.Pool;
-        
+
             // 设置对象池的工厂方法，实例化 ImageItem 并激活
             SingletonPool<ImageItem>.Pool.SetObjectFactory(new CustomObjectFactory<ImageItem>(() =>
             {

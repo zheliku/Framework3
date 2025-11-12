@@ -6,11 +6,8 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using NotImplementedException = System.NotImplementedException;
-
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.Command
 {
-
     public class ReturnMenuCommand : AbstractCommand
     {
         protected override void OnExecute()

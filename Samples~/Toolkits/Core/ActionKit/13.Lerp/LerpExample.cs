@@ -13,9 +13,9 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class LerpExample : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
-            ActionKit.Lerp(0, 360, 5.0f, (v) =>
+            ActionKit.Lerp(0, 360, 5.0f, v =>
             {
                 this.SetRotation(Quaternion.Euler(0, 0, v));
             }).Start(this);

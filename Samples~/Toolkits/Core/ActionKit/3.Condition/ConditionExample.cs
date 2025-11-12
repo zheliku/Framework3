@@ -15,10 +15,10 @@ namespace Framework3.Toolkits.ActionKit.Example
         private void Start()
         {
             ActionKit.Sequence()
-                     .Callback(() => Debug.Log("Before Condition"))
-                     .Condition(() => Input.GetMouseButtonDown(0))
-                     .Callback(() => Debug.Log("Mouse Clicked"))
-                     .Start(this);
+               .Callback(() => Debug.Log("Before Condition"))
+               .Condition(() => Input.GetMouseButtonDown(0))
+               .Callback(() => Debug.Log("Mouse Clicked"))
+               .Start(this);
         }
     }
 }

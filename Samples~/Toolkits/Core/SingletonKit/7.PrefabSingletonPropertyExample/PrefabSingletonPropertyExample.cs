@@ -8,8 +8,6 @@
 
 namespace Framework3.Toolkits.SingletonKit.Example._7.PrefabSingletonPropertyExample
 {
-    using System;
-    using System.Collections;
     using UnityEngine;
 
     public class PrefabSingletonPropertyExample : MonoBehaviour

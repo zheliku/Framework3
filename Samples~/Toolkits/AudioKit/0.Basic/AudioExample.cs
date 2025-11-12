@@ -57,7 +57,7 @@ namespace Framework3.Toolkits.AudioKit.Example._0.Basic
                     Debug.Log("Music play finished.");
                 });
         }
-        
+
         public void PlayNarration()
         {
             Debug.Log("Playing Narration...");
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.AudioKit.Example._0.Basic
                     Debug.Log("Narration play finished.");
                 });
         }
-        
+
         public void PlaySound()
         {
             Debug.Log("Playing Sound...");
@@ -79,43 +79,43 @@ namespace Framework3.Toolkits.AudioKit.Example._0.Basic
                     Debug.Log("Sound play finished: " + player.AudioClipName);
                 });
         }
-        
+
         public void StopAllSound()
         {
             Debug.Log("Stopping All Sound...");
             AudioKit.StopAllSound();
         }
-        
+
         public void SetMusicVolume(float volume)
         {
             AudioKit.Setting.MusicVolume.Value = volume;
             Debug.Log("Music Volume set to: " + volume);
         }
-        
+
         public void SetNarrationVolume(float volume)
         {
             AudioKit.Setting.NarrationVolume.Value = volume;
             Debug.Log("Narration Volume set to: " + volume);
         }
-        
+
         public void SetSoundVolume(float volume)
         {
             AudioKit.Setting.SoundVolume.Value = volume;
             Debug.Log("Sound Volume set to: " + volume);
         }
-        
+
         public void ToggleMusic(bool isOn)
         {
             AudioKit.Setting.IsMusicOn.Value = isOn;
             Debug.Log("Music toggled: " + isOn);
         }
-        
+
         public void ToggleNarration(bool isOn)
         {
             AudioKit.Setting.IsNarrationOn.Value = isOn;
             Debug.Log("Narration toggled: " + isOn);
         }
-        
+
         public void ToggleSound(bool isOn)
         {
             AudioKit.Setting.IsSoundOn.Value = isOn;

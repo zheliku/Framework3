@@ -12,6 +12,18 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
 
     public class AsyncUse2DExample : MonoBehaviour
     {
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                UI2DKit.ShowPanelAsync<AsyncUse2DExamplePanel>("myPanel2D");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                UI2DKit.HidePanel<AsyncUse2DExamplePanel>("myPanel2D");
+            }
+        }
         private void OnEnable()
         {
             // 可指定名称加载
@@ -19,19 +31,6 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
             {
                 Debug.Log("AsyncUse2DExamplePanel loaded");
             });
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                UI2DKit.ShowPanelAsync<AsyncUse2DExamplePanel>("myPanel2D");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                UI2DKit.HidePanel<AsyncUse2DExamplePanel>("myPanel2D");
-            }
         }
 
         private void OnDisable()

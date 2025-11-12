@@ -13,13 +13,12 @@ namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
 
     public class ImageItem : MonoBehaviour, IPoolable
     {
-        private Image _image;
-        
         [SerializeField]
         private Transform _poolParent;
 
         [SerializeField]
         private Transform _useParent;
+        private Image _image;
 
         private void Awake()
         {
@@ -31,7 +30,7 @@ namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
             transform.SetParent(_poolParent);
             _image.color = Color.gray;
         }
-        
+
         public void OnGet()
         {
             transform.SetParent(_useParent);
@@ -43,7 +42,7 @@ namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
             transform.SetParent(_poolParent);
             _image.color = Color.gray;
         }
-        
+
         public void OnDestroy()
         {
             if (this)

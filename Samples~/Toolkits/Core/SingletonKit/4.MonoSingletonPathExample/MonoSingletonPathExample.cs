@@ -16,7 +16,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._4.MonoSingletonPathExample
         {
             Debug.Log(ClassUseMonoSingletonPath.Instance);
         }
-        
+
         private void OnDestroy()
         {
             ClassUseMonoSingletonPath.Instance.Dispose();

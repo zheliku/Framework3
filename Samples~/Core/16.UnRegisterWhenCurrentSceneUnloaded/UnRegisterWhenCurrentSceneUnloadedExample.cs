@@ -7,11 +7,11 @@
 
     public class UnregisterWhenCurrentSceneUnloadedExample : MonoBehaviour
     {
-        private static bool s_registered = false;
+        private static bool s_registered;
 
-        private static readonly EasyEvent example_event = new EasyEvent();
+        private static readonly EasyEvent example_event = new();
 
-        async void Start()
+        private async void Start()
         {
             if (!s_registered)
             {

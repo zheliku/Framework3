@@ -22,7 +22,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._3.MonoSingletonPropertyExamp
             // new instance
             Class2MonoSingletonProperty.Instance.Log("Hello World!");
         }
-        
+
         private void OnDestroy()
         {
             Class2MonoSingletonProperty.Instance.Dispose();
@@ -31,12 +31,12 @@ namespace Framework3.Toolkits.SingletonKit.Example._3.MonoSingletonPropertyExamp
 
     internal class Class2MonoSingletonProperty : MonoBehaviour, ISingleton
     {
+        private static int s_index;
+
         public static Class2MonoSingletonProperty Instance
         {
             get => MonoSingletonProperty<Class2MonoSingletonProperty>.Instance;
         }
-
-        private static int s_index = 0;
 
         public void OnSingletonInit()
         {

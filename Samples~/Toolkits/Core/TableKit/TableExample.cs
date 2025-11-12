@@ -11,24 +11,24 @@ namespace Framework3.Toolkits.TableKit.Example
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class TableExample : MonoBehaviour
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private School _school = new School();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private School _school = new();
 
         private void Start()
         {
-            _school.Add(new Student() { Age = 1, Level = 2, Name = "zheliku" });
-            _school.Add(new Student() { Age = 2, Level = 2, Name = "ava" });
-            _school.Add(new Student() { Age = 3, Level = 2, Name = "abc" });
-            _school.Add(new Student() { Age = 3, Level = 3, Name = "efg" });
+            _school.Add(new Student { Age = 1, Level = 2, Name = "zheliku" });
+            _school.Add(new Student { Age = 2, Level = 2, Name = "ava" });
+            _school.Add(new Student { Age = 3, Level = 2, Name = "abc" });
+            _school.Add(new Student { Age = 3, Level = 3, Name = "efg" });
         }
 
         public void LogLevel2()
@@ -42,17 +42,17 @@ using Sirenix.OdinInspector;
 
     public class School : Table<Student>
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        public TableIndex<int, Student> AgeIndex = new TableIndex<int, Student>(
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public TableIndex<int, Student> AgeIndex = new(
             student => student.Age
         );
 
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        public TableIndex<int, Student> LevelIndex = new TableIndex<int, Student>(
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public TableIndex<int, Student> LevelIndex = new(
             student => student.Level
         );
 

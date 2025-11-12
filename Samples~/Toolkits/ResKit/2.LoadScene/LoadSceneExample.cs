@@ -6,12 +6,10 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.ResKit.Example._2.LoadScene
 {
-    using System;
     using FluentAPI;
+    using UnityEngine;
 
     public class LoadSceneExample : MonoBehaviour
     {

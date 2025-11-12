@@ -22,7 +22,7 @@ namespace Framework3.Toolkits.InputKit.Example._0.Axis
             {
                 Cube.transform.Translate(Vector3.right * (Speed * value * Time.deltaTime));
             });
-            
+
             OldInputKit.RegisterAxis("Vertical", (oldValue, value) =>
             {
                 Cube.transform.Translate(Vector3.up * (Speed * value * Time.deltaTime));

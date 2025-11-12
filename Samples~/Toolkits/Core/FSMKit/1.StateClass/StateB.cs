@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.FSMKit.Example._1.StateClass
     {
         public StateB(FSM<States> fsm, IStateClassExample owner) : base(fsm, owner)
         { }
-        
+
         protected override void OnEnter()
         {
             Debug.Log("Enter B");

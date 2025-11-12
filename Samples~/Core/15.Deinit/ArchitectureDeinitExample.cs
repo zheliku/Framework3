@@ -6,11 +6,10 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Core.Example._15.Deinit
 {
     using System.Collections;
+    using UnityEngine;
 
     public class ArchitectureDeinitExample : MonoBehaviour
     {

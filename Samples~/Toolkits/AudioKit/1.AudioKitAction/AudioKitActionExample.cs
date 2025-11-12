@@ -6,12 +6,11 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.AudioKit.Example._1.AudioKitAction
 {
     using ActionKit;
     using PoolKit;
+    using UnityEngine;
 
     public class AudioKitActionExample : MonoBehaviour
     {
@@ -19,13 +18,13 @@ namespace Framework3.Toolkits.AudioKit.Example._1.AudioKitAction
         {
             // 使用 ResourcesAudioLoader 作为音频加载器
             AudioKit.AudioLoaderPool.SetObjectFactory(new CustomObjectFactory<IAudioLoader>(() => new ResourcesAudioLoader()));
-            
+
             ActionKit.Sequence()
-                     .Delay(2)
-                     .PlaySound("Music/HomeBg")
-                     .Delay(2)
-                     .PlaySound("Music/PillowTalk")
-                     .Start(this);
+               .Delay(2)
+               .PlaySound("Music/HomeBg")
+               .Delay(2)
+               .PlaySound("Music/PillowTalk")
+               .Start(this);
         }
     }
 }

@@ -26,6 +26,18 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._3.InterfaceEventMode
                                            , IOnEvent<InterfaceEventA> // 快捷监听事件 InterfaceEventA
                                            , IOnEvent<InterfaceEventB>
     {
+        private void Start()
+        {
+            this.RegisterEvent<InterfaceEventA>()              // 注册监听，默认注册到 TypeEventSystem.GLOBAL 中
+               .UnregisterWhenGameObjectDestroyed(gameObject); // 自动注销
+
+            this.RegisterEvent<InterfaceEventB>();
+        }
+
+        private void OnDestroy()
+        {
+            this.UnregisterEvent<InterfaceEventB>(); // 手动注销
+        }
         public void OnEvent(InterfaceEventA e) // InterfaceEventA 事件监听函数
         {
             Debug.Log(e);
@@ -34,19 +46,6 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._3.InterfaceEventMode
         public void OnEvent(InterfaceEventB e)
         {
             Debug.Log(e);
-        }
-
-        private void Start()
-        {
-            this.RegisterEvent<InterfaceEventA>()               // 注册监听，默认注册到 TypeEventSystem.GLOBAL 中
-                .UnregisterWhenGameObjectDestroyed(gameObject); // 自动注销
-
-            this.RegisterEvent<InterfaceEventB>();
-        }
-
-        private void OnDestroy()
-        {
-            this.UnregisterEvent<InterfaceEventB>(); // 手动注销
         }
 
         public void SendInterfaceEventA()

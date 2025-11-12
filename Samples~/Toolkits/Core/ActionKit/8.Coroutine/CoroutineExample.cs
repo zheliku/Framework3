@@ -20,11 +20,11 @@ namespace Framework3.Toolkits.ActionKit.Example
             SomeCoroutine().ToAction().Start(this);
 
             ActionKit.Sequence()
-                     .Coroutine(SomeCoroutine)
-                     .Start(this);
+               .Coroutine(SomeCoroutine)
+               .Start(this);
         }
 
-        IEnumerator SomeCoroutine()
+        private IEnumerator SomeCoroutine()
         {
             yield return new WaitForSeconds(1.0f);
             Debug.Log("Hello: " + Time.time);

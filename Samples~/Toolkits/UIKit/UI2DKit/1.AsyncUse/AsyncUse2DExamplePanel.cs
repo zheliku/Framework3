@@ -16,6 +16,7 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
 
     public class AsyncUse2DExamplePanel : UIPanel2D
     {
+        protected override IArchitecture _Architecture { get; }
         protected override void Awake()
         {
             base.Awake();
@@ -26,7 +27,7 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
                 ActionKit.Delay(3, Show)
                    .StartCurrentScene();
             });
-            
+
             Debug.Log("AsyncUse2DExamplePanel Awake");
         }
 
@@ -35,7 +36,7 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
             base.OnEnable();
             Debug.Log("AsyncUse2DExamplePanel OnEnable");
         }
-        
+
         protected override void OnDisable()
         {
             base.OnDisable();
@@ -47,7 +48,5 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
             base.OnDestroy();
             Debug.Log("AsyncUse2DExamplePanel OnDestroy");
         }
-
-        protected override IArchitecture _Architecture { get; }
     }
 }

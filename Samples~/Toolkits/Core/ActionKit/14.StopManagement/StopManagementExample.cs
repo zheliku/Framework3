@@ -13,27 +13,27 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class StopManagementExample : MonoBehaviour
     {
-        private List<IActionController> _actionControllers = new List<IActionController>();
+        private List<IActionController> _actionControllers = new();
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             var a = default(IActionController);
             a = ActionKit.Sequence()
-                         .Callback(() => { Debug.Log("Start"); })
-                         .Delay(1.0f)
-                         .Callback(() => { Debug.Log("Delay 1.0f"); })
-                         .Start(this, () =>
-                          {
-                              ActionKit.Sequence()
-                                       .Callback(() => { Debug.Log("New Start"); })
-                                       .Delay(0.5f)
-                                       .Callback(() => { Debug.Log("Delay 0.5f, Ready to Deinit"); })
-                                       .Start(this, () =>
-                                        {
-                                            a.Deinit();
-                                        });
-                          });
+               .Callback(() => { Debug.Log("Start"); })
+               .Delay(1.0f)
+               .Callback(() => { Debug.Log("Delay 1.0f"); })
+               .Start(this, () =>
+                {
+                    ActionKit.Sequence()
+                       .Callback(() => { Debug.Log("New Start"); })
+                       .Delay(0.5f)
+                       .Callback(() => { Debug.Log("Delay 0.5f, Ready to Deinit"); })
+                       .Start(this, () =>
+                        {
+                            a.Deinit();
+                        });
+                });
         }
     }
 }

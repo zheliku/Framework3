@@ -16,6 +16,7 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
 
     public class SyncUse2DExamplePanel : UIPanel2D
     {
+        protected override IArchitecture _Architecture { get; }
         protected override void Awake()
         {
             base.Awake();
@@ -25,7 +26,7 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
                 ActionKit.Delay(3, Show)
                    .StartCurrentScene();
             });
-            
+
             Debug.Log("SyncUse2DExamplePanel Awake");
         }
 
@@ -46,7 +47,5 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
             base.OnDestroy();
             Debug.Log("SyncUse2DExamplePanel OnDestroy");
         }
-
-        protected override IArchitecture _Architecture { get; }
     }
 }

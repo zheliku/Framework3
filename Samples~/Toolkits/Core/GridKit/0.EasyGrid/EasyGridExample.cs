@@ -8,16 +8,16 @@
 
 namespace Framework3.Toolkits.GridKit.Example._0.Grid
 {
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class EasyGridExample : MonoBehaviour
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
         private EasyGrid<string> _grid;
 
         private void Start()
@@ -29,17 +29,17 @@ using Sirenix.OdinInspector;
         {
             _grid.Fill("Empty");
         }
-        
+
         public void SetValue()
         {
             _grid[2, 3] = "@@@ Hello @@@";
         }
-        
+
         public void LogAll()
         {
             _grid.ForEach((i, j, value) => Debug.Log($"({i}, {j}) = {value}"));
         }
-        
+
         public void Resize()
         {
             _grid.Resize(1, 5, (i, j) => "New Value");

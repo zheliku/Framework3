@@ -8,23 +8,28 @@
 
 namespace Framework3.Toolkits.FSMKit.Example._0.BasicUsage
 {
-    #if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
     using TMPro;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class IStateBasicUsageExample : MonoBehaviour
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        private FSM<States> _fsm = new FSM<States>();
+        public enum States
+        {
+            A,
+            B
+        }
 
         [SerializeField]
         private TextMeshProUGUI _textInfo;
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private FSM<States> _fsm = new();
 
-        void Start()
+        private void Start()
         {
             Application.targetFrameRate = 60;
 
@@ -71,14 +76,14 @@ using Sirenix.OdinInspector;
             _fsm.FixedUpdate();
         }
 
-        private void OnGUI()
-        {
-            _fsm.OnGUI();
-        }
-
         private void OnDestroy()
         {
             _fsm.Clear();
+        }
+
+        private void OnGUI()
+        {
+            _fsm.OnGUI();
         }
 
         public void ChangeToStateA()
@@ -89,12 +94,6 @@ using Sirenix.OdinInspector;
         public void ChangeToStateB()
         {
             _fsm.ChangeState(States.B);
-        }
-
-        public enum States
-        {
-            A,
-            B
         }
     }
 }

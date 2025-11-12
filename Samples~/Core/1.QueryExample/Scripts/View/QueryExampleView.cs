@@ -8,7 +8,6 @@
 
 namespace Framework3.Core.Example._1.QueryExample.Scripts.View
 {
-    using Core;
     using Model;
     using Query;
     using TMPro;
@@ -18,7 +17,7 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.View
     {
         [HierarchyPath("/Canvas/Txt_Info")] // 使用特性绑定，"/Canvas/Txt_Info" 是组件在场景中的路径
         private TextMeshProUGUI _textInfo;
-        
+
         [HierarchyPath("/Canvas/Txt_Result")] // 使用特性绑定，"/Canvas/Txt_Result" 是组件在场景中的路径
         private TextMeshProUGUI _textResult;
 
@@ -33,9 +32,9 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts.View
             var teacherModel = this.GetModel<TeacherModel>();
 
             _textInfo.text = "Students:\n"
-                       + studentModel.Students.Join("\n")
-                       + "\n\nTeachers:\n"
-                       + teacherModel.Teachers.Join("\n");
+                           + studentModel.Students.Join("\n")
+                           + "\n\nTeachers:\n"
+                           + teacherModel.Teachers.Join("\n");
 
             var allPersonCount = this.SendQuery(new SchoolAllPersonCountQuery());
             _textResult.text = $"All Person Count: {allPersonCount}";

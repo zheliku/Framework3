@@ -6,8 +6,6 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using NotImplementedException = System.NotImplementedException;
-
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.AchievementSystem
 {
     using global::System;
@@ -19,9 +17,8 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.AchievementS
 
     public class AchievementSystem : AbstractSystem, IAchievementSystem
     {
-        private IGameModel _gameModel;
-
-        private List<AchievementItem> _items = new List<AchievementItem>();
+        private readonly List<AchievementItem> _items = new();
+        private          IGameModel            _gameModel;
 
         private bool _missed;
 
@@ -31,10 +28,10 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.AchievementS
 
             _items.AddRange(new[]
             {
-                new AchievementItem() { Name = "百分成就", CheckComplete = () => _gameModel.BestScore.Value > 100 },
-                new AchievementItem() { Name = "手残", CheckComplete   = () => _gameModel.Score.Value < 0 },
-                new AchievementItem() { Name = "手速", CheckComplete   = () => !_missed },
-                new AchievementItem() { Name = "成就大师", CheckComplete = () => _items.Count(item => item.Unlocked) >= 3 }
+                new AchievementItem { Name = "百分成就", CheckComplete = () => _gameModel.BestScore.Value > 100 },
+                new AchievementItem { Name = "手残", CheckComplete   = () => _gameModel.Score.Value < 0 },
+                new AchievementItem { Name = "手速", CheckComplete   = () => !_missed },
+                new AchievementItem { Name = "成就大师", CheckComplete = () => _items.Count(item => item.Unlocked) >= 3 }
             });
 
             this.RegisterEvent<GameStartEvent>(OnGameStart);

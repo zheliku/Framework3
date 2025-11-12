@@ -13,14 +13,6 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._0.Basic
 
     public class TypeEventSystemBasicExample : MonoBehaviour
     {
-        // 最好使用 struct 声明，减少 GC
-        public struct TestEventA
-        {
-            public int Age;
-
-            public override string ToString() { return $"{nameof(TestEventA)}: Age={Age}"; }
-        }
-
         private void Start()
         {
             TypeEventSystem.Global.Register<TestEventA>(e =>
@@ -28,18 +20,26 @@ namespace Framework3.Core.Example._2.TypeEventSystem._2._0.Basic
                 Debug.Log(e);
             }).UnregisterWhenGameObjectDestroyed(gameObject);
         }
-        
+
         public void SendEventA1()
         {
-            TypeEventSystem.Global.Send(new TestEventA()
+            TypeEventSystem.Global.Send(new TestEventA
             {
                 Age = 20
             });
         }
-        
+
         public void SendEventA2()
         {
             TypeEventSystem.Global.Send<TestEventA>();
+        }
+
+        // 最好使用 struct 声明，减少 GC
+        public struct TestEventA
+        {
+            public int Age;
+
+            public override string ToString() { return $"{nameof(TestEventA)}: Age={Age}"; }
         }
     }
 }

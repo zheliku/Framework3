@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.InputKit.Example._1.Mouse
                     Cube.SetPosition(mousePos);
                 }
             });
-           
+
             OldInputKit.RegisterMouse(MouseInputType.Right, (oldValue, value) =>
             {
                 if (value)

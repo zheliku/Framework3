@@ -12,6 +12,18 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
 
     public class AsyncUse3DExample : MonoBehaviour
     {
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                UI3DKit.ShowPanelAsync<AsyncUse3DExamplePanel>("myPanel3D");
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                UI3DKit.HidePanel<AsyncUse3DExamplePanel>("myPanel3D");
+            }
+        }
         private void OnEnable()
         {
             // 可指定名称加载
@@ -20,19 +32,6 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
                 panel.Canvas.worldCamera = Camera.main;
                 Debug.Log("AsyncUse3DExamplePanel loaded");
             });
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                UI3DKit.ShowPanelAsync<AsyncUse3DExamplePanel>("myPanel3D");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                UI3DKit.HidePanel<AsyncUse3DExamplePanel>("myPanel3D");
-            }
         }
 
         private void OnDisable()

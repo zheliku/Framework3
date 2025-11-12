@@ -8,16 +8,18 @@
 
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
-    using Core;
-
     public class UI : AbstractView
     {
-        protected override IArchitecture _Architecture => PointGame.Architecture;
+        private AbstractView _gamePanel;
+        private AbstractView _losePanel;
 
         private AbstractView _startPanel;
-        private AbstractView _gamePanel;
         private AbstractView _winPanel;
-        private AbstractView _losePanel;
+
+        protected override IArchitecture _Architecture
+        {
+            get => PointGame.Architecture;
+        }
 
         protected override void Awake()
         {

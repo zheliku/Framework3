@@ -9,14 +9,16 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
     using Command;
-    using Core;
     using UnityEngine.UI;
 
     public class LosePanel : AbstractView
     {
-        protected override IArchitecture _Architecture => PointGame.Architecture;
-
         private Button _btnBack;
+
+        protected override IArchitecture _Architecture
+        {
+            get => PointGame.Architecture;
+        }
 
         protected override void Awake()
         {

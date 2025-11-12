@@ -9,23 +9,26 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
     using Command;
-    using Core;
     using Model;
     using TMPro;
     using UnityEngine.UI;
 
     public class StartPanel : AbstractView
     {
-        protected override IArchitecture _Architecture => PointGame.Architecture;
+        private Button _btnBuyLife;
+
+        private Button _btnStart;
 
         private IGameModel _gameModel;
 
-        private Button _btnStart;
-        private Button _btnBuyLife;
-
         private TextMeshProUGUI _txtBestScoreValue;
-        private TextMeshProUGUI _txtLifeValue;
         private TextMeshProUGUI _txtGoldValue;
+        private TextMeshProUGUI _txtLifeValue;
+
+        protected override IArchitecture _Architecture
+        {
+            get => PointGame.Architecture;
+        }
 
         protected override void Awake()
         {

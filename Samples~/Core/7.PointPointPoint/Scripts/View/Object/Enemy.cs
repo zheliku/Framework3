@@ -10,11 +10,13 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.Object
 {
     using Command;
-    using Core;
 
     public class Enemy : AbstractView
     {
-        protected override IArchitecture _Architecture => PointGame.Architecture;
+        protected override IArchitecture _Architecture
+        {
+            get => PointGame.Architecture;
+        }
 
         private void OnMouseDown()
         {

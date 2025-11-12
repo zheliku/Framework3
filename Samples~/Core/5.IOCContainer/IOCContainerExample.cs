@@ -13,6 +13,18 @@ namespace Framework3.Core.Example._5.IOCContainer
 
     public class IOCContainerExample : MonoBehaviour
     {
+        private void Start()
+        {
+            var container = new IOCContainer();
+
+            container.Register(new SomeService());
+
+            container.Register<INetworkService>(new NetworkService());
+
+            container.Get<SomeService>().Say();
+            container.Get<INetworkService>().Connect();
+        }
+
         public class SomeService
         {
             public void Say()
@@ -32,18 +44,6 @@ namespace Framework3.Core.Example._5.IOCContainer
             {
                 Debug.Log("NetworkService Connect Succeed");
             }
-        }
-
-        private void Start()
-        {
-            var container = new IOCContainer();
-
-            container.Register(new SomeService());
-
-            container.Register<INetworkService>(new NetworkService());
-
-            container.Get<SomeService>().Say();
-            container.Get<INetworkService>().Connect();
         }
     }
 }

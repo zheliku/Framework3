@@ -15,15 +15,9 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.CountSownSys
         private DateTime _gameStartTime;
         private bool     _started;
 
-        protected override void OnInit()
-        {
-            this.RegisterEvent<GameStartEvent>(OnGameStart);
-            this.RegisterEvent<GameWinEvent>(OnGameWin);
-        }
-
         public int CurrentRemainSecond
         {
-            get { return 10 - (int) (DateTime.Now - _gameStartTime).TotalSeconds; }
+            get => 10 - (int) (DateTime.Now - _gameStartTime).TotalSeconds;
         }
 
         public void Update()
@@ -34,6 +28,12 @@ namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.CountSownSys
             {
                 this.SendEvent<OnCountDownEndEvent>();
             }
+        }
+
+        protected override void OnInit()
+        {
+            this.RegisterEvent<GameStartEvent>(OnGameStart);
+            this.RegisterEvent<GameWinEvent>(OnGameWin);
         }
 
         private void OnGameStart(GameStartEvent e)

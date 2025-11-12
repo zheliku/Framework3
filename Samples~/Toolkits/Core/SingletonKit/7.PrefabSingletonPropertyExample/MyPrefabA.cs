@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._7.PrefabSingletonPropertyExa
 
     public class MyPrefabA : MonoBehaviour
     {
-        private static int s_index = 0;
+        private static int s_index;
 
         // static MyPrefabA()
         // {

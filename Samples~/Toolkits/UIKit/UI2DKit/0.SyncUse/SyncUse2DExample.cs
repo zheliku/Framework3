@@ -13,12 +13,6 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
     public class SyncUse2DExample : MonoBehaviour
     {
         private SyncUse2DExamplePanel _panel;
-        
-        private void OnEnable()
-        {
-            // 默认加载名为 nameof(SyncUse2DExamplePanel) 的 prefab 并获取挂载在其上的 SyncUse2DExamplePanel 组件
-            _panel = UI2DKit.LoadPanel<SyncUse2DExamplePanel>();
-        }
 
         private void Update()
         {
@@ -26,11 +20,17 @@ namespace Framework3.Toolkits.UIKit.Example._0.SyncUse
             {
                 UI2DKit.ShowPanel<SyncUse2DExamplePanel>();
             }
-            
+
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 _panel.Hide();
             }
+        }
+
+        private void OnEnable()
+        {
+            // 默认加载名为 nameof(SyncUse2DExamplePanel) 的 prefab 并获取挂载在其上的 SyncUse2DExamplePanel 组件
+            _panel = UI2DKit.LoadPanel<SyncUse2DExamplePanel>();
         }
 
         private void OnDisable()

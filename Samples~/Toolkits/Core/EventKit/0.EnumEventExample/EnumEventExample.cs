@@ -12,30 +12,10 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
 
     public class EnumEventExample : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             EnumEventSystem.Global.Register(TestEventA.Test, OnEventA);
             EnumEventSystem.Global.Register(TestEventB.Test, OnEventB);
-        }
-
-        void OnEventA(TestEventA key, params object[] obj)
-        {
-            Debug.Log($"TestEventA_{key}: {obj[0]}");
-        }
-        
-        void OnEventB(TestEventB key, params object[] obj)
-        {
-            Debug.Log($"TestEventB_{key}: {obj[0]}");
-        }
-        
-        public void SendTestEventA()
-        {
-            EnumEventSystem.Global.Send(TestEventA.Test, "Hello World!");
-        }
-        
-        public void SendTestEventB()
-        {
-            EnumEventSystem.Global.Send(TestEventB.Test, "Hello World!");
         }
 
         private void OnDestroy()
@@ -43,19 +23,39 @@ namespace Framework3.Toolkits.EventKit.Example._0.EnumEventExample
             EnumEventSystem.Global.Unregister(TestEventA.Test, OnEventA);
             EnumEventSystem.Global.Unregister(TestEventB.Test, OnEventB);
         }
+
+        private void OnEventA(TestEventA key, params object[] obj)
+        {
+            Debug.Log($"TestEventA_{key}: {obj[0]}");
+        }
+
+        private void OnEventB(TestEventB key, params object[] obj)
+        {
+            Debug.Log($"TestEventB_{key}: {obj[0]}");
+        }
+
+        public void SendTestEventA()
+        {
+            EnumEventSystem.Global.Send(TestEventA.Test, "Hello World!");
+        }
+
+        public void SendTestEventB()
+        {
+            EnumEventSystem.Global.Send(TestEventB.Test, "Hello World!");
+        }
     }
 
     public enum TestEventA
     {
         Start,
         Test,
-        End,
+        End
     }
 
     public enum TestEventB
     {
         Start,
         Test,
-        End,
+        End
     }
 }

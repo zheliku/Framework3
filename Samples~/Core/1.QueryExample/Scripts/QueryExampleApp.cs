@@ -14,8 +14,8 @@ namespace Framework3.Core.Example._1.QueryExample.Scripts
     {
         protected override void Init()
         {
-            this.RegisterModel<StudentModel>(new StudentModel());
-            this.RegisterModel<TeacherModel>(new TeacherModel());
+            RegisterModel(new StudentModel());
+            RegisterModel(new TeacherModel());
         }
     }
 }

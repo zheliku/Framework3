@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
     public class SingletonPropertyExample : MonoBehaviour
     {
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             Class2SingletonProperty.Instance.Log("Hello World!");
 
@@ -23,7 +23,7 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
             // new instance
             Class2SingletonProperty.Instance.Log("Hello World!");
         }
-        
+
         private void OnDestroy()
         {
             Class2SingletonProperty.Instance.Dispose();
@@ -31,21 +31,21 @@ namespace Framework3.Toolkits.SingletonKit.Example._2.SingletonPropertyExample
     }
 
     /// <summary>
-    /// Class2SingletonProperty 可以继承其他类
+    ///     Class2SingletonProperty 可以继承其他类
     /// </summary>
     internal class Class2SingletonProperty : ISingleton
     {
+        private static int s_index;
+
+        private Class2SingletonProperty() { }
+
         /// <summary>
-        /// 通过属性返回静态单例，来实现单例模式
+        ///     通过属性返回静态单例，来实现单例模式
         /// </summary>
         public static Class2SingletonProperty Instance
         {
             get => SingletonProperty<Class2SingletonProperty>.Instance;
         }
-
-        private Class2SingletonProperty() { }
-
-        private static int s_index = 0;
 
         public void OnSingletonInit()
         {

@@ -9,22 +9,24 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.View.UI
 {
     using System.CountSownSystem;
-    using Core;
     using Model;
     using TMPro;
     using UnityEngine;
 
     public class GamePanel : AbstractView
     {
-        protected override IArchitecture _Architecture => PointGame.Architecture;
-
         private ICountDownSystem _countDownSystem;
         private IGameModel       _gameModel;
+        private TextMeshProUGUI  _txtCountDownValue;
+        private TextMeshProUGUI  _txtGoldValue;
+        private TextMeshProUGUI  _txtLifeValue;
 
         private TextMeshProUGUI _txtScoreValue;
-        private TextMeshProUGUI _txtLifeValue;
-        private TextMeshProUGUI _txtGoldValue;
-        private TextMeshProUGUI _txtCountDownValue;
+
+        protected override IArchitecture _Architecture
+        {
+            get => PointGame.Architecture;
+        }
 
         protected override void Awake()
         {

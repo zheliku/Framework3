@@ -13,6 +13,7 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
 
     public class AsyncUse3DExamplePanel : UIPanel3D
     {
+        protected override IArchitecture _Architecture { get; }
         protected override void Awake()
         {
             base.Awake();
@@ -24,7 +25,7 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
             base.OnEnable();
             Debug.Log("AsyncUse3DExamplePanel OnEnable");
         }
-        
+
         protected override void OnDisable()
         {
             base.OnDisable();
@@ -36,7 +37,5 @@ namespace Framework3.Toolkits.UIKit.Example._1.AsyncUse
             base.OnDestroy();
             Debug.Log("AsyncUse3DExamplePanel OnDestroy");
         }
-
-        protected override IArchitecture _Architecture { get; }
     }
 }

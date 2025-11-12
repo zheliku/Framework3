@@ -19,19 +19,19 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
 
     public class BindableDictionaryExample : MonoBehaviour
     {
-        private BindableDictionary<string, string>  _nameDict   = new BindableDictionary<string, string>();
-        private Dictionary<string, TextMeshProUGUI> _recordDict = new Dictionary<string, TextMeshProUGUI>();
+        private readonly BindableDictionary<string, string>  _nameDict   = new();
+        private readonly Dictionary<string, TextMeshProUGUI> _recordDict = new();
+        private          Transform                           _contentRoot;
+        private          int                                 _count;
 
         private TextMeshProUGUI _txtNameTemplate;
-        private Transform       _contentRoot;
-        private int             _count;
 
         private void Awake()
         {
             _txtNameTemplate = GameObject.Find("Canvas/txtName").GetComponent<TextMeshProUGUI>();
-            _contentRoot = GameObject.Find("Canvas/ContentRoot").transform;
+            _contentRoot     = GameObject.Find("Canvas/ContentRoot").transform;
 
-            UnityEngineGameObjectExtension.DisableGameObject(_txtNameTemplate);
+            _txtNameTemplate.DisableGameObject();
 
             _nameDict.OnCountChanged.Register(OnNameDictCountChanged).UnregisterWhenGameObjectDestroyed(gameObject);
             _nameDict.OnAdd.Register(OnNameDictAdd).UnregisterWhenGameObjectDestroyed(gameObject);
@@ -50,9 +50,9 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
             Debug.Log("OnNameDictAdd: " + key + ", " + value);
 
             var text = _txtNameTemplate
-                      .Instantiate(_contentRoot)
-                      .EnableGameObject()
-                      .Self(txt => txt.text = $"{key}: {value}");
+               .Instantiate(_contentRoot)
+               .EnableGameObject()
+               .Self(txt => txt.text = $"{key}: {value}");
             _recordDict.Add(key, text);
         }
 
@@ -83,7 +83,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
         {
             _nameDict.Add("Key " + ++_count, Random.Range(0, 100).ToString());
         }
-        
+
         public void Remove()
         {
             if (_nameDict.Count > 0)
@@ -91,7 +91,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
                 _nameDict.Remove(_nameDict.Keys.First());
             }
         }
-        
+
         public void Replace()
         {
             if (_nameDict.Count > 0)
@@ -99,7 +99,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableDictionary
                 _nameDict[_nameDict.Keys.First()] = _nameDict.Keys.First() + ": " + Random.Range(0, 100);
             }
         }
-        
+
         public void Clear()
         {
             _nameDict.Clear();

@@ -7,6 +7,19 @@
 
     public class CommandWithResultExample : MonoBehaviour
     {
+        private void Start()
+        {
+            Debug.Log(ExampleArchitecture.Architecture.SendCommand(new SimpleResultCommand()));
+            StartCoroutine(ExampleArchitecture.Architecture.SendCommand(new ACoroutineCommand()));
+            SendTaskACommand();
+        }
+
+        private async void SendTaskACommand()
+        {
+            var result = await ExampleArchitecture.Architecture.SendCommand(new TaskACommand());
+            Debug.Log("A Task Command Result: " + result + ", time: " + Time.time); // 输出 1.5f，因为异步时间与 Time.time 不严格同步
+        }
+
         public class ExampleArchitecture : AbstractArchitecture<ExampleArchitecture>
         {
             protected override void Init() { }
@@ -37,19 +50,6 @@
                 await Task.Delay(TimeSpan.FromSeconds(2f));
                 return true;
             }
-        }
-
-        void Start()
-        {
-            Debug.Log(ExampleArchitecture.Architecture.SendCommand(new SimpleResultCommand()));
-            StartCoroutine(ExampleArchitecture.Architecture.SendCommand(new ACoroutineCommand()));
-            SendTaskACommand();
-        }
-
-        async void SendTaskACommand()
-        {
-            var result = await ExampleArchitecture.Architecture.SendCommand(new TaskACommand());
-            Debug.Log("A Task Command Result: " + result + ", time: " + Time.time); // 输出 1.5f，因为异步时间与 Time.time 不严格同步
         }
     }
 }

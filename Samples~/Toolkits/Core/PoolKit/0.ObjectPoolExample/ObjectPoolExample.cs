@@ -13,8 +13,6 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
 
     public class ObjectPoolExample : MonoBehaviour
     {
-        private ObjectPool<GameObject> _objectPool;
-
         [SerializeField]
         private Image _imageItem;
 
@@ -23,8 +21,9 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
 
         [SerializeField]
         private Transform _useParent;
+        private ObjectPool<GameObject> _objectPool;
 
-        void Start()
+        private void Start()
         {
             _objectPool = new ObjectPool<GameObject>(
                 () =>
@@ -34,17 +33,17 @@ namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
                     image.color = Color.gray;
                     return image.gameObject;
                 },
-                actionOnGet: gameObj =>
+                gameObj =>
                 {
                     gameObj.transform.SetParent(_useParent);
                     gameObj.GetComponent<Image>().color = Color.white;
                 },
-                actionOnRelease: gameObj =>
+                gameObj =>
                 {
                     gameObj.transform.SetParent(_poolParent);
                     gameObj.GetComponent<Image>().color = Color.gray;
                 },
-                actionOnDestroy: Destroy,
+                Destroy,
                 defaultCapacity: 10);
         }
 

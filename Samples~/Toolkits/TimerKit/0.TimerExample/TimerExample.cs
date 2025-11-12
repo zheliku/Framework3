@@ -15,23 +15,23 @@ namespace Framework3.Toolkits.TimerKit.Example
         public void StartTimer1()
         {
             TimerKit.Create(
-                (t) => Debug.Log("Timer 1: " + t.TickCount + " Count"),
+                t => Debug.Log("Timer 1: " + t.TickCount + " Count"),
                 1,
                 -1);
         }
-        
+
         public void StartTimer2()
         {
             TimerKit.Create(
-                (t) => Debug.Log("Timer 2: " + t.TickCount + " Count"),
+                t => Debug.Log("Timer 2: " + t.TickCount + " Count"),
                 2,
                 3);
         }
-        
+
         public void StartTimer3()
         {
             TimerKit.Create(
-                (t) => Debug.Log("Timer 3: " + t.TickCount + " Count"),
+                t => Debug.Log("Timer 3: " + t.TickCount + " Count"),
                 3,
                 3);
         }

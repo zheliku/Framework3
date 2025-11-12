@@ -9,14 +9,17 @@
 namespace Framework3.Core.Example._0.CounterApp.Scripts.Model
 {
     using Utility;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     // 计数应用模型，实现了 ICounterAppModel 接口，继承自 AbstractModel
     public class CounterAppModel : AbstractModel, ICounterAppModel
     {
-        #if ODIN_INSPECTOR
-[ShowInInspector]
-#endif
-        public BindableProperty<int> Count { get; set; } = new BindableProperty<int>();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public BindableProperty<int> Count { get; set; } = new();
 
         protected override void OnInit()
         {

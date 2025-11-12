@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                     Cube.transform.Translate(Vector3.up * (Speed * Time.deltaTime));
                 }
             }, InputType.Hold);
-            
+
             OldInputKit.RegisterKeyCode(KeyCode.S, (oldValue, value) =>
             {
                 if (value)
@@ -33,7 +33,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                     Cube.transform.Translate(Vector3.down * (Speed * Time.deltaTime));
                 }
             }, InputType.Hold);
-            
+
             OldInputKit.RegisterKeyCode(KeyCode.A, (oldValue, value) =>
             {
                 if (value)
@@ -41,7 +41,7 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                     Cube.transform.Translate(Vector3.left * (Speed * Time.deltaTime));
                 }
             }, InputType.Hold);
-            
+
             OldInputKit.RegisterKeyCode(KeyCode.D, (oldValue, value) =>
             {
                 if (value)
@@ -56,12 +56,10 @@ namespace Framework3.Toolkits.InputKit.Example._2.KeyCode
                 {
                     OldInputKit.UnregisterKeyCode(KeyCode.A);
                 }
-            }, InputType.Press);
+            });
         }
 
         private void Update()
-        {
-            
-        }
+        { }
     }
 }

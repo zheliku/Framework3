@@ -17,15 +17,15 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
 
     public class BindableListExample : MonoBehaviour
     {
-        private BindableList<string> _nameList = new BindableList<string>();
+        private readonly BindableList<string> _nameList = new();
+        private          Transform            _contentRoot;
 
         private TextMeshProUGUI _txtNameTemplate;
-        private Transform       _contentRoot;
 
         private void Awake()
         {
             _txtNameTemplate = GameObject.Find("Canvas/txtName").GetComponent<TextMeshProUGUI>();
-            _contentRoot = GameObject.Find("Canvas/ContentRoot").transform;
+            _contentRoot     = GameObject.Find("Canvas/ContentRoot").transform;
 
             _txtNameTemplate.DisableGameObject();
 
@@ -47,9 +47,9 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
             Debug.Log("OnNameListAdd: " + index + ", " + item);
 
             _txtNameTemplate.Instantiate(_contentRoot)
-                            .SetSiblingIndex(index)
-                            .EnableGameObject()
-                            .text = item;
+               .SetSiblingIndex(index)
+               .EnableGameObject()
+               .text = item;
         }
 
         private void OnNameListMove(int oldIndex, int newIndex, string item)
@@ -84,7 +84,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
         {
             _nameList.Add("Name " + _nameList.Count);
         }
-        
+
         public void Move0To1()
         {
             if (_nameList.Count > 1)
@@ -92,7 +92,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
                 _nameList.Move(0, 1);
             }
         }
-        
+
         public void RemoveAt0()
         {
             if (_nameList.Count > 0)
@@ -100,7 +100,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
                 _nameList.RemoveAt(0);
             }
         }
-        
+
         public void ReplaceAt0()
         {
             if (_nameList.Count > 0)
@@ -108,7 +108,7 @@ namespace Framework3.Toolkits.Core.BindableKit.Example.BindableList
                 _nameList[0] = "Name " + _nameList.Count;
             }
         }
-        
+
         public void Clear()
         {
             _nameList.Clear();

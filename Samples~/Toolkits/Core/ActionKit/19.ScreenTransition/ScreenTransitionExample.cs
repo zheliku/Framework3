@@ -18,14 +18,14 @@ namespace Framework3.Toolkits.ActionKit.Example
                .FadeIn()
                .Start(this);
         }
-        
+
         public void FadeOut()
         {
             ActionKit.ScreenTransition
                .FadeOut()
                .Start(this);
         }
-        
+
         public void FadeInOut()
         {
             ActionKit.ScreenTransition
@@ -34,14 +34,14 @@ namespace Framework3.Toolkits.ActionKit.Example
                .OnOutFinish(() => { Debug.Log("Load Finished."); })
                .Start(this);
         }
-        
+
         public void FadeInWhite()
         {
             ActionKit.ScreenTransition
                .FadeIn(color: Color.white) // 参数设置
                .Start(this);
         }
-        
+
         public void FadeOutRed()
         {
             ActionKit.ScreenTransition
@@ -49,11 +49,11 @@ namespace Framework3.Toolkits.ActionKit.Example
                .Color(Color.red) // 方法设置
                .Start(this);
         }
-        
+
         public void FadeInOutSpecial()
         {
             ActionKit.ScreenTransition
-               .FadeInOut(fadeInDuration: 0.5f, fadeOutDuration: 0.5f)
+               .FadeInOut(0.5f, 0.5f)
                .In(fadeIn => fadeIn.Color(Color.green))
                .Out(fadeOut => fadeOut.Color(Color.blue))
                .Start(this);

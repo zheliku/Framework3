@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.ActionKit.Example
 
     public class GlobalMonoEventExample : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             ActionKit.OnUpdate.Register(() =>
             {

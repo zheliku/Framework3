@@ -19,11 +19,11 @@ namespace Framework3.Toolkits.TimerKit.Example
             {
                 Debug.Log("PassIntervalTime: 0.5s");
             }
-            
+
             // 每隔100帧打印一次
             if (TimerKit.PassIntervalFrame(this, 100))
             {
-                Debug.Log($"Passed 100 Frames: 100frames");
+                Debug.Log("Passed 100 Frames: 100frames");
             }
         }
     }

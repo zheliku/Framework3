@@ -9,7 +9,7 @@
 namespace Framework3.Core.Example._7.PointPointPoint.Scripts.System.ScoreSystem
 {
     using CountSownSystem;
-    using Framework3.Core.Example._7.PointPointPoint.Scripts.Model;
+    using Model;
 
     public class ScoreSystem : AbstractSystem, IScoreSystem
     {

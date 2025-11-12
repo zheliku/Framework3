@@ -13,12 +13,11 @@ namespace Framework3.Core.Example._4.BindableProperty
 
     public class BindablePropertyExample : AbstractView
     {
+        private readonly BindableProperty<int> _someValue = new();
         [HierarchyPath("/Canvas/SomeValue/Txt_Info")]
         private TextMeshProUGUI _someValueText;
 
-        private readonly BindableProperty<int> _someValue = new(0);
-        
-        void Start()
+        private void Start()
         {
             _someValue.Register((oldValue, newValue) =>
             {
@@ -34,10 +33,10 @@ namespace Framework3.Core.Example._4.BindableProperty
             Debug.Log("new BindableProperty<Test>(new Test(1)) == new Test(1)): " + (new BindableProperty<Test>(new Test(1)) == new Test(1)));
 
             // ReSharper disable ConditionIsAlwaysTrueOrFalse
-            Debug.Log("new BindableProperty<Test>(null) == null): " + (new BindableProperty<Test>(null) == null));
+            Debug.Log("new BindableProperty<Test>(null) == null): " + (new BindableProperty<Test>() == null));
             // ReSharper disable EqualExpressionComparison
-            Debug.Log("new BindableProperty<Test>(null) == new BindableProperty<Test>(null)): " + (new BindableProperty<Test>(null) == new BindableProperty<Test>(null)));
-            Debug.Log("null == new BindableProperty<Test>(null)): " + (null == new BindableProperty<Test>(null)));
+            Debug.Log("new BindableProperty<Test>(null) == new BindableProperty<Test>(null)): " + (new BindableProperty<Test>() == new BindableProperty<Test>()));
+            Debug.Log("null == new BindableProperty<Test>(null)): " + (null == new BindableProperty<Test>()));
         }
 
         public void SomeValuePlusPlus()
@@ -69,7 +68,7 @@ namespace Framework3.Core.Example._4.BindableProperty
             }
 
             // Return true if the fields match:
-            return (Value == test.Value);
+            return Value == test.Value;
         }
 
         protected bool Equals(Test other)
