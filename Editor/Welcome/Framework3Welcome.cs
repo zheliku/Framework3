@@ -32,9 +32,9 @@ namespace Framework3.Editor
         private Vector2 _scroll;
 
         [MenuItem(MenuPath, priority = 0)]
-        public static void ShowWindow(bool forceOpen = false)
+        public static void ShowWindow()
         {
-            if (!forceOpen && !ShouldPopForThisVersion()) return;
+            // if (!ShouldPopForThisVersion()) return;
 
             var win = GetWindow<Framework3Welcome>(true, "Welcome to Framework3", true);
             win.minSize = new Vector2(760, 520);
@@ -56,7 +56,7 @@ namespace Framework3.Editor
         private static void DelayedOpen()
         {
             EditorApplication.update -= DelayedOpen;
-            ShowWindow(forceOpen: true);
+            ShowWindow();
         }
 
         private static bool ShouldPopForThisVersion()
