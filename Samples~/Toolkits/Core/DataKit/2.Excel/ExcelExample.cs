@@ -10,12 +10,16 @@ using UnityEngine;
 
 namespace Framework3.Toolkits.Core.DataKit.Example._1Json
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using Toolkits.DataKit;
 
     public class ExcelExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         public ExcelSheet Sheet = new ExcelSheet();
 
         public string FileName  = "example";

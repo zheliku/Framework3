@@ -9,54 +9,61 @@
 namespace Framework3.Core
 {
     using System;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// View 基类
+    ///     View 基类
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class AbstractView : MonoBehaviour, IView
     {
-        [Button] [PropertyOrder(100)]
-        private void BindComponent()
-        {
-            this.BindHierarchyComponent();
-        }
-        
-        IArchitecture IBelongToArchitecture.Architecture
-        {
-            get => _Architecture;
-        }
+        /// <summary>
+        ///     子类需要指定该 View 属于哪个 Architecture
+        /// </summary>
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        protected abstract IArchitecture _Architecture { get; }
 
         protected virtual void Awake()
         {
             this.BindHierarchyComponent();
         }
 
-        /// <summary>
-        /// 子类需要指定该 View 属于哪个 Architecture
-        /// </summary>
-        [ShowInInspector]
-        protected abstract IArchitecture _Architecture { get; }
+        IArchitecture IBelongToArchitecture.Architecture
+        {
+            get => _Architecture;
+        }
+    #if ODIN_INSPECTOR
+        [Button] [PropertyOrder(100)]
+    #endif
+        private void BindComponent()
+        {
+            this.BindHierarchyComponent();
+        }
     }
 
     /// <summary>
-    /// 空路径：表示自己 <br/>
-    /// 以 "/" 开头：表示从根节点开始查找 <br/>
-    /// 其余情况：以自己为根结点的相对路径
+    ///     空路径：表示自己 <br />
+    ///     以 "/" 开头：表示从根节点开始查找 <br />
+    ///     其余情况：以自己为根结点的相对路径
     /// </summary>
     public class HierarchyPathAttribute : Attribute
     {
         public readonly string HierarchyPath;
-        
+
         public readonly bool LogErrorIfNotFound = true;
-        
+
         public HierarchyPathAttribute()
         {
             HierarchyPath = string.Empty;
         }
-        
+
         public HierarchyPathAttribute(bool logErrorIfNotFound)
         {
             LogErrorIfNotFound = logErrorIfNotFound;
@@ -64,7 +71,7 @@ namespace Framework3.Core
 
         public HierarchyPathAttribute(string hierarchyPath, bool logErrorIfNotFound = true)
         {
-            HierarchyPath = hierarchyPath;
+            HierarchyPath      = hierarchyPath;
             LogErrorIfNotFound = logErrorIfNotFound;
         }
     }

@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.FluentAPI
     public static class UnityEngineMathfExtension
     {
         /// <summary>
-        /// 使用线性插值计算两个值之间的插值。
+        ///     使用线性插值计算两个值之间的插值。
         /// </summary>
         /// <param name="self">插值因子，范围为 [0, 1]。</param>
         /// <param name="a">起始值。</param>
@@ -25,7 +25,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 使用线性插值计算两个角度之间的插值。
+        ///     使用线性插值计算两个角度之间的插值。
         /// </summary>
         /// <param name="self">插值因子，范围为 [0, 1]。</param>
         /// <param name="angle1">起始角度。</param>
@@ -37,7 +37,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 平滑过渡
+        ///     平滑过渡
         /// </summary>
         /// <param name="self">起始与目标值</param>
         /// <param name="speed">过渡速度</param>
@@ -48,7 +48,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 平滑过渡（角度）
+        ///     平滑过渡（角度）
         /// </summary>
         /// <param name="self">起始与目标值</param>
         /// <param name="speed">过渡速度</param>
@@ -59,7 +59,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取浮点数的绝对值。
+        ///     获取浮点数的绝对值。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>浮点数的绝对值。</returns>
@@ -69,7 +69,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取整数的绝对值。
+        ///     获取整数的绝对值。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>整数的绝对值。</returns>
@@ -79,7 +79,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数与目标浮点数之间的绝对差值。
+        ///     计算浮点数与目标浮点数之间的绝对差值。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <param name="to">目标浮点数。</param>
@@ -90,7 +90,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数与目标浮点数之间的绝对差值。
+        ///     计算整数与目标浮点数之间的绝对差值。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <param name="to">目标浮点数。</param>
@@ -101,7 +101,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数与目标整数之间的绝对差值。
+        ///     计算整数与目标整数之间的绝对差值。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <param name="to">目标整数。</param>
@@ -112,7 +112,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数与目标整数之间的绝对差值。
+        ///     计算浮点数与目标整数之间的绝对差值。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <param name="to">目标整数。</param>
@@ -123,7 +123,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 判断两个浮点数是否近似相等。
+        ///     判断两个浮点数是否近似相等。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <param name="other">另一个浮点数。</param>
@@ -134,7 +134,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 判断浮点数与整数是否近似相等。
+        ///     判断浮点数与整数是否近似相等。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <param name="other">整数值。</param>
@@ -145,7 +145,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 判断两个整数是否近似相等。
+        ///     判断两个整数是否近似相等。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <param name="other">另一个整数。</param>
@@ -156,7 +156,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 判断整数与浮点数是否近似相等。
+        ///     判断整数与浮点数是否近似相等。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <param name="other">浮点数值。</param>
@@ -167,7 +167,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的指数值（e^x）。
+        ///     计算浮点数的指数值（e^x）。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>浮点数的指数值。</returns>
@@ -177,7 +177,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的指数值（e^x）。
+        ///     计算整数的指数值（e^x）。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>整数的指数值。</returns>
@@ -187,7 +187,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的自然对数值（ln(x)）。
+        ///     计算浮点数的自然对数值（ln(x)）。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>浮点数的自然对数值。</returns>
@@ -197,7 +197,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的自然对数值（ln(x)）。
+        ///     计算整数的自然对数值（ln(x)）。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>整数的自然对数值。</returns>
@@ -207,7 +207,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的以 10 为底的对数值（log10(x)）。
+        ///     计算浮点数的以 10 为底的对数值（log10(x)）。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>浮点数的以 10 为底的对数值。</returns>
@@ -217,7 +217,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的以 10 为底的对数值（log10(x)）。
+        ///     计算整数的以 10 为底的对数值（log10(x)）。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>整数的以 10 为底的对数值。</returns>
@@ -227,7 +227,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的以指定底数的对数值（log_base(x)）。
+        ///     计算浮点数的以指定底数的对数值（log_base(x)）。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <param name="newBase">对数的底数。</param>
@@ -238,7 +238,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的以指定底数的对数值（log_base(x)）。
+        ///     计算整数的以指定底数的对数值（log_base(x)）。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <param name="newBase">对数的底数。</param>
@@ -249,7 +249,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的幂值（self^power）。
+        ///     计算浮点数的幂值（self^power）。
         /// </summary>
         /// <param name="self">底数。</param>
         /// <param name="power">指数。</param>
@@ -260,7 +260,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的幂值（self^power）。
+        ///     计算整数的幂值（self^power）。
         /// </summary>
         /// <param name="self">底数。</param>
         /// <param name="power">指数。</param>
@@ -271,7 +271,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的平方根。
+        ///     计算浮点数的平方根。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>浮点数的平方根。</returns>
@@ -281,7 +281,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的平方根。
+        ///     计算整数的平方根。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>整数的平方根。</returns>
@@ -291,7 +291,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取浮点数的符号值。
+        ///     获取浮点数的符号值。
         /// </summary>
         /// <param name="self">浮点数值。</param>
         /// <returns>如果为正数返回 1，负数返回 -1，零返回 0。</returns>
@@ -306,7 +306,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取整数的符号值。
+        ///     获取整数的符号值。
         /// </summary>
         /// <param name="self">整数值。</param>
         /// <returns>如果为正数返回 1，负数返回 -1，零返回 0。</returns>
@@ -321,7 +321,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的余弦值。
+        ///     计算浮点数的余弦值。
         /// </summary>
         /// <param name="self">浮点数值（弧度）。</param>
         /// <returns>浮点数的余弦值。</returns>
@@ -331,7 +331,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的余弦值。
+        ///     计算整数的余弦值。
         /// </summary>
         /// <param name="self">整数值（弧度）。</param>
         /// <returns>整数的余弦值。</returns>
@@ -341,7 +341,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的正弦值。
+        ///     计算浮点数的正弦值。
         /// </summary>
         /// <param name="self">浮点数值（弧度）。</param>
         /// <returns>浮点数的正弦值。</returns>
@@ -351,7 +351,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算整数的正弦值。
+        ///     计算整数的正弦值。
         /// </summary>
         /// <param name="self">整数值（弧度）。</param>
         /// <returns>整数的正弦值。</returns>
@@ -361,7 +361,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算浮点数的正切值。
+        ///     计算浮点数的正切值。
         /// </summary>
         /// <param name="self">浮点数值（弧度）。</param>
         /// <returns>浮点数的正切值。</returns>
@@ -370,7 +370,7 @@ namespace Framework3.Toolkits.FluentAPI
             return Mathf.Tan(self);
         }
         /// <summary>
-        /// 计算整数的正切值。
+        ///     计算整数的正切值。
         /// </summary>
         /// <param name="self">整数值（弧度）。</param>
         /// <returns>整数的正切值。</returns>
@@ -380,7 +380,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 角度转弧度
+        ///     角度转弧度
         /// </summary>
         /// <param name="self">角度</param>
         /// <returns>弧度</returns>
@@ -390,7 +390,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 角度转弧度
+        ///     角度转弧度
         /// </summary>
         /// <param name="self">角度</param>
         /// <returns>弧度</returns>
@@ -400,7 +400,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 弧度转角度
+        ///     弧度转角度
         /// </summary>
         /// <param name="self">弧度</param>
         /// <returns>角度</returns>
@@ -410,7 +410,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 弧度转角度
+        ///     弧度转角度
         /// </summary>
         /// <param name="self">弧度</param>
         /// <returns>角度</returns>
@@ -420,7 +420,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 计算二维向量的角度（以度为单位）。
+        ///     计算二维向量的角度（以度为单位）。
         /// </summary>
         /// <param name="self">二维向量</param>
         /// <returns>角度</returns>
@@ -430,7 +430,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 将浮点数限制在指定的最小值和最大值之间。
+        ///     将浮点数限制在指定的最小值和最大值之间。
         /// </summary>
         /// <param name="self">浮点数</param>
         /// <param name="min">最小值</param>
@@ -442,7 +442,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 将整数限制在指定的最小值和最大值之间。
+        ///     将整数限制在指定的最小值和最大值之间。
         /// </summary>
         /// <param name="self">浮点数</param>
         /// <param name="min">最小值</param>
@@ -454,7 +454,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 将浮点数限制在 0 到 1 之间。
+        ///     将浮点数限制在 0 到 1 之间。
         /// </summary>
         /// <param name="self">浮点数</param>
         /// <returns>限制后的值</returns>
@@ -464,13 +464,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最小值进行比较，返回两者中较小的float值
+        ///     与指定的最小值进行比较，返回两者中较小的float值
         /// </summary>
         /// <param name="self">当前float值</param>
         /// <param name="min">用于比较的最小值（float类型）</param>
         /// <returns>当前值与最小值中较小的那个float值</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float value = 5.5f;
         /// float result = value.MinWith(3.2f); // result将是3.2f
         /// </code>
@@ -481,13 +481,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最小值进行比较，返回两者中较小的float值
+        ///     与指定的最小值进行比较，返回两者中较小的float值
         /// </summary>
         /// <param name="self">当前float值</param>
         /// <param name="min">用于比较的最小值（int类型）</param>
         /// <returns>当前值与最小值中较小的那个值，转换为float类型返回</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float value = 5.5f;
         /// float result = value.MinWith(3); // result将是3.0f
         /// </code>
@@ -498,13 +498,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最小值进行比较，返回两者中较小的float值
+        ///     与指定的最小值进行比较，返回两者中较小的float值
         /// </summary>
         /// <param name="self">当前int值</param>
         /// <param name="min">用于比较的最小值（float类型）</param>
         /// <returns>当前值与最小值中较小的那个值，转换为float类型返回</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// int value = 5;
         /// float result = value.MinWith(3.2f); // result将是3.2f
         /// </code>
@@ -515,13 +515,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最小值进行比较，返回两者中较小的int值
+        ///     与指定的最小值进行比较，返回两者中较小的int值
         /// </summary>
         /// <param name="self">当前int值</param>
         /// <param name="min">用于比较的最小值（int类型）</param>
         /// <returns>当前值与最小值中较小的那个int值</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// int value = 5;
         /// int result = value.MinWith(3); // result将是3
         /// </code>
@@ -532,13 +532,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最大值进行比较，返回两者中较大的float值
+        ///     与指定的最大值进行比较，返回两者中较大的float值
         /// </summary>
         /// <param name="self">当前float值</param>
         /// <param name="max">用于比较的最大值（float类型）</param>
         /// <returns>当前值与最大值中较大的那个float值</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float value = 5.5f;
         /// float result = value.MaxWith(8.2f); // result将是8.2f
         /// </code>
@@ -549,13 +549,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最大值进行比较，返回两者中较大的float值
+        ///     与指定的最大值进行比较，返回两者中较大的float值
         /// </summary>
         /// <param name="self">当前float值</param>
         /// <param name="max">用于比较的最大值（int类型）</param>
         /// <returns>当前值与最大值中较大的那个值，转换为float类型返回</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float value = 5.5f;
         /// float result = value.MaxWith(8); // result将是8.0f
         /// </code>
@@ -566,13 +566,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最大值进行比较，返回两者中较大的float值
+        ///     与指定的最大值进行比较，返回两者中较大的float值
         /// </summary>
         /// <param name="self">当前int值</param>
         /// <param name="max">用于比较的最大值（float类型）</param>
         /// <returns>当前值与最大值中较大的那个值，转换为float类型返回</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// int value = 5;
         /// float result = value.MaxWith(8.2f); // result将是8.2f
         /// </code>
@@ -583,13 +583,13 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 与指定的最大值进行比较，返回两者中较大的int值
+        ///     与指定的最大值进行比较，返回两者中较大的int值
         /// </summary>
         /// <param name="self">当前int值</param>
         /// <param name="max">用于比较的最大值（int类型）</param>
         /// <returns>当前值与最大值中较大的那个int值</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// int value = 5;
         /// int result = value.MaxWith(8); // result将是8
         /// </code>
@@ -600,15 +600,15 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 将角度值（度）转换为2D方向向量
+        ///     将角度值（度）转换为2D方向向量
         /// </summary>
         /// <param name="self">角度值（度），0度表示右方向，逆时针为正方向</param>
         /// <returns>对应的2D方向向量，x分量为水平方向，y分量为垂直方向</returns>
         /// <remarks>
-        /// 内部会先将角度转换为弧度，再计算方向向量
+        ///     内部会先将角度转换为弧度，再计算方向向量
         /// </remarks>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float angle = 90f; // 90度（向上）
         /// Vector2 direction = angle.Deg2Direction2D(); // 结果为(0, 1)
         /// </code>
@@ -619,12 +619,12 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 将角度值（弧度）转换为2D方向向量
+        ///     将角度值（弧度）转换为2D方向向量
         /// </summary>
         /// <param name="self">角度值（弧度），0弧度表示右方向，逆时针为正方向</param>
         /// <returns>对应的2D方向向量，x分量为水平方向，y分量为垂直方向</returns>
         /// <example>
-        /// <code>
+        ///     <code>
         /// float radians = Mathf.PI / 2; // 90度（向上）
         /// Vector2 direction = radians.Rad2Direction2D(); // 结果为(0, 1)
         /// </code>

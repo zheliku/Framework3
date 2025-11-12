@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 注销器接口
+    ///     注销器接口
     /// </summary>
     public interface IUnregister
     {
         /// <summary>
-        /// 注销事件方法
+        ///     注销事件方法
         /// </summary>
         void Unregister();
     }

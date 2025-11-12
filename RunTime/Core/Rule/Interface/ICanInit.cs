@@ -9,22 +9,22 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 继承该接口，即可初始化
+    ///     继承该接口，即可初始化
     /// </summary>
     public interface ICanInit
     {
         /// <summary>
-        /// 是否已经初始化
+        ///     是否已经初始化
         /// </summary>
         bool Initialized { get; }
 
         /// <summary>
-        /// 初始化方法
+        ///     初始化方法
         /// </summary>
         void Init();
 
         /// <summary>
-        /// 反初始化方法
+        ///     反初始化方法
         /// </summary>
         void Deinit();
     }

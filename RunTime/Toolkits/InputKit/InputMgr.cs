@@ -9,17 +9,20 @@
 namespace Framework3.Toolkits.InputKit
 {
     using System.Collections.Generic;
-    using Core;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     [MonoSingletonPath("Framework3/InputKit")]
     public class InputMgr : MonoSingleton<InputMgr>
     {
     #region 字段
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public Dictionary<string, InputActionMapTracker> ActionMapTrackerDict { get; } = new();
 
     #endregion
@@ -42,7 +45,7 @@ namespace Framework3.Toolkits.InputKit
         }
 
         /// <summary>
-        /// 获取 InputAction 对应的 Mono
+        ///     获取 InputAction 对应的 Mono
         /// </summary>
         /// <param name="action">输入行为</param>
         /// <returns>InputAction 对应的 Mono</returns>
@@ -50,9 +53,9 @@ namespace Framework3.Toolkits.InputKit
         {
             return Instance.ActionMapTrackerDict[action.actionMap.name].InputActions[action.name];
         }
-        
+
         /// <summary>
-        /// 获取 InputAction 对应的 MapMono
+        ///     获取 InputAction 对应的 MapMono
         /// </summary>
         /// <param name="action">输入行为</param>
         /// <returns>InputAction 对应的 MapMono</returns>
@@ -60,9 +63,9 @@ namespace Framework3.Toolkits.InputKit
         {
             return Instance.ActionMapTrackerDict[action.actionMap.name];
         }
-        
+
         /// <summary>
-        /// 获取 InputActionMap 对应的 MapMono
+        ///     获取 InputActionMap 对应的 MapMono
         /// </summary>
         /// <param name="actionMap">输入行为地图</param>
         /// <returns>InputAction 对应的 MapMono</returns>

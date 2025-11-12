@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// IUnregisterList 扩展
+    ///     IUnregisterList 扩展
     /// </summary>
     public static class UnregisterListExtension
     {
         /// <summary>
-        /// 将注销器添加至 List
+        ///     将注销器添加至 List
         /// </summary>
         /// <param name="self">注销器</param>
         /// <param name="unregisterList">待添加的 List</param>
@@ -24,7 +24,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注销 List 中的所有事件
+        ///     注销 List 中的所有事件
         /// </summary>
         /// <param name="self">待注销的 List</param>
         public static void UnregisterAll(this IUnregisterList self)

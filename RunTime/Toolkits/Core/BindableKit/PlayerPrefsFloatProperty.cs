@@ -16,7 +16,7 @@ namespace Framework3.Toolkits.BindableKit
         public PlayerPrefsFloatProperty(string saveKey, float defaultValue = 0f)
         {
             _value = PlayerPrefs.GetFloat(saveKey, defaultValue);
-            
+
             Register((oldValue, value) => PlayerPrefs.SetFloat(saveKey, value));
         }
     }

@@ -10,30 +10,13 @@ namespace Framework3.Toolkits.UIKit
 {
     using Core;
     using FluentAPI;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public abstract class UIPanel : AbstractView, IPanel
     {
-        public Transform Transform { get => transform; }
-        
-        [ShowInInspector] [EnumToggleButtons]
-        public PanelState State
-        {
-            get;
-            protected set;
-        }
-
-        public void Show()
-        {
-            this.EnableGameObject();
-        }
-
-        public void Hide()
-        {
-            this.DisableGameObject();
-        }
-
         protected override void Awake()
         {
             base.Awake();
@@ -53,6 +36,26 @@ namespace Framework3.Toolkits.UIKit
         protected virtual void OnDestroy()
         {
             State = PanelState.Unloaded;
+        }
+        public Transform Transform { get => transform; }
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector] [EnumToggleButtons]
+    #endif
+        public PanelState State
+        {
+            get;
+            protected set;
+        }
+
+        public void Show()
+        {
+            this.EnableGameObject();
+        }
+
+        public void Hide()
+        {
+            this.DisableGameObject();
         }
     }
 }

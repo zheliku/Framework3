@@ -52,7 +52,7 @@ namespace Framework3.Toolkits.InputKit
         {
             return GetInputAction(actionName).UnregisterStarted(callback);
         }
-        
+
         public static InputAction UnregisterAllPerformed(string actionName, string actionMapName = "Player")
         {
             return GetInputAction(actionName).UnregisterPerformedAll();
@@ -67,7 +67,7 @@ namespace Framework3.Toolkits.InputKit
         {
             return GetInputAction(actionName).UnregisterStartedAll();
         }
-        
+
         public static InputAction UnregisterAll(string actionName, string actionMapName = "Player")
         {
             return GetInputAction(actionName).UnregisterAll();
@@ -87,12 +87,12 @@ namespace Framework3.Toolkits.InputKit
         {
             return GetInputAction(actionName).WasPerformedThisFrame();
         }
-        
+
         public static bool WasPressedThisFrame(string actionName, string actionMapName = "Player")
         {
             return GetInputAction(actionName).WasPressedThisFrame();
         }
-        
+
         public static bool WasReleasedThisFrame(string actionName, string actionMapName = "Player")
         {
             return GetInputAction(actionName).WasReleasedThisFrame();

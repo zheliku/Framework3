@@ -7,8 +7,11 @@ namespace Framework3.Toolkits.DataKit
     using System.Text;
     using FluentAPI;
     using OfficeOpenXml;
-    using Sirenix.OdinInspector;
+    using UnityEditor;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public enum ExcelFormat
     {
@@ -17,27 +20,18 @@ namespace Framework3.Toolkits.DataKit
     }
 
     /// <summary>
-    /// Excel 文件存储和读取器 <br/>
-    /// WebGL 端数据存储参考：<see href="https://blog.csdn.net/xiaotaiyang_gege/article/details/135862196"/>
+    ///     Excel 文件存储和读取器 <br />
+    ///     WebGL 端数据存储参考：<see href="https://blog.csdn.net/xiaotaiyang_gege/article/details/135862196" />
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public partial class ExcelSheet
     {
-#if UNITY_EDITOR
-        [UnityEditor.MenuItem("Framework3/DataKit/Open Excel Folder")]
-        public static void OpenExcelSavePath()
-        {
-            DataKit.ExcelSavePath.EnsureDirectoryExist();
-            UnityEditor.EditorUtility.RevealInFinder(DataKit.ExcelSavePath.ConvertToCurrentEnvironmentPath());
-        }
-#endif
-        
-        public Vector2Int Start { get; private set; } = Vector2Int.zero;
-
-        public Vector2Int End { get; private set; } = Vector2Int.one;
-
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private Dictionary<Vector2Int, string> _sheetDic = new Dictionary<Vector2Int, string>(); // 缓存当前数据的字典
+    #endif
+        private Dictionary<Vector2Int, string> _sheetDic = new(); // 缓存当前数据的字典
 
         public ExcelSheet() { }
 
@@ -45,6 +39,10 @@ namespace Framework3.Toolkits.DataKit
         {
             Load(filePath, sheetName, format);
         }
+
+        public Vector2Int Start { get; private set; } = Vector2Int.zero;
+
+        public Vector2Int End { get; private set; } = Vector2Int.one;
 
         public string this[int row, int col]
         {
@@ -74,10 +72,10 @@ namespace Framework3.Toolkits.DataKit
             get
             {
                 var rows = new List<List<string>>();
-                for (int i = 0; i < End.x; i++)
+                for (var i = 0; i < End.x; i++)
                 {
                     var row = new List<string>();
-                    for (int j = 0; j < End.y; j++)
+                    for (var j = 0; j < End.y; j++)
                     {
                         row.Add(this[i, j]);
                     }
@@ -92,10 +90,10 @@ namespace Framework3.Toolkits.DataKit
             get
             {
                 var columns = new List<List<string>>();
-                for (int j = 0; j < End.y; j++)
+                for (var j = 0; j < End.y; j++)
                 {
                     var column = new List<string>();
-                    for (int i = 0; i < End.x; i++)
+                    for (var i = 0; i < End.x; i++)
                     {
                         column.Add(this[i, j]);
                     }
@@ -104,9 +102,17 @@ namespace Framework3.Toolkits.DataKit
                 return columns;
             }
         }
+    #if UNITY_EDITOR
+        [MenuItem("Framework3/DataKit/Open Excel Folder")]
+        public static void OpenExcelSavePath()
+        {
+            DataKit.ExcelSavePath.EnsureDirectoryExist();
+            EditorUtility.RevealInFinder(DataKit.ExcelSavePath.ConvertToCurrentEnvironmentPath());
+        }
+    #endif
 
         /// <summary>
-        /// 处理输入路径，使得路径符合 ExcelSheet 下的路径
+        ///     处理输入路径，使得路径符合 ExcelSheet 下的路径
         /// </summary>
         private static string ProcessPath(string path)
         {
@@ -114,35 +120,35 @@ namespace Framework3.Toolkits.DataKit
         }
 
         /// <summary>
-        /// 存储 Excel 文件
+        ///     存储 Excel 文件
         /// </summary>
         /// <param name="filePath">文件路径，可以不写文件扩展名</param>
         /// <param name="sheetName">表名，如果没有指定表名，则使用文件名。若使用 csv 格式，则忽略此参数</param>
         /// <param name="format">保存的文件格式</param>
         public void Save(string filePath, string sheetName = null, ExcelFormat format = ExcelFormat.Xlsx)
         {
-            string fullPath = ProcessPath(filePath).           // 处理输入路径
+            var fullPath = ProcessPath(filePath).              // 处理输入路径
                 ChangeExtension(FileFormatToExtension(format)) // 确保文件路径扩展名为指定格式
                .EnsureDirectoryExist();                        // 确保文件所在目录存在
 
             switch (format)
             {
-                case ExcelFormat.Xlsx:
-                    SaveAsXlsx(fullPath, sheetName);
-                    break;
-                case ExcelFormat.Csv:
-                    SaveAsCsv(fullPath);
-                    break;
-                default: throw new ArgumentOutOfRangeException(nameof(format), format, null);
+            case ExcelFormat.Xlsx:
+                SaveAsXlsx(fullPath, sheetName);
+                break;
+            case ExcelFormat.Csv:
+                SaveAsCsv(fullPath);
+                break;
+            default: throw new ArgumentOutOfRangeException(nameof(format), format, null);
             }
-            
-#if UNITY_EDITOR
-            UnityEditor.AssetDatabase.Refresh();
-#endif
+
+        #if UNITY_EDITOR
+            AssetDatabase.Refresh();
+        #endif
         }
 
         /// <summary>
-        /// 读取 Excel 文件
+        ///     读取 Excel 文件
         /// </summary>
         /// <param name="filePath">文件相对路径，可以不写文件扩展名</param>
         /// <param name="sheetName">表名，如果没有指定表名，则使用文件名</param>
@@ -152,7 +158,7 @@ namespace Framework3.Toolkits.DataKit
             // 清空当前数据
             Clear();
 
-            string fullPath = ProcessPath(filePath).            // 处理输入路径
+            var fullPath = ProcessPath(filePath).               // 处理输入路径
                 ChangeExtension(FileFormatToExtension(format)); // 确保文件路径扩展名为指定格式
 
             if (!File.Exists(fullPath))
@@ -163,13 +169,13 @@ namespace Framework3.Toolkits.DataKit
 
             switch (format)
             {
-                case ExcelFormat.Xlsx:
-                    LoadFromXlsx(fullPath, sheetName);
-                    break;
-                case ExcelFormat.Csv:
-                    LoadFromCsv(fullPath);
-                    break;
-                default: throw new ArgumentOutOfRangeException(nameof(format), format, null);
+            case ExcelFormat.Xlsx:
+                LoadFromXlsx(fullPath, sheetName);
+                break;
+            case ExcelFormat.Csv:
+                LoadFromCsv(fullPath);
+                break;
+            default: throw new ArgumentOutOfRangeException(nameof(format), format, null);
             }
         }
 
@@ -181,11 +187,11 @@ namespace Framework3.Toolkits.DataKit
         }
 
         /// <summary>
-        /// 获取 Excel 文件中的所有表名
+        ///     获取 Excel 文件中的所有表名
         /// </summary>
         public static List<string> GetSheetNamesInExcel(string filePath)
         {
-            string fullPath = ProcessPath(filePath).                      // 处理输入路径
+            var fullPath = ProcessPath(filePath).                         // 处理输入路径
                 ChangeExtension(FileFormatToExtension(ExcelFormat.Xlsx)); // 确保文件路径扩展名为指定格式
 
             if (!File.Exists(fullPath)) return new List<string>();
@@ -198,7 +204,7 @@ namespace Framework3.Toolkits.DataKit
 
         public static bool ExistSheetInExcel(string filePath, string sheetName)
         {
-            string fullPath = ProcessPath(filePath).                      // 处理输入路径
+            var fullPath = ProcessPath(filePath).                         // 处理输入路径
                 ChangeExtension(FileFormatToExtension(ExcelFormat.Xlsx)); // 确保文件路径扩展名为指定格式
 
             if (!File.Exists(fullPath)) return false;
@@ -211,7 +217,7 @@ namespace Framework3.Toolkits.DataKit
 
         public static bool DeleteSheetInExcel(string filePath, string sheetName)
         {
-            string fullPath = ProcessPath(filePath).                      // 处理输入路径
+            var fullPath = ProcessPath(filePath).                         // 处理输入路径
                 ChangeExtension(FileFormatToExtension(ExcelFormat.Xlsx)); // 确保文件路径扩展名为指定格式
 
             if (!File.Exists(fullPath)) return false;
@@ -266,10 +272,10 @@ namespace Framework3.Toolkits.DataKit
 
         private void SaveAsCsv(string fullPath)
         {
-            using FileStream fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
+            using var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
 
             var idx = new Vector2Int(0, 0);
-            for (int i = 0; i < End.x; i++)
+            for (var i = 0; i < End.x; i++)
             {
                 idx.x = i;
                 idx.y = 0;
@@ -280,7 +286,7 @@ namespace Framework3.Toolkits.DataKit
                     fs.Write(Encoding.UTF8.GetBytes(value));
 
                 // 写入后续 value，需要添加 ","
-                for (int j = 1; j < End.y; j++)
+                for (var j = 1; j < End.y; j++)
                 {
                     idx.y = j;
                     value = "," + _sheetDic.GetValueOrDefault(idx, "");
@@ -315,9 +321,9 @@ namespace Framework3.Toolkits.DataKit
             End   = new Vector2Int(end.Row, end.Column);
 
             var cells = sheet.Cells;
-            for (int i = Start.x; i < End.x; i++)
+            for (var i = Start.x; i < End.x; i++)
             {
-                for (int j = Start.y; j < End.y; j++)
+                for (var j = Start.y; j < End.y; j++)
                 {
                     var value = cells[i + 1, j + 1].Text;
                     if (string.IsNullOrEmpty(value)) continue; // 有数据才记录
@@ -330,11 +336,11 @@ namespace Framework3.Toolkits.DataKit
         private void LoadFromCsv(string fullPath)
         {
             // 读取文件
-            string[] lines = File.ReadAllLines(fullPath); // 读取所有行
-            for (int i = 0; i < lines.Length; i++)
+            var lines = File.ReadAllLines(fullPath); // 读取所有行
+            for (var i = 0; i < lines.Length; i++)
             {
-                string[] line = lines[i].Split(','); // 读取一行，逗号分割
-                for (int j = 0; j < line.Length; j++)
+                var line = lines[i].Split(','); // 读取一行，逗号分割
+                for (var j = 0; j < line.Length; j++)
                 {
                     if (line[j] != "") // 有数据才记录
                     {

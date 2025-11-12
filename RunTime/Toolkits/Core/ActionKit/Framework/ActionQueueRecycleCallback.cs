@@ -13,23 +13,23 @@ namespace Framework3.Toolkits.ActionKit
     public struct ActionQueueRecycleCallback<T> : IActionQueueCallback where T : class, IAction
     {
         /// <summary>
-        /// 需要回收倒哪个 ObjectPool 中
+        ///     需要回收倒哪个 ObjectPool 中
         /// </summary>
         private ObjectPool<T> _pool;
 
         /// <summary>
-        /// 哪个 Action 需要回收
+        ///     哪个 Action 需要回收
         /// </summary>
         private T _action;
 
         public ActionQueueRecycleCallback(ObjectPool<T> pool, T action)
         {
-            _pool = pool;
+            _pool   = pool;
             _action = action;
         }
-        
+
         /// <summary>
-        /// 回收方法
+        ///     回收方法
         /// </summary>
         public void Call()
         {

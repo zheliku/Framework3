@@ -12,7 +12,7 @@ namespace Framework3.Core
     using UnityEngine.SceneManagement;
 
     /// <summary>
-    /// 场景卸载时的注销触发器
+    ///     场景卸载时的注销触发器
     /// </summary>
     public sealed class UnregisterCurrentSceneUnloadedTrigger : UnregisterTrigger
     {
@@ -42,7 +42,7 @@ namespace Framework3.Core
             SceneManager.sceneUnloaded -= OnSceneUnloaded; // 注销场景卸载事件
         }
 
-        void OnSceneUnloaded(Scene scene)
+        private void OnSceneUnloaded(Scene scene)
         {
             Unregister(); // 场景卸载时注销所有事件
         }

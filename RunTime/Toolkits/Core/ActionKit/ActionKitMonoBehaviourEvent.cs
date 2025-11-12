@@ -12,44 +12,54 @@ namespace Framework3.Toolkits.ActionKit
     using System.Collections;
     using Core;
     using SingletonKit;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 用于 ActionKit 的 MonoBehaviour 事件
+    ///     用于 ActionKit 的 MonoBehaviour 事件
     /// </summary>
     public class ActionKitMonoBehaviourEvent : MonoSingleton<ActionKitMonoBehaviourEvent>
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent OnUpdate = new EasyEvent();
+    #endif
+        public readonly EasyEvent<bool> OnApplicationFocusEvent = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent OnFixedUpdate = new EasyEvent();
+    #endif
+        public readonly EasyEvent<bool> OnApplicationPauseEvent = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent OnLateUpdate = new EasyEvent();
+    #endif
+        public readonly EasyEvent OnApplicationQuitEvent = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent OnGUIEvent = new EasyEvent();
+    #endif
+        public readonly EasyEvent OnFixedUpdate = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent<bool> OnApplicationFocusEvent = new EasyEvent<bool>();
+    #endif
+        public readonly EasyEvent OnGUIEvent = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent<bool> OnApplicationPauseEvent = new EasyEvent<bool>();
-
+    #endif
+        public readonly EasyEvent OnLateUpdate = new();
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public readonly EasyEvent OnApplicationQuitEvent = new EasyEvent();
+    #endif
+        public readonly EasyEvent OnUpdate = new();
 
         protected override void Update()
         {
             base.Update();
-            
-            OnUpdate?.Trigger();
-        }
 
-        private void OnGUI()
-        {
-            OnGUIEvent?.Trigger();
+            OnUpdate?.Trigger();
         }
 
         private void FixedUpdate()
@@ -60,6 +70,11 @@ namespace Framework3.Toolkits.ActionKit
         private void LateUpdate()
         {
             OnLateUpdate?.Trigger();
+        }
+
+        private void OnGUI()
+        {
+            OnGUIEvent?.Trigger();
         }
 
         private void OnApplicationFocus(bool hasFocus)

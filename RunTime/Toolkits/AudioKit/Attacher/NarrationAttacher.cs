@@ -8,11 +8,10 @@
 
 namespace Framework3.Toolkits.AudioKit
 {
-    using Core;
     using SingletonKit;
 
     /// <summary>
-    /// 仅用于挂载 Narration 的 AudioSource
+    ///     仅用于挂载 Narration 的 AudioSource
     /// </summary>
     [MonoSingletonPath("Framework3/AudioKit/AudioMgr/NarrationAttacher")]
     public class NarrationAttacher : MonoSingleton<NarrationAttacher>

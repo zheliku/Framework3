@@ -14,9 +14,9 @@ namespace Framework3.Toolkits.ActionKit
     public static class ActionExecutorExtension
     {
         public static bool UpdateAction(
-            this IActionExecutor             self,
-            IActionController                controller,
-            float                            deltaTime,
+            this IActionExecutor      self,
+            IActionController         controller,
+            float                     deltaTime,
             Action<IActionController> onFinish = null)
         {
             // 如果控制器中的动作未执行完成，并且执行动作成功
@@ -31,22 +31,22 @@ namespace Framework3.Toolkits.ActionKit
         }
 
         public static IAction ExecuteByUpdate(
-            this GameObject                  self,
-            IAction                          action,
-            IActionController                controller,
+            this GameObject           self,
+            IAction                   action,
+            IActionController         controller,
             Action<IActionController> onFinish = null)
         {
             if (action.Status == ActionStatus.Finished)
             {
                 action.Reset();
             }
-            
+
             var comp = self.gameObject.GetComponent<ActionExecutor>();
             if (!comp)
             {
                 comp = self.gameObject.AddComponent<ActionExecutor>();
             }
-            
+
             comp.Execute(controller, onFinish); // 挂载 ActionExecutor 帧更新执行 Action
             return action;
         }

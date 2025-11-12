@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// Utility 接口，自由实现扩展类，因此没有方法约束
+    ///     Utility 接口，自由实现扩展类，因此没有方法约束
     /// </summary>
     public interface IUtility
     { }

@@ -11,14 +11,29 @@ namespace Framework3.Toolkits.TableKit
     using System;
     using System.Collections;
     using System.Collections.Generic;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 目前仅支持 <c>TData</c> 为引用类型
+    ///     目前仅支持 <c>TData</c> 为引用类型
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class Table<TData> : IEnumerable<TData>, IDisposable where TData : class
     {
+        public void Dispose()
+        {
+            OnDispose();
+        }
+
+        public abstract IEnumerator<TData> GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
         protected abstract void OnAdd(TData data);
 
         protected abstract void OnRemove(TData data);
@@ -26,8 +41,6 @@ namespace Framework3.Toolkits.TableKit
         protected abstract void OnClear();
 
         protected abstract void OnDispose();
-
-        public abstract IEnumerator<TData> GetEnumerator();
 
         public void Add(TData data)
         {
@@ -42,16 +55,6 @@ namespace Framework3.Toolkits.TableKit
         public void Clear()
         {
             OnClear();
-        }
-
-        public void Dispose()
-        {
-            OnDispose();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

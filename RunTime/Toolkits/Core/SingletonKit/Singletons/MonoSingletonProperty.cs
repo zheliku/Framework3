@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.SingletonKit
     using UnityEngine;
 
     /// <summary>
-    /// 通过属性实现的 MonoSingleton，不占用父类的位置
+    ///     通过属性实现的 MonoSingleton，不占用父类的位置
     /// </summary>
     public static class MonoSingletonProperty<TSingleton> where TSingleton : MonoBehaviour, ISingleton
     {

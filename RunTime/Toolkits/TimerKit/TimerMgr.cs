@@ -12,63 +12,35 @@ namespace Framework3.Toolkits.TimerKit
     using System.Collections.Generic;
     using PoolKit;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     [MonoSingletonPath("Framework3/TimerKit/TimerMgr")]
     public class TimerMgr : MonoSingleton<TimerMgr>
     {
-        #region 字段
-
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly List<Timer> _timers = new List<Timer>();
-
-        [ShowInInspector]
-        public float ScaleTime
-        {
-            get => Time.time;
-        }
-
-        [ShowInInspector]
-        public float UnScaledTime
-        {
-            get => Time.unscaledTime;
-        }
-
-        private readonly object _lock = new();
-
-        #endregion
-
-        [ShowInInspector]
+    #endif
         public ObjectPool<Timer> TimerPool { get => SingletonPool<Timer>.Pool; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public Dictionary<object, float> TimeDict { get; } = new();
-        
+
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public Dictionary<object, float> FrameDict { get; } = new();
 
-        #region 公共方法
-
-        public Timer CreateTimer(Action<Timer> onTick, float duration, int repeat = 1,
-            TimerType timerType = TimerType.Scaled)
-        {
-            lock (_lock)
-            {
-                var timer = Timer.Spawn(onTick, duration, repeat, timerType);
-                _timers.Add(timer);
-                return timer;
-            }
-        }
-
-        #endregion
-
-        #region Unity 事件
+    #region Unity 事件
 
         protected override void Update()
         {
             base.Update();
-            
+
             lock (_lock)
             {
                 _timers.RemoveAll(timer =>
@@ -94,6 +66,48 @@ namespace Framework3.Toolkits.TimerKit
             }
         }
 
-        #endregion
+    #endregion
+
+    #region 公共方法
+
+        public Timer CreateTimer(Action<Timer> onTick, float duration, int repeat = 1,
+                                 TimerType     timerType = TimerType.Scaled)
+        {
+            lock (_lock)
+            {
+                var timer = Timer.Spawn(onTick, duration, repeat, timerType);
+                _timers.Add(timer);
+                return timer;
+            }
+        }
+
+    #endregion
+
+    #region 字段
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private readonly List<Timer> _timers = new();
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public float ScaleTime
+        {
+            get => Time.time;
+        }
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public float UnScaledTime
+        {
+            get => Time.unscaledTime;
+        }
+
+        private readonly object _lock = new();
+
+    #endregion
     }
 }

@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// View 接口
+    ///     View 接口
     /// </summary>
     public interface IView : // IBelongToArchitecture, 
         ICanGetModel,        // IView 可获取 Model
@@ -18,6 +18,5 @@ namespace Framework3.Core
         ICanRegisterEvent,   // IView 可注册 Event
         ICanSendCommand,     // IView 可发送 Command
         ICanSendQuery        // IView 可发送 Query
-    {
-    }
+    { }
 }

@@ -6,20 +6,23 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.ResKit
 {
     using System.Collections.Generic;
+    using UnityEngine;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 用于在 Inspector 中显示 Resources 资源的 Mono 对象
+    ///     用于在 Inspector 中显示 Resources 资源的 Mono 对象
     /// </summary>
     public class ResourcesMono : MonoBehaviour
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public Dictionary<string, ResourcesMonoInfo> ResMap = new Dictionary<string, ResourcesMonoInfo>();
+    #endif
+        public Dictionary<string, ResourcesMonoInfo> ResMap = new();
 
         public void BindRes(Object res)
         {
@@ -47,33 +50,41 @@ namespace Framework3.Toolkits.ResKit
     }
 
     /// <summary>
-    /// 显示在 Inspector 中的 Resources Info
+    ///     显示在 Inspector 中的 Resources Info
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class ResourcesMonoInfo
     {
-        /// <summary>
-        /// 显示 Resources 的资源加载路径
-        /// </summary>
-        [ShowInInspector] [LabelWidth(75)]
-        public string AssetPath { get; private set; }
-
-        /// <summary>
-        /// 显示 Resources 的资源
-        /// </summary>
-        [ShowInInspector] [LabelWidth(75)]
-        public Object Asset { get; private set; }
-
-        /// <summary>
-        /// 显示 Resources 的引用计数
-        /// </summary>
-        [ShowInInspector] [LabelWidth(75)]
-        public int RefCount { get; set; }
-
         public ResourcesMonoInfo(string assetPath, Object asset)
         {
             AssetPath = assetPath;
             Asset     = asset;
         }
+
+        /// <summary>
+        ///     显示 Resources 的资源加载路径
+        /// </summary>
+    #if ODIN_INSPECTOR
+        [ShowInInspector] [LabelWidth(75)]
+    #endif
+        public string AssetPath { get; private set; }
+
+        /// <summary>
+        ///     显示 Resources 的资源
+        /// </summary>
+    #if ODIN_INSPECTOR
+        [ShowInInspector] [LabelWidth(75)]
+    #endif
+        public Object Asset { get; private set; }
+
+        /// <summary>
+        ///     显示 Resources 的引用计数
+        /// </summary>
+    #if ODIN_INSPECTOR
+        [ShowInInspector] [LabelWidth(75)]
+    #endif
+        public int RefCount { get; set; }
     }
 }

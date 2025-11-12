@@ -8,12 +8,16 @@
 
 namespace Framework3.Toolkits.PoolKit.Example._1.SingletonObjectPoolExample
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
 
     public class SingletonObjectPoolExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private ObjectPool<ImageItem> _pool;
     
         [SerializeField]

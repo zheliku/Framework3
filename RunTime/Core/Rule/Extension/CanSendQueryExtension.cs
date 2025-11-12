@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// ICanSendQuery 的扩展实现
+    ///     ICanSendQuery 的扩展实现
     /// </summary>
     public static class CanSendQueryExtension
     {
         /// <summary>
-        /// 发送 Query 并返回结果
+        ///     发送 Query 并返回结果
         /// </summary>
         /// <typeparam name="TResult">查询结果的类型</typeparam>
         /// <param name="self">ICanSendQuery 实例</param>

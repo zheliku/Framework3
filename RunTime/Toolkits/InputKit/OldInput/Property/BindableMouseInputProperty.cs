@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.InputKit
 {
     using Core;
-    
+
     public enum MouseInputType
     {
         Left,

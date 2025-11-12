@@ -13,12 +13,12 @@ namespace Framework3.Toolkits.ResKit
     using Object = UnityEngine.Object;
 
     /// <summary>
-    /// 获取 Resources 对应的资源信息
+    ///     获取 Resources 对应的资源信息
     /// </summary>
     public static class IObjectExtension
     {
         /// <summary>
-        /// 获取 Resources 对应的资源加载路径
+        ///     获取 Resources 对应的资源加载路径
         /// </summary>
         public static string AssetPath(this Object obj)
         {
@@ -31,7 +31,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 获取 Resources 对应的资源加载路径
+        ///     获取 Resources 对应的资源加载路径
         /// </summary>
         public static string AssetPath<T>(this T obj) where T : Object
         {
@@ -44,15 +44,15 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 封装方法：卸载 Resources 并更新 Mono 显示
+        ///     封装方法：卸载 Resources 并更新 Mono 显示
         /// </summary>
         public static void Unload(this Object res)
         {
             ResKit.Unload(res);
         }
-        
+
         /// <summary>
-        /// 封装方法：卸载 Resources 并更新 Mono 显示
+        ///     封装方法：卸载 Resources 并更新 Mono 显示
         /// </summary>
         public static void Unload(this ResourceRequest req)
         {

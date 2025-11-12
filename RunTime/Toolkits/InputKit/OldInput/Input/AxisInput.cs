@@ -9,15 +9,40 @@
 namespace Framework3.Toolkits.InputKit
 {
     using System;
-    using Core;
     using System.Collections.Generic;
+    using Core;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
-    
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
+
     [MonoSingletonPath("Framework3/InputKit/AxisInput")]
     public class AxisInput : MonoSingleton<AxisInput>
     {
+    #region Unity 事件
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (!OldInputKit.EnableAxis)
+            {
+                return;
+            }
+
+            foreach (var pair in _axisInputProperties)
+            {
+                var property = pair.Value;
+                property.Value = property.IsRaw ? Input.GetAxisRaw(pair.Key) : Input.GetAxis(pair.Key);
+            }
+
+            _horizontalAndVerticalProperty.Value    = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            _horizontalAndVerticalRawProperty.Value = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
+
+    #endregion
+
     #region Static
 
         public static string Horizontal = "Horizontal";
@@ -30,15 +55,21 @@ namespace Framework3.Toolkits.InputKit
 
     #region 字段
 
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelText("Axis")] [PropertySpace]
         [DictionaryDrawerSettings(KeyLabel = "Axis", ValueLabel = "Value")]
-        private Dictionary<string, BindableAxisInputProperty> _axisInputProperties = new Dictionary<string, BindableAxisInputProperty>();
+    #endif
+        private Dictionary<string, BindableAxisInputProperty> _axisInputProperties = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private BindableTwoAxisInputProperty _horizontalAndVerticalProperty = new BindableTwoAxisInputProperty(false);
+    #endif
+        private BindableTwoAxisInputProperty _horizontalAndVerticalProperty = new(false);
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private BindableTwoAxisInputProperty _horizontalAndVerticalRawProperty = new BindableTwoAxisInputProperty(true);
+    #endif
+        private BindableTwoAxisInputProperty _horizontalAndVerticalRawProperty = new(true);
 
     #endregion
 
@@ -81,8 +112,8 @@ namespace Framework3.Toolkits.InputKit
         public void RegisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
         {
             var value = isRaw
-                ? _horizontalAndVerticalRawProperty
-                : _horizontalAndVerticalProperty;
+                            ? _horizontalAndVerticalRawProperty
+                            : _horizontalAndVerticalProperty;
 
             value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
         }
@@ -90,8 +121,8 @@ namespace Framework3.Toolkits.InputKit
         public void UnregisterHorizontalAndVertical(Action<Vector2, Vector2> action, bool isRaw = false)
         {
             var value = isRaw
-                ? _horizontalAndVerticalRawProperty
-                : _horizontalAndVerticalProperty;
+                            ? _horizontalAndVerticalRawProperty
+                            : _horizontalAndVerticalProperty;
 
             value.Unregister(action);
         }
@@ -99,8 +130,8 @@ namespace Framework3.Toolkits.InputKit
         public void UnregisterHorizontalAndVertical(bool isRaw)
         {
             var value = isRaw
-                ? _horizontalAndVerticalRawProperty
-                : _horizontalAndVerticalProperty;
+                            ? _horizontalAndVerticalRawProperty
+                            : _horizontalAndVerticalProperty;
 
             value.UnregisterAll();
         }
@@ -119,33 +150,6 @@ namespace Framework3.Toolkits.InputKit
             }
 
             _axisInputProperties.Clear();
-        }
-
-    #endregion
-
-    #region 其他方法
-
-    #endregion
-
-    #region Unity 事件
-
-        protected override void Update()
-        {
-            base.Update();
-
-            if (!OldInputKit.EnableAxis)
-            {
-                return;
-            }
-
-            foreach (var pair in _axisInputProperties)
-            {
-                var property = pair.Value;
-                property.Value = property.IsRaw ? Input.GetAxisRaw(pair.Key) : Input.GetAxis(pair.Key);
-            }
-
-            _horizontalAndVerticalProperty.Value    = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            _horizontalAndVerticalRawProperty.Value = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
 
     #endregion

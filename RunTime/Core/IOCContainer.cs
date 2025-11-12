@@ -11,19 +11,23 @@ namespace Framework3.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// IOC 管理器
+    ///     IOC 管理器
     /// </summary>
     public sealed class IOCContainer
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private Dictionary<Type, object> _instances = new();
 
         /// <summary>
-        /// 注册实例
+        ///     注册实例
         /// </summary>
         /// <param name="instance">实例</param>
         /// <typeparam name="T">实例类型</typeparam>
@@ -34,7 +38,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 获取实例
+        ///     获取实例
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
         /// <returns>实例</returns>
@@ -53,7 +57,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 依据类型获取所有实例
+        ///     依据类型获取所有实例
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
         /// <returns>可枚举的所有实例</returns>
@@ -64,7 +68,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 清空容器
+        ///     清空容器
         /// </summary>
         public void Clear()
         {

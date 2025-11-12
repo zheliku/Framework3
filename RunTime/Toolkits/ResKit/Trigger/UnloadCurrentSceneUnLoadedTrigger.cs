@@ -41,7 +41,7 @@ namespace Framework3.Toolkits.ResKit
             SceneManager.sceneUnloaded -= OnSceneUnloaded; // 注销场景卸载事件
         }
 
-        void OnSceneUnloaded(Scene scene)
+        private void OnSceneUnloaded(Scene scene)
         {
             Unload(); // 场景卸载时卸载所有资源
         }

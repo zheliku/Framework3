@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.ActionKit
     using System.Collections.Generic;
 
     /// <summary>
-    /// 并行 Action
+    ///     并行 Action
     /// </summary>
     public interface IParallel : ISequence
     { }
@@ -43,7 +43,7 @@ namespace Framework3.Toolkits.ActionKit
 
         public override void OnExecute(float deltaTime)
         {
-            for (int i = _finishedCount; i < _actions.Count; i++) // 从未完成的 Action 开始执行
+            for (var i = _finishedCount; i < _actions.Count; i++) // 从未完成的 Action 开始执行
             {
                 if (!_actions[i].Execute(deltaTime)) continue;
 

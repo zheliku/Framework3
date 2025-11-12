@@ -9,7 +9,9 @@
 namespace Framework3.Toolkits.FSMKit.Example._2.FrameCount
 {
     using FluentAPI;
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -25,7 +27,9 @@ namespace Framework3.Toolkits.FSMKit.Example._2.FrameCount
             RotateTo
         }
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private FSM<States> _fsm = new FSM<States>();
 
         private Image _image;

@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.FluentAPI
     using UnityEngine.UI;
 
     /// <summary>
-    /// UnityEngine.UI.Graphic 静态扩展
+    ///     UnityEngine.UI.Graphic 静态扩展
     /// </summary>
     public static class UnityEngineUIGraphicExtension
     {

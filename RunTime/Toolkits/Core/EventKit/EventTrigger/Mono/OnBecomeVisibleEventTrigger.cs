@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnBecomeVisibleEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnBecameVisibleEvent = new EasyEvent();
+        public readonly EasyEvent OnBecameVisibleEvent = new();
 
         private void OnBecameVisible()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnBecomeVisibleEventTrigger>().OnBecameVisibleEvent
-                       .Register(onBecameVisible, priority);
+               .Register(onBecameVisible, priority);
         }
 
         public static IUnregister OnBecameVisibleEvent(this GameObject self, Action onBecameVisible, float priority = 0)
         {
             return self.GetOrAddComponent<OnBecomeVisibleEventTrigger>().OnBecameVisibleEvent
-                       .Register(onBecameVisible, priority);
+               .Register(onBecameVisible, priority);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Framework3.Toolkits.AudioKit
             player.playEvent.RegisterOnFinish(onFinish);
             return player;
         }
-        
+
         public static AudioPlayer VolumeScale(this AudioPlayer player, float volumeScale)
         {
             player.volumeScale = volumeScale;

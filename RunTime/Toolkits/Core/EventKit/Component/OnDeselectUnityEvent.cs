@@ -1,6 +1,6 @@
 ﻿/****************************************************************************
  * Copyright (c) 2015 - 2024 liangxiegame UNDER MIT License
- * 
+ *
  * https://qframework.cn
  * https://github.com/liangxiegame/QFramework
  * https://gitee.com/liangxiegame/QFramework
@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.EventKit
     using UnityEngine.Events;
     using UnityEngine.EventSystems;
 
-    public class OnDeselectUnityEvent: MonoBehaviour, IDeselectHandler
+    public class OnDeselectUnityEvent : MonoBehaviour, IDeselectHandler
     {
         public UnityEvent<BaseEventData> OnDeselectEvent;
 

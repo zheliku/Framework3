@@ -14,17 +14,17 @@ namespace Framework3.Toolkits.InputKit
     public class BindableAxisInputProperty : BindableProperty<float>
     {
         public bool IsRaw;
-        
+
         public BindableAxisInputProperty(bool isRaw) : base(0, true)
         {
             IsRaw = isRaw;
         }
     }
-    
+
     public class BindableTwoAxisInputProperty : BindableProperty<Vector2>
     {
         public bool IsRaw;
-        
+
         public BindableTwoAxisInputProperty(bool isRaw) : base(Vector2.zero, true)
         {
             IsRaw = isRaw;

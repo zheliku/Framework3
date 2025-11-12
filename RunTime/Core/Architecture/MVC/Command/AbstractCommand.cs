@@ -8,12 +8,16 @@
 
 namespace Framework3.Core
 {
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// Command 基类，执行后无返回值
+    ///     Command 基类，执行后无返回值
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class AbstractCommand : ICommand
     {
         private IArchitecture _architecture;
@@ -34,15 +38,17 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 执行方法，需要由子类实现
+        ///     执行方法，需要由子类实现
         /// </summary>
         protected abstract void OnExecute();
     }
 
     /// <summary>
-    /// Command 基类，执行后有返回值
+    ///     Command 基类，执行后有返回值
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class AbstractCommand<TResult> : ICommand<TResult>
     {
         private IArchitecture _architecture;
@@ -63,7 +69,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 执行方法，需要由子类实现
+        ///     执行方法，需要由子类实现
         /// </summary>
         protected abstract TResult OnExecute();
     }

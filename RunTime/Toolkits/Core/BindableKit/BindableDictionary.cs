@@ -6,15 +6,13 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.BindableKit
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using Framework3.Core;
+    using Core;
 
     [Serializable]
     public class BindableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
@@ -61,9 +59,9 @@ namespace Framework3.Toolkits.BindableKit
         }
 
         /// <summary>
-        /// TKey:key
-        /// TValue:oldValue
-        /// TValue:newValue
+        ///     TKey:key
+        ///     TValue:oldValue
+        ///     TValue:newValue
         /// </summary>
         public EasyEvent<TKey, TValue, TValue> OnReplace
         {

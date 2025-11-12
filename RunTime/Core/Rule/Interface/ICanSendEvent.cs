@@ -9,9 +9,8 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 可发送 Event，通过 Architecture 发送，由 CanSendEventExtension 扩展实现
+    ///     可发送 Event，通过 Architecture 发送，由 CanSendEventExtension 扩展实现
     /// </summary>
     public interface ICanSendEvent : IBelongToArchitecture
-    {
-    }
+    { }
 }

@@ -15,28 +15,28 @@ namespace Framework3.Toolkits.UIKit
         Loaded,
         Shown,
         Hidden,
-        Unloaded,
+        Unloaded
     }
-    
+
     public interface IPanel
     {
         /// <summary>
-        /// Panel 依附的 Transform
+        ///     Panel 依附的 Transform
         /// </summary>
         Transform Transform { get; }
 
         /// <summary>
-        /// Panel 状态
+        ///     Panel 状态
         /// </summary>
         PanelState State { get; }
 
         /// <summary>
-        /// 显示 Panel
+        ///     显示 Panel
         /// </summary>
         void Show();
 
         /// <summary>
-        /// 隐藏 Panel
+        ///     隐藏 Panel
         /// </summary>
         void Hide();
     }

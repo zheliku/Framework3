@@ -12,9 +12,9 @@ namespace Framework3.Toolkits.ActionKit
     using UnityEngine;
 
     /// <summary>
-    /// 见 <see href="https://dotween.demigiant.com/documentation.php"/> 中的 <c>SetEase()</c> <br/>
-    /// 图像： <see href="https://blog.51cto.com/u_16452213/9713116"/> <br/>
-    /// 网页分析：<see href="https://blog.csdn.net/njiyue/article/details/141197904"/>
+    ///     见 <see href="https://dotween.demigiant.com/documentation.php" /> 中的 <c>SetEase()</c> <br />
+    ///     图像： <see href="https://blog.51cto.com/u_16452213/9713116" /> <br />
+    ///     网页分析：<see href="https://blog.csdn.net/njiyue/article/details/141197904" />
     /// </summary>
     public static class EasyTween
     {
@@ -27,15 +27,15 @@ namespace Framework3.Toolkits.ActionKit
         {
             var mid = (start + end) * 0.5f;
             return t < 0.5f
-                ? InBack(start, mid, t * 2, bounciness)
-                : OutBack(mid, end, (t - 0.5f) * 2, bounciness);
+                       ? InBack(start, mid, t * 2, bounciness)
+                       : OutBack(mid, end, (t - 0.5f) * 2, bounciness);
         }
 
         public static float InBack(float start, float end, float t, float bounciness = 1.5f)
         {
             // 动画的总距离
             var distance = end - start;
-            
+
             // t * t：表示位置平方，用于加速动画的进度。
             // ((bounciness + 1) * t - bounciness)：用于控制回弹的弹性效果，使得动画在达到最大值后反弹。
             return distance * t * t * ((bounciness + 1) * t - bounciness) + start;
@@ -51,18 +51,18 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutBounce(float start, float end, float t, float bounciness = 7.5625f)
         {
             return t < 0.5f
-                ? InBounce(start, (start + end) / 2, t * 2)
-                : OutBounce((start + end) / 2, end, (t - 0.5f) * 2);
+                       ? InBounce(start, (start + end) / 2, t * 2)
+                       : OutBounce((start + end) / 2, end, (t - 0.5f) * 2);
         }
 
         public static float OutBounce(float start, float end, float t, float bounciness = 7.5625f)
         {
             var distance = end - start;
-            
+
             // 第一阶段（t < 1/2.75）：以二次函数形式加速
             if (t < 1f / 2.75f)
                 return distance * (bounciness * t * t) + start;
-            
+
             // 第二阶段（1/2.75 <= t < 2/2.75）：开始减速，并逐渐接近终点
             if (t < 2f / 2.75f)
             {
@@ -92,8 +92,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutCircle(float start, float end, float t)
         {
             return t < 0.5f
-                ? InCircle(start, (start + end) / 2, t * 2)
-                : OutCircle((start + end) / 2, end, (t - 0.5f) * 2);
+                       ? InCircle(start, (start + end) / 2, t * 2)
+                       : OutCircle((start + end) / 2, end, (t - 0.5f) * 2);
         }
 
         public static float OutCircle(float start, float end, float t)
@@ -112,8 +112,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutCubic(float start, float end, float t)
         {
             return t < 0.5f
-                ? InCubic(start, (start + end) * 0.5f, t * 2)
-                : OutCubic((start + end) * 0.5f, end, (t - 0.5f) * 2);
+                       ? InCubic(start, (start + end) * 0.5f, t * 2)
+                       : OutCubic((start + end) * 0.5f, end, (t - 0.5f) * 2);
         }
 
         public static float OutCubic(float start, float end, float t)
@@ -131,8 +131,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutElastic(float start, float end, float t, float elasticity = 0.3f, float duration = 5.0f)
         {
             return t < 0.5f
-                ? InElastic(start, (start + end) * 0.5f, t * 2, elasticity, duration)
-                : OutElastic((start + end) * 0.5f, end, (t - 0.5f) * 2, elasticity, duration);
+                       ? InElastic(start, (start + end) * 0.5f, t * 2, elasticity, duration)
+                       : OutElastic((start + end) * 0.5f, end, (t - 0.5f) * 2, elasticity, duration);
         }
 
         public static float OutElastic(float start, float end, float t, float elasticity = 0.3f, float duration = 5.0f)
@@ -168,8 +168,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutExpo(float start, float end, float t)
         {
             return t < 0.5f
-                ? InExpo(start, (start + end) * 0.5f, t * 2)
-                : OutExpo((start + end) * 0.5f, end, (t - 0.5f) * 2);
+                       ? InExpo(start, (start + end) * 0.5f, t * 2)
+                       : OutExpo((start + end) * 0.5f, end, (t - 0.5f) * 2);
         }
 
         public static float OutExpo(float start, float end, float t)
@@ -187,8 +187,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutQuad(float start, float end, float t)
         {
             return t < 0.5f
-                ? InQuad(start, (start + end) * 0.5f, t * 2)
-                : OutQuad((start + end) * 0.5f, end, (t - 0.5f) * 2);
+                       ? InQuad(start, (start + end) * 0.5f, t * 2)
+                       : OutQuad((start + end) * 0.5f, end, (t - 0.5f) * 2);
         }
 
         public static float OutQuad(float start, float end, float t)
@@ -206,8 +206,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutQuart(float start, float end, float t)
         {
             return t < 0.5f
-                ? InQuart(start, (start + end) * 0.5f, t * 2)
-                : OutQuart((start + end) * 0.5f, end, (t - 0.5f) * 2);
+                       ? InQuart(start, (start + end) * 0.5f, t * 2)
+                       : OutQuart((start + end) * 0.5f, end, (t - 0.5f) * 2);
         }
 
         public static float OutQuart(float start, float end, float t)
@@ -225,8 +225,8 @@ namespace Framework3.Toolkits.ActionKit
         public static float InOutQuint(float start, float end, float t)
         {
             return t < 0.5f
-                ? InQuint(start, (start + end) * 0.5f, t * 2)
-                : OutQuint((start + end) * 0.5f, end, (t - 0.5f) * 2);
+                       ? InQuint(start, (start + end) * 0.5f, t * 2)
+                       : OutQuint((start + end) * 0.5f, end, (t - 0.5f) * 2);
         }
 
         public static float OutQuint(float start, float end, float t)

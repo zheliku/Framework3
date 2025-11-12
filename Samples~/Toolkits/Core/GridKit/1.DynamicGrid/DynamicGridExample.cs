@@ -8,12 +8,16 @@
 
 namespace Framework3.Toolkits.GridKit.Example._1.DynamicGrid
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
 
     public class DynamicGridExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private DynamicGrid<string> _grid;
 
         private void Start()

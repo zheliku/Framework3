@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// ICanGetModel 的扩展实现
+    ///     ICanGetModel 的扩展实现
     /// </summary>
     public static class CanGetModelExtension
     {
         /// <summary>
-        /// 获取指定类型的 Model
+        ///     获取指定类型的 Model
         /// </summary>
         /// <typeparam name="TModel">要获取的 Model 类型</typeparam>
         /// <param name="self">ICanGetModel 实例</param>

@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnMoveEventTrigger : MonoBehaviour, IMoveHandler
     {
-        public readonly EasyEvent<AxisEventData> OnMoveEvent = new EasyEvent<AxisEventData>();
+        public readonly EasyEvent<AxisEventData> OnMoveEvent = new();
 
         public void OnMove(AxisEventData eventData)
         {

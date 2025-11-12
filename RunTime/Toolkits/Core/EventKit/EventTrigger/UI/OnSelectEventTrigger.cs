@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnSelectEventTrigger : MonoBehaviour, ISelectHandler
     {
-        public readonly EasyEvent<BaseEventData> OnSelectEvent = new EasyEvent<BaseEventData>();
+        public readonly EasyEvent<BaseEventData> OnSelectEvent = new();
 
         public void OnSelect(BaseEventData eventData)
         {

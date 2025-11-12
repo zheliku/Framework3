@@ -8,9 +8,13 @@
 
 namespace Framework3.Core
 {
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class AbstractSystem : ISystem
     {
         private IArchitecture _architecture;
@@ -25,7 +29,9 @@ namespace Framework3.Core
             set => _architecture = value;
         }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public bool Initialized { get; protected set; }
 
         // 仅能通过 ICanInit 接口使用 Init 方法
@@ -42,12 +48,12 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 初始化方法，需要由子类实现
+        ///     初始化方法，需要由子类实现
         /// </summary>
         protected abstract void OnInit();
 
         /// <summary>
-        /// 反初始化方法
+        ///     反初始化方法
         /// </summary>
         protected virtual void OnDeinit() { }
     }

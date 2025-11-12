@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// ICanGetSystem 的扩展实现
+    ///     ICanGetSystem 的扩展实现
     /// </summary>
     public static class CanGetSystemExtension
     {
         /// <summary>
-        /// 获取指定类型的 System
+        ///     获取指定类型的 System
         /// </summary>
         /// <typeparam name="TSystem">要获取的 System 类型</typeparam>
         /// <param name="self">ICanGetSystem 实例</param>

@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnPointerDownEventTrigger : MonoBehaviour, IPointerDownHandler
     {
-        public readonly EasyEvent<PointerEventData> OnPointerDownEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnPointerDownEvent = new();
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -31,13 +31,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnPointerDownEventTrigger>().OnPointerDownEvent
-                       .Register(onPointerDownEvent, priority);
+               .Register(onPointerDownEvent, priority);
         }
 
         public static IUnregister OnPointerDownEvent(this GameObject self, Action<PointerEventData> onPointerDownEvent, float priority = 0)
         {
             return self.GetOrAddComponent<OnPointerDownEventTrigger>().OnPointerDownEvent
-                       .Register(onPointerDownEvent, priority);
+               .Register(onPointerDownEvent, priority);
         }
     }
 }

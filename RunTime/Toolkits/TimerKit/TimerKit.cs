@@ -12,12 +12,12 @@ namespace Framework3.Toolkits.TimerKit
     using UnityEngine;
 
     /// <summary>
-    /// TimerKit 提供用于创建和管理计时器的静态方法。
+    ///     TimerKit 提供用于创建和管理计时器的静态方法。
     /// </summary>
     public static class TimerKit
     {
         /// <summary>
-        /// 创建一个基于缩放时间的计时器。
+        ///     创建一个基于缩放时间的计时器。
         /// </summary>
         /// <param name="onTick">计时器触发时的回调函数。</param>
         /// <param name="duration">计时器的持续时间（秒）。</param>
@@ -25,11 +25,11 @@ namespace Framework3.Toolkits.TimerKit
         /// <returns>返回创建的计时器实例。</returns>
         public static Timer CreateScaled(Action<Timer> onTick, float duration, int repeat = 1)
         {
-            return TimerMgr.Instance.CreateTimer(onTick, duration, repeat, TimerType.Scaled);
+            return TimerMgr.Instance.CreateTimer(onTick, duration, repeat);
         }
 
         /// <summary>
-        /// 创建一个基于非缩放时间的计时器。
+        ///     创建一个基于非缩放时间的计时器。
         /// </summary>
         /// <param name="onTick">计时器触发时的回调函数。</param>
         /// <param name="duration">计时器的持续时间（秒）。</param>
@@ -41,7 +41,7 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 创建一个计时器，可以指定时间类型（缩放或非缩放）。
+        ///     创建一个计时器，可以指定时间类型（缩放或非缩放）。
         /// </summary>
         /// <param name="onTick">计时器触发时的回调函数。</param>
         /// <param name="duration">计时器的持续时间（秒）。</param>
@@ -54,7 +54,7 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 检查指定对象是否已超过给定的时间间隔。
+        ///     检查指定对象是否已超过给定的时间间隔。
         /// </summary>
         /// <param name="id">用于标识的对象。</param>
         /// <param name="interval">时间间隔（秒）。</param>
@@ -78,7 +78,7 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 检查指定对象是否已超过给定的帧间隔。
+        ///     检查指定对象是否已超过给定的帧间隔。
         /// </summary>
         /// <param name="id">用于标识的对象。</param>
         /// <param name="interval">帧间隔。</param>

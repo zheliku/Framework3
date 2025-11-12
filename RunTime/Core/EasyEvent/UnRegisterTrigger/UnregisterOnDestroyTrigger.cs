@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 对象销毁时的注销触发器
+    ///     对象销毁时的注销触发器
     /// </summary>
     public sealed class UnregisterOnDestroyTrigger : UnregisterTrigger
     {

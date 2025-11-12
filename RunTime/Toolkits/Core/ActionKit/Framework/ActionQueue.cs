@@ -9,36 +9,36 @@
 namespace Framework3.Toolkits.ActionKit
 {
     using System.Collections.Generic;
-    using Core;
     using SingletonKit;
-    using Sirenix.OdinInspector;
+    using UnityEditor;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     [MonoSingletonPath("Framework3/ActionKit/Queue")]
     public class ActionQueue : MonoBehaviour, ISingleton
     {
-        [ShowInInspector]
-        private static ActionQueue s_instance { get => MonoSingletonProperty<ActionQueue>.Instance; }
-
         /// <summary>
-        /// 回收列表
+        ///     回收列表
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly List<IActionQueueCallback> _actionQueueCallbacks = new List<IActionQueueCallback>();
-
-        public static void AddCallback(IActionQueueCallback actionQueueCallback)
-        {
-            s_instance._actionQueueCallbacks.Add(actionQueueCallback);
-        }
+    #endif
+        private readonly List<IActionQueueCallback> _actionQueueCallbacks = new();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private static ActionQueue s_instance { get => MonoSingletonProperty<ActionQueue>.Instance; }
 
         // Update is called once per frame
         private void Update()
         {
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
 
             // 强制刷新 Inspector GUI
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
+            EditorUtility.SetDirty(this);
+        #endif
 
             // 如果回调列表不为空，则立即回调
             if (_actionQueueCallbacks.Count > 0)
@@ -53,5 +53,10 @@ namespace Framework3.Toolkits.ActionKit
         }
 
         void ISingleton.OnSingletonInit() { }
+
+        public static void AddCallback(IActionQueueCallback actionQueueCallback)
+        {
+            s_instance._actionQueueCallbacks.Add(actionQueueCallback);
+        }
     }
 }

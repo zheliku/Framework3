@@ -9,118 +9,48 @@
 namespace Framework3.Toolkits.InputKit
 {
     using System;
-    using Core;
     using System.Collections.Generic;
+    using Core;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     [MonoSingletonPath("Framework3/InputKit/KeyCodeInput")]
     public class KeyCodeInput : MonoSingleton<KeyCodeInput>
     {
-    #region 字段
+    #region Unity 事件
 
-        [ShowInInspector] [LabelText("KeyCode Press")]
-        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
-        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodePressProperties = new Dictionary<KeyCode, BindableKeyCodeInputProperty>();
-
-        [ShowInInspector] [LabelText("KeyCode Hold")] [PropertySpace]
-        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
-        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodeHoldProperties = new Dictionary<KeyCode, BindableKeyCodeInputProperty>();
-
-        [ShowInInspector] [LabelText("KeyCode Release")] [PropertySpace]
-        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
-        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodeReleaseProperties = new Dictionary<KeyCode, BindableKeyCodeInputProperty>();
-
-    #endregion
-
-    #region 属性
-
-    #endregion
-
-    #region 公共方法
-
-        public void Register(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
+        protected override void Update()
         {
-            var dic = GetMouseDic(inputType);
+            base.Update();
 
-            if (!dic.TryGetValue(keyCode, out var value))
+            if (!OldInputKit.EnableKeyCode)
             {
-                value = new BindableKeyCodeInputProperty();
-
-                dic.Add(keyCode, value);
+                return;
             }
 
-            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
-        }
-        
-        public void Unregister(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
-        {
-            var dic = GetMouseDic(inputType);
-
-            if (dic.TryGetValue(keyCode, out var value))
-            {
-                value.Unregister(action);
-                
-                if (value.EventCount == 0)
-                {
-                    dic.Remove(keyCode);
-                }
-            }
-        }
-        
-        public void Unregister(KeyCode keyCode, InputType inputType)
-        {
-            var dic = GetMouseDic(inputType);
-
-            if (dic.TryGetValue(keyCode, out var value))
-            {
-                value.UnregisterAll();
-                dic.Remove(keyCode);
-            }
-        }
-        
-        public void Unregister(KeyCode keyCode)
-        {
-            if (_keyCodePressProperties.TryGetValue(keyCode, out var value))
-            {
-                value.UnregisterAll();
-                _keyCodePressProperties.Remove(keyCode);
-            }
-            
-            if (_keyCodeHoldProperties.TryGetValue(keyCode, out value))
-            {
-                value.UnregisterAll();
-                _keyCodeHoldProperties.Remove(keyCode);
-            }
-            
-            if (_keyCodeReleaseProperties.TryGetValue(keyCode, out value))
-            {
-                value.UnregisterAll();
-                _keyCodeReleaseProperties.Remove(keyCode);
-            }
-        }
-
-        public void UnregisterAll()
-        {
             foreach (var pair in _keyCodePressProperties)
             {
-                pair.Value.UnregisterAll();
+                var property = pair.Value;
+
+                property.Value = Input.GetKeyDown(pair.Key);
             }
-            
+
             foreach (var pair in _keyCodeHoldProperties)
             {
-                pair.Value.UnregisterAll();
+                var property = pair.Value;
+
+                property.Value = Input.GetKey(pair.Key);
             }
-            
+
             foreach (var pair in _keyCodeReleaseProperties)
             {
-                pair.Value.UnregisterAll();
+                var property = pair.Value;
+
+                property.Value = Input.GetKeyUp(pair.Key);
             }
-            
-            _keyCodePressProperties.Clear();
-            _keyCodeHoldProperties.Clear();
-            _keyCodeReleaseProperties.Clear();
         }
 
     #endregion
@@ -140,37 +70,114 @@ namespace Framework3.Toolkits.InputKit
 
     #endregion
 
-    #region Unity 事件
+    #region 字段
 
-        protected override void Update()
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+        [LabelText("KeyCode Press")]
+        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
+    #endif
+        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodePressProperties = new();
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+        [LabelText("KeyCode Hold")] [PropertySpace]
+        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
+    #endif
+        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodeHoldProperties = new();
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+        [LabelText("KeyCode Release")] [PropertySpace]
+        [DictionaryDrawerSettings(KeyLabel = "KeyCode", ValueLabel = "Value")]
+    #endif
+        private Dictionary<KeyCode, BindableKeyCodeInputProperty> _keyCodeReleaseProperties = new();
+
+    #endregion
+
+    #region 公共方法
+
+        public void Register(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
         {
-            base.Update();
+            var dic = GetMouseDic(inputType);
 
-            if (!OldInputKit.EnableKeyCode)
+            if (!dic.TryGetValue(keyCode, out var value))
             {
-                return;
+                value = new BindableKeyCodeInputProperty();
+
+                dic.Add(keyCode, value);
             }
-            
+
+            value.Register(action).UnregisterWhenGameObjectDestroyed(Instance);
+        }
+
+        public void Unregister(KeyCode keyCode, Action<bool, bool> action, InputType inputType)
+        {
+            var dic = GetMouseDic(inputType);
+
+            if (dic.TryGetValue(keyCode, out var value))
+            {
+                value.Unregister(action);
+
+                if (value.EventCount == 0)
+                {
+                    dic.Remove(keyCode);
+                }
+            }
+        }
+
+        public void Unregister(KeyCode keyCode, InputType inputType)
+        {
+            var dic = GetMouseDic(inputType);
+
+            if (dic.TryGetValue(keyCode, out var value))
+            {
+                value.UnregisterAll();
+                dic.Remove(keyCode);
+            }
+        }
+
+        public void Unregister(KeyCode keyCode)
+        {
+            if (_keyCodePressProperties.TryGetValue(keyCode, out var value))
+            {
+                value.UnregisterAll();
+                _keyCodePressProperties.Remove(keyCode);
+            }
+
+            if (_keyCodeHoldProperties.TryGetValue(keyCode, out value))
+            {
+                value.UnregisterAll();
+                _keyCodeHoldProperties.Remove(keyCode);
+            }
+
+            if (_keyCodeReleaseProperties.TryGetValue(keyCode, out value))
+            {
+                value.UnregisterAll();
+                _keyCodeReleaseProperties.Remove(keyCode);
+            }
+        }
+
+        public void UnregisterAll()
+        {
             foreach (var pair in _keyCodePressProperties)
             {
-                var property = pair.Value;
-
-                property.Value = Input.GetKeyDown(pair.Key);
+                pair.Value.UnregisterAll();
             }
-            
+
             foreach (var pair in _keyCodeHoldProperties)
             {
-                var property = pair.Value;
-
-                property.Value = Input.GetKey(pair.Key);
+                pair.Value.UnregisterAll();
             }
-            
+
             foreach (var pair in _keyCodeReleaseProperties)
             {
-                var property = pair.Value;
-
-                property.Value = Input.GetKeyUp(pair.Key);
+                pair.Value.UnregisterAll();
             }
+
+            _keyCodePressProperties.Clear();
+            _keyCodeHoldProperties.Clear();
+            _keyCodeReleaseProperties.Clear();
         }
 
     #endregion

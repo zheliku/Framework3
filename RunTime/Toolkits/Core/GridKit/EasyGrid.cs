@@ -6,32 +6,39 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.GridKit
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
+    using Core;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 密集型网格
+    ///     密集型网格
     /// </summary>
     /// <typeparam name="TValue">网格单元存储的数据类型（如单元格预制体、数值、状态标记等）</typeparam>
-    [HideReferenceObjectPicker] // Odin Inspector特性：隐藏网格实例的引用对象选择器，简化编辑器中网格对象的引用配置
+#if ODIN_INSPECTOR
+    [HideReferenceObjectPicker]
+    // Odin Inspector特性：隐藏网格实例的引用对象选择器，简化编辑器中网格对象的引用配置
+#endif
     public class EasyGrid<TValue> : IEnumerable<KeyValuePair<Vector2Int, TValue>>
     {
         /// <summary>
-        /// 存储网格数据的核心二维数组（密集存储，每个行列位置均占用内存，即使值为默认）
+        ///     存储网格数据的核心二维数组（密集存储，每个行列位置均占用内存，即使值为默认）
         /// </summary>
-        [ShowInInspector] // Odin Inspector特性：在编辑器中可视化网格数据
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+        // Odin Inspector特性：在编辑器中可视化网格数据
         [TableMatrix(Transpose = true)] // 自定义二维数组在编辑器中的显示样式（表格矩阵，行列转置以匹配直观的网格展示）
+    #endif
         private TValue[,] _grid;
 
         /// <summary>
-        /// 初始化指定行列数的密集型网格实例
+        ///     初始化指定行列数的密集型网格实例
         /// </summary>
         /// <param name="row">网格的总行数（必须大于0，否则二维数组初始化会抛异常）</param>
         /// <param name="column">网格的总列数（必须大于0，否则二维数组初始化会抛异常）</param>
@@ -42,24 +49,24 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 获取当前网格的总行数（只读，由二维数组长度决定）
+        ///     获取当前网格的总行数（只读，由二维数组长度决定）
         /// </summary>
         public int Row { get => _grid.GetLength(0); }
 
         /// <summary>
-        /// 获取当前网格的总列数（只读，由二维数组长度决定）
+        ///     获取当前网格的总列数（只读，由二维数组长度决定）
         /// </summary>
         public int Column { get => _grid.GetLength(1); }
 
         /// <summary>
-        /// 通过【行索引+列索引】安全访问或设置网格单元数据（索引器）
+        ///     通过【行索引+列索引】安全访问或设置网格单元数据（索引器）
         /// </summary>
-        /// <param name="row">目标单元的行索引（范围：0 ≤ row &lt; <see cref="Row"/>）</param>
-        /// <param name="column">目标单元的列索引（范围：0 ≤ column &lt; <see cref="Column"/>）</param>
+        /// <param name="row">目标单元的行索引（范围：0 ≤ row &lt; <see cref="Row" />）</param>
+        /// <param name="column">目标单元的列索引（范围：0 ≤ column &lt; <see cref="Column" />）</param>
         /// <value>目标位置的单元数据；设置时会覆盖原有数据（若在合法范围内）</value>
         /// <exception cref="FrameworkException">当索引超出【0~Row-1】或【0~Column-1】范围时抛出，提示索引越界</exception>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 初始化5行3列的网格
         /// var grid = new EasyGrid&lt;int>(5, 3);
         /// // 设置(2,1)位置的数值为10（合法索引）
@@ -97,12 +104,40 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 用指定的统一值填充整个网格（覆盖所有单元原有数据）
+        ///     实现<see cref="IEnumerable{KeyValuePair{Vector2Int, TValue}}" />接口，获取网格的枚举器（按行优先顺序）
+        /// </summary>
+        /// <returns>枚举器：每个元素为键值对（Key为Vector2Int类型位置，Value为单元数据）</returns>
+        /// <remarks>支持foreach遍历网格，自动将行列索引转换为Vector2Int（x=行，y=列），简化外部使用</remarks>
+        public IEnumerator<KeyValuePair<Vector2Int, TValue>> GetEnumerator()
+        {
+            for (var i = 0; i < Row; i++)
+            {
+                for (var j = 0; j < Column; j++)
+                {
+                    yield return new KeyValuePair<Vector2Int, TValue>(
+                        new Vector2Int(i, j),
+                        _grid[i, j]
+                    );
+                }
+            }
+        }
+
+        /// <summary>
+        ///     实现<see cref="IEnumerable" />接口，获取非泛型枚举器（内部调用泛型枚举器实现）
+        /// </summary>
+        /// <returns>非泛型枚举器</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        /// <summary>
+        ///     用指定的统一值填充整个网格（覆盖所有单元原有数据）
         /// </summary>
         /// <param name="value">用于填充的统一值（可为&lt;TValue>的默认值，如null、0等）</param>
         /// <remarks>适用于网格初始化、批量重置场景（如棋盘重置为空白状态、数值网格重置为0）</remarks>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 将5x3的网格所有单元填充为0
         /// var grid = new EasyGrid&lt;int>(5, 3);
         /// grid.Fill(0);
@@ -120,12 +155,12 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 用自定义逻辑动态填充整个网格（支持按行列位置生成不同值）
+        ///     用自定义逻辑动态填充整个网格（支持按行列位置生成不同值）
         /// </summary>
         /// <param name="onFill">填充逻辑回调：参数1为行索引，参数2为列索引，返回当前位置需填充的值</param>
         /// <remarks>适用于网格单元值与位置相关的场景（如棋盘按位置设置黑白棋子、地图按坐标生成地形类型）</remarks>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 填充5x3的网格，使每个单元值 = 行索引 * 10 + 列索引
         /// var grid = new EasyGrid&lt;int>(5, 3);
         /// grid.Fill((row, col) => row * 10 + col);
@@ -144,13 +179,13 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 调整网格的行列大小，并对新增的行列单元执行自定义初始化逻辑
+        ///     调整网格的行列大小，并对新增的行列单元执行自定义初始化逻辑
         /// </summary>
         /// <param name="row">调整后的总行数</param>
         /// <param name="column">调整后的总列数</param>
         /// <param name="onAdd">新增单元初始化回调：参数1为新增单元的行索引，参数2为列索引，返回初始化值</param>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 初始化3x3的网格并填充初始值
         /// var grid = new EasyGrid&lt;int>(3, 3);
         /// grid.Fill((r, c) => r * 3 + c);
@@ -176,7 +211,7 @@ namespace Framework3.Toolkits.GridKit
                 }
 
                 // 处理当前行的新增列（列≥minColumn）
-                for (int j = minColumn; j < column; j++)
+                for (var j = minColumn; j < column; j++)
                 {
                     newGrid[i, j] = onAdd(i, j);
                 }
@@ -185,7 +220,7 @@ namespace Framework3.Toolkits.GridKit
             // 处理新增行（行≥minRow）的所有列
             for (var i = minRow; i < row; i++)
             {
-                for (int j = 0; j < column; j++)
+                for (var j = 0; j < column; j++)
                 {
                     newGrid[i, j] = onAdd(i, j);
                 }
@@ -199,12 +234,12 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 遍历网格中所有单元，执行带行列索引的自定义逻辑（按行优先顺序遍历）
+        ///     遍历网格中所有单元，执行带行列索引的自定义逻辑（按行优先顺序遍历）
         /// </summary>
         /// <param name="each">遍历回调函数：参数1为行索引，参数2为列索引，参数3为当前网格单元数据</param>
         /// <remarks>遍历顺序固定为“行从0到Row-1，列从0到Column-1”，适合需要按位置顺序处理的场景（如按行列绘制网格、批量计算位置相关逻辑）</remarks>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 遍历5x3的网格，打印每个单元的位置与值
         /// var grid = new EasyGrid&lt;int>(5, 3);
         /// grid.ForEach((row, col, value) => 
@@ -225,12 +260,12 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 遍历网格中所有单元，仅执行数据相关的自定义逻辑（按行优先顺序遍历）
+        ///     遍历网格中所有单元，仅执行数据相关的自定义逻辑（按行优先顺序遍历）
         /// </summary>
         /// <param name="each">遍历回调函数：参数为当前网格单元数据</param>
         /// <remarks>遍历顺序固定为“行从0到Row-1，列从0到Column-1”，适合仅需处理数据、无需位置信息的场景（如批量释放资源、数据汇总）</remarks>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 遍历网格，销毁所有单元对应的GameObject
         /// var grid = new EasyGrid&lt;GameObject>(5, 3);
         /// grid.ForEach(obj => 
@@ -251,11 +286,11 @@ namespace Framework3.Toolkits.GridKit
         }
 
         /// <summary>
-        /// 清空网格中所有单元数据并释放网格引用（可选执行单元清理逻辑）
+        ///     清空网格中所有单元数据并释放网格引用（可选执行单元清理逻辑）
         /// </summary>
         /// <param name="cleanUpItem">单元清理回调（可选）：清空前对每个单元数据执行的自定义清理逻辑（如释放引用类型资源、注销事件）</param>
         /// <example>
-        /// <code>
+        ///     <code>
         /// // 清空网格并销毁所有单元的GameObject，最后释放网格引用
         /// var grid = new EasyGrid&lt;GameObject>(5, 3);
         /// grid.Clear(obj => 
@@ -280,34 +315,6 @@ namespace Framework3.Toolkits.GridKit
             }
 
             _grid = null;
-        }
-
-        /// <summary>
-        /// 实现<see cref="IEnumerable{KeyValuePair{Vector2Int, TValue}}"/>接口，获取网格的枚举器（按行优先顺序）
-        /// </summary>
-        /// <returns>枚举器：每个元素为键值对（Key为Vector2Int类型位置，Value为单元数据）</returns>
-        /// <remarks>支持foreach遍历网格，自动将行列索引转换为Vector2Int（x=行，y=列），简化外部使用</remarks>
-        public IEnumerator<KeyValuePair<Vector2Int, TValue>> GetEnumerator()
-        {
-            for (var i = 0; i < Row; i++)
-            {
-                for (var j = 0; j < Column; j++)
-                {
-                    yield return new KeyValuePair<Vector2Int, TValue>(
-                        new Vector2Int(i, j),
-                        _grid[i, j]
-                    );
-                }
-            }
-        }
-
-        /// <summary>
-        /// 实现<see cref="IEnumerable"/>接口，获取非泛型枚举器（内部调用泛型枚举器实现）
-        /// </summary>
-        /// <returns>非泛型枚举器</returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

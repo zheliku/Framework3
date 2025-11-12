@@ -13,23 +13,18 @@ namespace Framework3.Toolkits.ActionKit
     public class ActionController : IActionController
     {
         private static readonly ObjectPool<IActionController> s_pool = new(
-            createFunc: () => new ActionController(),
-            actionOnGet: null,
-            actionOnRelease: controller =>
+            () => new ActionController(),
+            null,
+            controller =>
             {
                 controller.UpdateMode = ActionUpdateMode.ScaledDeltaTime;
                 controller.ActionID   = 0;
                 controller.Action     = null;
             },
-            actionOnDestroy: null,
-            collectionCheck: true,
-            defaultCapacity: 10,
-            maxSize: 100);
-
-        public static IActionController Spawn()
-        {
-            return s_pool.Get() as ActionController;
-        }
+            null,
+            true,
+            10,
+            100);
 
         public ulong ActionID { get; set; }
 
@@ -62,6 +57,11 @@ namespace Framework3.Toolkits.ActionKit
         public void Recycle()
         {
             s_pool.Release(this);
+        }
+
+        public static IActionController Spawn()
+        {
+            return s_pool.Get() as ActionController;
         }
     }
 }

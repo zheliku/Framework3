@@ -16,12 +16,145 @@ namespace Framework3.Toolkits.ActionKit
     {
         public static ulong IDGenerator = 0;
 
+        /// <summary>
+        ///     Update 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnUpdate.Register(() =>
+        /// {
+        ///     if (Time.frameCount % 30 == 0)
+        ///     {
+        ///         Debug.Log("Update");
+        ///     }
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent OnUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnUpdate;
+        }
+
+        /// <summary>
+        ///     OnFixedUpdate 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnFixedUpdate.Register(() =>
+        /// {
+        ///     // fixed update code here
+        ///     // 这里写 fixed update 相关代码
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent OnFixedUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnFixedUpdate;
+        }
+
+        /// <summary>
+        ///     OnLateUpdate 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnLateUpdate.Register(() =>
+        /// {
+        ///     // late update code here
+        ///     // 这里写 late update 相关代码
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent OnLateUpdate
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnLateUpdate;
+        }
+
+        /// <summary>
+        ///     OnGUI 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnGUI.Register(() =>
+        /// {
+        ///     GUILayout.Label("See Example Code");
+        ///     GUILayout.Label("请查看示例代码");
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent OnGUI
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnGUIEvent;
+        }
+
+        /// <summary>
+        ///     OnApplicationQuit 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnApplicationQuit.Register(() =>
+        /// {
+        ///     Debug.Log("quit");
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent OnApplicationQuit
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationQuitEvent;
+        }
+
+        /// <summary>
+        ///     OnApplicationPause 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnApplicationPause.Register(pause =>
+        /// {
+        ///     Debug.Log("pause: " + pause);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent<bool> OnApplicationPause
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationPauseEvent;
+        }
+
+        /// <summary>
+        ///     OnApplicationFocus 生命周期支持
+        /// </summary>
+        /// <example>
+        ///     <code>
+        /// <![CDATA[
+        /// ActionKit.OnApplicationFocus.Register(focus =>
+        /// {
+        ///     Debug.Log("focus: " + focus);
+        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
+        /// ]]>
+        /// </code>
+        /// </example>
+        public static EasyEvent<bool> OnApplicationFocus
+        {
+            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationFocusEvent;
+        }
+
         protected override void Init() { }
 
         /// <summary>
-        /// 回调事件
+        ///     回调事件
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// Debug.Log("Sequence Start: " + Time.time);
         /// ActionKit.Sequence()
@@ -36,16 +169,18 @@ namespace Framework3.Toolkits.ActionKit
         /// // Delay Finish: 0.984723
         /// // Sequence Finish: 0.984723
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction Callback(Action callback)
         {
             return Toolkits.ActionKit.Callback.Create(callback);
         }
 
         /// <summary>
-        /// 延时回调
+        ///     延时回调
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// Debug.Log("Start Time: " + Time.time);
         /// ActionKit.Delay(2, () =>
@@ -57,16 +192,18 @@ namespace Framework3.Toolkits.ActionKit
         /// ------ 2 秒后 ------
         /// // End Time: 1.986583
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction Delay(float seconds, Action callback)
         {
             return Toolkits.ActionKit.Delay.Create(seconds, callback);
         }
 
         /// <summary>
-        /// 动作序列
+        ///     动作序列
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// Debug.Log("Sequence Start: " + Time.time);
         /// ActionKit.Sequence()
@@ -81,16 +218,18 @@ namespace Framework3.Toolkits.ActionKit
         /// // Delay Finish: 0.984723
         /// // Sequence Finish: 0.984723
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static ISequence Sequence()
         {
             return Toolkits.ActionKit.Sequence.Create();
         }
 
         /// <summary>
-        /// 延时帧
+        ///     延时帧
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// Debug.Log("Delay Frame Start FrameCount: " + Time.frameCount);
         /// ActionKit.DelayFrame(1, () => { Debug.Log("Delay Frame Finish FrameCount: " + Time.frameCount); })
@@ -105,16 +244,18 @@ namespace Framework3.Toolkits.ActionKit
         /// // Delay Frame Finish FrameCount: 2
         /// // Sequence Delay FrameCount: 11
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction DelayFrame(int frameCount, Action onDelayFinish = null)
         {
             return Toolkits.ActionKit.DelayFrame.Create(frameCount, onDelayFinish);
         }
 
         /// <summary>
-        /// 下一帧
+        ///     下一帧
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// ActionKit.Sequence()
         ///          .NextFrame()
@@ -123,16 +264,18 @@ namespace Framework3.Toolkits.ActionKit
         /// ActionKit.NextFrame(() => { })
         ///          .Start(this);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction NextFrame(Action onDelayFinish = null)
         {
             return Toolkits.ActionKit.DelayFrame.Create(1, onDelayFinish);
         }
 
         /// <summary>
-        /// 重复动作
+        ///     重复动作
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// ActionKit.Repeat()
         ///          .Condition(() => Input.GetMouseButtonDown(0))
@@ -157,16 +300,18 @@ namespace Framework3.Toolkits.ActionKit
         /// // Mouse right clicked
         /// // Right click finished
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IRepeat Repeat(int repeatCount = -1)
         {
             return Toolkits.ActionKit.Repeat.Create(repeatCount);
         }
 
         /// <summary>
-        /// 并行动作
+        ///     并行动作
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// Debug.Log("Parallel Start: " + Time.time);
         ///  
@@ -185,16 +330,18 @@ namespace Framework3.Toolkits.ActionKit
         /// // 3.02
         /// // Parallel Finish: 3.02
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IParallel Parallel()
         {
             return Toolkits.ActionKit.Parallel.Create();
         }
 
         /// <summary>
-        /// 自定义动作
+        ///     自定义动作
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// ActionKit.Custom(a =>
         /// {
@@ -211,7 +358,8 @@ namespace Framework3.Toolkits.ActionKit
         /// // OnExecute
         /// // OnFinish
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction Custom(Action<ICustomAPI<object>> customSetting)
         {
             var action = Toolkits.ActionKit.Custom.Create();
@@ -220,9 +368,10 @@ namespace Framework3.Toolkits.ActionKit
         }
 
         /// <summary>
-        /// 自定义动作
+        ///     自定义动作
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// class SomeData
         /// {
@@ -242,7 +391,7 @@ namespace Framework3.Toolkits.ActionKit
         ///       {
         ///           Debug.Log(a.Data.ExecuteCount);
         ///           a.Data.ExecuteCount++;
-        ///
+        /// 
         ///           if (a.Data.ExecuteCount >= 5)
         ///           {
         ///               a.Finish();
@@ -257,7 +406,8 @@ namespace Framework3.Toolkits.ActionKit
         /// // 4
         /// // Finished
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction Custom<TData>(Action<ICustomAPI<TData>> customSetting)
         {
             var action = Toolkits.ActionKit.Custom<TData>.Create();
@@ -266,9 +416,10 @@ namespace Framework3.Toolkits.ActionKit
         }
 
         /// <summary>
-        /// 协程支持
+        ///     协程支持
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// IEnumerator SomeCoroutine()
         /// {
@@ -290,7 +441,8 @@ namespace Framework3.Toolkits.ActionKit
         ///  
         /// // Hello: 1.0039
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static IAction Coroutine(Func<IEnumerator> coroutineGetter)
         {
             return Toolkits.ActionKit.Coroutine.Create(coroutineGetter);
@@ -307,9 +459,10 @@ namespace Framework3.Toolkits.ActionKit
         }
 
         /// <summary>
-        /// Task 支持
+        ///     Task 支持
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// async Task SomeTask()
         /// {
@@ -327,128 +480,11 @@ namespace Framework3.Toolkits.ActionKit
         ///  
         /// // Hello: 1.0039
         /// ]]>
-        /// </code> </example>
-        public static IAction Task(Func<global::System.Threading.Tasks.Task> taskGetter)
+        /// </code>
+        /// </example>
+        public static IAction Task(Func<System.Threading.Tasks.Task> taskGetter)
         {
             return Toolkits.ActionKit.Task.Create(taskGetter);
-        }
-
-        /// <summary>
-        /// Update 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnUpdate.Register(() =>
-        /// {
-        ///     if (Time.frameCount % 30 == 0)
-        ///     {
-        ///         Debug.Log("Update");
-        ///     }
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent OnUpdate
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnUpdate;
-        }
-
-        /// <summary>
-        /// OnFixedUpdate 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnFixedUpdate.Register(() =>
-        /// {
-        ///     // fixed update code here
-        ///     // 这里写 fixed update 相关代码
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent OnFixedUpdate
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnFixedUpdate;
-        }
-
-        /// <summary>
-        /// OnLateUpdate 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnLateUpdate.Register(() =>
-        /// {
-        ///     // late update code here
-        ///     // 这里写 late update 相关代码
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent OnLateUpdate
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnLateUpdate;
-        }
-
-        /// <summary>
-        /// OnGUI 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnGUI.Register(() =>
-        /// {
-        ///     GUILayout.Label("See Example Code");
-        ///     GUILayout.Label("请查看示例代码");
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent OnGUI
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnGUIEvent;
-        }
-
-        /// <summary>
-        /// OnApplicationQuit 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnApplicationQuit.Register(() =>
-        /// {
-        ///     Debug.Log("quit");
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent OnApplicationQuit
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationQuitEvent;
-        }
-
-        /// <summary>
-        /// OnApplicationPause 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnApplicationPause.Register(pause =>
-        /// {
-        ///     Debug.Log("pause: " + pause);
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent<bool> OnApplicationPause
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationPauseEvent;
-        }
-
-        /// <summary>
-        /// OnApplicationFocus 生命周期支持
-        /// </summary>
-        /// <example> <code>
-        /// <![CDATA[
-        /// ActionKit.OnApplicationFocus.Register(focus =>
-        /// {
-        ///     Debug.Log("focus: " + focus);
-        /// }).UnregisterWhenGameObjectDestroyed(gameObject);
-        /// ]]>
-        /// </code> </example>
-        public static EasyEvent<bool> OnApplicationFocus
-        {
-            get => ActionKitMonoBehaviourEvent.Instance.OnApplicationFocusEvent;
         }
 
         public static void ClearGlobal()
@@ -456,7 +492,7 @@ namespace Framework3.Toolkits.ActionKit
             var executor = ActionKitMonoBehaviourEvent.Instance.GetComponent<ActionExecutor>();
             executor?.Clear();
         }
-        
+
         public static void ClearCurrentScene()
         {
             var executor = ActionKitCurrentScene.SceneComponent.GetComponent<ActionExecutor>();

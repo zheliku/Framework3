@@ -17,12 +17,6 @@ namespace Framework3.Toolkits.SingletonKit
 
         private static T s_instance;
 
-        public static T InstanceWithLoader(Func<string, T> loader)
-        {
-            ScriptableLoader = loader;
-            return Instance;
-        }
-
         public static T Instance
         {
             get
@@ -32,10 +26,16 @@ namespace Framework3.Toolkits.SingletonKit
             }
         }
 
+        public static T InstanceWithLoader(Func<string, T> loader)
+        {
+            ScriptableLoader = loader;
+            return Instance;
+        }
+
         public static void Dispose()
         {
             Resources.UnloadAsset(s_instance);
-            
+
             s_instance = null;
         }
     }

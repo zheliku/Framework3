@@ -18,12 +18,6 @@ namespace Framework3.Toolkits.SingletonKit
 
         private static TSingleton s_instance;
 
-        public static TSingleton InstanceWithLoader(Func<string, GameObject> loader)
-        {
-            PrefabLoader = loader;
-            return Instance;
-        }
-
         public static TSingleton Instance
         {
             get
@@ -44,6 +38,12 @@ namespace Framework3.Toolkits.SingletonKit
 
                 return s_instance;
             }
+        }
+
+        public static TSingleton InstanceWithLoader(Func<string, GameObject> loader)
+        {
+            PrefabLoader = loader;
+            return Instance;
         }
 
         public static void Dispose()

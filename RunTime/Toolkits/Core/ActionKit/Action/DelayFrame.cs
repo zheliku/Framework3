@@ -12,12 +12,12 @@ namespace Framework3.Toolkits.ActionKit
     using UnityEngine;
 
     /// <summary>
-    /// 延迟帧 Action
+    ///     延迟帧 Action
     /// </summary>
     public class DelayFrame : AbstractAction<DelayFrame>
     {
     #region Static
-        
+
         internal static DelayFrame Create(int frameCount, Action onDelayFinish = null)
         {
             var delayFrame = CreateInternal();

@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.PoolKit
     using Core;
 
     /// <summary>
-    /// 对象必须继承 IPoolable
+    ///     对象必须继承 IPoolable
     /// </summary>
     public class SingletonPool<T> where T : class, IPoolable, new()
     {
@@ -24,13 +24,13 @@ namespace Framework3.Toolkits.PoolKit
                 item.IsInPool = true;
                 return item;
             },
-            actionOnGet: item => item.OnGet(),
-            actionOnRelease: item => item.OnRelease(),
-            actionOnDestroy: item => item.OnDestroy(),
-            collectionCheck: true,
-            defaultCapacity: 10,
-            maxSize: 100,
-            preCreate: false
+            item => item.OnGet(),
+            item => item.OnRelease(),
+            item => item.OnDestroy(),
+            true,
+            10,
+            100,
+            false
         );
 
         public static T Get()
@@ -42,7 +42,7 @@ namespace Framework3.Toolkits.PoolKit
 
         public static PooledObject<T> Get(out T value)
         {
-            value = Pool.Get();
+            value          = Pool.Get();
             value.IsInPool = false;
             return new PooledObject<T>(value, Pool);
         }
@@ -53,13 +53,13 @@ namespace Framework3.Toolkits.PoolKit
             {
                 throw new FrameworkException("SingletonPool: The object is already in the pool.");
             }
-            
+
             if (Pool.Release(toRelease))
             {
                 toRelease.IsInPool = true;
                 return true;
             }
-            
+
             return false;
         }
 

@@ -13,22 +13,30 @@ namespace Framework3.Toolkits.TreeKit
     using System.Linq;
 
     /// <summary>
-    /// 树节点实现类
+    ///     树节点实现类
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
     public class TreeNode<T>
     {
+        // 子节点集合
+
+        /// <summary>
+        ///     构造函数
+        /// </summary>
+        /// <param name="data">节点数据</param>
+        public TreeNode(T data)
+        {
+            Data = data;
+        }
+
         // 当前节点的数据
         public T Data { get; }
 
         // 父节点
         public TreeNode<T> Parent { get; set; }
 
-        // 子节点集合
-        private readonly List<TreeNode<T>> _children = new List<TreeNode<T>>();
-
         /// <summary>
-        /// 根节点
+        ///     根节点
         /// </summary>
         public TreeNode<T> Root
         {
@@ -44,13 +52,13 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 获取以当前节点为根的子树中的节点总数
+        ///     获取以当前节点为根的子树中的节点总数
         /// </summary>
         public int Count
         {
             get
             {
-                int count = 1; // 当前节点
+                var count = 1; // 当前节点
                 foreach (var child in Children)
                 {
                     count += child.Count; // 递归计算子节点的节点数
@@ -60,7 +68,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 祖先节点集合（按路径距离升序）
+        ///     祖先节点集合（按路径距离升序）
         /// </summary>
         public IEnumerable<TreeNode<T>> Ancestors
         {
@@ -76,22 +84,22 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 子节点集合
+        ///     子节点集合
         /// </summary>
         public List<TreeNode<T>> Children
         {
-            get => _children;
-        }
+            get;
+        } = new();
 
         /// <summary>
-        /// 后代节点集合（深度优先先序遍历）
+        ///     后代节点集合（深度优先先序遍历）
         /// </summary>
         public IEnumerable<TreeNode<T>> Descendants
         {
             get
             {
                 yield return this;
-                foreach (var child in _children)
+                foreach (var child in Children)
                 {
                     foreach (var descendant in child.Descendants)
                     {
@@ -102,7 +110,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 兄弟节点集合（不包括自身节点）
+        ///     兄弟节点集合（不包括自身节点）
         /// </summary>
         public IEnumerable<TreeNode<T>> Siblings
         {
@@ -116,7 +124,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 在兄弟节点中的排行
+        ///     在兄弟节点中的排行
         /// </summary>
         public int IndexOfSiblings
         {
@@ -131,54 +139,54 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 节点的层
+        ///     节点的层
         /// </summary>
         public int Level
         {
             get
             {
-                int level   = 0;
+                var level   = 0;
                 var current = this;
                 while (current.Parent != null)
                 {
                     level++;
-                    current = (TreeNode<T>) current.Parent;
+                    current = current.Parent;
                 }
                 return level;
             }
         }
 
         /// <summary>
-        /// 节点（以当前节点为根的子树）的高度
+        ///     节点（以当前节点为根的子树）的高度
         /// </summary>
         public int Height
         {
             get
             {
-                if (!_children.Any())
+                if (!Children.Any())
                     return 0;
 
-                return _children.Max(child => child.Height) + 1;
+                return Children.Max(child => child.Height) + 1;
             }
         }
 
         /// <summary>
-        /// 节点的度
+        ///     节点的度
         /// </summary>
         public int Degree
         {
-            get => _children.Count;
+            get => Children.Count;
         }
 
         /// <summary>
-        /// 树（以当前节点为根的子树）的所有节点中度最大的节点的度
+        ///     树（以当前节点为根的子树）的所有节点中度最大的节点的度
         /// </summary>
         public int MaxDegreeOfTree
         {
             get
             {
-                int maxDegree = Degree;
-                foreach (var child in _children)
+                var maxDegree = Degree;
+                foreach (var child in Children)
                 {
                     maxDegree = Math.Max(maxDegree, child.MaxDegreeOfTree);
                 }
@@ -187,7 +195,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 当前节点是否是根节点
+        ///     当前节点是否是根节点
         /// </summary>
         public bool IsRoot
         {
@@ -195,32 +203,23 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 当前节点是否是叶子节点
+        ///     当前节点是否是叶子节点
         /// </summary>
         public bool IsLeaf
         {
-            get => !_children.Any();
+            get => !Children.Any();
         }
 
         /// <summary>
-        /// 当前节点是否有子节点
+        ///     当前节点是否有子节点
         /// </summary>
         public bool HasChild
         {
-            get => _children.Any();
+            get => Children.Any();
         }
 
         /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="data">节点数据</param>
-        public TreeNode(T data)
-        {
-            Data = data;
-        }
-
-        /// <summary>
-        /// 添加子节点
+        ///     添加子节点
         /// </summary>
         /// <param name="child">子节点</param>
         public void AddChild(TreeNode<T> child)
@@ -229,11 +228,11 @@ namespace Framework3.Toolkits.TreeKit
                 throw new InvalidOperationException("节点已有一个父节点");
 
             child.Parent = this;
-            _children.Add(child);
+            Children.Add(child);
         }
 
         /// <summary>
-        /// 添加子节点
+        ///     添加子节点
         /// </summary>
         /// <param name="childData">子节点数据</param>
         /// <param name="childAction">对子节点执行的方法</param>
@@ -244,7 +243,7 @@ namespace Framework3.Toolkits.TreeKit
                 Parent = this
             };
 
-            _children.Add(child);
+            Children.Add(child);
             childAction?.Invoke(child);
             return child;
         }
@@ -260,7 +259,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 以当前节点为根返回树形排版的结构字符串
+        ///     以当前节点为根返回树形排版的结构字符串
         /// </summary>
         /// <param name="formatter">数据对象格式化器</param>
         /// <param name="convertToSingleLine">处理掉换行符变成单行文本</param>
@@ -304,7 +303,7 @@ namespace Framework3.Toolkits.TreeKit
             var stack = new Stack<(TreeNode<T> Node, int Level)>();
             stack.Push((root, 0));
 
-            for (int i = 1; i < lines.Length; i++)
+            for (var i = 1; i < lines.Length; i++)
             {
                 var line     = lines[i];
                 var indent   = line.TakeWhile(c => c == ' ' || c == '|').Count();                 // 计算缩进长度
@@ -333,7 +332,7 @@ namespace Framework3.Toolkits.TreeKit
         }
 
         /// <summary>
-        /// 递归构建树形结构的字符串表示
+        ///     递归构建树形结构的字符串表示
         /// </summary>
         /// <param name="node">当前节点</param>
         /// <param name="indent">缩进</param>
@@ -347,7 +346,7 @@ namespace Framework3.Toolkits.TreeKit
             indent += isLast ? "   " : "|  ";
 
             var children = node.Children.ToList();
-            for (int i = 0; i < children.Count; i++)
+            for (var i = 0; i < children.Count; i++)
             {
                 BuildTreeString(children[i], indent, i == children.Count - 1, result, formatter);
             }

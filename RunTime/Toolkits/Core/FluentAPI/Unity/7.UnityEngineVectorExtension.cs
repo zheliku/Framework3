@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.FluentAPI
     using UnityEngine;
 
     /// <summary>
-    /// 针对 <see cref="UnityEngine.Vector4"/>、<see cref="UnityEngine.Vector3"/>、<see cref="UnityEngine.Vector2"/> 提供的链式扩展
+    ///     针对 <see cref="UnityEngine.Vector4" />、<see cref="UnityEngine.Vector3" />、<see cref="UnityEngine.Vector2" /> 提供的链式扩展
     /// </summary>
     public static class UnityEngineVectorExtension
     {
@@ -49,17 +49,17 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return new Vector4(self.x + (x ?? 0), self.y + (y ?? 0), self.z + (z ?? 0), self.w + (w ?? 0));
         }
-        
+
         public static Vector4 Add(this Vector4 self, Vector4 value)
         {
             return self + value;
         }
-        
+
         public static Vector4 Add(this Vector4 self, Vector3 value)
         {
             return self + value.ToVector4();
         }
-        
+
         public static Vector4 Add(this Vector4 self, Vector2 value)
         {
             return self + value.ToVector4();
@@ -69,12 +69,12 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return new Vector3(self.x + (x ?? 0), self.y + (y ?? 0), self.z + (z ?? 0));
         }
-        
+
         public static Vector3 Add(this Vector3 self, Vector3 value)
         {
             return self + value;
         }
-        
+
         public static Vector3 Add(this Vector3 self, Vector2 value)
         {
             return self + value.ToVector3();
@@ -84,7 +84,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return new Vector2(self.x + (x ?? 0), self.y + (y ?? 0));
         }
-        
+
         public static Vector2 Add(this Vector2 self, Vector2 value)
         {
             return self + value;
@@ -154,7 +154,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return to.transform.position - self.transform.position;
         }
-        
+
         public static Vector3 PositionTo(this Component self, Vector3 to)
         {
             return to - self.transform.position;
@@ -184,7 +184,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self.transform.position - from.transform.position;
         }
-        
+
         public static Vector3 PositionFrom(this GameObject self, Vector3 from)
         {
             return self.transform.position - from;
@@ -214,7 +214,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return to.transform.position - self.transform.position;
         }
-        
+
         public static Vector2 Position2DTo(this Component self, Vector2 to)
         {
             return to - self.transform.position.ToVector2();
@@ -244,7 +244,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return self.transform.position - from.transform.position;
         }
-        
+
         public static Vector2 Position2DFrom(this GameObject self, Vector2 from)
         {
             return self.transform.position.ToVector2() - from;
@@ -274,7 +274,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return (to.transform.position - self.transform.position).normalized;
         }
-        
+
         public static Vector3 DirectionTo(this Component self, Vector3 to)
         {
             return (to - self.transform.position).normalized;
@@ -304,7 +304,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return (self.transform.position - from.transform.position).normalized;
         }
-        
+
         public static Vector3 DirectionFrom(this GameObject self, Vector3 from)
         {
             return (self.transform.position - from).normalized;
@@ -334,7 +334,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return (to.transform.position - self.transform.position).normalized;
         }
-        
+
         public static Vector2 Direction2DTo(this Component self, Vector2 to)
         {
             return (to - self.transform.position.ToVector2()).normalized;
@@ -364,7 +364,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return (self.transform.position - from.transform.position).normalized;
         }
-        
+
         public static Vector2 Direction2DFrom(this GameObject self, Vector2 from)
         {
             return (self.transform.position.ToVector2() - from).normalized;
@@ -394,7 +394,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return Vector3.Distance(self.GetPosition(), other.GetPosition());
         }
-        
+
         public static float Distance(this GameObject self, Vector3 other)
         {
             return Vector3.Distance(self.GetPosition(), other);
@@ -424,7 +424,7 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return Vector2.Distance(self.GetPosition(), other.GetPosition());
         }
-        
+
         public static float Distance2D(this GameObject self, Vector2 other)
         {
             return Vector2.Distance(self.GetPosition(), other);
@@ -439,17 +439,17 @@ namespace Framework3.Toolkits.FluentAPI
         {
             return Vector2.Lerp(self, target, t);
         }
-        
+
         public static Vector2 LerpWithSpeed(this Vector2 self, Vector2 target, float speed)
         {
             return Vector2.Lerp(self, target, 1 - Mathf.Exp(-speed));
         }
-        
+
         public static Vector3 Lerp(this Vector3 self, Vector3 target, float t)
         {
             return Vector3.Lerp(self, target, t);
         }
-        
+
         public static Vector3 LerpWithSpeed(this Vector3 self, Vector3 target, float speed)
         {
             return Vector3.Lerp(self, target, 1 - Mathf.Exp(-speed));

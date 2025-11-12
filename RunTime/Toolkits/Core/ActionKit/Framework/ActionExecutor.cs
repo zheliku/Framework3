@@ -8,33 +8,46 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
+    using System;
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.Pool;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// Action 执行器
+    ///     Action 执行器
     /// </summary>
     internal class ActionExecutor : MonoBehaviour, IActionExecutor
     {
+        private readonly ObjectPool<ActionTask> _actionTaskPool = new(
+            () => new ActionTask(),
+            null,
+            task => task.Recycle(),
+            null,
+            true,
+            10,
+            100);
+
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
+        private readonly Dictionary<IAction, ActionTask> _executingTasks = new();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
         private readonly List<ActionTask> _prepareExecutionTasks = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private readonly List<IActionController> _tobeRemovedActions = new();
 
-        [ShowInInspector]
-        private readonly Dictionary<IAction, ActionTask> _executingTasks = new();
-
-        private readonly ObjectPool<ActionTask> _actionTaskPool = new(
-            createFunc: () => new ActionTask(),
-            actionOnGet: null,
-            actionOnRelease: task => task.Recycle(),
-            actionOnDestroy: null,
-            collectionCheck: true,
-            defaultCapacity: 10,
-            maxSize: 100);
+        public void Reset()
+        {
+            Clear();
+        }
 
         private void Update()
         {
@@ -49,7 +62,7 @@ namespace Framework3.Toolkits.ActionKit
             // 执行 _executingActions 中的每个 action
             foreach (var pair in _executingTasks)
             {
-                var task = pair.Value;
+                var task       = pair.Value;
                 var controller = task.Controller;
 
                 // 选择使用 Time.deltaTime / Time.unscaledDeltaTime
@@ -75,7 +88,7 @@ namespace Framework3.Toolkits.ActionKit
             _tobeRemovedActions.Clear();
         }
 
-        public void Execute(IActionController controller, System.Action<IActionController> onFinish = null)
+        public void Execute(IActionController controller, Action<IActionController> onFinish = null)
         {
             // 如果 controller 的 Action 状态为已完成，则重置 Action
             if (controller.Action.Status == ActionStatus.Finished)
@@ -98,11 +111,6 @@ namespace Framework3.Toolkits.ActionKit
 
             // 将任务添加到 _prepareExecutionActions 中
             _prepareExecutionTasks.Add(task);
-        }
-
-        public void Reset()
-        {
-            Clear();
         }
 
         public void Clear()

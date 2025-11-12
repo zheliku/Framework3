@@ -22,7 +22,7 @@ namespace Framework3.Toolkits.ResKit
     public class ResKit
     {
         /// <summary>
-        /// 使用 Resources 同步加载对象
+        ///     使用 Resources 同步加载对象
         /// </summary>
         /// <param name="path">资源路径（Resources 文件夹下）</param>
         /// <typeparam name="T">资源类型</typeparam>
@@ -39,7 +39,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Resources 异步加载对象
+        ///     使用 Resources 异步加载对象
         /// </summary>
         /// <param name="path">资源路径（Resources 文件夹下）</param>
         /// <param name="callback">加载成功的回调函数</param>
@@ -56,7 +56,7 @@ namespace Framework3.Toolkits.ResKit
             req.completed += operation =>
             {
                 var resourceRequest = operation as ResourceRequest;
-                var res = resourceRequest?.asset as T;
+                var res             = resourceRequest?.asset as T;
                 if (res == null)
                 {
                     throw new FrameworkException("LoadFromResourcesAsync failed: " + path);
@@ -73,7 +73,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 异步加载 GameObject 并实例化
+        ///     使用 Addressables 异步加载 GameObject 并实例化
         /// </summary>
         /// <param name="assetNameOrLabel">资源名称或标签</param>
         /// <param name="position">实例化的位置</param>
@@ -83,12 +83,12 @@ namespace Framework3.Toolkits.ResKit
         /// <param name="instantiateInWorldSpace">是否在世界空间下实例化</param>
         /// <returns>异步加载句柄</returns>
         public static AsyncOperationHandle<GameObject> InstantiateAsync(
-            string assetNameOrLabel,
-            Vector3 position,
-            Quaternion rotation,
-            Action<GameObject> callback = null,
-            Transform parent = null,
-            bool instantiateInWorldSpace = false)
+            string             assetNameOrLabel,
+            Vector3            position,
+            Quaternion         rotation,
+            Action<GameObject> callback                = null,
+            Transform          parent                  = null,
+            bool               instantiateInWorldSpace = false)
         {
             var handle =
                 Addressables.InstantiateAsync(assetNameOrLabel, position, rotation, parent, instantiateInWorldSpace);
@@ -107,7 +107,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 异步加载 GameObject 并实例化
+        ///     使用 Addressables 异步加载 GameObject 并实例化
         /// </summary>
         /// <param name="assetNameOrLabel">资源名称或标签</param>
         /// <param name="callback">加载成功时的回调</param>
@@ -115,10 +115,10 @@ namespace Framework3.Toolkits.ResKit
         /// <param name="instantiateInWorldSpace">是否在世界空间下实例化</param>
         /// <returns>异步加载句柄</returns>
         public static AsyncOperationHandle<GameObject> InstantiateAsync(
-            string assetNameOrLabel,
-            Action<GameObject> callback = null,
-            Transform parent = null,
-            bool instantiateInWorldSpace = false)
+            string             assetNameOrLabel,
+            Action<GameObject> callback                = null,
+            Transform          parent                  = null,
+            bool               instantiateInWorldSpace = false)
         {
             var handle = Addressables.InstantiateAsync(assetNameOrLabel, parent, instantiateInWorldSpace);
 
@@ -136,7 +136,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 同步加载 GameObject 并实例化
+        ///     使用 Addressables 同步加载 GameObject 并实例化
         /// </summary>
         /// <param name="assetNameOrLabel">资源名称或标签</param>
         /// <param name="position">实例化的位置</param>
@@ -145,11 +145,11 @@ namespace Framework3.Toolkits.ResKit
         /// <param name="instantiateInWorldSpace">是否在世界空间下实例化</param>
         /// <returns>异步加载句柄</returns>
         public static AsyncOperationHandle<GameObject> Instantiate(
-            string assetNameOrLabel,
-            Vector3 position = default,
-            Quaternion rotation = default,
-            Transform parent = null,
-            bool instantiateInWorldSpace = false)
+            string     assetNameOrLabel,
+            Vector3    position                = default,
+            Quaternion rotation                = default,
+            Transform  parent                  = null,
+            bool       instantiateInWorldSpace = false)
         {
             var handle = InstantiateAsync(assetNameOrLabel, position, rotation, null, parent, instantiateInWorldSpace);
             handle.WaitForCompletion();
@@ -157,7 +157,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 异步加载单个资源
+        ///     使用 Addressables 异步加载单个资源
         /// </summary>
         /// <param name="assetNameOrLabel">资源名称或标签</param>
         /// <param name="callback">加载成功时的回调</param>
@@ -179,7 +179,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 同步加载单个资源
+        ///     使用 Addressables 同步加载单个资源
         /// </summary>
         /// <param name="assetNameOrLabel">资源名称或标签</param>
         /// <returns>异步加载句柄</returns>
@@ -191,7 +191,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 异步加载多个资源
+        ///     使用 Addressables 异步加载多个资源
         /// </summary>
         /// <param name="names">所有资源名称或标签</param>
         /// <param name="callback">加载成功时的回调</param>
@@ -199,10 +199,10 @@ namespace Framework3.Toolkits.ResKit
         /// <param name="releaseDependenciesOnFailure">加载失败时是否自动释放资源</param>
         /// <returns>异步加载句柄</returns>
         public static AsyncOperationHandle<IList<T>> LoadAssetsAsync<T>(
-            IList<string> names,
-            Action<IList<T>> callback = null,
-            Addressables.MergeMode mode = Addressables.MergeMode.Union,
-            bool releaseDependenciesOnFailure = false)
+            IList<string>          names,
+            Action<IList<T>>       callback                     = null,
+            Addressables.MergeMode mode                         = Addressables.MergeMode.Union,
+            bool                   releaseDependenciesOnFailure = false)
         {
             var handle = Addressables.LoadAssetsAsync<T>(names, null, mode, releaseDependenciesOnFailure);
 
@@ -219,21 +219,21 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 同步加载多个资源
+        ///     使用 Addressables 同步加载多个资源
         /// </summary>
         /// <param name="names">所有资源名称或标签</param>
         /// <param name="mode">搜索资源模式，默认为并集</param>
         /// <returns>异步加载句柄</returns>
-        public static AsyncOperationHandle<IList<T>> LoadAssets<T>(IList<string> names,
-            Addressables.MergeMode mode = Addressables.MergeMode.Union)
+        public static AsyncOperationHandle<IList<T>> LoadAssets<T>(IList<string>          names,
+                                                                   Addressables.MergeMode mode = Addressables.MergeMode.Union)
         {
-            var handle = LoadAssetsAsync<T>(names, callback: null, mode: mode);
+            var handle = LoadAssetsAsync<T>(names, null, mode);
             handle.WaitForCompletion();
             return handle;
         }
 
         /// <summary>
-        /// 使用 Addressables 同步加载多个资源
+        ///     使用 Addressables 同步加载多个资源
         /// </summary>
         /// <param name="names">所有资源名称或标签，搜索资源模式为并集</param>
         /// <returns>异步加载句柄</returns>
@@ -245,7 +245,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 使用 Addressables 异步加载场景
+        ///     使用 Addressables 异步加载场景
         /// </summary>
         /// <param name="name">场景名称</param>
         /// <param name="callback">加载成功时的回调</param>
@@ -255,24 +255,24 @@ namespace Framework3.Toolkits.ResKit
         /// <param name="releaseMode">释放模式</param>
         /// <returns>异步加载句柄</returns>
         public static AsyncOperationHandle<SceneInstance> LoadSceneAsync(
-            string name,
-            Action callback = null,
-            bool activateOnLoad = true,
-            LoadSceneMode loadSceneMode = LoadSceneMode.Single,
-            int priority = 100
-#if UNITY_2022
-#elif UNITY_2022_3_OR_NEWER // Unity 6 及以上版本支持 SceneReleaseMode
-            , SceneReleaseMode releaseMode = SceneReleaseMode.ReleaseSceneWhenSceneUnloaded
-#endif
+            string        name,
+            Action        callback       = null,
+            bool          activateOnLoad = true,
+            LoadSceneMode loadSceneMode  = LoadSceneMode.Single,
+            int           priority       = 100
+        #if UNITY_2022
+        #elif UNITY_2022_3_OR_NEWER // Unity 6 及以上版本支持 SceneReleaseMode
+          , SceneReleaseMode releaseMode = SceneReleaseMode.ReleaseSceneWhenSceneUnloaded
+        #endif
         )
         {
-#if UNITY_2022
+        #if UNITY_2022
             var asyncOperationHandle =
                 Addressables.LoadSceneAsync(name, loadSceneMode, activateOnLoad, priority);
-#elif UNITY_2022_3_OR_NEWER // Unity 6 及以上版本支持 SceneReleaseMode
+        #elif UNITY_2022_3_OR_NEWER // Unity 6 及以上版本支持 SceneReleaseMode
             var asyncOperationHandle =
                 Addressables.LoadSceneAsync(name, loadSceneMode, activateOnLoad, priority, releaseMode);
-#endif
+        #endif
             asyncOperationHandle.Completed += handle =>
             {
                 if (handle.Status == AsyncOperationStatus.Succeeded)
@@ -289,7 +289,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 封装方法：卸载 Resources 并更新 Mono 显示
+        ///     封装方法：卸载 Resources 并更新 Mono 显示
         /// </summary>
         public static void Unload(Object res)
         {
@@ -312,7 +312,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
+        ///     封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
         /// </summary>
         public static void Unload(AsyncOperationHandle handle)
         {
@@ -321,7 +321,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
+        ///     封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
         /// </summary>
         public static void Unload<T>(AsyncOperationHandle<T> handle)
         {
@@ -330,7 +330,7 @@ namespace Framework3.Toolkits.ResKit
         }
 
         /// <summary>
-        /// 封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
+        ///     封装方法：卸载 AsyncOperationHandle 并更新 Mono 显示
         /// </summary>
         public static void Unload<T>(AsyncOperationHandle<IList<T>> handle)
         {

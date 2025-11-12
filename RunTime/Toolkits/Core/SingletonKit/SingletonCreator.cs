@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.SingletonKit
     using Object = UnityEngine.Object;
 
     /// <summary>
-    /// 普通单例创建类
+    ///     普通单例创建类
     /// </summary>
     internal static class SingletonCreator
     {
@@ -46,7 +46,7 @@ namespace Framework3.Toolkits.SingletonKit
         }
 
         /// <summary>
-        /// 泛型方法：创建MonoBehaviour单例
+        ///     泛型方法：创建MonoBehaviour单例
         /// </summary>
         /// <typeparam name="TMonoSingleton"></typeparam>
         /// <returns></returns>
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.SingletonKit
             }
 
             // MemberInfo：获取有关成员属性的信息并提供对成员元数据的访问
-            var memberInfo = (MemberInfo)type;
+            var memberInfo = (MemberInfo) type;
 
             // 获取 TMonoSingleton 类型自定义属性，并找到相关路径属性，利用该属性创建T实例
             var attributes = memberInfo.GetCustomAttributes(true);
@@ -92,7 +92,7 @@ namespace Framework3.Toolkits.SingletonKit
             {
                 var obj = new GameObject(typeof(TMonoSingleton).Name);
                 Object.DontDestroyOnLoad(obj);
-                instance = (TMonoSingleton)obj.AddComponent(typeof(TMonoSingleton));
+                instance = (TMonoSingleton) obj.AddComponent(typeof(TMonoSingleton));
             }
 
             instance.OnSingletonInit();
@@ -100,7 +100,7 @@ namespace Framework3.Toolkits.SingletonKit
         }
 
         /// <summary>
-        /// 在 GameObject 上创建 T 组件（脚本）
+        ///     在 GameObject 上创建 T 组件（脚本）
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="path">路径（应该就是 Hierarchy 下的树结构路径）</param>
@@ -122,7 +122,7 @@ namespace Framework3.Toolkits.SingletonKit
         }
 
         /// <summary>
-        /// 查找Obj（对于路径 进行拆分）
+        ///     查找Obj（对于路径 进行拆分）
         /// </summary>
         /// <param name="path">路径</param>
         /// <param name="build">true</param>
@@ -145,7 +145,7 @@ namespace Framework3.Toolkits.SingletonKit
         }
 
         /// <summary>
-        /// 查找 Obj（一个嵌套查找 Obj 的过程）
+        ///     查找 Obj（一个嵌套查找 Obj 的过程）
         /// </summary>
         /// <param name="root">父节点</param>
         /// <param name="subPath">拆分后的路径节点</param>
@@ -155,10 +155,10 @@ namespace Framework3.Toolkits.SingletonKit
         /// <returns></returns>
         private static GameObject FindGameObject(
             GameObject root,
-            string[] subPath,
-            int index,
-            bool build,
-            bool dontDestroy)
+            string[]   subPath,
+            int        index,
+            bool       build,
+            bool       dontDestroy)
         {
             GameObject client = null;
 

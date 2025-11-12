@@ -11,12 +11,12 @@ namespace Framework3.Core
     using UnityEngine;
 
     /// <summary>
-    /// IUnregister 扩展
+    ///     IUnregister 扩展
     /// </summary>
     public static class UnregisterExtension
     {
         /// <summary>
-        /// 获取 GameObject 上的组件，不存在则添加
+        ///     获取 GameObject 上的组件，不存在则添加
         /// </summary>
         /// <param name="gameObject">GameObject 实例</param>
         /// <typeparam name="TComponent">组件类型</typeparam>
@@ -34,7 +34,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 当 GameObject 销毁时注销
+        ///     当 GameObject 销毁时注销
         /// </summary>
         /// <param name="self">注销器</param>
         /// <param name="gameObject">绑定的 GameObject</param>
@@ -45,7 +45,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 当 GameObject 禁用时注销
+        ///     当 GameObject 禁用时注销
         /// </summary>
         /// <param name="self">注销器</param>
         /// <param name="gameObject">绑定的 GameObject</param>
@@ -56,7 +56,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 当组件挂载的 GameObject 销毁时注销
+        ///     当组件挂载的 GameObject 销毁时注销
         /// </summary>
         /// <param name="self">注销器</param>
         /// <param name="component">绑定的组件</param>
@@ -67,7 +67,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 当组件挂载的 GameObject 禁用时注销
+        ///     当组件挂载的 GameObject 禁用时注销
         /// </summary>
         /// <param name="self">注销器</param>
         /// <param name="component">绑定的组件</param>
@@ -79,7 +79,7 @@ namespace Framework3.Core
 
 
         /// <summary>
-        /// 当前场景卸载时注销
+        ///     当前场景卸载时注销
         /// </summary>
         /// <param name="self">注销器</param>
         /// <returns>注销器</returns>

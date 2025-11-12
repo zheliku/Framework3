@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 对象禁用时的注销触发器
+    ///     对象禁用时的注销触发器
     /// </summary>
     public sealed class UnregisterOnDisableTrigger : UnregisterTrigger
     {

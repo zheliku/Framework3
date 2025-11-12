@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 继承该接口，即可设置 Architecture
+    ///     继承该接口，即可设置 Architecture
     /// </summary>
     public interface ICanSetArchitecture : IBelongToArchitecture
     {

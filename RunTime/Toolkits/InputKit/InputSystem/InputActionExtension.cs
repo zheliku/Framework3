@@ -15,7 +15,7 @@ namespace Framework3.Toolkits.InputKit
     using UnityEngine.InputSystem;
 
     /// <summary>
-    /// 请使用 InputAction 封装方法，用于更新 Inspector 面板中显示的 Mono
+    ///     请使用 InputAction 封装方法，用于更新 Inspector 面板中显示的 Mono
     /// </summary>
     public static class InputActionExtension
     {
@@ -103,7 +103,7 @@ namespace Framework3.Toolkits.InputKit
         }
 
         public static InputAction UnregisterPerformedWhenGameObjectDisabled(this InputAction self, GameObject target, Action<InputAction.CallbackContext>
-                                                                            action,            int        priority = 0)
+                                                                                action,            int        priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
@@ -113,7 +113,7 @@ namespace Framework3.Toolkits.InputKit
         }
 
         public static InputAction UnregisterPerformedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext>
-                                                                            action,            int       priority = 0)
+                                                                                action,            int       priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
             {
@@ -166,7 +166,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterPerformedAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
@@ -184,7 +184,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterStartedWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -202,7 +202,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterStartedWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
@@ -220,7 +220,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterStartedAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -238,7 +238,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterStartedAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
@@ -256,7 +256,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterCanceledWhenGameObjectDisabled(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -274,7 +274,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterCanceledWhenGameObjectDestroyed(this InputAction self, Component target, Action<InputAction.CallbackContext> action, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>
@@ -292,7 +292,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterCanceledAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -319,7 +319,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterAllWhenGameObjectDisabled(this InputAction self, GameObject target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -328,7 +328,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterAllWhenGameObjectDisabled(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent.Register(() =>
@@ -346,7 +346,7 @@ namespace Framework3.Toolkits.InputKit
             }, priority);
             return self;
         }
-        
+
         public static InputAction UnregisterAllWhenGameObjectDestroyed(this InputAction self, Component target, float priority = 0)
         {
             target.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent.Register(() =>

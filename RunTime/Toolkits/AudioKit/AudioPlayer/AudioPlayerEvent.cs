@@ -9,27 +9,32 @@
 namespace Framework3.Toolkits.AudioKit
 {
     using System;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     internal class AudioPlayerEvent
     {
+        private readonly AudioPlayer _owner;
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        internal Action<AudioPlayer> onFinish; // 播放结束的回调
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        internal Action<AudioPlayer> onStart; // 开始播放的回调
         public AudioPlayerEvent(AudioPlayer owner)
         {
             _owner = owner;
         }
 
-        private AudioPlayer _owner;
-        
-        [ShowInInspector]
-        internal Action<AudioPlayer> onStart; // 开始播放的回调
-
-        [ShowInInspector]
-        internal Action<AudioPlayer> onFinish; // 播放结束的回调
-
         internal void RegisterOnStart(Action<AudioPlayer> startEvent)
         {
             if (startEvent == null) return;
-            
+
             if (onStart == null)
             {
                 onStart = startEvent;
@@ -39,11 +44,11 @@ namespace Framework3.Toolkits.AudioKit
                 onStart += startEvent;
             }
         }
-        
+
         internal void RegisterOnFinish(Action<AudioPlayer> finishEvent)
         {
             if (finishEvent == null) return;
-            
+
             if (onFinish == null)
             {
                 onFinish = finishEvent;
@@ -53,20 +58,20 @@ namespace Framework3.Toolkits.AudioKit
                 onFinish += finishEvent;
             }
         }
-        
+
         internal void CallOnStart()
         {
             onStart?.Invoke(_owner);
         }
-        
+
         internal void CallOnFinish()
         {
             onFinish?.Invoke(_owner);
         }
-        
+
         internal void Clear()
         {
-            onStart = null;
+            onStart  = null;
             onFinish = null;
         }
     }

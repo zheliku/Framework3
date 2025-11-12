@@ -12,7 +12,7 @@ namespace Framework3.Toolkits.PoolKit
     using System.Reflection;
 
     /// <summary>
-    /// 没有公共构造函数的对象工厂：相关对象只能通过反射获得
+    ///     没有公共构造函数的对象工厂：相关对象只能通过反射获得
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class NonPublicObjectFactory<T> : IObjectFactory<T> where T : class

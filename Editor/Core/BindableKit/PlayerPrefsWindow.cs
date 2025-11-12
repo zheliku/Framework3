@@ -1,70 +1,67 @@
 // ------------------------------------------------------------
 // @file       PlayerPrefsWindow.cs
-// @brief
+// @brief      Odin-aware：未装 Odin 显示引导；已装照常使用 Odin 界面/逻辑
 // @author     zheliku
 // @Modified   2025-06-10 01:36:18
-// @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
-
 
 namespace Framework3.Toolkits.BindableKit.Editor
 {
     using System;
     using System.Diagnostics;
-    using Sirenix.OdinInspector;
+    using System.Text;
     using Microsoft.Win32;
-    using Sirenix.OdinInspector.Editor;
     using UnityEditor;
     using UnityEngine;
+    using Framework3.Editor; // 引入基类与安装器
 
-    public class PlayerPrefsWindow : OdinEditorWindow
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+    using Sirenix.OdinInspector.Editor;
+#endif
+
+    public class PlayerPrefsWindow : OdinAwareEditorWindowBase
     {
+        protected override string WindowTitle => "PlayerPrefs";
+
         [MenuItem("Framework3/BindableKit/Open PlayerPrefs Window")]
         private static void OpenWindow()
         {
             var window = GetWindow<PlayerPrefsWindow>();
-            window.InitializeList();
             window.Show();
+#if ODIN_INSPECTOR
+            window.InitializeList();
+#endif
         }
 
         [MenuItem("Framework3/BindableKit/Open Registry Window")]
         private static void OpenRegistry()
         {
-            // 获取PlayerSettings中的公司名和产品名
-            string companyName = PlayerSettings.companyName;
-            string productName = PlayerSettings.productName;
-
-            // 构造注册表路径（Windows平台）
-            var registryLastKey = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit";
-            var registryLocation = $"HKEY_CURRENT_USER\\Software\\Unity\\UnityEditor\\{companyName}\\{productName}";
-
-#if Net_4_8
-            
+#if UNITY_EDITOR_WIN
+            var companyName = PlayerSettings.companyName;
+            var productName = PlayerSettings.productName;
+            var lastKey = @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit";
+            var loc = $"HKEY_CURRENT_USER\\Software\\Unity\\UnityEditor\\{companyName}\\{productName}";
+            Registry.SetValue(lastKey, "LastKey", loc);
+            Process.Start(new ProcessStartInfo("regedit.exe"){ UseShellExecute = true });
+#else
+            EditorUtility.DisplayDialog("Not Supported","仅 Windows 支持打开注册表。","OK");
 #endif
-            
-            Registry.SetValue(registryLastKey, "LastKey",
-                registryLocation); // Set LastKey value that regedit will go directly to
-
-            // 调用regedit并定位到指定路径
-            Process.Start("regedit.exe");
         }
 
+#if ODIN_INSPECTOR
+        // ---- 你的原有字段/逻辑（仅在 Odin 存在时编译）----
         public BindableList<PlayerPrefPair> PlayerPrefPairs;
 
         private void InitializeList()
         {
-            if (PlayerPrefPairs != null)
-            {
-                return;
-            }
+            if (PlayerPrefPairs != null) return;
 
-            string companyName = PlayerSettings.companyName;
-            string productName = PlayerSettings.productName;
-
+            var companyName = PlayerSettings.companyName;
+            var productName = PlayerSettings.productName;
             var keyValues = GetAll(companyName, productName);
-            PlayerPrefPairs = new BindableList<PlayerPrefPair>(keyValues);
 
-            // PlayerPrefPairs.OnAdd.Register((i,     pair) => pair.WriteToPlayerPrefs());
+            PlayerPrefPairs = new BindableList<PlayerPrefPair>(keyValues);
             PlayerPrefPairs.OnRemove.Register((i, pair) => pair.DeleteFromPlayerPrefs());
             PlayerPrefPairs.OnReplace.Register((i, oldPair, newPair) =>
             {
@@ -73,120 +70,82 @@ namespace Framework3.Toolkits.BindableKit.Editor
             });
             PlayerPrefPairs.OnClear.Register(() =>
             {
-                foreach (var pair in keyValues)
-                {
-                    pair.DeleteFromPlayerPrefs();
-                }
+                foreach (var pair in keyValues) pair.DeleteFromPlayerPrefs();
             });
         }
-
-        public static PlayerPrefPair[] GetAll(string companyName, string productName)
-        {
-            if (Application.platform == RuntimePlatform.WindowsEditor)
-            {
-                // From Unity docs: On Windows, PlayerPrefs are stored in the registry under HKCU\Software\[company name]\[product name] key, where company and product names are the names set up in Project Settings.
-#if UNITY_5_5_OR_NEWER
-
-                // From Unity 5.5 editor player prefs moved to a specific location
-                var registryKey =
-                    Registry.CurrentUser.OpenSubKey("Software\\Unity\\UnityEditor\\" + companyName + "\\" +
-                                                    productName);
-#else
-                Microsoft.Win32.RegistryKey registryKey =
- Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\\" + companyName + "\\" + productName);
 #endif
 
-                // Parse the registry if the specified registryKey exists
-                if (registryKey != null)
-                {
-                    // Get an array of what keys (registry value names) are stored
-                    string[] valueNames = registryKey.GetValueNames();
-
-                    // Create the array of the right size to take the saved player prefs
-                    PlayerPrefPair[] tempPlayerPrefs = new PlayerPrefPair[valueNames.Length];
-
-                    // Parse and convert the registry saved player prefs into our array
-                    for (int i = 0; i < valueNames.Length; i++)
-                    {
-                        string key = valueNames[i];
-
-                        // Remove the _h193410979 style suffix used on player pref keys in Windows registry
-                        int index = key.LastIndexOf("_", StringComparison.Ordinal);
-                        key = key.Remove(index, key.Length - index);
-
-                        // Get the value from the registry
-                        var ambiguousValue = registryKey.GetValue(valueNames[i]);
-                        var valueKind = registryKey.GetValueKind(valueNames[i]);
-
-                        // Unfortunately floats will come back as an int (at least on 64 bit) because the float is stored as
-                        // 64 bit but marked as 32 bit - which confuses the GetValue() method greatly! 
-                        if (valueKind == RegistryValueKind.DWord)
-                        {
-                            // If the player pref is not actually an int then it must be a float, this will evaluate to true
-                            // (impossible for it to be 0 and -1 at the same time)
-                            if (PlayerPrefs.GetInt(key, -1) == -1 && PlayerPrefs.GetInt(key, 0) == 0)
-                            {
-                                // Fetch the float value from PlayerPrefs in memory
-                                ambiguousValue = PlayerPrefs.GetFloat(key);
-                            }
-                        }
-                        else if (valueKind == RegistryValueKind.Binary)
-                        {
-                            // On Unity 5 a string may be stored as binary, so convert it back to a string
-                            ambiguousValue = System.Text.Encoding.Default.GetString((byte[])ambiguousValue);
-                        }
-
-                        // Assign the key and value into the respective record in our output array
-                        tempPlayerPrefs[i] = new PlayerPrefPair() { Key = key, Value = ambiguousValue };
-                    }
-
-                    // Return the results
-                    return tempPlayerPrefs;
-                }
-                else
-                {
-                    // No existing player prefs saved (which is valid), so just return an empty array
-                    return Array.Empty<PlayerPrefPair>();
-                }
-            }
-            else
-            {
-                throw new NotSupportedException("PlayerPrefsEditor doesn't support this Unity Editor platform");
-            }
-        }
-    }
-
-    [Serializable]
-    public struct PlayerPrefPair
-    {
-        [HorizontalGroup("PlayerPref", Gap = 50)]
-        [LabelWidth(50)]
-        public string Key;
-
-        [HorizontalGroup("PlayerPref")]
-        [ShowInInspector] [HideReferenceObjectPicker]
-        [LabelWidth(50)]
-        public object Value;
-
-        public void WriteToPlayerPrefs()
+        // ---- 通用：读取 PlayerPrefs（Windows）----
+        public static PlayerPrefPair[] GetAll(string companyName, string productName)
         {
-            if (Value is string str)
+            if (Application.platform != RuntimePlatform.WindowsEditor)
+                throw new NotSupportedException("PlayerPrefsWindow 目前仅支持在 Windows Editor 下读取注册表。");
+
+#if UNITY_5_5_OR_NEWER
+            var registryKey =
+                Registry.CurrentUser.OpenSubKey("Software\\Unity\\UnityEditor\\" + companyName + "\\" + productName);
+#else
+            var registryKey =
+                Registry.CurrentUser.OpenSubKey("Software\\" + companyName + "\\" + productName);
+#endif
+            if (registryKey == null) return Array.Empty<PlayerPrefPair>();
+
+            var valueNames = registryKey.GetValueNames();
+            var temp = new PlayerPrefPair[valueNames.Length];
+
+            for (var i = 0; i < valueNames.Length; i++)
             {
-                PlayerPrefs.SetString(Key, str);
+                var key = valueNames[i];
+                var idx = key.LastIndexOf("_", StringComparison.Ordinal);
+                if (idx >= 0) key = key.Remove(idx, key.Length - idx);
+
+                var ambiguous = registryKey.GetValue(valueNames[i]);
+                var kind = registryKey.GetValueKind(valueNames[i]);
+
+                if (kind == RegistryValueKind.DWord)
+                {
+                    if (PlayerPrefs.GetInt(key, -1) == -1 && PlayerPrefs.GetInt(key, 0) == 0)
+                        ambiguous = PlayerPrefs.GetFloat(key);
+                }
+                else if (kind == RegistryValueKind.Binary)
+                {
+                    ambiguous = Encoding.Default.GetString((byte[])ambiguous);
+                }
+
+                temp[i] = new PlayerPrefPair { Key = key, Value = ambiguous };
             }
-            else if (Value is int i)
-            {
-                PlayerPrefs.SetInt(Key, i);
-            }
-            else if (Value is float f)
-            {
-                PlayerPrefs.SetFloat(Key, f);
-            }
+            return temp;
         }
 
-        public void DeleteFromPlayerPrefs()
+        [Serializable]
+        public struct PlayerPrefPair
         {
-            PlayerPrefs.DeleteKey(Key);
+#if ODIN_INSPECTOR
+            [HorizontalGroup("PlayerPref", Gap = 50)]
+            [LabelWidth(50)]
+#endif
+            public string Key;
+
+#if ODIN_INSPECTOR
+            [HorizontalGroup("PlayerPref")]
+            [ShowInInspector]
+            [HideReferenceObjectPicker]
+            [LabelWidth(50)]
+#endif
+            public object Value;
+
+            public void WriteToPlayerPrefs()
+            {
+                if (string.IsNullOrEmpty(Key)) return;
+                if (Value is string s) PlayerPrefs.SetString(Key, s);
+                else if (Value is int i) PlayerPrefs.SetInt(Key, i);
+                else if (Value is float f) PlayerPrefs.SetFloat(Key, f);
+            }
+
+            public void DeleteFromPlayerPrefs()
+            {
+                if (!string.IsNullOrEmpty(Key)) PlayerPrefs.DeleteKey(Key);
+            }
         }
     }
 }

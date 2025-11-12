@@ -8,12 +8,13 @@
 
 namespace Framework3.Toolkits.ResKit
 {
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
     using System;
     using System.Collections.Generic;
     using FluentAPI;
-    using Core;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
     using Object = UnityEngine.Object;
@@ -24,22 +25,28 @@ namespace Framework3.Toolkits.ResKit
     #region Static
 
         /// <summary>
-        /// 记录 AsyncOperationHandle 的附属信息：资源名称
+        ///     记录 AsyncOperationHandle 的附属信息：资源名称
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public static Dictionary<AsyncOperationHandle, string> HandleAssetNameMap = new Dictionary<AsyncOperationHandle, string>();
+    #endif
+        public static Dictionary<AsyncOperationHandle, string> HandleAssetNameMap = new();
 
         /// <summary>
-        /// 记录 AsyncOperationHandle 的附属信息：资源类型
+        ///     记录 AsyncOperationHandle 的附属信息：资源类型
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public static Dictionary<AsyncOperationHandle, Type> HandleAssetTypeMap = new Dictionary<AsyncOperationHandle, Type>();
+    #endif
+        public static Dictionary<AsyncOperationHandle, Type> HandleAssetTypeMap = new();
 
         /// <summary>
-        /// 记录 Resources 的附属信息：资源加载路径
+        ///     记录 Resources 的附属信息：资源加载路径
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public static Dictionary<Object, string> ResourceAssetPathMap = new Dictionary<Object, string>();
+    #endif
+        public static Dictionary<Object, string> ResourceAssetPathMap = new();
 
     #endregion
 

@@ -12,11 +12,11 @@ namespace Framework3.Toolkits.PoolKit
 
     public class ListPool<T> : CollectionPool<List<T>, T>
     { }
-    
+
     public static class ListPoolExtension
     {
         /// <summary>
-        /// 对 List 拓展自身入栈的方法
+        ///     对 List 拓展自身入栈的方法
         /// </summary>
         public static void Release2Pool<T>(this List<T> toRelease)
         {

@@ -9,15 +9,21 @@
 namespace Framework3.Core
 {
     using System;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 自定义注销器
+    ///     自定义注销器
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public struct CustomUnregister : IUnregister
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private Action _onUnregister;
 
         public CustomUnregister(Action onUnregister)

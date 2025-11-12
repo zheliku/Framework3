@@ -11,36 +11,40 @@ namespace Framework3.Toolkits.FluentAPI
     using UnityEngine;
 
     /// <summary>
-    /// 针对 <see cref="UnityEngine.Behaviour"/> 提供的链式扩展
+    ///     针对 <see cref="UnityEngine.Behaviour" /> 提供的链式扩展
     /// </summary>
     public static class UnityEngineBehaviourExtension
     {
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// behaviour.enable = true
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.Enable();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Enable<T>(this T selfBehaviour, bool enable = true) where T : Behaviour
         {
             selfBehaviour.enabled = enable;
             return selfBehaviour;
         }
-        
+
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// behaviour.enable = false
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.Disable();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Disable<T>(this T selfBehaviour) where T : Behaviour
         {
             selfBehaviour.enabled = false;

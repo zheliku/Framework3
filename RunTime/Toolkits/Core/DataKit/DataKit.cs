@@ -16,24 +16,24 @@ namespace Framework3.Toolkits.DataKit
         public static string ProjectPath { get => Application.dataPath; }
 
         /// <summary>
-        /// Json 存储路径
+        ///     Json 存储路径
         /// </summary>
         public static string JsonSavePath { get; set; } = Application.persistentDataPath.CombinePath("Json");
 
         /// <summary>
-        /// Txt 存储路径
+        ///     Txt 存储路径
         /// </summary>
         public static string TxtSavePath { get; set; } = Application.persistentDataPath.CombinePath("Txt");
 
         /// <summary>
-        /// Binary 存储路径
+        ///     Binary 存储路径
         /// </summary>
 
         // public static string BinarySavePath { get; set; } = Application.persistentDataPath.CombinePath("Binary");
         public static string BinarySavePath { get; set; } = Application.persistentDataPath + "/Binary";
 
         /// <summary>
-        /// Excel 存储路径
+        ///     Excel 存储路径
         /// </summary>
         public static string ExcelSavePath { get; set; } = Application.streamingAssetsPath.CombinePath("Excel");
 
@@ -64,7 +64,7 @@ namespace Framework3.Toolkits.DataKit
 
         public static void SaveJson<TData>(string filePath, TData data, string extension = JsonHelper.EXTENSION, JsonType type = JsonType.LitJson)
         {
-            JsonHelper.Save<TData>(filePath, data, extension, type);
+            JsonHelper.Save(filePath, data, extension, type);
         }
 
         public static TData FromJson<TData>(string jsonStr, JsonType type = JsonType.LitJson)
@@ -72,9 +72,9 @@ namespace Framework3.Toolkits.DataKit
             return JsonHelper.FromJson<TData>(jsonStr, type);
         }
 
-        public static TData LoadJson<TData>(string filePath, TData defaultValue = default(TData), string extension = JsonHelper.EXTENSION, JsonType type = JsonType.LitJson)
+        public static TData LoadJson<TData>(string filePath, TData defaultValue = default, string extension = JsonHelper.EXTENSION, JsonType type = JsonType.LitJson)
         {
-            return JsonHelper.Load<TData>(filePath, defaultValue, extension, type);
+            return JsonHelper.Load(filePath, defaultValue, extension, type);
         }
 
         public static ExcelSheet LoadExcel(string filePath, string sheetName = null, ExcelFormat format = ExcelFormat.Xlsx)
@@ -89,7 +89,7 @@ namespace Framework3.Toolkits.DataKit
 
         public static void SaveBinary<TData>(string filePath, TData data, string extension = BinaryHelper.EXTENSION)
         {
-            BinaryHelper.Save<TData>(filePath, data, extension);
+            BinaryHelper.Save(filePath, data, extension);
         }
     }
 }

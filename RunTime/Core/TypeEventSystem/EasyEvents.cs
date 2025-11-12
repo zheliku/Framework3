@@ -10,20 +10,24 @@ namespace Framework3.Core
 {
     using System;
     using System.Collections.Generic;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// EasyEvent 管理器
+    ///     EasyEvent 管理器
     /// </summary>
     public sealed class EasyEvents
     {
         private static readonly EasyEvents s_globalEvents = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private readonly Dictionary<Type, IEasyEvent> _typeEvents = new();
 
         /// <summary>
-        /// 获取 EasyEvent，用于 GLOBAL_EVENTS
+        ///     获取 EasyEvent，用于 GLOBAL_EVENTS
         /// </summary>
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         /// <returns>EasyEvent 实例</returns>
@@ -33,7 +37,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注册 EasyEvent，用于 GLOBAL_EVENTS
+        ///     注册 EasyEvent，用于 GLOBAL_EVENTS
         /// </summary>
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         public static void Register<TEasyEvent>() where TEasyEvent : IEasyEvent, new()
@@ -42,7 +46,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 添加 EasyEvent，用于新实例
+        ///     添加 EasyEvent，用于新实例
         /// </summary>
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         public void AddEvent<TEasyEvent>() where TEasyEvent : IEasyEvent, new()
@@ -51,7 +55,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 获取 EasyEvent，用于新实例
+        ///     获取 EasyEvent，用于新实例
         /// </summary>
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         /// <returns>EasyEvent 实例</returns>
@@ -61,7 +65,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 获取 EasyEvent，不存在则添加，用于新实例
+        ///     获取 EasyEvent，不存在则添加，用于新实例
         /// </summary>
         /// <typeparam name="TEasyEvent">EasyEvent 类型</typeparam>
         /// <returns>EasyEvent 实例</returns>

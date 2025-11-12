@@ -1,61 +1,62 @@
 // ------------------------------------------------------------
 // @file       CodeGenWindow.cs
-// @brief
+// @brief      Odin-aware：未装 Odin 显示引导；已装照常使用 Odin 界面/逻辑
 // @author     zheliku
 // @Modified   2025-02-23 22:02:38
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Toolkits.FluentAPI;
-
 namespace Framework3.Toolkits.CodeGenKit.Editor
 {
+    using FluentAPI;
+    using UnityEditor;
+    using Framework3.Editor;
+    using UnityEngine;
+
+#if ODIN_INSPECTOR
     using System.IO;
     using Sirenix.OdinInspector;
     using Sirenix.OdinInspector.Editor;
-    using UnityEditor;
-    using UnityEngine;
+#endif
 
-    public class CodeGenWindow : OdinEditorWindow
+    public class CodeGenWindow : OdinAwareEditorWindowBase
     {
-        [ShowInInspector]
-        public string NameSpace
+        protected override string WindowTitle => "CodeGen";
+
+        // 如需自定义 Samples 的显示名/包名以提高定位准确性，可在此覆盖
+        // protected override string PackageDisplayName => "Framework3";
+        // protected override string PackageName => "com.your.framework3";
+
+#if ODIN_INSPECTOR
+        [ShowInInspector] public string NameSpace
         {
             get => CodeGenPipeline.Default.NameSpace;
             set => CodeGenPipeline.Default.NameSpace = value;
         }
 
-        [ShowInInspector] [FolderPath]
-        public string FolderPath
+        [ShowInInspector, FolderPath] public string FolderPath
         {
             get => CodeGenPipeline.Default.FolderPath;
             set => CodeGenPipeline.Default.FolderPath = value;
         }
 
-        [ShowInInspector]
-        public string FileName
+        [ShowInInspector] public string FileName
         {
             get => CodeGenPipeline.Default.FileName;
             set => CodeGenPipeline.Default.FileName = value;
         }
 
-        [ShowInInspector]
-        public GameObject SelectedGameObject
+        [ShowInInspector] public GameObject SelectedGameObject
         {
             get => CodeGenPipeline.Default.LastSelectedGameObject;
             set
             {
                 CodeGenPipeline.Default.LastSelectedGameObject = value;
-
-                if (value != null)
-                {
-                    FileName = value.name.Replace(" ", "");
-                }
+                if (value != null) FileName = value.name.Replace(" ", "");
             }
         }
 
-        [ShowInInspector]
-        public string Architecture
+        [ShowInInspector] public string Architecture
         {
             get => CodeGenPipeline.Default.Architecture;
             set => CodeGenPipeline.Default.Architecture = value;
@@ -67,49 +68,26 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             set => CodeGenPipeline.Default.IsGenerating = value;
         }
 
-        [HorizontalGroup("Buttons")]
-        [Button(ButtonSizes.Large)]
+        [HorizontalGroup("Buttons"), Button(ButtonSizes.Large)]
         public void Generate()
         {
             CheckArchitectureExist();
-
             IsGenerating = true;
-
             var filePath = $"{FolderPath}/{FileName}.cs";
-
-            if (!Directory.Exists(FolderPath))
-            {
-                Directory.CreateDirectory(FolderPath);
-            }
-
+            if (!Directory.Exists(FolderPath)) Directory.CreateDirectory(FolderPath);
             File.WriteAllText(filePath, GenerateCodeContent);
-
-            // 刷新 Unity 资源数据库，触发脚本编译
             AssetDatabase.Refresh();
         }
 
-        [HorizontalGroup("Buttons")]
-        [Button(ButtonSizes.Large)]
+        [HorizontalGroup("Buttons"), Button(ButtonSizes.Large)]
         public void GenerateAndOpen()
         {
             CheckArchitectureExist();
-
             IsGenerating = true;
-
-            // SaveCodeGenData();
-
             var filePath = $"{FolderPath}/{FileName}.cs";
-
-            if (!Directory.Exists(FolderPath))
-            {
-                Directory.CreateDirectory(FolderPath);
-            }
-
+            if (!Directory.Exists(FolderPath)) Directory.CreateDirectory(FolderPath);
             File.WriteAllText(filePath, GenerateCodeContent);
-
-            CodeGenKit.OpenFile(filePath); // 打开文件
-
-            // 刷新 Unity 资源数据库，触发脚本编译
+            CodeGenKit.OpenFile(filePath);
             AssetDatabase.Refresh();
         }
 
@@ -118,33 +96,27 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             if (Architecture.GetTypeByName() == null)
             {
                 var architectureContent = CodeGenPipeline.Default.GenerateArchitectureCode();
-                
-                if (!Directory.Exists(FolderPath))
-                {
-                    Directory.CreateDirectory(FolderPath);
-                }
-
+                if (!Directory.Exists(FolderPath)) Directory.CreateDirectory(FolderPath);
                 File.WriteAllText(FolderPath + "/" + Architecture + ".cs", architectureContent);
             }
         }
 
-        [ShowInInspector] [DisplayAsString(false)] [HideLabel]
-        public string GenerateCodeContent
-        {
-            get => CodeGenPipeline.Default.GenerateViewCode();
-        }
+        [ShowInInspector, DisplayAsString(false), HideLabel]
+        public string GenerateCodeContent => CodeGenPipeline.Default.GenerateViewCode();
+#endif
 
         [MenuItem("Framework3/CodeGen/Open CodeGen Window &V")]
         private static void OpenWindow()
         {
             var window = GetWindow<CodeGenWindow>();
             window.Show();
-
+#if ODIN_INSPECTOR
             window.LoadCodeGenData();
-
             window.SelectedGameObject = Selection.activeGameObject;
+#endif
         }
 
+#if ODIN_INSPECTOR
         private void LoadCodeGenData()
         {
             NameSpace    = CodeGenPipeline.Default.GlobalNameSpace;
@@ -153,7 +125,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             Architecture = CodeGenPipeline.Default.GlobalArchitecture;
         }
 
-        [Button(ButtonSizes.Large)] [PropertySpace(5)]
+        [Button(ButtonSizes.Large), PropertySpace(5)]
         private void SaveCodeGenData()
         {
             CodeGenPipeline.Default.GlobalNameSpace    = NameSpace;
@@ -161,5 +133,6 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             CodeGenPipeline.Default.GlobalFileName     = FileName;
             CodeGenPipeline.Default.GlobalArchitecture = Architecture;
         }
+#endif
     }
 }

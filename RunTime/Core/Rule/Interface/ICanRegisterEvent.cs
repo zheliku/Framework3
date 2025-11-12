@@ -9,9 +9,8 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 可注册 Event，通过 Architecture 注册，由 CanRegisterEventExtension 扩展实现
+    ///     可注册 Event，通过 Architecture 注册，由 CanRegisterEventExtension 扩展实现
     /// </summary>
     public interface ICanRegisterEvent : IBelongToArchitecture
-    {
-    }
+    { }
 }

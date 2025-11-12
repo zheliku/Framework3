@@ -8,16 +8,17 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
+    using System;
     using UnityEngine;
 
     /// <summary>
-    /// 线性插值 Action
+    ///     线性插值 Action
     /// </summary>
     public class Lerp : AbstractAction<Lerp>
     {
     #region Static
 
-        internal static Lerp Create(float a, float b, float duration, System.Action<float> onLerp, System.Action onLerpFinished)
+        internal static Lerp Create(float a, float b, float duration, Action<float> onLerp, Action onLerpFinished)
         {
             var lerp = CreateInternal();
             lerp._a              = a;
@@ -37,8 +38,8 @@ namespace Framework3.Toolkits.ActionKit
         private float _duration;
         private float _currentTime;
 
-        private System.Action<float> _onLerp;
-        private System.Action        _onLerpFinished;
+        private Action<float> _onLerp;
+        private Action        _onLerpFinished;
 
     #endregion
 

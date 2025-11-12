@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnCancelEventTrigger : MonoBehaviour, ICancelHandler
     {
-        public readonly EasyEvent<BaseEventData> OnCancelEvent = new EasyEvent<BaseEventData>();
+        public readonly EasyEvent<BaseEventData> OnCancelEvent = new();
 
         public void OnCancel(BaseEventData eventData)
         {

@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnDisableEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnDisableEvent = new EasyEvent();
+        public readonly EasyEvent OnDisableEvent = new();
 
         private void OnDisable()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent
-                       .Register(onDisable, priority);
+               .Register(onDisable, priority);
         }
 
         public static IUnregister OnDisableEvent(this GameObject self, Action onDisable, float priority = 0)
         {
             return self.GetOrAddComponent<OnDisableEventTrigger>().OnDisableEvent
-                       .Register(onDisable, priority);
+               .Register(onDisable, priority);
         }
     }
 }

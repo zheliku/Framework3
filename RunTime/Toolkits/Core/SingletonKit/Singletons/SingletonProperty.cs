@@ -17,12 +17,12 @@ namespace Framework3.Toolkits.SingletonKit
     public static class SingletonProperty<TSingleton> where TSingleton : class, ISingleton
     {
         /// <summary>
-        /// 静态 Lazy
+        ///     静态 Lazy
         /// </summary>
         private static Lazy<TSingleton> s_lazyHolder = new(SingletonCreator.CreateSingleton<TSingleton>);
 
         /// <summary>
-        /// 静态属性
+        ///     静态属性
         /// </summary>
         public static TSingleton Instance
         {
@@ -30,12 +30,12 @@ namespace Framework3.Toolkits.SingletonKit
         }
 
         /// <summary>
-        /// 资源释放
+        ///     资源释放
         /// </summary>
         public static void Dispose()
         {
             // 重新创建 Lazy 实例
-            s_lazyHolder = new(SingletonCreator.CreateSingleton<TSingleton>);
+            s_lazyHolder = new Lazy<TSingleton>(SingletonCreator.CreateSingleton<TSingleton>);
         }
     }
 }

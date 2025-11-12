@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.SingletonKit
     using System;
 
     /// <summary>
-    /// 修改 MonoSingleton 或者 MonoSingletonProperty 的 gameObject 名字和路径
+    ///     修改 MonoSingleton 或者 MonoSingletonProperty 的 gameObject 名字和路径
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)] // 这个特性只能标记在 Class 上
     public class MonoSingletonPathAttribute : Attribute

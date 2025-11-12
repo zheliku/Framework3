@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnSubmitEventTrigger : MonoBehaviour, ISubmitHandler
     {
-        public readonly EasyEvent<BaseEventData> OnSubmitEvent = new EasyEvent<BaseEventData>();
+        public readonly EasyEvent<BaseEventData> OnSubmitEvent = new();
 
         public void OnSubmit(BaseEventData eventData)
         {

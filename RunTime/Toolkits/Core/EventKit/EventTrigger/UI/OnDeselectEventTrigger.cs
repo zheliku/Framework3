@@ -10,15 +10,15 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnDeselectEventTrigger : MonoBehaviour, IDeselectHandler
     {
-        public readonly EasyEvent<BaseEventData> OnDeselectEvent = new EasyEvent<BaseEventData>();
-        
+        public readonly EasyEvent<BaseEventData> OnDeselectEvent = new();
+
         public void OnDeselect(BaseEventData eventData)
         {
             OnDeselectEvent.Trigger(eventData);

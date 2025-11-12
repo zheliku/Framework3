@@ -9,9 +9,8 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 可发送 Command，通过 Architecture 发送，由 CanSendCommandExtension 扩展实现
+    ///     可发送 Command，通过 Architecture 发送，由 CanSendCommandExtension 扩展实现
     /// </summary>
     public interface ICanSendCommand : IBelongToArchitecture
-    {
-    }
+    { }
 }

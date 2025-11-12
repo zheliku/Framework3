@@ -9,7 +9,9 @@
 namespace Framework3.Toolkits.ActionKit
 {
     using System.Collections.Generic;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     public interface ISequence : IAction
     {
@@ -27,14 +29,43 @@ namespace Framework3.Toolkits.ActionKit
 
     #endregion
 
+    #region 方法
+
+        /// <summary>
+        ///     执行到下一个未完成的 Action
+        /// </summary>
+        private void TryExecuteUntilNextNotFinished()
+        {
+            while (_currentAction != null &&
+                   _currentAction.Execute(0)) // 前一个执行完成后，才会进入下一个 Action，执行时帧间隔为 0，因为在同一帧的 while 循环中执行的
+            {
+                _currentActionIndex++;
+
+                if (_currentActionIndex < _actions.Count) // 数组未越界
+                {
+                    _currentAction = _actions[_currentActionIndex]; // 更新当前 Action 为下一个
+                    _currentAction.Reset();                         // 重置当前 Action，准备执行
+                }
+                else // 数组已越界
+                {
+                    _currentAction = null;
+                    this.Finish();
+                }
+            }
+        }
+
+    #endregion
+
     #region 字段
 
         private IAction _currentAction;
 
         private int _currentActionIndex;
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly List<IAction> _actions = new List<IAction>();
+    #endif
+        private readonly List<IAction> _actions = new();
 
     #endregion
 
@@ -114,33 +145,6 @@ namespace Framework3.Toolkits.ActionKit
         {
             _actions.Add(action);
             return this;
-        }
-
-    #endregion
-
-    #region 方法
-
-        /// <summary>
-        /// 执行到下一个未完成的 Action
-        /// </summary>
-        private void TryExecuteUntilNextNotFinished()
-        {
-            while (_currentAction != null &&
-                   _currentAction.Execute(0)) // 前一个执行完成后，才会进入下一个 Action，执行时帧间隔为 0，因为在同一帧的 while 循环中执行的
-            {
-                _currentActionIndex++;
-
-                if (_currentActionIndex < _actions.Count) // 数组未越界
-                {
-                    _currentAction = _actions[_currentActionIndex]; // 更新当前 Action 为下一个
-                    _currentAction.Reset();                         // 重置当前 Action，准备执行
-                }
-                else // 数组已越界
-                {
-                    _currentAction = null;
-                    this.Finish();
-                }
-            }
         }
 
     #endregion

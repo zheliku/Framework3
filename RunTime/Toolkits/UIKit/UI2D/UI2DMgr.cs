@@ -6,35 +6,63 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.UIKit
 {
     using System;
     using System.Collections.Generic;
     using ResKit;
     using SingletonKit;
-    using Sirenix.OdinInspector;
+    using UnityEditor;
+    using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
+
     public class Panel2DInfo
     {
-        [LabelWidth(75)]
-        public IPanel2D Panel2D;
-
         [HideInInspector]
         public AsyncOperationHandle Handle;
+    #if ODIN_INSPECTOR
+        [LabelWidth(75)]
+    #endif
+        public IPanel2D Panel2D;
 
         public Panel2DInfo(IPanel2D panel2D, AsyncOperationHandle handle)
         {
-            Panel2D  = panel2D;
-            Handle = handle;
+            Panel2D = panel2D;
+            Handle  = handle;
         }
     }
 
     public class UI2DMgr : MonoBehaviour, ISingleton
     {
+    #region 字段
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private Dictionary<string, Panel2DInfo> _panels = new();
+
+    #endregion
+
+    #region Unity 事件
+
+        private void Update()
+        {
+        #if UNITY_EDITOR
+
+            // 强制刷新 Inspector GUI
+            EditorUtility.SetDirty(this);
+        #endif
+        }
+
+    #endregion
+
     #region Static
 
         private static UI2DMgr s_instance;
@@ -43,13 +71,6 @@ namespace Framework3.Toolkits.UIKit
         {
             get => UI2DRoot.Instance.GetComponentInChildren<UI2DMgr>();
         }
-
-    #endregion
-
-    #region 字段
-
-        [ShowInInspector]
-        private Dictionary<string, Panel2DInfo> _panels = new Dictionary<string, Panel2DInfo>();
 
     #endregion
 
@@ -68,7 +89,7 @@ namespace Framework3.Toolkits.UIKit
                 {
                     obj.name = panelName;
                     var panel = obj.GetComponent<T>();
-                    panel.Level = level;
+                    panel.Level   = level;
                     value.Panel2D = panel;
                     callback?.Invoke(panel);
                 });
@@ -86,7 +107,7 @@ namespace Framework3.Toolkits.UIKit
                     return (T) value.Panel2D;
                 }
             }
-            return default;
+            return default(T);
         }
 
         public void UnloadPanel<T>(string panelName, Action callback = null) where T : IPanel2D
@@ -98,14 +119,14 @@ namespace Framework3.Toolkits.UIKit
                     Debug.LogError("Panel2D " + panelName + " is not of type " + typeof(T).Name);
                     return;
                 }
-                
+
                 value.Handle.Release();
                 callback?.Invoke();
                 _panels.Remove(panelName);
                 Destroy(value.Panel2D.Transform.gameObject);
             }
         }
-        
+
         public void UnloadPanel(string panelName, Action callback = null)
         {
             if (_panels.TryGetValue(panelName, out var value))
@@ -120,7 +141,7 @@ namespace Framework3.Toolkits.UIKit
         public AsyncOperationHandle<GameObject> ShowPanelAsync<T>(string panelName, Action<T> callback = null, UILevel level = UILevel.Common) where T : IPanel2D
         {
             var handle = LoadPanelAsync<T>(panelName);
-            
+
             if (!handle.IsDone)
             {
                 handle.OnCompleted(obj =>
@@ -173,19 +194,6 @@ namespace Framework3.Toolkits.UIKit
         }
 
         public void OnSingletonInit() { }
-
-    #endregion
-
-    #region Unity 事件
-
-        private void Update()
-        {
-#if UNITY_EDITOR
-
-            // 强制刷新 Inspector GUI
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-        }
 
     #endregion
     }

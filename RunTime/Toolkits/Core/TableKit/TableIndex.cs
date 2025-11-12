@@ -11,22 +11,32 @@ namespace Framework3.Toolkits.TableKit
     using System;
     using System.Collections.Generic;
     using System.Linq;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class TableIndex<TKey, TValue> : IDisposable
     {
-        [ShowInInspector]
-        private readonly Dictionary<TKey, List<TValue>> _index = new Dictionary<TKey, List<TValue>>();
-
         private readonly Func<TValue, TKey> _getKeyByValue;
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private readonly Dictionary<TKey, List<TValue>> _index = new();
 
         public TableIndex(Func<TValue, TKey> keyGetter)
         {
             _getKeyByValue = keyGetter;
         }
-        
+
         public IDictionary<TKey, List<TValue>> Dictionary { get => _index; }
+
+        public void Dispose()
+        {
+            Clear();
+        }
 
         public void Add(TValue value)
         {
@@ -66,13 +76,8 @@ namespace Framework3.Toolkits.TableKit
             {
                 list.Clear();
             }
-            
-            _index.Clear();
-        }
 
-        public void Dispose()
-        {
-            Clear();
+            _index.Clear();
         }
     }
 }

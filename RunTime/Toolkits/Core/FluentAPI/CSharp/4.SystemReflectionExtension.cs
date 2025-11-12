@@ -13,20 +13,22 @@ namespace Framework3.Toolkits.FluentAPI
     using System.Reflection;
 
     /// <summary>
-    /// 针对 System.Reflection 提供的链式扩展
+    ///     针对 System.Reflection 提供的链式扩展
     /// </summary>
     public static class SystemReflectionExtension
     {
         /// <summary>
-        /// 通过 Type 创建 Instance
+        ///     通过 Type 创建 Instance
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// interface IA { }
         /// class A { }
         /// IA a = typeof(A).CreateInstance<IA>();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T CreateInstance<T>(this Type self) where T : class
         {
             // 获取构造函数
@@ -39,9 +41,10 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 通过反射调用私有方法
+        ///     通过反射调用私有方法
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// class A
         /// {
@@ -49,7 +52,8 @@ namespace Framework3.Toolkits.FluentAPI
         /// }
         /// new A().ReflectionCallPrivateMethod(""Say""); // I'm A!
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static object CallPrivateMethod<T>(this T self, string methodName, params object[] args)
         {
             var methodInfo = typeof(T).GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -58,9 +62,10 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 通过反射调用私有方法，有返回值
+        ///     通过反射调用私有方法，有返回值
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// class A
         /// {
@@ -68,7 +73,8 @@ namespace Framework3.Toolkits.FluentAPI
         /// }
         /// Debug.Log(new A().ReflectionCallPrivateMethod("Add", 1, 2)); // 3
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static TReturnType CallPrivateMethod<T, TReturnType>(this T self, string methodName, params object[] args)
         {
             var methodInfo = typeof(T).GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -77,19 +83,20 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute，同时也支持 MethodInfo、PropertyInfo、FieldInfo
+        ///     检查是否有指定的 Attribute，同时也支持 MethodInfo、PropertyInfo、FieldInfo
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// [DisplayName(""A Class"")]
         /// class A
         /// {
         ///     [DisplayName("A Number")]
         ///     public int Number;
-        ///
+        /// 
         ///     [DisplayName("Is Complete?")]
         ///     private bool Complete => Number > 100;
-        ///
+        /// 
         ///     [DisplayName("Say complete result?")]
         ///     public void SayComplete()
         ///     {
@@ -100,14 +107,15 @@ namespace Framework3.Toolkits.FluentAPI
         /// Debug.Log(aType.HasAttribute(typeof(DisplayNameAttribute)); // true
         /// Debug.Log(aType.HasAttribute<DisplayNameAttribute>()); // true
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static bool HasAttribute<T>(this Type type, bool inherit = false) where T : Attribute
         {
             return type.GetCustomAttributes(typeof(T), inherit).Any();
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute(this Type type, Type attributeType, bool inherit = false)
         {
@@ -115,7 +123,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute<T>(this PropertyInfo prop, bool inherit = false) where T : Attribute
         {
@@ -123,7 +131,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute(this PropertyInfo prop, Type attributeType, bool inherit = false)
         {
@@ -131,7 +139,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute<T>(this FieldInfo field, bool inherit = false) where T : Attribute
         {
@@ -139,7 +147,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute(this FieldInfo field, Type attributeType, bool inherit)
         {
@@ -147,7 +155,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute<T>(this MethodInfo method, bool inherit = false) where T : Attribute
         {
@@ -155,7 +163,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 检查是否有指定的 Attribute
+        ///     检查是否有指定的 Attribute
         /// </summary>
         public static bool HasAttribute(this MethodInfo method, Type attributeType, bool inherit = false)
         {
@@ -163,19 +171,20 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute，同时也支持 MethodInfo、PropertyInfo、FieldInfo
+        ///     获取指定的 Attribute，同时也支持 MethodInfo、PropertyInfo、FieldInfo
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// [DisplayName(""A Class"")]
         /// class A
         /// {
         ///     [DisplayName("A Number")]
         ///     public int Number;
-        ///
+        /// 
         ///     [DisplayName("Is Complete?")]
         ///     private bool Complete => Number > 100;
-        ///
+        /// 
         ///     [DisplayName("Say complete result?")]
         ///     public void SayComplete()
         ///     {
@@ -186,14 +195,15 @@ namespace Framework3.Toolkits.FluentAPI
         /// Debug.Log(aType.GetAttribute(typeof(DisplayNameAttribute)); // DisplayNameAttribute
         /// Debug.Log(aType.GetAttribute<DisplayNameAttribute>()); // DisplayNameAttribute
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T GetAttribute<T>(this Type type, bool inherit = false) where T : Attribute
         {
             return type.GetCustomAttributes<T>(inherit).FirstOrDefault();
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static object GetAttribute(this Type type, Type attributeType, bool inherit = false)
         {
@@ -201,7 +211,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static T GetAttribute<T>(this MethodInfo method, bool inherit = false) where T : Attribute
         {
@@ -209,7 +219,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static object GetAttribute(this MethodInfo method, Type attributeType, bool inherit = false)
         {
@@ -217,7 +227,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static T GetAttribute<T>(this FieldInfo field, bool inherit = false) where T : Attribute
         {
@@ -225,7 +235,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static object GetAttribute(this FieldInfo field, Type attributeType, bool inherit = false)
         {
@@ -233,7 +243,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static T GetAttribute<T>(this PropertyInfo prop, bool inherit = false) where T : Attribute
         {
@@ -241,7 +251,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 获取指定的 Attribute
+        ///     获取指定的 Attribute
         /// </summary>
         public static object GetAttribute(this PropertyInfo prop, Type attributeType, bool inherit = false)
         {
@@ -249,27 +259,27 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据类型名称获取类型实例。
+        ///     根据类型名称获取类型实例。
         /// </summary>
         /// <param name="name">类型的完全限定名称。</param>
         /// <returns>
-        /// 如果找到匹配的类型，则返回该类型的实例；
-        /// 如果未找到匹配的类型，则返回 null。
+        ///     如果找到匹配的类型，则返回该类型的实例；
+        ///     如果未找到匹配的类型，则返回 null。
         /// </returns>
         public static Type GetTypeByName(this string name)
         {
             var type = Type.GetType(name);
             if (type != null)
                 return type;
-        
-            Assembly[] assembly = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (Assembly ass in assembly)
+
+            var assembly = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var ass in assembly)
             {
                 type = ass.GetType(name);
                 if (type != null)
                     return type;
             }
-        
+
             return null;
         }
     }

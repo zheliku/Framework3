@@ -11,20 +11,22 @@ namespace Framework3.Toolkits.FluentAPI
     using UnityEngine;
 
     /// <summary>
-    /// 针对 <see cref="UnityEngine.Transform"/> 中有关 Rotation 提供的链式扩展
+    ///     针对 <see cref="UnityEngine.Transform" /> 中有关 Rotation 提供的链式扩展
     /// </summary>
     public static class UnityEngineTransformRotationExtension
     {
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.localRotation = localRotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.SetLocalRotation(Quaternion.identity);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetLocalRotation<T>(this T selfComponent, Quaternion localRotation) where T : Component
         {
             selfComponent.transform.localRotation = localRotation;
@@ -32,15 +34,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.localRotation = localRotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.SetLocalRotation(Quaternion.identity);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetLocalRotation(this GameObject selfComponent, Quaternion localRotation)
         {
             selfComponent.transform.localRotation = localRotation;
@@ -48,15 +52,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.localRotation = Quaternion.identity;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component.SetLocalRotationIdentity();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetLocalRotationIdentity<T>(this T selfComponent) where T : Component
         {
             selfComponent.transform.localRotation = Quaternion.identity;
@@ -64,15 +70,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.localRotation = Quaternion.identity;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.SetLocalRotationIdentity();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetLocalRotationIdentity(this GameObject selfComponent)
         {
             selfComponent.transform.localRotation = Quaternion.identity;
@@ -80,15 +88,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.localRotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.SetLocalRotation(new Vector3(0, 90, 0));
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetLocalEulerAngles<T>(this T selfComponent, Vector3 eulerAngles) where T : Component
         {
             selfComponent.transform.localRotation = Quaternion.Euler(eulerAngles);
@@ -96,15 +106,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.localRotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().SetLocalRotation(new Vector3(0, 90, 0));
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetLocalEulerAngles(this GameObject self, Vector3 eulerAngles)
         {
             self.transform.localRotation = Quaternion.Euler(eulerAngles);
@@ -112,16 +124,18 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.localRotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.SetLocalEulerAngles(x:0, y:90, z:0);
         /// myScript.SetLocalEulerAngles(x:0, z:0);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetLocalEulerAngles<T>(
             this T selfComponent,
             float? x = null,
@@ -136,16 +150,18 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.localRotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().SetLocalRotation(x:0, y:90, z:0);
         /// new GameObject().SetLocalRotation(x:0, z:0);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetLocalEulerAngles(
             this GameObject self,
             float?          x = null,
@@ -159,165 +175,187 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.localRotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var localRotation = myScript.GetLocalRotation();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Quaternion GetLocalRotation<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.localRotation;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.localRotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var localRotation = gameObject.GetLocalRotation();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Quaternion GetLocalRotation(this GameObject self)
         {
             return self.transform.localRotation;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.localEulerAngles;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.GetLocalEulerAngles();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Vector3 GetLocalEulerAngles<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.localEulerAngles;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.localEulerAngles;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.GetLocalEulerAngles();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Vector3 GetLocalEulerAngles(this GameObject self)
         {
             return self.transform.localEulerAngles;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.localEulerAngles.x;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotX = component.GetLocalEulerAnglesX();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesX<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.localEulerAngles.x;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.localEulerAngles.x;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotX = gameObject.GetLocalEulerAnglesX();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesX(this GameObject self)
         {
             return self.transform.localEulerAngles.x;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.localEulerAngles.y;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotY = component.GetLocalEulerAnglesY();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesY<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.localEulerAngles.y;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.localEulerAngles.y;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotY = gameObject.GetLocalEulerAnglesY();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesY(this GameObject self)
         {
             return self.transform.localEulerAngles.y;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.localEulerAngles.z;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotZ = component.GetLocalEulerAnglesZ();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesZ<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.localEulerAngles.z;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.localEulerAngles.z;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotZ = gameObject.GetLocalEulerAnglesZ();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetLocalEulerAnglesZ(this GameObject self)
         {
             return self.transform.localEulerAngles.z;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.rotation = rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.SetRotation(Quaternion.identity);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetRotation<T>(this T selfComponent, Quaternion rotation) where T : Component
         {
             selfComponent.transform.rotation = rotation;
@@ -325,15 +363,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.rotation = rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.SetRotation(Quaternion.identity);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetRotation(this GameObject self, Quaternion rotation)
         {
             self.transform.rotation = rotation;
@@ -341,15 +381,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.rotation = Quaternion.identity;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component.SetRotationIdentity();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetRotationIdentity<T>(this T selfComponent) where T : Component
         {
             selfComponent.transform.rotation = Quaternion.identity;
@@ -357,15 +399,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.rotation = Quaternion.identity;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.SetRotationIdentity();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetRotationIdentity(this GameObject selfComponent)
         {
             selfComponent.transform.rotation = Quaternion.identity;
@@ -373,15 +417,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.rotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.SetRotation(new Vector3(0, 90, 0));
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetEulerAngles<T>(this T selfComponent, Vector3 eulerAngles) where T : Component
         {
             selfComponent.transform.rotation = Quaternion.Euler(eulerAngles);
@@ -389,15 +435,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.rotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().SetRotation(new Vector3(0, 90, 0));
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetEulerAngles(this GameObject self, Vector3 eulerAngles)
         {
             self.transform.rotation = Quaternion.Euler(eulerAngles);
@@ -405,15 +453,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// component.transform.rotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.Rotation(0, 90, 0);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T SetEulerAngles<T>(
             this T selfComponent,
             float? x = null,
@@ -428,15 +478,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// gameObject.transform.rotation = Quaternion.Euler(x, y, z);
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.Rotation(0, 90, 0);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject SetEulerAngles(
             this GameObject self,
             float?          x = null,
@@ -450,165 +502,187 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotation = myScript.GetRotation();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Quaternion GetRotation<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.rotation;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotation = gameObject.GetRotation();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Quaternion GetRotation(this GameObject self)
         {
             return self.transform.rotation;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.eulerAngles;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// myScript.GetEulerAngles();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Vector3 GetEulerAngles<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.eulerAngles;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.eulerAngles;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.GetEulerAngles();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static Vector3 GetEulerAngles(this GameObject self)
         {
             return self.transform.eulerAngles;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.eulerAngles.x;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotX = component.GetEulerAnglesX();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesX<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.eulerAngles.x;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.eulerAngles.x;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotX = gameObject.GetEulerAnglesX();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesX(this GameObject self)
         {
             return self.transform.eulerAngles.x;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.eulerAngles.y;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotY = component.GetEulerAnglesY();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesY<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.eulerAngles.y;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.eulerAngles.y;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotY = gameObject.GetEulerAnglesY();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesY(this GameObject self)
         {
             return self.transform.eulerAngles.y;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return component.transform.eulerAngles.z;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotZ = component.GetEulerAnglesZ();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesZ<T>(this T selfComponent) where T : Component
         {
             return selfComponent.transform.eulerAngles.z;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// return gameObject.transform.eulerAngles.z;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// var rotZ = gameObject.GetEulerAnglesZ();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static float GetEulerAnglesZ(this GameObject self)
         {
             return self.transform.eulerAngles.z;
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// to.transform.rotation = self.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component1.CopyRotationTo(component2);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T CopyRotationTo<T>(this T self, Component to) where T : Component
         {
             to.transform.rotation = self.transform.rotation;
@@ -616,15 +690,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// to.transform.rotation = self.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.CopyRotationTo(component);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject CopyRotationTo(this GameObject self, Component to)
         {
             to.transform.rotation = self.transform.rotation;
@@ -632,15 +708,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// to.transform.rotation = self.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component.CopyRotationTo(gameObject);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T CopyRotationTo<T>(this T self, GameObject to) where T : Component
         {
             to.transform.rotation = self.transform.rotation;
@@ -648,15 +726,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// to.transform.rotation = self.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject1.CopyRotationTo(gameObject2);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject CopyRotationTo(this GameObject self, GameObject to)
         {
             to.transform.rotation = self.transform.rotation;
@@ -664,15 +744,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// self.transform.rotation = from.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component1.CopyRotationFrom(component2);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T CopyRotationFrom<T>(this T self, Component from) where T : Component
         {
             self.transform.rotation = from.transform.rotation;
@@ -680,15 +762,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// self.transform.rotation = from.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// component.CopyRotationFrom(gameObject);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T CopyRotationFrom<T>(this T self, GameObject from) where T : Component
         {
             self.transform.rotation = from.transform.rotation;
@@ -696,15 +780,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// self.transform.rotation = from.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject.CopyRotationFrom(component);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject CopyRotationFrom(this GameObject self, Component from)
         {
             self.transform.rotation = from.transform.rotation;
@@ -712,15 +798,17 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <c> <![CDATA[
+        ///     <c> <![CDATA[
         /// self.transform.rotation = from.transform.rotation;
         /// ]]> </c>
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// gameObject1.CopyRotationFrom(gameObject2);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static GameObject CopyRotationFrom(this GameObject self, GameObject from)
         {
             self.transform.rotation = from.transform.rotation;

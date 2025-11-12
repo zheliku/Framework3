@@ -10,11 +10,13 @@ namespace Framework3.Toolkits.TimerKit
 {
     using System;
     using PoolKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 定义计时器类型，支持缩放时间和非缩放时间。
+    ///     定义计时器类型，支持缩放时间和非缩放时间。
     /// </summary>
     public enum TimerType
     {
@@ -23,15 +25,17 @@ namespace Framework3.Toolkits.TimerKit
     }
 
     /// <summary>
-    /// Timer 类用于管理计时器的生命周期，包括创建、触发、暂停、取消和回收。
+    ///     Timer 类用于管理计时器的生命周期，包括创建、触发、暂停、取消和回收。
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class Timer : IPoolable, IPoolType
     {
-            #region Static
+    #region Static
 
         /// <summary>
-        /// 创建一个新的计时器实例。
+        ///     创建一个新的计时器实例。
         /// </summary>
         /// <param name="onTick">计时器触发时的回调函数。</param>
         /// <param name="duration">计时器的持续时间（秒）。</param>
@@ -53,65 +57,81 @@ namespace Framework3.Toolkits.TimerKit
             return timer;
         }
 
-            #endregion
+    #endregion
 
-            #region 字段
+    #region 字段
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private Action<Timer> _onTickAction; // Timer 的触发事件
 
         private bool _paused;
 
-        // [ShowInInspector]
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
         private float _pausedProgress;
 
-            #endregion
+    #endregion
 
-            #region 属性
+    #region 属性
 
         /// <summary>
-        /// 获取或设置计时器是否启用。
+        ///     获取或设置计时器是否启用。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public bool Enabled { get; private set; } = true;
 
         /// <summary>
-        /// 获取或设置计时器是否在对象池中。
+        ///     获取或设置计时器是否在对象池中。
         /// </summary>
-        // [ShowInInspector]
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
         public bool IsInPool { get; set; }
 
         /// <summary>
-        /// 获取或设置计时器的延迟时间（秒）。
+        ///     获取或设置计时器的延迟时间（秒）。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public float DelayTime { get; set; }
 
         /// <summary>
-        /// 获取计时器的创建时间。
+        ///     获取计时器的创建时间。
         /// </summary>
-        // [ShowInInspector]
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
         public float CreateTime { get; private set; }
 
         /// <summary>
-        /// 获取计时器上一次触发的时间。
+        ///     获取计时器上一次触发的时间。
         /// </summary>
-        // [ShowInInspector]
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public float LastTickTime { get; private set; }
 
         /// <summary>
-        /// 获取计时器下一次触发的时间。
+        ///     获取计时器下一次触发的时间。
         /// </summary>
-        // [ShowInInspector]
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public float TargetTime { get => LastTickTime + DelayTime; }
 
         /// <summary>
-        /// 获取计时器的当前时间，基于 TimerType。
+        ///     获取计时器的当前时间，基于 TimerType。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
         [ProgressBar(nameof(LastTickTime), nameof(TargetTime))]
+    #endif
         public float CurrentTime
         {
             get => TimerType == TimerType.Scaled
@@ -120,21 +140,27 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 获取计时器的类型（缩放或非缩放）。
+        ///     获取计时器的类型（缩放或非缩放）。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public TimerType TimerType { get; private set; }
 
         /// <summary>
-        /// 获取计时器是否为循环计时器。
+        ///     获取计时器是否为循环计时器。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public bool Loop { get => RepeatCount < 0; }
 
         /// <summary>
-        /// 获取或设置计时器是否暂停。
+        ///     获取或设置计时器是否暂停。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public bool Paused
         {
             get => _paused;
@@ -152,24 +178,28 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 获取计时器已触发的次数。
+        ///     获取计时器已触发的次数。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public int TickCount { get; private set; }
 
         /// <summary>
-        /// 获取计时器的循环次数。
-        /// 小于 0 表示无限循环；等于 0 表示被回收；大于 0 表示具体的循环次数。
+        ///     获取计时器的循环次数。
+        ///     小于 0 表示无限循环；等于 0 表示被回收；大于 0 表示具体的循环次数。
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public int RepeatCount { get; private set; }
 
-            #endregion
+    #endregion
 
-            #region 公共方法
+    #region 公共方法
 
         /// <summary>
-        /// 触发计时器的回调函数。
+        ///     触发计时器的回调函数。
         /// </summary>
         public void Tick()
         {
@@ -178,7 +208,7 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 取消计时器。
+        ///     取消计时器。
         /// </summary>
         public void Cancel()
         {
@@ -190,7 +220,7 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 尝试重复计时器，如果可以重复则更新 LastTickTime。
+        ///     尝试重复计时器，如果可以重复则更新 LastTickTime。
         /// </summary>
         /// <returns>如果可以重复，返回 true；否则返回 false。</returns>
         public bool TryRepeat()
@@ -205,17 +235,17 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 当计时器被创建时调用。
+        ///     当计时器被创建时调用。
         /// </summary>
         public void OnCreate() { }
 
         /// <summary>
-        /// 当计时器从对象池中获取时调用。
+        ///     当计时器从对象池中获取时调用。
         /// </summary>
         public void OnGet() { }
 
         /// <summary>
-        /// 当计时器被释放时调用，重置计时器的状态。
+        ///     当计时器被释放时调用，重置计时器的状态。
         /// </summary>
         public void OnRelease()
         {
@@ -227,18 +257,18 @@ namespace Framework3.Toolkits.TimerKit
         }
 
         /// <summary>
-        /// 当计时器被销毁时调用。
+        ///     当计时器被销毁时调用。
         /// </summary>
         public void OnDestroy() { }
 
         /// <summary>
-        /// 将计时器回收到对象池中。
+        ///     将计时器回收到对象池中。
         /// </summary>
         public void Recycle2Pool()
         {
             SingletonPool<Timer>.Release(this);
         }
 
-            #endregion
+    #endregion
     }
 }

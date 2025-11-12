@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnDestroyEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnDestroyEvent = new EasyEvent();
+        public readonly EasyEvent OnDestroyEvent = new();
 
         private void OnDestroy()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent
-                       .Register(onDestroy, priority);
+               .Register(onDestroy, priority);
         }
 
         public static IUnregister OnDestroyEvent(this GameObject self, Action onDestroy, float priority = 0)
         {
             return self.GetOrAddComponent<OnDestroyEventTrigger>().OnDestroyEvent
-                       .Register(onDestroy, priority);
+               .Register(onDestroy, priority);
         }
     }
 }

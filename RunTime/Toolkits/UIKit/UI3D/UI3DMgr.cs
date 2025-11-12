@@ -6,30 +6,37 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.UIKit
 {
     using System;
     using System.Collections.Generic;
     using ResKit;
     using SingletonKit;
-    using Sirenix.OdinInspector;
+    using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
+
     public class Panel3DInfo
     {
-        [LabelWidth(75)]
-        public IPanel3D Panel3D;
-
+    #if ODIN_INSPECTOR
         [HideInInspector]
+    #endif
         public AsyncOperationHandle Handle;
+    #if ODIN_INSPECTOR
+        [LabelWidth(75)]
+    #endif
+        public IPanel3D Panel3D;
 
         public Panel3DInfo(IPanel3D panel3D, AsyncOperationHandle handle)
         {
-            Panel3D  = panel3D;
-            Handle = handle;
+            Panel3D = panel3D;
+            Handle  = handle;
         }
     }
 
@@ -38,7 +45,9 @@ namespace Framework3.Toolkits.UIKit
     {
     #region 字段
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private Dictionary<string, Panel3DInfo> _panels = new();
 
     #endregion
@@ -75,9 +84,9 @@ namespace Framework3.Toolkits.UIKit
                     return (T) value.Panel3D;
                 }
             }
-            return default;
+            return default(T);
         }
-        
+
         public void UnloadPanel<T>(string panelName, Action callback = null) where T : IPanel3D
         {
             if (_panels.TryGetValue(panelName, out var value))
@@ -87,7 +96,7 @@ namespace Framework3.Toolkits.UIKit
                     Debug.LogError("Panel3D " + panelName + " is not of type " + typeof(T).Name);
                     return;
                 }
-                
+
                 value.Handle.Release();
                 callback?.Invoke();
                 _panels.Remove(panelName);
@@ -109,7 +118,7 @@ namespace Framework3.Toolkits.UIKit
         public AsyncOperationHandle<GameObject> ShowPanelAsync<T>(string panelName, Action<T> callback = null) where T : IPanel3D
         {
             var handle = LoadPanelAsync<T>(panelName);
-            
+
             if (!handle.IsDone)
             {
                 handle.OnCompleted(obj =>

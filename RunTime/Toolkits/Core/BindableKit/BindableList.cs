@@ -18,12 +18,12 @@ namespace Framework3.Toolkits.BindableKit
     {
     #region 字段
 
-        [NonSerialized] private EasyEvent<int, int>          _onCountChanged = null;
-        [NonSerialized] private EasyEvent                    _onClear        = null;
-        [NonSerialized] private EasyEvent<int, TElem>        _collectionAdd  = null;
-        [NonSerialized] private EasyEvent<int, int, TElem>   _onMove         = null;
-        [NonSerialized] private EasyEvent<int, TElem>        _onRemove       = null;
-        [NonSerialized] private EasyEvent<int, TElem, TElem> _onReplace      = null;
+        [NonSerialized] private EasyEvent<int, int>          _onCountChanged;
+        [NonSerialized] private EasyEvent                    _onClear;
+        [NonSerialized] private EasyEvent<int, TElem>        _collectionAdd;
+        [NonSerialized] private EasyEvent<int, int, TElem>   _onMove;
+        [NonSerialized] private EasyEvent<int, TElem>        _onRemove;
+        [NonSerialized] private EasyEvent<int, TElem, TElem> _onReplace;
 
     #endregion
 
@@ -45,9 +45,9 @@ namespace Framework3.Toolkits.BindableKit
         }
 
         /// <summary>
-        /// int:oldIndex
-        /// int:newIndex
-        /// T:item
+        ///     int:oldIndex
+        ///     int:newIndex
+        ///     T:item
         /// </summary>
         public EasyEvent<int, int, TElem> OnMove
         {
@@ -60,9 +60,9 @@ namespace Framework3.Toolkits.BindableKit
         }
 
         /// <summary>
-        /// int:index
-        /// T:oldItem
-        /// T:newItem
+        ///     int:index
+        ///     T:oldItem
+        ///     T:newItem
         /// </summary>
         public EasyEvent<int, TElem, TElem> OnReplace
         {
@@ -150,6 +150,9 @@ namespace Framework3.Toolkits.BindableKit
 
     public static class BindableListExtension
     {
-        public static BindableList<T> ToBindableList<T>(this IEnumerable<T> self) => new BindableList<T>(self);
+        public static BindableList<T> ToBindableList<T>(this IEnumerable<T> self)
+        {
+            return new BindableList<T>(self);
+        }
     }
 }

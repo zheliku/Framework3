@@ -8,31 +8,34 @@
 
 namespace Framework3.Core
 {
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// Query 基类
+    ///     Query 基类
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public abstract class Query<TResult> : IQuery<TResult>
     {
-        private IArchitecture _architecture;
-
         public IArchitecture Architecture
         {
-            get => _architecture;
+            get;
+            private set;
         }
 
         IArchitecture ICanSetArchitecture.Architecture
         {
-            set => _architecture = value;
+            set => Architecture = value;
         }
 
         public TResult Do() { return OnDo(); }
 
         /// <summary>
-        /// 查询方法，需要由子类实现
+        ///     查询方法，需要由子类实现
         /// </summary>
         /// <returns>查询结果</returns>
         protected abstract TResult OnDo();

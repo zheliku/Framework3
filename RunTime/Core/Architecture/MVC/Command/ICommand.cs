@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// Command 接口，无返回值
+    ///     Command 接口，无返回值
     /// </summary>
     public interface ICommand : // IBelongToArchitecture,
         ICanGetModel,           // ICommand 可获取 Model
@@ -21,13 +21,13 @@ namespace Framework3.Core
         ICanSendQuery           // ICommand 可发送 Query
     {
         /// <summary>
-        /// 执行 Command
+        ///     执行 Command
         /// </summary>
         void Execute();
     }
 
     /// <summary>
-    /// Command&lt;TResult&gt; 接口，有返回值
+    ///     Command&lt;TResult&gt; 接口，有返回值
     /// </summary>
     public interface ICommand<out TResult> : // IBelongToArchitecture, 
         ICanGetModel,                        // ICommand 可获取 Model
@@ -39,7 +39,7 @@ namespace Framework3.Core
         ICanSendQuery                        // ICommand 可发送 Query
     {
         /// <summary>
-        /// 执行 Command
+        ///     执行 Command
         /// </summary>
         /// <returns>返回值</returns>
         TResult Execute();

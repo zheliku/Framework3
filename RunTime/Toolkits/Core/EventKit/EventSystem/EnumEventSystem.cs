@@ -6,22 +6,24 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.EventKit
 {
     using System;
     using System.Collections.Generic;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     public class EnumEventSystem
     {
-        public static readonly EnumEventSystem Global = new EnumEventSystem();
+        public static readonly EnumEventSystem Global = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly Dictionary<Enum, IEasyEvent> _events = new Dictionary<Enum, IEasyEvent>(50);
+    #endif
+        private readonly Dictionary<Enum, IEasyEvent> _events = new(50);
 
         protected EnumEventSystem() { }
 
@@ -47,7 +49,7 @@ namespace Framework3.Toolkits.EventKit
                 e.As<EasyEvent<TEnum, object[]>>()?.Unregister(onEvent);
                 return true;
             }
-            
+
             return false;
         }
 

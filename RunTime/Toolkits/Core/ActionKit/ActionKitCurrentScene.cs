@@ -11,11 +11,11 @@ namespace Framework3.Toolkits.ActionKit
     using UnityEngine;
 
     /// <summary>
-    /// 用于当前场景的 Action 单例
+    ///     用于当前场景的 Action 单例
     /// </summary>
     public class ActionKitCurrentScene : MonoBehaviour
     {
-        private static ActionKitCurrentScene s_sceneComponent = null;
+        private static ActionKitCurrentScene s_sceneComponent;
 
         public static ActionKitCurrentScene SceneComponent
         {

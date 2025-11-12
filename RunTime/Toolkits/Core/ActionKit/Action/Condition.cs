@@ -11,10 +11,16 @@ namespace Framework3.Toolkits.ActionKit
     using System;
 
     /// <summary>
-    /// 条件 Action
+    ///     条件 Action
     /// </summary>
     public class Condition : AbstractAction<Condition>
     {
+    #region 字段
+
+        private Func<bool> _condition;
+
+    #endregion
+
     #region Static
 
         internal static Condition Create(Func<bool> func)
@@ -23,12 +29,6 @@ namespace Framework3.Toolkits.ActionKit
             condition._condition = func;
             return condition;
         }
-
-    #endregion
-
-    #region 字段
-
-        private Func<bool> _condition;
 
     #endregion
 

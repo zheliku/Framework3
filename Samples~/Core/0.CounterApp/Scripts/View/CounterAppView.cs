@@ -11,7 +11,9 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.View
     using Command;
     using Core;
     using Model;
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using TMPro;
     using UnityEngine.UI;
 
@@ -25,7 +27,9 @@ namespace Framework3.Core.Example._0.CounterApp.Scripts.View
         [HierarchyPath("/Canvas/Txt_Count")] // View 组件获取（方式 1），使用特性绑定，"/Canvas/Txt_Count" 是组件在场景中的路径
         private TextMeshProUGUI _txtCount;
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private ICounterAppModel _model;
 
         private void Start()

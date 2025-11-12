@@ -9,19 +9,23 @@
 namespace Framework3.Core
 {
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 注销触发器基类
+    ///     注销触发器基类
     /// </summary>
     public abstract class UnregisterTrigger : MonoBehaviour
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private readonly HashSet<IUnregister> _unRegisters = new(); // 存储 IUnregister 接口的实现类
 
         /// <summary>
-        /// 添加注销器
+        ///     添加注销器
         /// </summary>
         /// <param name="unregister">待添加的注销器</param>
         /// <returns>添加后的注销器</returns>
@@ -32,7 +36,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 移除注销器
+        ///     移除注销器
         /// </summary>
         /// <param name="unregister">待移除的注销器</param>
         public void RemoveUnregister(IUnregister unregister)
@@ -41,7 +45,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 触发所有注销器
+        ///     触发所有注销器
         /// </summary>
         public void Unregister()
         {

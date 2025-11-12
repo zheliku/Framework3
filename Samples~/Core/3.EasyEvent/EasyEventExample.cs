@@ -8,7 +8,9 @@
 
 namespace Framework3.Core.Example._3.EasyEvent
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -32,13 +34,19 @@ namespace Framework3.Core.Example._3.EasyEvent
         [HierarchyPath("/Canvas/EasyEventInt/Scrollbar")]
         private Scrollbar _easyEventIntScrollbar;
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private EasyEvent _easyEvent = new EasyEvent();
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private EasyEvent<int> _easyEventInt = new EasyEvent<int>();
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private EventA _eventA = new EventA();
 
         private void Start()

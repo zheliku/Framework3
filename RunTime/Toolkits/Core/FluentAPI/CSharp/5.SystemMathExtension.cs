@@ -13,7 +13,7 @@ namespace Framework3.Toolkits.FluentAPI
     public static class SystemMathExtension
     {
         /// <summary>
-        /// 获取 1 到 n 的 k 个数的全排列
+        ///     获取 1 到 n 的 k 个数的全排列
         /// </summary>
         /// <param name="self">(n, k)</param>
         /// <returns>全排列列表</returns>
@@ -38,7 +38,7 @@ namespace Framework3.Toolkits.FluentAPI
             }
 
             // 遍历 1 到 n 的所有数
-            for (int i = 1; i <= n; i++)
+            for (var i = 1; i <= n; i++)
             {
                 if (!used[i])
                 {

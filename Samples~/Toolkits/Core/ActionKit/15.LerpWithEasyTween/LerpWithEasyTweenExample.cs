@@ -9,7 +9,9 @@
 namespace Framework3.Toolkits.ActionKit.Example
 {
     using FluentAPI;
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
 
     public class LerpWithEasyTweenExample : MonoBehaviour
@@ -17,10 +19,14 @@ namespace Framework3.Toolkits.ActionKit.Example
         [SerializeField]
         private Transform _quad;
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private int _startX = 0;
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private int _endX = 5;
 
         private void Start()

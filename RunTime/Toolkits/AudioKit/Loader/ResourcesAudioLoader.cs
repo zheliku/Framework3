@@ -24,7 +24,7 @@ namespace Framework3.Toolkits.AudioKit
         public void LoadClipAsync(string clipName, Action<bool, AudioClip> onLoad = null)
         {
             var req = Resources.LoadAsync<AudioClip>(clipName);
-            
+
             req.completed += operation =>
             {
                 // 检查加载是否成功

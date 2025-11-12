@@ -9,11 +9,15 @@
 namespace Framework3.Toolkits.InputKit
 {
     using System.Collections.Generic;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     public class InputActionMapTracker
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public Dictionary<string, InputActionTracker> InputActions = new();
 
         public InputActionTracker this[string actionName]

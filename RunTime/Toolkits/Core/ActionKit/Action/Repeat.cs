@@ -12,11 +12,12 @@ namespace Framework3.Toolkits.ActionKit
     { }
 
     /// <summary>
-    /// 重复 Action
+    ///     重复 Action
     /// </summary>
     public class Repeat : AbstractAction<Repeat>, IRepeat
     {
     #region Static
+
         internal static Repeat Create(int repeatCount = -1) // -1 表示无限次
         {
             var repeat = CreateInternal();
@@ -41,7 +42,7 @@ namespace Framework3.Toolkits.ActionKit
         {
             _sequence = Sequence.Create();
         }
-        
+
         public override void OnStart()
         {
             _currentRepeatCount = 0;

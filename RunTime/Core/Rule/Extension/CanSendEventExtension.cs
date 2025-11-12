@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// ICanSendEvent 的扩展实现
+    ///     ICanSendEvent 的扩展实现
     /// </summary>
     public static class CanSendEventExtension
     {
         /// <summary>
-        /// 发送 Event，参数使用默认构造函数 new() 传入
+        ///     发送 Event，参数使用默认构造函数 new() 传入
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="self">ICanSendEvent 实例</param>
@@ -24,14 +24,14 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 发送 Event，参数使用指定的 e 传入
+        ///     发送 Event，参数使用指定的 e 传入
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="self">ICanSendEvent 实例</param>
         /// <param name="e">事件实例</param>
         public static void SendEvent<TEvent>(this ICanSendEvent self, TEvent e)
         {
-            self.Architecture.SendEvent<TEvent>(e); // 调用 Architecture 的 SendEvent 方法
+            self.Architecture.SendEvent(e); // 调用 Architecture 的 SendEvent 方法
         }
     }
 }

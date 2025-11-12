@@ -9,14 +9,17 @@
 namespace Framework3.Core
 {
     using System;
-    using System.Collections.Generic;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 绑定事件监听的 Property
+    ///     绑定事件监听的 Property
     /// </summary>
     /// <typeparam name="TProperty">被绑定的 Property 类型</typeparam>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class BindableProperty<TProperty> : IBindableProperty<TProperty>
     {
     #region Static
@@ -28,7 +31,7 @@ namespace Framework3.Core
 
         public static explicit operator BindableProperty<TProperty>(TProperty property)
         {
-            return new(property);
+            return new BindableProperty<TProperty>(property);
         }
 
         public static bool operator ==(TProperty property, BindableProperty<TProperty> bindableProperty)
@@ -79,14 +82,18 @@ namespace Framework3.Core
 
         protected TProperty _value;
 
+    #if ODIN_INSPECTOR
         [ShowInInspector] [PropertyOrder(1)]
+    #endif
         protected EasyEvent<TProperty, TProperty> _onValueChanged = new();
 
     #endregion
 
     #region 接口
 
+    #if ODIN_INSPECTOR
         [ShowInInspector] [PropertyOrder(0)]
+    #endif
         public TProperty Value
         {
             get => GetValue();
@@ -145,7 +152,7 @@ namespace Framework3.Core
 
     #region 方法
 
-        public BindableProperty(TProperty defaultValue = default(TProperty), bool triggerWhenSameValue = false)
+        public BindableProperty(TProperty defaultValue = default, bool triggerWhenSameValue = false)
         {
             _value                = defaultValue;
             _triggerWhenSameValue = triggerWhenSameValue;
@@ -175,7 +182,7 @@ namespace Framework3.Core
 
             if (obj is BindableProperty<TProperty> bindableProperty)
             {
-                return Equals(Value, (TProperty)bindableProperty);
+                return Equals(Value, (TProperty) bindableProperty);
             }
 
             return false;
@@ -188,7 +195,7 @@ namespace Framework3.Core
                 return Value is null;
             }
 
-            return Equals(Value, (TProperty)other);
+            return Equals(Value, (TProperty) other);
         }
 
         public override int GetHashCode()

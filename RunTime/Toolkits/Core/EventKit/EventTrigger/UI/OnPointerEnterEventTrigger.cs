@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnPointerEnterEventTrigger : MonoBehaviour, IPointerEnterHandler
     {
-        public readonly EasyEvent<PointerEventData> OnPointerEnterEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnPointerEnterEvent = new();
 
         public void OnPointerEnter(PointerEventData eventData)
         {

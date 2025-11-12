@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.ActionKit
     using System;
 
     /// <summary>
-    /// 延迟 Action
+    ///     延迟 Action
     /// </summary>
     public class Delay : AbstractAction<Delay>
     {
@@ -49,7 +49,7 @@ namespace Framework3.Toolkits.ActionKit
 
         public Action OnDelayFinish { get; set; }
 
-        public float CurrentSeconds { get; set; } = 0;
+        public float CurrentSeconds { get; set; }
 
     #endregion
 

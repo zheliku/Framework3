@@ -13,9 +13,6 @@ namespace Framework3.Toolkits.TreeKit
 
     public class Tree<T>
     {
-        // 根节点
-        public TreeNode<T> Root { get; set; }
-
         // 构造函数
         public Tree(T rootData)
         {
@@ -25,6 +22,21 @@ namespace Framework3.Toolkits.TreeKit
         public Tree(TreeNode<T> node)
         {
             Root = node;
+        }
+
+        // 根节点
+        public TreeNode<T> Root { get; set; }
+
+        // 获取树的高度
+        public int Height
+        {
+            get => Root?.Height ?? 0;
+        }
+
+        // 获取树的节点数量
+        public int Count
+        {
+            get => Root?.Count ?? 0;
         }
 
         // 遍历整棵树（深度优先先序遍历）
@@ -85,18 +97,6 @@ namespace Framework3.Toolkits.TreeKit
             }
 
             return null;
-        }
-
-        // 获取树的高度
-        public int Height
-        {
-            get => Root?.Height ?? 0;
-        }
-
-        // 获取树的节点数量
-        public int Count
-        {
-            get => Root?.Count ?? 0;
         }
 
         // 层级遍历（广度优先遍历）

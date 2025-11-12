@@ -10,18 +10,25 @@ namespace Framework3.Toolkits.InputKit
 {
     using System;
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine.InputSystem;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class InputActionTracker
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public List<Action<InputAction.CallbackContext>> StartedActions = new();
-
-        [ShowInInspector]
-        public List<Action<InputAction.CallbackContext>> PerformedActions = new();
-        
-        [ShowInInspector]
+    #endif
         public List<Action<InputAction.CallbackContext>> CanceledActions = new();
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public List<Action<InputAction.CallbackContext>> PerformedActions = new();
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        public List<Action<InputAction.CallbackContext>> StartedActions = new();
     }
 }

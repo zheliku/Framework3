@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 继承该接口，即可获取 Architecture
+    ///     继承该接口，即可获取 Architecture
     /// </summary>
     public interface IBelongToArchitecture
     {
         /// <summary>
-        /// 获取 Architecture
+        ///     获取 Architecture
         /// </summary>
         IArchitecture Architecture { get; }
     }

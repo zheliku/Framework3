@@ -16,7 +16,7 @@ namespace Framework3.Toolkits.BindableKit
         public PlayerPrefsIntProperty(string saveKey, int defaultValue = 0)
         {
             _value = PlayerPrefs.GetInt(saveKey, defaultValue);
-            
+
             Register((oldValue, value) => PlayerPrefs.SetInt(saveKey, value));
         }
     }

@@ -9,9 +9,8 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 可获取 Model，通过 Architecture 获取，由 CanGetModelExtension 扩展实现
+    ///     可获取 Model，通过 Architecture 获取，由 CanGetModelExtension 扩展实现
     /// </summary>
     public interface ICanGetModel : IBelongToArchitecture
-    {
-    }
+    { }
 }

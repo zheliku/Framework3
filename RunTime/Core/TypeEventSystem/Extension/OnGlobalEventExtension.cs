@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// IOnEvent 扩展
+    ///     IOnEvent 扩展
     /// </summary>
     public static class OnGlobalEventExtension
     {
         /// <summary>
-        /// 注册事件
+        ///     注册事件
         /// </summary>
         /// <param name="self">IOnEvent 实例</param>
         /// <param name="priority">事件优先级</param>
@@ -26,7 +26,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注销事件
+        ///     注销事件
         /// </summary>
         /// <param name="self">IOnEvent 实例</param>
         /// <typeparam name="TEvent">Event 类型</typeparam>

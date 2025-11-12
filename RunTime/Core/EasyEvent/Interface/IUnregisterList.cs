@@ -11,12 +11,12 @@ namespace Framework3.Core
     using System.Collections.Generic;
 
     /// <summary>
-    /// 注销器列表接口
+    ///     注销器列表接口
     /// </summary>
     public interface IUnregisterList
     {
         /// <summary>
-        /// 注销器列表
+        ///     注销器列表
         /// </summary>
         List<IUnregister> UnregisterList { get; }
     }

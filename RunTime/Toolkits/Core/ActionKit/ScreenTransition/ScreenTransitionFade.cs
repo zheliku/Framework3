@@ -13,10 +13,10 @@ namespace Framework3.Toolkits.ActionKit
     public class ScreenTransitionFade : AbstractAction<ScreenTransitionFade>
     {
         private Color _color = UnityEngine.Color.black;
-        private float _fromAlpha = 0;
-        private float _toAlpha = 0;
+        private float _currentSeconds;
         private float _duration = 1.0f;
-        private float _currentSeconds = 0;
+        private float _fromAlpha;
+        private float _toAlpha;
 
         public static ScreenTransitionFade Create()
         {

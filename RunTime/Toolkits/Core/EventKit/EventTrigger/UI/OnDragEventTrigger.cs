@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnDragEventTrigger : MonoBehaviour, IDragHandler
     {
-        public readonly EasyEvent<PointerEventData> OnDragEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnDragEvent = new();
 
         public void OnDrag(PointerEventData eventData)
         {

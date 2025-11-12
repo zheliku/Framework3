@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnCollisionExitEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent<Collision> OnCollisionExitEvent = new EasyEvent<Collision>();
+        public readonly EasyEvent<Collision> OnCollisionExitEvent = new();
 
         private void OnCollisionExit(Collision col)
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnCollisionExitEventTrigger>().OnCollisionExitEvent
-                       .Register(onCollisionExit, priority);
+               .Register(onCollisionExit, priority);
         }
 
         public static IUnregister OnCollisionExitEvent(this GameObject self, Action<Collision> onCollisionExit, float priority = 0)
         {
             return self.GetOrAddComponent<OnCollisionExitEventTrigger>().OnCollisionExitEvent
-                       .Register(onCollisionExit, priority);
+               .Register(onCollisionExit, priority);
         }
     }
 }

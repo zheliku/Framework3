@@ -9,9 +9,8 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// 可获取 System，通过 Architecture 获取，由 CanGetSystemExtension 扩展实现
+    ///     可获取 System，通过 Architecture 获取，由 CanGetSystemExtension 扩展实现
     /// </summary>
     public interface ICanGetSystem : IBelongToArchitecture
-    {
-    }
+    { }
 }

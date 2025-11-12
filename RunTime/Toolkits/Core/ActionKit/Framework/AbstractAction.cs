@@ -11,52 +11,35 @@ namespace Framework3.Toolkits.ActionKit
     using UnityEngine.Pool;
 
     /// <summary>
-    /// Action 基类
+    ///     Action 基类
     /// </summary>
     /// <typeparam name="TAction"></typeparam>
     public abstract class AbstractAction<TAction> : IAction where TAction : AbstractAction<TAction>, new()
     {
         private static readonly ObjectPool<TAction> s_pool = new(
-            createFunc: () => new TAction(),
-            actionOnGet: action =>
+            () => new TAction(),
+            action =>
             {
                 action.ActionID = ActionKit.IDGenerator++;
                 action.Deinited = false;
                 action.OnCreate();
                 action.Reset();
             },
-            actionOnRelease: null,
-            actionOnDestroy: null,
-            collectionCheck: true,
-            defaultCapacity: 10,
-            maxSize: 100);
-
-        protected static TAction CreateInternal()
-        {
-            return s_pool.Get();
-        }
+            null,
+            null,
+            true,
+            10,
+            100);
 
         public ulong ActionID { get; protected set; }
 
         public ActionStatus Status { get; set; }
-
-        public abstract void OnCreate();
 
         public abstract void OnStart();
 
         public abstract void OnExecute(float deltaTime);
 
         public abstract void OnFinish();
-
-        /// <summary>
-        /// 在这里写 Reset 逻辑，外部无法调用 OnReset()，而是调用 Reset()
-        /// </summary>
-        protected abstract void OnReset();
-
-        /// <summary>
-        /// 在这里写 Deinit 逻辑，外部无法调用 OnDeinit()，而是调用 Deinit()
-        /// </summary>
-        protected abstract void OnDeinit();
 
         public bool Deinited { get; set; }
 
@@ -84,12 +67,29 @@ namespace Framework3.Toolkits.ActionKit
 
                 // 调用 OnDeinit() 方法
                 OnDeinit();
-                
+
                 s_pool.Release(this as TAction);
 
                 // 将当前对象添加到 ActionQueue 中，以便在适当的时候进行回收
                 // ActionQueue.AddCallback(new ActionQueueRecycleCallback<TAction>(s_pool, this as TAction));
             }
         }
+
+        protected static TAction CreateInternal()
+        {
+            return s_pool.Get();
+        }
+
+        public abstract void OnCreate();
+
+        /// <summary>
+        ///     在这里写 Reset 逻辑，外部无法调用 OnReset()，而是调用 Reset()
+        /// </summary>
+        protected abstract void OnReset();
+
+        /// <summary>
+        ///     在这里写 Deinit 逻辑，外部无法调用 OnDeinit()，而是调用 Deinit()
+        /// </summary>
+        protected abstract void OnDeinit();
     }
 }

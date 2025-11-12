@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// System 接口
+    ///     System 接口
     /// </summary>
     public interface ISystem : // IBelongToArchitecture,
         ICanInit,              // ISystem 可初始化

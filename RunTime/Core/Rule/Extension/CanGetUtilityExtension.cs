@@ -9,12 +9,12 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// ICanGetUtility 的扩展实现
+    ///     ICanGetUtility 的扩展实现
     /// </summary>
     public static class CanGetUtilityExtension
     {
         /// <summary>
-        /// 获取指定类型的 Utility
+        ///     获取指定类型的 Utility
         /// </summary>
         /// <typeparam name="TUtility">要获取的 Utility 类型</typeparam>
         /// <param name="self">ICanGetUtility 实例</param>

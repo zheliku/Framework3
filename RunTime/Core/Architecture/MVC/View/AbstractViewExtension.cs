@@ -93,7 +93,7 @@ namespace Framework3.Core
                     var scripts = targetTransform.GetComponents<MonoBehaviour>();
 
                     var finded = false;
-                    
+
                     foreach (var script in scripts)
                     {
                         // 检查脚本是否实现了接口
@@ -104,7 +104,7 @@ namespace Framework3.Core
                             break;
                         }
                     }
-                    
+
                     if (!finded && attribute.LogErrorIfNotFound)
                     {
                         Debug.LogError($"Interface resolve failed: {fieldType.Name} at {attribute.HierarchyPath}", view.gameObject);

@@ -11,10 +11,16 @@ namespace Framework3.Toolkits.ActionKit
     using System;
 
     /// <summary>
-    /// 回调 Action
+    ///     回调 Action
     /// </summary>
     internal class Callback : AbstractAction<Callback>
     {
+    #region 字段
+
+        private Action _callback;
+
+    #endregion
+
     #region Static
 
         internal static Callback Create(Action func)
@@ -26,12 +32,6 @@ namespace Framework3.Toolkits.ActionKit
 
     #endregion
 
-    #region 字段
-
-        private Action _callback;
-
-    #endregion
-
     #region 接口
 
         public override void OnCreate()
@@ -40,7 +40,7 @@ namespace Framework3.Toolkits.ActionKit
             _callback?.Invoke();
             this.Finish();
         }
-        
+
         public override void OnStart()
         {
             // 执行回调后即结束

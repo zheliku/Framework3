@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.PoolKit
     using System;
 
     /// <summary>
-    /// 对象池接口
+    ///     对象池接口
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IObjectPool<T>
@@ -23,13 +23,13 @@ namespace Framework3.Toolkits.PoolKit
         public int CountActive { get; }
 
         /// <summary>
-        /// 分配对象
+        ///     分配对象
         /// </summary>
         /// <returns></returns>
         T Get();
 
         /// <summary>
-        /// 回收对象
+        ///     回收对象
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

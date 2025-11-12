@@ -9,15 +9,18 @@
 namespace Framework3.Toolkits.PoolKit.Example._0.ObjectPoolExample
 {
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine;
 
     public class ListPoolExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         public List<List<int>> Lists = new();
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         public ObjectPool<List<int>> ListPool = ListPool<int>.Pool;
 
         public void GetList()

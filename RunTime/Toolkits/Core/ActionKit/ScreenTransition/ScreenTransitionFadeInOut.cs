@@ -13,15 +13,14 @@ namespace Framework3.Toolkits.ActionKit
 
     public class ScreenTransitionFadeInOut : AbstractAction<ScreenTransitionFadeInOut>
     {
+        private ScreenTransitionFade _in;
+
+        private float                        _intervalTime;
+        private Action                       _onInFinish;
+        private Action                       _onOutFinish;
         private Action<ScreenTransitionFade> _onSetIn;
         private Action<ScreenTransitionFade> _onSetOut;
-
-        private float _intervalTime;
-
-        private ScreenTransitionFade _in;
-        private ScreenTransitionFade _out;
-        private Action               _onInFinish;
-        private Action               _onOutFinish;
+        private ScreenTransitionFade         _out;
 
         public static ScreenTransitionFadeInOut Create(ScreenTransitionFade transitionIn, ScreenTransitionFade transitionOut)
         {
@@ -81,13 +80,13 @@ namespace Framework3.Toolkits.ActionKit
             _out.FromAlpha(alpha);
             return this;
         }
-        
+
         public ScreenTransitionFadeInOut InDuration(float duration)
         {
             _in.Duration(duration);
             return this;
         }
-        
+
         public ScreenTransitionFadeInOut OutDuration(float duration)
         {
             _out.Duration(duration);

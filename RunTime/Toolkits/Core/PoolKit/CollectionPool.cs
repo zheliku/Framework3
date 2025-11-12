@@ -15,9 +15,9 @@ namespace Framework3.Toolkits.PoolKit
     {
         public static readonly ObjectPool<TCollection> Pool = new(
             () => new TCollection(),
-            actionOnGet: null,
-            actionOnRelease: l => l.Clear(),
-            actionOnDestroy: null,
+            null,
+            l => l.Clear(),
+            null,
             defaultCapacity: 5,
             maxSize: 20
         );
@@ -31,7 +31,7 @@ namespace Framework3.Toolkits.PoolKit
         {
             Pool.Release(toRelease);
         }
-        
+
         public static void Clear(Action<TCollection> onClear = null)
         {
             Pool.Clear(onClear);

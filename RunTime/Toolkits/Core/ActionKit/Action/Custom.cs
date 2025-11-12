@@ -37,9 +37,9 @@ namespace Framework3.Toolkits.ActionKit
 
     #region 字段
 
-        protected Action _onStart;
+        protected Action        _onStart;
         protected Action<float> _onExecute;
-        protected Action _onFinish;
+        protected Action        _onFinish;
 
     #endregion
 
@@ -102,20 +102,19 @@ namespace Framework3.Toolkits.ActionKit
 
     public class Custom : Custom<object>
     {
-        protected Custom() { }
-
         private static readonly ObjectPool<Custom> s_objectPool = new(
-            createFunc: () => new Custom(),
-            actionOnGet: custom =>
+            () => new Custom(),
+            custom =>
             {
                 custom.Deinited = false;
                 custom.Reset();
             },
-            actionOnRelease: null,
-            actionOnDestroy: null,
-            collectionCheck: true,
-            defaultCapacity: 10,
-            maxSize: 100);
+            null,
+            null,
+            true,
+            10,
+            100);
+        protected Custom() { }
 
         public new static Custom Create()
         {

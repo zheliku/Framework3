@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnInitializePotentialDragEventTrigger : MonoBehaviour, IInitializePotentialDragHandler
     {
-        public readonly EasyEvent<PointerEventData> OnInitializePotentialDragEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnInitializePotentialDragEvent = new();
 
 
         public void OnInitializePotentialDrag(PointerEventData eventData)

@@ -10,13 +10,18 @@ namespace Framework3.Toolkits.ActionKit
 {
     using System;
     using System.Collections;
-    using PoolKit;
 
     /// <summary>
-    /// 协程 Action
+    ///     协程 Action
     /// </summary>
     internal class Coroutine : AbstractAction<Coroutine>
     {
+    #region 字段
+
+        private Func<IEnumerator> _coroutineGetter;
+
+    #endregion
+
     #region Static
 
         internal static Coroutine Create(Func<IEnumerator> coroutineGetter)
@@ -25,12 +30,6 @@ namespace Framework3.Toolkits.ActionKit
             coroutine._coroutineGetter = coroutineGetter;
             return coroutine;
         }
-
-    #endregion
-
-    #region 字段
-
-        private Func<IEnumerator> _coroutineGetter;
 
     #endregion
 

@@ -6,18 +6,17 @@
 // @Copyright  Copyright (c) 2025, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Game
 {
     using Framework3.Core;
     using Framework3.Toolkits.EventKit;
     using Framework3.Toolkits.FluentAPI;
+    using UnityEngine;
     using UnityEngine.EventSystems;
     using UnityEngine.InputSystem.OnScreen;
 
     /// <summary>
-    /// 显示 Android 手柄
+    ///     显示 Android 手柄
     /// </summary>
     public class JoyStick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
@@ -29,9 +28,9 @@ namespace Game
             Handle = "Bg/Handle".GetComponentInHierarchy<OnScreenStick>(transform);
             Bg     = "Bg".GetGameObjectInHierarchy(transform);
 
-#if !UNITY_ANDROID
+        #if !UNITY_ANDROID
             Bg.Disable();
-#endif
+        #endif
             Handle.movementRange = Bg.GetComponent<RectTransform>().rect.width / 2;
         }
 
@@ -44,7 +43,7 @@ namespace Game
         {
             Bg.Enable();
 
-            Handle.OnPointerUpEvent((e) =>
+            Handle.OnPointerUpEvent(e =>
             {
                 Bg.Disable();
             }).UnregisterWhenGameObjectDisabled(Bg);

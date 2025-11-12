@@ -9,17 +9,16 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnApplicationFocusEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnApplicationFocusEvent = new EasyEvent();
+        public          bool      IsFocused;
+        public readonly EasyEvent OnApplicationFocusEvent = new();
 
-        public readonly EasyEvent OnApplicationUnFocusEvent = new EasyEvent();
-
-        public bool IsFocused;
+        public readonly EasyEvent OnApplicationUnFocusEvent = new();
 
         private void OnApplicationFocus(bool focusStatus)
         {
@@ -36,7 +35,7 @@ namespace Framework3.Toolkits.EventKit
             {
                 OnApplicationUnFocusEvent.Trigger();
             }
-            
+
             IsFocused = focusStatus;
         }
     }
@@ -55,7 +54,7 @@ namespace Framework3.Toolkits.EventKit
             return self.GetOrAddComponent<OnApplicationFocusEventTrigger>().OnApplicationFocusEvent
                .Register(onApplicationFocus, priority);
         }
-        
+
         public static IUnregister OnApplicationUnFocusEvent<T>(this T self, Action onApplicationUnFocus, int priority = 0)
             where T : Component
         {

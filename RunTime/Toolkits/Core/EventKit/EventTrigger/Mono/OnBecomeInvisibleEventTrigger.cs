@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnBecomeInvisibleEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnBecameInvisibleEvent = new EasyEvent();
+        public readonly EasyEvent OnBecameInvisibleEvent = new();
 
         private void OnBecameInvisible()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnBecomeInvisibleEventTrigger>().OnBecameInvisibleEvent
-                       .Register(onBecameInvisible, priority);
+               .Register(onBecameInvisible, priority);
         }
 
         public static IUnregister OnBecameInvisibleEvent(this GameObject self, Action onBecameInvisible, float priority = 0)
         {
             return self.GetOrAddComponent<OnBecomeInvisibleEventTrigger>().OnBecameInvisibleEvent
-                       .Register(onBecameInvisible, priority);
+               .Register(onBecameInvisible, priority);
         }
     }
 }

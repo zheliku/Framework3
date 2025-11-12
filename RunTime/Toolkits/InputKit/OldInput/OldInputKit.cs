@@ -10,7 +10,6 @@ namespace Framework3.Toolkits.InputKit
 {
     using System;
     using UnityEngine;
-    using UnityEngine.InputSystem;
 
     public enum InputType
     {

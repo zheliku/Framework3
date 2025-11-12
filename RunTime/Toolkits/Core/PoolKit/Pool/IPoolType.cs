@@ -9,7 +9,7 @@
 namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
-    /// I cache type.
+    ///     I cache type.
     /// </summary>
     public interface IPoolType
     {

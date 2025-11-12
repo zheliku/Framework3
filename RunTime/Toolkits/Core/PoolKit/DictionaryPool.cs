@@ -13,11 +13,11 @@ namespace Framework3.Toolkits.PoolKit
     public class DictionaryPool<TKey, TValue> :
         CollectionPool<Dictionary<TKey, TValue>, KeyValuePair<TKey, TValue>>
     { }
-    
+
     public static class DictionaryPoolExtension
     {
         /// <summary>
-        /// 对 Dictionary 拓展自身入栈的方法
+        ///     对 Dictionary 拓展自身入栈的方法
         /// </summary>
         public static void Release2Pool<TKey, TValue>(this Dictionary<TKey, TValue> toRelease)
         {

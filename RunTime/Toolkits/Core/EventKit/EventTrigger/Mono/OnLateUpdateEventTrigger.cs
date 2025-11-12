@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnLateUpdateEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent LateUpdateEvent = new EasyEvent();
+        public readonly EasyEvent LateUpdateEvent = new();
 
         private void LateUpdate()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnLateUpdateEventTrigger>().LateUpdateEvent
-                       .Register(update, priority);
+               .Register(update, priority);
         }
 
         public static IUnregister OnLateUpdateEvent(this GameObject self, Action update, int priority = 0)
         {
             return self.GetOrAddComponent<OnLateUpdateEventTrigger>().LateUpdateEvent
-                       .Register(update, priority);
+               .Register(update, priority);
         }
     }
 }

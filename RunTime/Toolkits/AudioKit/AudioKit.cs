@@ -14,7 +14,7 @@ namespace Framework3.Toolkits.AudioKit
     using UnityEngine;
 
     /// <summary>
-    /// 播放模式
+    ///     播放模式
     /// </summary>
     public enum SoundMode
     {
@@ -27,9 +27,20 @@ namespace Framework3.Toolkits.AudioKit
 
     public class AudioKit
     {
-        public static AudioKitSetting Setting { get => AudioKitSetting.Instance; }
+        public static int GlobalFrameCountForIgnoreSameSound = 10; // 每相邻 GlobalFrameCountForIgnoreSameSound 帧内进行检查，不播放相同音效
+        public static int SoundFrameCountForIgnoreSameSound  = 10; // 相同音效在各自记录的 SoundFrameCountForIgnoreSameSound 内，不连续播放
 
-        public static ObjectPool<IAudioLoader> AudioLoaderPool { get; set; } = new ObjectPool<IAudioLoader>(
+        public static float GlobalTimeForIgnoreSameSound = 0.16f; // 每相邻 GlobalTimesForIgnoreSameSound 时间内进行检查，不播放相同音效
+        public static float SoundTimeForIgnoreSameSound  = 0.16f; // 相同音效在各自记录的 SoundTimesForIgnoreSameSound 内，不连续播放
+
+        private static readonly Dictionary<string, int>   _SoundFrameCountDict = new();
+        private static readonly Dictionary<string, float> _SoundTimeDict       = new();
+
+        private static int             _GlobalFrameCount; // 当前帧数
+        private static float           _GlobalTime;       // 当前时间
+        public static  AudioKitSetting Setting { get => AudioKitSetting.Instance; }
+
+        public static ObjectPool<IAudioLoader> AudioLoaderPool { get; set; } = new(
             () => new AddressablesAudioLoader()
         );
 
@@ -39,20 +50,8 @@ namespace Framework3.Toolkits.AudioKit
 
         public static SoundMode SoundMode { get; set; } = SoundMode.IgnoreSameSoundInGlobalTimes;
 
-        public static int GlobalFrameCountForIgnoreSameSound = 10; // 每相邻 GlobalFrameCountForIgnoreSameSound 帧内进行检查，不播放相同音效
-        public static int SoundFrameCountForIgnoreSameSound  = 10; // 相同音效在各自记录的 SoundFrameCountForIgnoreSameSound 内，不连续播放
-
-        public static float GlobalTimeForIgnoreSameSound = 0.16f; // 每相邻 GlobalTimesForIgnoreSameSound 时间内进行检查，不播放相同音效
-        public static float SoundTimeForIgnoreSameSound  = 0.16f; // 相同音效在各自记录的 SoundTimesForIgnoreSameSound 内，不连续播放
-
-        private static Dictionary<string, int>   _SoundFrameCountDict = new Dictionary<string, int>();
-        private static Dictionary<string, float> _SoundTimeDict       = new Dictionary<string, float>();
-
-        private static int   _GlobalFrameCount = 0; // 当前帧数
-        private static float _GlobalTime       = 0; // 当前时间
-
         /// <summary>
-        /// 播放背景音乐（异步加载音频）
+        ///     播放背景音乐（异步加载音频）
         /// </summary>
         /// <param name="musicName">背景音乐名</param>
         /// <param name="volume">音量</param>
@@ -75,12 +74,12 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             MusicPlayer.VolumeScale(volume)
-               .OnStart((player) =>
+               .OnStart(player =>
                 {
                     AudioMgr.Instance.CurrentMusic = player.AudioClip;
                     onPlayStart?.Invoke(player);
                 })
-               .OnFinish((player) =>
+               .OnFinish(player =>
                 {
                     if (!player.IsLoop)
                     {
@@ -92,7 +91,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放背景音乐
+        ///     播放背景音乐
         /// </summary>
         /// <param name="clip">背景音乐音频</param>
         /// <param name="volume">音量</param>
@@ -115,12 +114,12 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             MusicPlayer.VolumeScale(volume)
-               .OnStart((player) =>
+               .OnStart(player =>
                 {
                     AudioMgr.Instance.CurrentMusic = player.AudioClip;
                     onPlayStart?.Invoke(player);
                 })
-               .OnFinish((player) =>
+               .OnFinish(player =>
                 {
                     if (!player.IsLoop)
                     {
@@ -132,7 +131,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 停止播放背景音乐
+        ///     停止播放背景音乐
         /// </summary>
         public static void StopMusic()
         {
@@ -140,7 +139,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 暂停播放背景音乐
+        ///     暂停播放背景音乐
         /// </summary>
         public static void PauseMusic()
         {
@@ -148,7 +147,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 恢复播放背景音乐
+        ///     恢复播放背景音乐
         /// </summary>
         public static void UnPauseMusic()
         {
@@ -156,7 +155,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放背景人声（异步加载音频）
+        ///     播放背景人声（异步加载音频）
         /// </summary>
         /// <param name="narrationName">背景人声名</param>
         /// <param name="volume">音量</param>
@@ -179,12 +178,12 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             NarrationPlayer.VolumeScale(volume)
-               .OnStart((player) =>
+               .OnStart(player =>
                 {
                     AudioMgr.Instance.CurrentNarration = player.AudioClip;
                     onPlayStart?.Invoke(player);
                 })
-               .OnFinish((player) =>
+               .OnFinish(player =>
                 {
                     if (!player.IsLoop)
                     {
@@ -196,7 +195,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放背景人声
+        ///     播放背景人声
         /// </summary>
         /// <param name="clip">背景人声音频</param>
         /// <param name="volume">音量</param>
@@ -219,12 +218,12 @@ namespace Framework3.Toolkits.AudioKit
             }
 
             NarrationPlayer.VolumeScale(volume)
-               .OnStart((player) =>
+               .OnStart(player =>
                 {
                     AudioMgr.Instance.CurrentNarration = player.AudioClip;
                     onPlayStart?.Invoke(player);
                 })
-               .OnFinish((player) =>
+               .OnFinish(player =>
                 {
                     if (!player.IsLoop)
                     {
@@ -236,7 +235,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 停止播放背景人声
+        ///     停止播放背景人声
         /// </summary>
         public static void StopNarration()
         {
@@ -244,7 +243,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 暂停播放背景人声
+        ///     暂停播放背景人声
         /// </summary>
         public static void PauseNarration()
         {
@@ -252,7 +251,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 恢复播放背景人声
+        ///     恢复播放背景人声
         /// </summary>
         public static void UnPauseNarration()
         {
@@ -260,7 +259,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放音效（异步加载音频）
+        ///     播放音效（异步加载音频）
         /// </summary>
         /// <param name="soundName">音效名</param>
         /// <param name="volume">音量</param>
@@ -292,7 +291,7 @@ namespace Framework3.Toolkits.AudioKit
             player.VolumeScale(volume)
                .OnStart(onPlayStart)
                .PlayAsync(soundName, loop, SoundAttacher.Instance.gameObject)
-               .OnFinish((audioPlayer) =>
+               .OnFinish(audioPlayer =>
                 {
                     onPlayFinish?.Invoke(audioPlayer);
                     mgr.RemoveSoundPlayerFromPool(audioPlayer);
@@ -307,7 +306,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放音效
+        ///     播放音效
         /// </summary>
         /// <param name="clip">音效音频</param>
         /// <param name="volume">音量</param>
@@ -338,7 +337,7 @@ namespace Framework3.Toolkits.AudioKit
             var player = AudioPlayer.Create(Setting.SoundVolume);
             player.VolumeScale(volume)
                .OnStart(onPlayStart)
-               .OnFinish((audioPlayer) =>
+               .OnFinish(audioPlayer =>
                 {
                     onPlayFinish?.Invoke(audioPlayer);
                     mgr.RemoveSoundPlayerFromPool(audioPlayer);
@@ -354,7 +353,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 停止播放所有音效
+        ///     停止播放所有音效
         /// </summary>
         public static void StopAllSound()
         {
@@ -364,7 +363,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 依据当前播放模式，判断是否可播放音效
+        ///     依据当前播放模式，判断是否可播放音效
         /// </summary>
         /// <param name="soundName">音效名</param>
         /// <returns>是否可播放</returns>

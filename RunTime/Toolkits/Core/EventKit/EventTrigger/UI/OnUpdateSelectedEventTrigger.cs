@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnUpdateSelectedEventTrigger : MonoBehaviour, IUpdateSelectedHandler
     {
-        public readonly EasyEvent<BaseEventData> OnUpdateSelectedEvent = new EasyEvent<BaseEventData>();
+        public readonly EasyEvent<BaseEventData> OnUpdateSelectedEvent = new();
 
 
         public void OnUpdateSelected(BaseEventData eventData)

@@ -12,28 +12,27 @@ namespace Framework3.Core
     using System.Collections.Generic;
 
     /// <summary>
-    /// 级联事件
+    ///     级联事件
     /// </summary>
     public sealed class OrEvent : IUnregisterList
     {
-        public List<IUnregister> UnregisterList { get; } = new(); // 待注销列表
-
-        private Action _onEvent = () => { }; // OrEvent 事件
+        private Action            _onEvent = () => { };            // OrEvent 事件
+        public  List<IUnregister> UnregisterList { get; } = new(); // 待注销列表
 
         /// <summary>
-        /// 绑定 EasyEvent
+        ///     绑定 EasyEvent
         /// </summary>
         /// <param name="easyEvent">IEasyEvent 实例</param>
         /// <returns>OrEvent 自身</returns>
         public OrEvent Or(IEasyEvent easyEvent)
         {
-            easyEvent.Register(Trigger)          // 给 easyEvent 绑定 OrEvent 自己的事件
-                     .AddToUnregisterList(this); // 登记注销
+            easyEvent.Register(Trigger)    // 给 easyEvent 绑定 OrEvent 自己的事件
+               .AddToUnregisterList(this); // 登记注销
             return this;
         }
 
         /// <summary>
-        /// 注册事件
+        ///     注册事件
         /// </summary>
         /// <param name="onEvent">事件</param>
         /// <returns>注销器</returns>
@@ -42,9 +41,9 @@ namespace Framework3.Core
             _onEvent += onEvent;
             return new CustomUnregister(() => { Unregister(onEvent); });
         }
-        
+
         /// <summary>
-        /// 注册并触发一次事件
+        ///     注册并触发一次事件
         /// </summary>
         /// <param name="onEvent">事件</param>
         /// <returns>注销器</returns>
@@ -55,7 +54,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注销事件
+        ///     注销事件
         /// </summary>
         /// <param name="onEvent">事件</param>
         public void Unregister(Action onEvent)

@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnDropEventTrigger : MonoBehaviour, IDropHandler
     {
-        public readonly EasyEvent<PointerEventData> OnDropEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnDropEvent = new();
 
         public void OnDrop(PointerEventData eventData)
         {

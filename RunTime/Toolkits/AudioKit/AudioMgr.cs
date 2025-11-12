@@ -12,13 +12,13 @@ namespace Framework3.Toolkits.AudioKit
     using System.Collections.Generic;
     using System.Linq;
     using Core;
-    using PoolKit;
     using SingletonKit;
-    using Sirenix.OdinInspector;
     using UnityEngine;
-    
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
+
 #if UNITY_EDITOR
-    using UnityEditor;
 #endif
 
     [MonoSingletonPath("Framework3/AudioKit/AudioMgr")]
@@ -26,30 +26,42 @@ namespace Framework3.Toolkits.AudioKit
     {
     #region Static
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private static Dictionary<string, List<AudioPlayer>> s_soundPlayerInPlaying = new Dictionary<string, List<AudioPlayer>>(30);
+    #endif
+        private static Dictionary<string, List<AudioPlayer>> s_soundPlayerInPlaying = new(30);
 
     #endregion
 
     #region 字段
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private AudioListener _audioListener;
 
     #endregion
 
     #region 属性
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioPlayer MusicPlayer { get; private set; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioPlayer NarrationPlayer { get; private set; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioClip CurrentMusic { get; set; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioClip CurrentNarration { get; set; }
 
     #endregion
@@ -115,7 +127,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 确认 AudioListener 存在
+        ///     确认 AudioListener 存在
         /// </summary>
         public void CheckAudioListener()
         {
@@ -125,7 +137,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 遍历所有 Sound，执行 operation
+        ///     遍历所有 Sound，执行 operation
         /// </summary>
         /// <param name="operation">每个 Sound 执行的方法</param>
         public void ForEachSound(Action<AudioPlayer> operation)

@@ -10,14 +10,57 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
 {
     using System;
     using System.IO;
-    using Sirenix.OdinInspector;
     using UnityEditor;
     using UnityEditor.Callbacks;
     using UnityEngine;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class CodeGenPipeline : ScriptableObject
     {
         private static CodeGenPipeline _Default;
+
+        public string GlobalNameSpace = "Game";
+
+    #if ODIN_INSPECTOR
+        [FolderPath]
+    #endif
+        public string GlobalFolderPath = "Assets/Scripts";
+
+        public string GlobalFileName;
+
+        public string GlobalArchitecture = "Game";
+
+    #if ODIN_INSPECTOR
+        [ReadOnly]
+    #endif
+        public bool IsGenerating;
+
+    #if ODIN_INSPECTOR
+        [ReadOnly]
+    #endif
+        public GameObject LastSelectedGameObject;
+
+    #if ODIN_INSPECTOR
+        [ReadOnly]
+    #endif
+        public string NameSpace = "Game";
+
+    #if ODIN_INSPECTOR
+        [ReadOnly] [FolderPath]
+    #endif
+        public string FolderPath = "Assets/Scripts";
+
+    #if ODIN_INSPECTOR
+        [ReadOnly]
+    #endif
+        public string FileName;
+
+    #if ODIN_INSPECTOR
+        [ReadOnly]
+    #endif
+        public string Architecture = "Game";
 
         public static CodeGenPipeline Default
         {
@@ -25,7 +68,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             {
                 if (_Default) return _Default;
 
-                var filePath = CodeGenKit.PipeLinePath;
+                var filePath      = CodeGenKit.PipeLinePath;
                 var directoryPath = Path.GetDirectoryName(filePath);
 
                 if (File.Exists(filePath))
@@ -48,33 +91,6 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             }
         }
 
-        public string GlobalNameSpace = "Game";
-
-        [FolderPath]
-        public string GlobalFolderPath = "Assets/Scripts";
-
-        public string GlobalFileName;
-
-        public string GlobalArchitecture = "Game";
-
-        [ReadOnly]
-        public bool IsGenerating;
-
-        [ReadOnly]
-        public GameObject LastSelectedGameObject;
-
-        [ReadOnly]
-        public string NameSpace = "Game";
-
-        [ReadOnly] [FolderPath]
-        public string FolderPath = "Assets/Scripts";
-
-        [ReadOnly]
-        public string FileName;
-
-        [ReadOnly]
-        public string Architecture = "Game";
-
         public string GenerateViewCode()
         {
             var templateContent = CodeGenTemplate.VIEW_CODE;
@@ -83,7 +99,7 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             var modifiedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             // 替换占位符
-            string content = templateContent
+            var content = templateContent
                .Replace("__Game__", NameSpace)
                .Replace("CodeTemplate", FileName)
                .Replace("__modifiedTime__", modifiedTime)
@@ -100,16 +116,16 @@ namespace Framework3.Toolkits.CodeGenKit.Editor
             var modifiedTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             // 替换占位符
-            string content = templateContent
-                .Replace("__Game__", NameSpace)
-                .Replace("ArchitectureTemplate", Architecture)
-                .Replace("__modifiedTime__", modifiedTime);
+            var content = templateContent
+               .Replace("__Game__", NameSpace)
+               .Replace("ArchitectureTemplate", Architecture)
+               .Replace("__modifiedTime__", modifiedTime);
 
             return content;
         }
 
         /// <summary>
-        /// Unity 编译脚本后执行的回调函数
+        ///     Unity 编译脚本后执行的回调函数
         /// </summary>
         private void OnDidReloadScripts()
         {

@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.UIKit
     using UnityEngine;
 
     /// <summary>
-    /// 挂载到 Canvas 上，并将 Canvas 设置为 World Space
+    ///     挂载到 Canvas 上，并将 Canvas 设置为 World Space
     /// </summary>
     public abstract class UIPanel3D : UIPanel, IPanel3D
     {

@@ -19,6 +19,17 @@ namespace Framework3.Toolkits.UIKit
 
         private static UI2DRoot s_instance;
 
+        public Camera           UICamera;
+        public Canvas           Canvas;
+        public CanvasScaler     CanvasScaler;
+        public GraphicRaycaster GraphicRaycaster;
+
+        // Level 层级对应的父物体
+        public RectTransform Bg;
+        public RectTransform Bottom;
+        public RectTransform Common;
+        public RectTransform Top;
+
         public static UI2DRoot Instance
         {
             get
@@ -53,19 +64,8 @@ namespace Framework3.Toolkits.UIKit
             }
         }
 
-        public Camera           UICamera;
-        public Canvas           Canvas;
-        public CanvasScaler     CanvasScaler;
-        public GraphicRaycaster GraphicRaycaster;
-
-        // Level 层级对应的父物体
-        public RectTransform Bg;
-        public RectTransform Bottom;
-        public RectTransform Common;
-        public RectTransform Top;
-
         /// <summary>
-        /// 设置参考分辨率
+        ///     设置参考分辨率
         /// </summary>
         public Vector2 ReferenceResolution
         {
@@ -74,7 +74,7 @@ namespace Framework3.Toolkits.UIKit
         }
 
         /// <summary>
-        /// 设置宽高适配比例
+        ///     设置宽高适配比例
         /// </summary>
         public float MatchWidthOrHeight
         {
@@ -82,8 +82,15 @@ namespace Framework3.Toolkits.UIKit
             set => CanvasScaler.matchWidthOrHeight = value;
         }
 
+        private void OnDestroy()
+        {
+            // _Asset?.Release();
+        }
+
+        public void OnSingletonInit() { }
+
         /// <summary>
-        /// 设置 ScreenSpaceOverlay 渲染模式
+        ///     设置 ScreenSpaceOverlay 渲染模式
         /// </summary>
         public void ScreenSpaceOverlayRenderMode()
         {
@@ -92,7 +99,7 @@ namespace Framework3.Toolkits.UIKit
         }
 
         /// <summary>
-        /// 设置 ScreenSpaceCamera 渲染模式
+        ///     设置 ScreenSpaceCamera 渲染模式
         /// </summary>
         public void ScreenSpaceCameraRenderMode()
         {
@@ -102,7 +109,7 @@ namespace Framework3.Toolkits.UIKit
         }
 
         /// <summary>
-        /// 设置 Panel2D 层级
+        ///     设置 Panel2D 层级
         /// </summary>
         /// <param name="level">层级</param>
         /// <param name="panel2D">哪个 Panel2D</param>
@@ -123,13 +130,6 @@ namespace Framework3.Toolkits.UIKit
                 panel2D.Transform.SetParent(Top, false);
                 break;
             }
-        }
-
-        public void OnSingletonInit() { }
-
-        private void OnDestroy()
-        {
-            // _Asset?.Release();
         }
     }
 }

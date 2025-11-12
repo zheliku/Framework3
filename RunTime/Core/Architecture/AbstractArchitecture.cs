@@ -6,7 +6,9 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
+#endif
 
 namespace Framework3.Core
 {
@@ -18,16 +20,16 @@ namespace Framework3.Core
     #region Static
 
         /// <summary>
-        /// 注册补丁的回调
+        ///     注册补丁的回调
         /// </summary>
         public static Action<TArchitecture> OnRegisterPatch = architecture => { };
 
         protected static TArchitecture s_architecture;
 
         /// <summary>
-        /// 确保架构实例存在，若不存在则创建新的实例并初始化
+        ///     确保架构实例存在，若不存在则创建新的实例并初始化
         /// </summary>
-        static void MakeSureArchitecture()
+        private static void MakeSureArchitecture()
         {
             if (s_architecture == null)
             {
@@ -39,13 +41,13 @@ namespace Framework3.Core
                 OnRegisterPatch?.Invoke(s_architecture); // 如果有注册补丁的回调函数，则调用
 
                 // 遍历架构中的所有模型，如果模型未初始化，则初始化
-                foreach (var model in s_architecture._iocContainer.GetInstancesByType<IModel>().Where<IModel>(m => !m.Initialized))
+                foreach (var model in s_architecture._iocContainer.GetInstancesByType<IModel>().Where(m => !m.Initialized))
                 {
                     model.Init();
                 }
 
                 // 遍历架构中的所有系统，如果系统未初始化，则初始化
-                foreach (var system in s_architecture._iocContainer.GetInstancesByType<ISystem>().Where<ISystem>(s => !s.Initialized))
+                foreach (var system in s_architecture._iocContainer.GetInstancesByType<ISystem>().Where(s => !s.Initialized))
                 {
                     system.Init();
                 }
@@ -56,7 +58,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 获取当前架构实例
+        ///     获取当前架构实例
         /// </summary>
         public static IArchitecture Architecture
         {
@@ -70,16 +72,22 @@ namespace Framework3.Core
     #endregion
 
     #region 字段
-        
-        [ShowInInspector]
-        private bool _initialized = false;
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private IOCContainer _iocContainer = new IOCContainer();
+    #endif
+        private bool _initialized;
+
+    #if ODIN_INSPECTOR
+        [ShowInInspector]
+    #endif
+        private IOCContainer _iocContainer = new();
 
         // 一个 Architecture 对应一个 TypeEventSystem
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private TypeEventSystem _typeEventSystem = new TypeEventSystem();
+    #endif
+        private TypeEventSystem _typeEventSystem = new();
 
     #endregion
 
@@ -88,7 +96,7 @@ namespace Framework3.Core
         public void RegisterSystem<TSystem>(TSystem system) where TSystem : ISystem
         {
             system.Architecture = this;
-            _iocContainer.Register<TSystem>(system);
+            _iocContainer.Register(system);
 
             if (_initialized)
             {
@@ -100,7 +108,7 @@ namespace Framework3.Core
         public void RegisterModel<TModel>(TModel model) where TModel : IModel
         {
             model.Architecture = this;
-            _iocContainer.Register<TModel>(model);
+            _iocContainer.Register(model);
 
             if (_initialized)
             {
@@ -111,7 +119,7 @@ namespace Framework3.Core
 
         public void RegisterUtility<TUtility>(TUtility utility) where TUtility : IUtility
         {
-            _iocContainer.Register<TUtility>(utility);
+            _iocContainer.Register(utility);
         }
 
         public TSystem GetSystem<TSystem>() where TSystem : class, ISystem
@@ -138,10 +146,10 @@ namespace Framework3.Core
         {
             return ExecuteCommand(command);
         }
-        
+
         public TResult SendQuery<TResult>(IQuery<TResult> query)
         {
-            return DoQuery<TResult>(query);
+            return DoQuery(query);
         }
 
         public void SendEvent<TEvent>() where TEvent : new()
@@ -151,17 +159,17 @@ namespace Framework3.Core
 
         public void SendEvent<TEvent>(TEvent e)
         {
-            _typeEventSystem.Send<TEvent>(e);
+            _typeEventSystem.Send(e);
         }
 
         public IUnregister RegisterEvent<TEvent>(Action<TEvent> onEvent, float priority)
         {
-            return _typeEventSystem.Register<TEvent>(onEvent, priority);
+            return _typeEventSystem.Register(onEvent, priority);
         }
-        
+
         public void UnregisterEvent<TEvent>(Action<TEvent> onEvent)
         {
-            _typeEventSystem.Unregister<TEvent>(onEvent);
+            _typeEventSystem.Unregister(onEvent);
         }
 
         public void Deinit()
@@ -169,13 +177,13 @@ namespace Framework3.Core
             OnDeinit(); // 调用反初始化事件
 
             // 遍历所有已初始化的系统，调用其反初始化方法
-            foreach (var system in _iocContainer.GetInstancesByType<ISystem>().Where<ISystem>(s => s.Initialized)) { system.Deinit(); }
+            foreach (var system in _iocContainer.GetInstancesByType<ISystem>().Where(s => s.Initialized)) { system.Deinit(); }
 
             // 遍历所有已初始化的模型，调用其反初始化方法
-            foreach (var model in _iocContainer.GetInstancesByType<IModel>().Where<IModel>(m => m.Initialized)) { model.Deinit(); }
+            foreach (var model in _iocContainer.GetInstancesByType<IModel>().Where(m => m.Initialized)) { model.Deinit(); }
 
             _iocContainer.Clear(); // 清空 IOC 容器
-            _initialized = false; // 设置初始化状态为 false
+            _initialized = false;  // 设置初始化状态为 false
         }
 
     #endregion

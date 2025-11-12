@@ -24,6 +24,20 @@ namespace Framework3.Toolkits.ActionKit
 
     #endregion
 
+    #region 方法
+
+        private async void StartTask()
+        {
+            _executingTask = _taskGetter();
+            await _executingTask;
+
+            // task 完成后，结束 Action
+            this.Finish();
+            _executingTask = null;
+        }
+
+    #endregion
+
     #region 字段
 
         private Func<SystemTask.Task> _taskGetter;
@@ -56,20 +70,6 @@ namespace Framework3.Toolkits.ActionKit
                 _executingTask.Dispose();
                 _executingTask = null;
             }
-        }
-
-    #endregion
-
-    #region 方法
-
-        private async void StartTask()
-        {
-            _executingTask = _taskGetter();
-            await _executingTask;
-
-            // task 完成后，结束 Action
-            this.Finish();
-            _executingTask = null;
         }
 
     #endregion

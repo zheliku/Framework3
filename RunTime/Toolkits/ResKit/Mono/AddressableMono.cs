@@ -6,22 +6,35 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using UnityEngine;
-
 namespace Framework3.Toolkits.ResKit
 {
     using System;
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
+    using UnityEditor;
+    using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 用于在 Inspector 中显示 Addressables 资源的 Mono 对象
+    ///     用于在 Inspector 中显示 Addressables 资源的 Mono 对象
     /// </summary>
     public class AddressableMono : MonoBehaviour
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        public Dictionary<string, AddressableMonoInfo> ResMap = new Dictionary<string, AddressableMonoInfo>();
+    #endif
+        public Dictionary<string, AddressableMonoInfo> ResMap = new();
+
+        private void Update()
+        {
+        #if UNITY_EDITOR
+
+            // 强制刷新 Inspector GUI
+            EditorUtility.SetDirty(this);
+        #endif
+        }
 
         public void BindHandle(AsyncOperationHandle handle)
         {
@@ -52,79 +65,86 @@ namespace Framework3.Toolkits.ResKit
         {
             ResMap[handle.AssetName()].OnCompletedActions.Remove(action);
         }
-
-        private void Update()
-        {
-#if UNITY_EDITOR
-
-            // 强制刷新 Inspector GUI
-            UnityEditor.EditorUtility.SetDirty(this);
-#endif
-        }
     }
 
     /// <summary>
-    /// 显示在 Inspector 中的 Addressable Info
+    ///     显示在 Inspector 中的 Addressable Info
     /// </summary>
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class AddressableMonoInfo
     {
         private AsyncOperationHandle _handle;
 
+        public AddressableMonoInfo(AsyncOperationHandle handle)
+        {
+            _handle = handle;
+        }
+
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
+    #endif
         public string Name { get => _handle.AssetName(); }
 
         /// <summary>
-        /// 显示 Addressable 当前状态
+        ///     显示 Addressable 当前状态
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)] [EnumToggleButtons]
+    #endif
         public AsyncOperationStatus Status
         {
             get => _handle.Status;
         }
 
         /// <summary>
-        /// 显示 Addressable 加载完成的所有回调方法
+        ///     显示 Addressable 加载完成的所有回调方法
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
-        public List<Delegate> OnCompletedActions { get; private set; } = new List<Delegate>();
+    #endif
+        public List<Delegate> OnCompletedActions { get; private set; } = new();
 
         /// <summary>
-        /// 显示 Addressable 的引用计数
+        ///     显示 Addressable 的引用计数
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
+    #endif
         public int RefCount { get; set; }
 
         /// <summary>
-        /// 显示 Addressable 对应的资源
+        ///     显示 Addressable 对应的资源
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
+    #endif
         public object Res
         {
             get => _handle.Result;
         }
 
         /// <summary>
-        /// 显示 Addressable 是否加载完成
+        ///     显示 Addressable 是否加载完成
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
+    #endif
         public bool IsDone
         {
             get => _handle.IsDone;
         }
 
         /// <summary>
-        /// 显示 Addressable 的加载进度
+        ///     显示 Addressable 的加载进度
         /// </summary>
+    #if ODIN_INSPECTOR
         [ShowInInspector] [LabelWidth(75)]
+    #endif
         public float Progress
         {
             get => _handle.PercentComplete;
-        }
-
-        public AddressableMonoInfo(AsyncOperationHandle handle)
-        {
-            _handle = handle;
         }
     }
 }

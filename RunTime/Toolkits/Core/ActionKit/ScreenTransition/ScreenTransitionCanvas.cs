@@ -8,7 +8,6 @@
 
 namespace Framework3.Toolkits.ActionKit
 {
-    using Core;
     using SingletonKit;
     using UnityEngine;
     using UnityEngine.UI;
@@ -16,12 +15,12 @@ namespace Framework3.Toolkits.ActionKit
     [MonoSingletonPath("Framework3/ActionKit/ScreenTransitionCanvas")]
     internal class ScreenTransitionCanvas : MonoBehaviour, ISingleton
     {
+        public Image ColorImage;
+
         internal static ScreenTransitionCanvas Instance
         {
             get => PrefabSingletonProperty<ScreenTransitionCanvas>.InstanceWithLoader(Resources.Load<GameObject>);
         }
-
-        public Image ColorImage;
 
         public void OnSingletonInit()
         { }

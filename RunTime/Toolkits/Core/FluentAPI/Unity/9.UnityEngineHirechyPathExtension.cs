@@ -16,7 +16,7 @@ namespace Framework3.Toolkits.FluentAPI
     public static class UnityEngineHierarchyPathExtension
     {
         /// <summary>
-        /// 根据层级路径查找指定的 GameObject。
+        ///     根据层级路径查找指定的 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="includeInactive">是否包含未激活的 GameObject。</param>
@@ -29,25 +29,25 @@ namespace Framework3.Toolkits.FluentAPI
             bool        throwExceptionIfNotFound = true)
         {
             var objNames = hierarchyPath.Split('/');
-            GameObject current = SceneManager.GetActiveScene()
-                                             .GetRootGameObjects()
-                                             .FirstOrDefault(o => o.name == objNames[0]
-                                                               && (includeInactive || o.activeInHierarchy));
+            var current = SceneManager.GetActiveScene()
+               .GetRootGameObjects()
+               .FirstOrDefault(o => o.name == objNames[0]
+                                 && (includeInactive || o.activeInHierarchy));
 
             if (current)
             {
                 // 逐级查找子节点
-                for (int i = 1; i < objNames.Length; i++)
+                for (var i = 1; i < objNames.Length; i++)
                 {
                     var found       = false;
                     var parentTrans = current.transform;
-                    for (int j = 0; j < parentTrans.childCount; j++)
+                    for (var j = 0; j < parentTrans.childCount; j++)
                     {
                         var child = parentTrans.GetChild(j).gameObject;
                         if (child.name == objNames[i] && (includeInactive || child.activeInHierarchy))
                         {
                             current = child;
-                            found = true;
+                            found   = true;
                             break;
                         }
                     }
@@ -68,7 +68,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径创建 GameObject，并设置父级关系。
+        ///     根据层级路径创建 GameObject，并设置父级关系。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 Transform，可选。</param>
@@ -88,7 +88,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定的 GameObject。
+        ///     根据层级路径获取或创建指定的 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="includeInactive">是否包含未激活的 GameObject。</param>
@@ -106,14 +106,11 @@ namespace Framework3.Toolkits.FluentAPI
             {
                 return hierarchyPath.AddGameObjectInHierarchy();
             }
-            else
-            {
-                return objNames[1..].Join("/").GetOrAddGameObjectInHierarchy(parent.transform, includeInactive);
-            }
+            return objNames[1..].Join("/").GetOrAddGameObjectInHierarchy(parent.transform, includeInactive);
         }
 
         /// <summary>
-        /// 根据层级路径获取指定类型的组件。
+        ///     根据层级路径获取指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -138,7 +135,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 Transform 获取 GameObject。
+        ///     根据层级路径从指定父级 Transform 获取 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 Transform。</param>
@@ -161,7 +158,7 @@ namespace Framework3.Toolkits.FluentAPI
                 // 记录父物体
                 var parentTrans = obj.transform;
 
-                for (int i = 0; i < parentTrans.childCount; i++)
+                for (var i = 0; i < parentTrans.childCount; i++)
                 {
                     var child = obj.transform.GetChild(i);
                     if ((includeInactive || child.gameObject.activeInHierarchy) && child.name == name)
@@ -189,7 +186,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 Component 获取 GameObject。
+        ///     根据层级路径从指定父级 Component 获取 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 Component。</param>
@@ -207,7 +204,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 GameObject 获取 GameObject。
+        ///     根据层级路径从指定父级 GameObject 获取 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 GameObject。</param>
@@ -225,7 +222,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 Transform 获取指定类型的组件。
+        ///     根据层级路径从指定父级 Transform 获取指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -253,7 +250,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 Component 获取指定类型的组件。
+        ///     根据层级路径从指定父级 Component 获取指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -273,7 +270,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径从指定父级 GameObject 获取指定类型的组件。
+        ///     根据层级路径从指定父级 GameObject 获取指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -293,7 +290,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定的 GameObject。
+        ///     根据层级路径获取或创建指定的 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 Transform。</param>
@@ -308,14 +305,14 @@ namespace Framework3.Toolkits.FluentAPI
             var obj      = parent.gameObject;
 
             // 层次遍历，广度优先
-            for (int i = 0; i < objNames.Length; i++)
+            for (var i = 0; i < objNames.Length; i++)
             {
-                string name = objNames[i];
+                var name = objNames[i];
 
                 // 记录父物体
                 var parentTrans = obj.transform;
 
-                for (int j = 0; j < parentTrans.childCount; j++)
+                for (var j = 0; j < parentTrans.childCount; j++)
                 {
                     var child = obj.transform.GetChild(j);
                     if ((includeInactive || child.gameObject.activeInHierarchy) && child.name == name)
@@ -338,7 +335,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定的 GameObject。
+        ///     根据层级路径获取或创建指定的 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 Component。</param>
@@ -353,7 +350,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定的 GameObject。
+        ///     根据层级路径获取或创建指定的 GameObject。
         /// </summary>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
         /// <param name="parent">父级 GameObject。</param>
@@ -368,7 +365,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定类型的组件。
+        ///     根据层级路径获取或创建指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -387,7 +384,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定类型的组件。
+        ///     根据层级路径获取或创建指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>
@@ -404,7 +401,7 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 根据层级路径获取或创建指定类型的组件。
+        ///     根据层级路径获取或创建指定类型的组件。
         /// </summary>
         /// <typeparam name="T">组件类型。</typeparam>
         /// <param name="hierarchyPath">层级路径，使用 '/' 分隔每一级名称。</param>

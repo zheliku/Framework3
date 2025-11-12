@@ -11,9 +11,10 @@ namespace Framework3.Toolkits.FluentAPI
     using UnityEngine;
 
     /// <summary>
-    /// 针对 <see cref="UnityEngine.Object"/> 提供的链式扩展
+    ///     针对 <see cref="UnityEngine.Object" /> 提供的链式扩展
     /// </summary>
-    /// <example> <code>
+    /// <example>
+    ///     <code>
     /// <![CDATA[
     /// var gameObject = new GameObject();
     /// --------------------------------------------------------------
@@ -34,17 +35,20 @@ namespace Framework3.Toolkits.FluentAPI
     ///    .Name("ExtensionExample")
     ///    .DontDestroyOnLoad();
     /// ]]>
-    /// </code> </example>
+    /// </code>
+    /// </example>
     public static class UnityEngineObjectExtension
     {
         /// <summary>
-        /// <see cref="Object.Instantiate(Object)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, bool keepName = false) where T : Object
         {
             var instance = Object.Instantiate(selfObj);
@@ -54,15 +58,17 @@ namespace Framework3.Toolkits.FluentAPI
             }
             return instance;
         }
-        
+
         /// <summary>
-        /// <see cref="Object.Instantiate(Object, Vector3, Quaternion)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object, Vector3, Quaternion)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(Vector3.zero);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, Vector3 position)
             where T : Object
         {
@@ -70,44 +76,50 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.Instantiate(Object, Vector3, Quaternion)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object, Vector3, Quaternion)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(Vector3.zero, Quaternion.identity);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, Vector3 position, Quaternion rotation)
             where T : Object
         {
             return Object.Instantiate(selfObj, position, rotation);
         }
-        
+
         /// <summary>
-        /// <see cref="Object.Instantiate(Object, Vector3, Quaternion, Transform)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object, Vector3, Quaternion, Transform)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(Vector3.zero, transformRoot);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(
-            this T     selfObj,
-            Vector3    position,
-            Transform  parent)
+            this T    selfObj,
+            Vector3   position,
+            Transform parent)
             where T : Object
         {
             return Object.Instantiate(selfObj, position, Quaternion.identity, parent);
         }
 
         /// <summary>
-        /// <see cref="Object.Instantiate(Object, Vector3, Quaternion, Transform)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object, Vector3, Quaternion, Transform)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(Vector3.zero, Quaternion.identity, transformRoot);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(
             this T     selfObj,
             Vector3    position,
@@ -119,35 +131,41 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.Instantiate(Object, Transform, bool)"/> 的简单链式封装
+        ///     <see cref="Object.Instantiate(Object, Transform, bool)" /> 的简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(transformRoot, true);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, Transform parent, bool worldPositionStays = false)
             where T : Object
         {
             return (T) Object.Instantiate((Object) selfObj, parent, worldPositionStays);
         }
 
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(componentRoot, true);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, Component parent, bool worldPositionStays = false)
             where T : Object
         {
             return (T) Object.Instantiate((Object) selfObj, parent.transform, worldPositionStays);
         }
-        
-        /// <example> <code>
+
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// prefab.Instantiate(componentRoot, true);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Instantiate<T>(this T selfObj, GameObject parent, bool worldPositionStays = false)
             where T : Object
         {
@@ -155,14 +173,16 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// 设置名字
+        ///     设置名字
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// scriptableObject.Name("LevelData");
         /// Debug.Log(scriptableObject.name); // LevelData
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Name<T>(this T selfObj, string name) where T : Object
         {
             selfObj.name = name;
@@ -170,27 +190,31 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.Destroy(Object)"/> 简单链式封装
+        ///     <see cref="Object.Destroy(Object)" /> 简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().Destroy()
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static void Destroy<T>(this T selfObj) where T : Object
         {
             Object.Destroy(selfObj);
         }
 
         /// <summary>
-        /// <see cref="Object.Destroy(Object)"/> 简单链式封装，不会报异常（但不好调试）
+        ///     <see cref="Object.Destroy(Object)" /> 简单链式封装，不会报异常（但不好调试）
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// GameObject gameObj = null;
         /// gameObj.DestroyGracefully(); // not throw null exception
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T DestroyGracefully<T>(this T selfObj) where T : Object
         {
             if (selfObj)
@@ -202,13 +226,15 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.Destroy(Object, float)"/> 简单链式封装
+        ///     <see cref="Object.Destroy(Object, float)" /> 简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().Destroy(5);
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T Destroy<T>(this T selfObj, float delayTime) where T : Object
         {
             Object.Destroy(selfObj, delayTime);
@@ -216,14 +242,16 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.Destroy(Object, float)"/> 简单链式封装，不会报异常（但不好调试）
+        ///     <see cref="Object.Destroy(Object, float)" /> 简单链式封装，不会报异常（但不好调试）
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// GameObject gameObj = null;
         /// gameObj.DestroyGracefully(5); // not throw null exception
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T DestroyGracefully<T>(this T selfObj, float delayTime) where T : Object
         {
             if (selfObj)
@@ -235,13 +263,15 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-        /// <see cref="Object.DontDestroyOnLoad(Object)"/> 简单链式封装
+        ///     <see cref="Object.DontDestroyOnLoad(Object)" /> 简单链式封装
         /// </summary>
-        /// <example> <code>
+        /// <example>
+        ///     <code>
         /// <![CDATA[
         /// new GameObject().DontDestroyOnLoad();
         /// ]]>
-        /// </code> </example>
+        /// </code>
+        /// </example>
         public static T DontDestroyOnLoad<T>(this T selfObj) where T : Object
         {
             Object.DontDestroyOnLoad(selfObj);
@@ -249,39 +279,39 @@ namespace Framework3.Toolkits.FluentAPI
         }
 
         /// <summary>
-            /// 使用 <see cref="Debug.Log(object)"/> 输出调试信息。
-            /// </summary>
-            /// <typeparam name="T">要输出的对象类型。</typeparam>
-            /// <param name="selfObj">要输出的对象。</param>
-            /// <returns>返回输入的对象本身。</returns>
-            public static T DebugLog<T>(this T selfObj)
-            {
-                Debug.Log(selfObj);
-                return selfObj;
-            }
-            
-            /// <summary>
-            /// 使用 <see cref="Debug.LogWarning(object)"/> 输出警告信息。
-            /// </summary>
-            /// <typeparam name="T">要输出的对象类型。</typeparam>
-            /// <param name="selfObj">要输出的对象。</param>
-            /// <returns>返回输入的对象本身。</returns>
-            public static T DebugLogWarning<T>(this T selfObj)
-            {
-                Debug.LogWarning(selfObj);
-                return selfObj;
-            }
-            
-            /// <summary>
-            /// 使用 <see cref="Debug.LogError(object)"/> 输出错误信息。
-            /// </summary>
-            /// <typeparam name="T">要输出的对象类型。</typeparam>
-            /// <param name="selfObj">要输出的对象。</param>
-            /// <returns>返回输入的对象本身。</returns>
-            public static T DebugLogError<T>(this T selfObj)
-            {
-                Debug.LogError(selfObj);
-                return selfObj;
-            }
+        ///     使用 <see cref="Debug.Log(object)" /> 输出调试信息。
+        /// </summary>
+        /// <typeparam name="T">要输出的对象类型。</typeparam>
+        /// <param name="selfObj">要输出的对象。</param>
+        /// <returns>返回输入的对象本身。</returns>
+        public static T DebugLog<T>(this T selfObj)
+        {
+            Debug.Log(selfObj);
+            return selfObj;
+        }
+
+        /// <summary>
+        ///     使用 <see cref="Debug.LogWarning(object)" /> 输出警告信息。
+        /// </summary>
+        /// <typeparam name="T">要输出的对象类型。</typeparam>
+        /// <param name="selfObj">要输出的对象。</param>
+        /// <returns>返回输入的对象本身。</returns>
+        public static T DebugLogWarning<T>(this T selfObj)
+        {
+            Debug.LogWarning(selfObj);
+            return selfObj;
+        }
+
+        /// <summary>
+        ///     使用 <see cref="Debug.LogError(object)" /> 输出错误信息。
+        /// </summary>
+        /// <typeparam name="T">要输出的对象类型。</typeparam>
+        /// <param name="selfObj">要输出的对象。</param>
+        /// <returns>返回输入的对象本身。</returns>
+        public static T DebugLogError<T>(this T selfObj)
+        {
+            Debug.LogError(selfObj);
+            return selfObj;
+        }
     }
 }

@@ -11,18 +11,18 @@ namespace Framework3.Core
     using System;
 
     /// <summary>
-    /// 可绑定事件监听的只读 Property 接口
+    ///     可绑定事件监听的只读 Property 接口
     /// </summary>
     /// <typeparam name="TProperty">被绑定的只读 Property 类型</typeparam>
     public interface IReadonlyBindableProperty<TProperty> : IEasyEvent
     {
         /// <summary>
-        /// Property
+        ///     Property
         /// </summary>
         TProperty Value { get; }
 
         /// <summary>
-        /// 注册绑定事件
+        ///     注册绑定事件
         /// </summary>
         /// <param name="onValueChanged">Property 变化时触发的监听事件</param>
         /// <param name="priority">事件优先级</param>
@@ -30,7 +30,7 @@ namespace Framework3.Core
         IUnregister Register(Action<TProperty, TProperty> onValueChanged, float priority = 0);
 
         /// <summary>
-        /// 注册绑定事件并立即触发一次
+        ///     注册绑定事件并立即触发一次
         /// </summary>
         /// <param name="onValueChanged">Property 变化时触发的监听事件</param>
         /// <param name="priority">事件优先级</param>
@@ -38,7 +38,7 @@ namespace Framework3.Core
         IUnregister RegisterWithInitValue(Action<TProperty, TProperty> onValueChanged, float priority = 0);
 
         /// <summary>
-        /// 注销绑定事件
+        ///     注销绑定事件
         /// </summary>
         /// <param name="onValueChanged">Property 变化时触发的监听事件</param>
         void Unregister(Action<TProperty, TProperty> onValueChanged);

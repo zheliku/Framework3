@@ -8,13 +8,17 @@
 
 namespace Framework3.Toolkits.FSMKit.Example._0.BasicUsage
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using TMPro;
     using UnityEngine;
 
     public class IStateBasicUsageExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private FSM<States> _fsm = new FSM<States>();
 
         [SerializeField]

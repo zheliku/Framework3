@@ -8,12 +8,16 @@
 
 namespace Framework3.Toolkits.GridKit.Example._0.Grid
 {
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
 
     public class EasyGridExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private EasyGrid<string> _grid;
 
         private void Start()

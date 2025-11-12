@@ -1,9 +1,9 @@
 {
   "name": "com.zheliku.framework3",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "displayName": "Framework3",
   "description": "An easy framework for Unity",
-  "unity": "6000.0",
+  "unity": "2022.3",
   "dependencies": {
     "com.unity.addressables": "2.3.16"
   },
@@ -20,6 +20,21 @@
       "displayName": "Toolkits",
       "description": "Toolkits samples for Framework3",
       "path": "Samples~/Toolkits"
+    },
+    {
+      "displayName": "Odin Inspector Integration",
+      "description": "Odin Inspector Integration samples for Framework3",
+      "path": "Samples~/Odin Inspector"
+    },
+    {
+      "displayName": "Events Pro Integration",
+      "description": "Events Pro Integration samples for Framework3",
+      "path": "Samples~/Events Pro"
+    },
+    {
+      "displayName": "BG Database Integration",
+      "description": "BG Database Integration samples for Framework3",
+      "path": "Samples~/BG Database"
     }
   ]
 }

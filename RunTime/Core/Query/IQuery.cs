@@ -9,7 +9,7 @@
 namespace Framework3.Core
 {
     /// <summary>
-    /// Query 接口
+    ///     Query 接口
     /// </summary>
     /// <typeparam name="TResult">查询结果类型</typeparam>
     public interface IQuery<out TResult> : // IBelongToArchitecture, 
@@ -19,7 +19,7 @@ namespace Framework3.Core
         ICanSendQuery                      // IQuery 可发送 Query
     {
         /// <summary>
-        /// 执行查询
+        ///     执行查询
         /// </summary>
         /// <returns>查询结果</returns>
         TResult Do();

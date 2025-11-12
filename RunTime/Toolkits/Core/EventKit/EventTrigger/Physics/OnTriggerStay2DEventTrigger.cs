@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnTriggerStay2DEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent<Collider2D> OnTriggerStay2DEvent = new EasyEvent<Collider2D>();
+        public readonly EasyEvent<Collider2D> OnTriggerStay2DEvent = new();
 
         private void OnTriggerStay2D(Collider2D collider)
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnTriggerStay2DEventTrigger>().OnTriggerStay2DEvent
-                       .Register(onTriggerStay2D, priority);
+               .Register(onTriggerStay2D, priority);
         }
 
         public static IUnregister OnTriggerStay2DEvent(this GameObject self, Action<Collider2D> onTriggerStay2D, int priority = 0)
         {
             return self.GetOrAddComponent<OnTriggerStay2DEventTrigger>().OnTriggerStay2DEvent
-                       .Register(onTriggerStay2D, priority);
+               .Register(onTriggerStay2D, priority);
         }
     }
 }

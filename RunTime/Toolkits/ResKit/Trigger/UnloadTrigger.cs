@@ -9,21 +9,25 @@
 namespace Framework3.Toolkits.ResKit
 {
     using System.Collections.Generic;
-    using Sirenix.OdinInspector;
     using UnityEngine;
     using UnityEngine.ResourceManagement.AsyncOperations;
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
 
     public class UnloadTrigger : MonoBehaviour
     {
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly HashSet<AsyncOperationHandle> _handles = new HashSet<AsyncOperationHandle>();
-        
+    #endif
+        private readonly HashSet<AsyncOperationHandle> _handles = new();
+
         public AsyncOperationHandle AddHandle(AsyncOperationHandle handle)
         {
             _handles.Add(handle);
             return handle;
         }
-        
+
         public void RemoveHandle(AsyncOperationHandle handle)
         {
             _handles.Remove(handle);

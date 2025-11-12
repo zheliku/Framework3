@@ -9,19 +9,18 @@
 namespace Framework3.Toolkits.PoolKit
 {
     /// <summary>
-    /// 可放进 ObjectPool 的对象接口.
+    ///     可放进 ObjectPool 的对象接口.
     /// </summary>
     public interface IPoolable
     {
+        bool IsInPool   { get; set; }
         void OnCreate() { }
-        
+
         void OnGet();
 
         void OnRelease();
 
         void OnDestroy();
-
-        bool IsInPool { get; set; }
     }
 
     public static class IPoolableExtension

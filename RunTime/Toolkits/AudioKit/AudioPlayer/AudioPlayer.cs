@@ -8,14 +8,18 @@
 
 namespace Framework3.Toolkits.AudioKit
 {
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
+#endif
     using Core;
     using PoolKit;
-    using Sirenix.OdinInspector;
     using TimerKit;
     using UnityEngine;
     using Object = UnityEngine.Object;
 
+#if ODIN_INSPECTOR
     [HideReferenceObjectPicker]
+#endif
     public class AudioPlayer : IPoolable, IPoolType
     {
     #region Static
@@ -27,7 +31,7 @@ namespace Framework3.Toolkits.AudioKit
             player.playEvent = new AudioPlayerEvent(player)
             {
                 onStart  = null,
-                onFinish = null,
+                onFinish = null
             };
             player.settingVolume = 1;
             player.volumeScale   = 1;
@@ -44,7 +48,9 @@ namespace Framework3.Toolkits.AudioKit
 
         private IAudioLoader _loader;
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private Timer _timer;
 
         internal AudioPlayerEvent playEvent;
@@ -59,10 +65,14 @@ namespace Framework3.Toolkits.AudioKit
 
         public BindableProperty<float> Volume { get; set; } // 指向 AudioKitSetting 中的 Volume
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public string AudioClipName { get; private set; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioSource AudioSource { get; private set; }
 
         public bool IsInPool { get; set; }
@@ -71,7 +81,9 @@ namespace Framework3.Toolkits.AudioKit
 
         public bool IsLoop { get; set; }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public AudioClip AudioClip { get; private set; }
 
         public bool IsPlaying
@@ -86,7 +98,7 @@ namespace Framework3.Toolkits.AudioKit
     #region 公共方法
 
         /// <summary>
-        /// 加载 Clip 并播放
+        ///     加载 Clip 并播放
         /// </summary>
         /// <param name="clipName">clip 名称</param>
         /// <param name="loop">是否循环播放</param>
@@ -144,7 +156,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 播放已有 AudioClip
+        ///     播放已有 AudioClip
         /// </summary>
         /// <param name="clip">音频</param>
         /// <param name="loop">是否循环</param>
@@ -172,7 +184,9 @@ namespace Framework3.Toolkits.AudioKit
             Release();
         }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public void Pause()
         {
             if (_isPaused)
@@ -190,7 +204,9 @@ namespace Framework3.Toolkits.AudioKit
             AudioSource.Pause();
         }
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         public void UnPause()
         {
             if (!_isPaused)
@@ -296,7 +312,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 事件：更改值时，同步更改 AudioSource 的音量
+        ///     事件：更改值时，同步更改 AudioSource 的音量
         /// </summary>
         /// <param name="oldValue">更改前的音量</param>
         /// <param name="volume">更改后的音量</param>
@@ -308,7 +324,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 同步更改 AudioSource 的音量
+        ///     同步更改 AudioSource 的音量
         /// </summary>
         internal void UpdateAudioSourceVolume()
         {
@@ -319,7 +335,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 依据记录信息进行播放
+        ///     依据记录信息进行播放
         /// </summary>
         private void PlayInternal()
         {
@@ -342,7 +358,7 @@ namespace Framework3.Toolkits.AudioKit
         }
 
         /// <summary>
-        /// 事件：播放结束时执行的方法
+        ///     事件：播放结束时执行的方法
         /// </summary>
         /// <param name="timer">依附的计时器</param>
         private void OnAudioClipPlayFinish(Timer timer)

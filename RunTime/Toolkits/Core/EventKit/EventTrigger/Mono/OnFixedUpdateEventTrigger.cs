@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnFixedUpdateEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent FixedUpdateEvent = new EasyEvent();
+        public readonly EasyEvent FixedUpdateEvent = new();
 
         private void FixedUpdate()
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnFixedUpdateEventTrigger>().FixedUpdateEvent
-                       .Register(update, priority);
+               .Register(update, priority);
         }
 
         public static IUnregister OnFixedUpdateEvent(this GameObject self, Action update, int priority = 0)
         {
             return self.GetOrAddComponent<OnFixedUpdateEventTrigger>().FixedUpdateEvent
-                       .Register(update, priority);
+               .Register(update, priority);
         }
     }
 }

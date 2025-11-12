@@ -11,17 +11,17 @@ namespace Framework3.Toolkits.SingletonKit
     using UnityEngine;
 
     /// <summary>
-    /// 当场景里包含两个 ReplaceableMonoSingleton，保留最后创建的
+    ///     当场景里包含两个 ReplaceableMonoSingleton，保留最后创建的
     /// </summary>
     public class ReplaceableMonoSingleton<TMonoSingleton> : MonoSingleton<TMonoSingleton> where TMonoSingleton : ReplaceableMonoSingleton<TMonoSingleton>
     {
         [SerializeField]
         private float _initializationTime;
-        
+
         protected override void Awake()
         {
             base.Awake();
-            
+
             if (!Application.isPlaying)
             {
                 return;
@@ -37,7 +37,7 @@ namespace Framework3.Toolkits.SingletonKit
             {
                 // 如果查找到的对象是当前对象，则跳过
                 if (searched == this) continue;
-                
+
                 // 如果查找到的对象的初始化时间小于当前对象的初始化时间，则销毁该对象
                 if (searched.GetComponent<ReplaceableMonoSingleton<TMonoSingleton>>()._initializationTime <= _initializationTime)
                 {

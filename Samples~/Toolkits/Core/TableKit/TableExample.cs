@@ -11,12 +11,16 @@ namespace Framework3.Toolkits.TableKit.Example
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Sirenix.OdinInspector;
+    #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
     using UnityEngine;
 
     public class TableExample : MonoBehaviour
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         private School _school = new School();
 
         private void Start()
@@ -38,12 +42,16 @@ namespace Framework3.Toolkits.TableKit.Example
 
     public class School : Table<Student>
     {
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         public TableIndex<int, Student> AgeIndex = new TableIndex<int, Student>(
             student => student.Age
         );
 
-        [ShowInInspector]
+        #if ODIN_INSPECTOR
+[ShowInInspector]
+#endif
         public TableIndex<int, Student> LevelIndex = new TableIndex<int, Student>(
             student => student.Level
         );

@@ -10,13 +10,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnCollisionEnter2DEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent<Collision2D> OnCollisionEnter2DEvent = new EasyEvent<Collision2D>();
+        public readonly EasyEvent<Collision2D> OnCollisionEnter2DEvent = new();
 
         private void OnCollisionEnter2D(Collision2D col)
         {
@@ -30,13 +30,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnCollisionEnter2DEventTrigger>().OnCollisionEnter2DEvent
-                       .Register(onCollisionEnter2D, priority);
+               .Register(onCollisionEnter2D, priority);
         }
 
         public static IUnregister OnCollisionEnter2DEvent(this GameObject self, Action<Collision2D> onCollisionEnter2D, int priority = 0)
         {
             return self.GetOrAddComponent<OnCollisionEnter2DEventTrigger>().OnCollisionEnter2DEvent
-                       .Register(onCollisionEnter2D, priority);
+               .Register(onCollisionEnter2D, priority);
         }
     }
 }

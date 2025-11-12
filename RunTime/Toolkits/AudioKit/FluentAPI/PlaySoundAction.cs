@@ -13,20 +13,21 @@ namespace Framework3.Toolkits.AudioKit
     using UnityEngine;
 
     /// <summary>
-    /// 用于支持 ActionKit 的 PlaySoundAction
+    ///     用于支持 ActionKit 的 PlaySoundAction
     /// </summary>
     public class PlaySoundAction : AbstractAction<PlaySoundAction>
     {
         public enum Mode
         {
             ByName,
-            ByClip,
+            ByClip
         }
 
-        private Mode      _mode;
-        private string    _soundPath;
         private AudioClip _audioClip;
-        private Action    _onFinish;
+
+        private Mode   _mode;
+        private Action _onFinish;
+        private string _soundPath;
 
         public static PlaySoundAction Create(string soundPath, Action onFinish = null)
         {
@@ -59,7 +60,7 @@ namespace Framework3.Toolkits.AudioKit
                 AudioKit.PlaySound(_audioClip, onPlayFinish: player => this.Finish());
             }
         }
-        
+
         public override void OnFinish()
         {
             _onFinish?.Invoke();

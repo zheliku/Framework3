@@ -6,22 +6,24 @@
 // @Copyright  Copyright (c) 2024, zheliku
 // ------------------------------------------------------------
 
-using Framework3.Core;
-
 namespace Framework3.Toolkits.EventKit
 {
     using System;
     using System.Collections.Generic;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     public class StringEventSystem
     {
-        public static readonly StringEventSystem Global = new StringEventSystem();
+        public static readonly StringEventSystem Global = new();
 
+    #if ODIN_INSPECTOR
         [ShowInInspector]
-        private readonly Dictionary<string, IEasyEvent> _events = new Dictionary<string, IEasyEvent>(50);
+    #endif
+        private readonly Dictionary<string, IEasyEvent> _events = new(50);
 
         public IUnregister Register(string key, Action onEvent, float priority = 0)
         {
@@ -52,7 +54,7 @@ namespace Framework3.Toolkits.EventKit
                 return easyEvent.Register(onEvent, priority);
             }
         }
-        
+
         public IUnregister Register<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
@@ -67,7 +69,7 @@ namespace Framework3.Toolkits.EventKit
                 return easyEvent.Register(onEvent, priority);
             }
         }
-        
+
         public IUnregister Register<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent, float priority = 0)
         {
             if (_events.TryGetValue(key, out var e))
@@ -106,7 +108,7 @@ namespace Framework3.Toolkits.EventKit
 
             return false;
         }
-        
+
         public bool Unregister<TArg1, TArg2>(string key, Action<TArg1, TArg2> onEvent)
         {
             if (_events.TryGetValue(key, out var e))
@@ -118,7 +120,7 @@ namespace Framework3.Toolkits.EventKit
 
             return false;
         }
-        
+
         public bool Unregister<TArg1, TArg2, TArg3>(string key, Action<TArg1, TArg2, TArg3> onEvent)
         {
             if (_events.TryGetValue(key, out var e))
@@ -130,12 +132,12 @@ namespace Framework3.Toolkits.EventKit
 
             return false;
         }
-        
+
         public bool Unregister(string key)
         {
             return _events.Remove(key);
         }
-        
+
         public void UnregisterAll()
         {
             _events.Clear();
@@ -158,7 +160,7 @@ namespace Framework3.Toolkits.EventKit
                 easyEvent?.Trigger(data);
             }
         }
-        
+
         public void Send<TArg1, TArg2>(string key, TArg1 arg1, TArg2 arg2)
         {
             if (_events.TryGetValue(key, out var e))
@@ -167,7 +169,7 @@ namespace Framework3.Toolkits.EventKit
                 easyEvent?.Trigger(arg1, arg2);
             }
         }
-        
+
         public void Send<TArg1, TArg2, TArg3>(string key, TArg1 arg1, TArg2 arg2, TArg3 arg3)
         {
             if (_events.TryGetValue(key, out var e))

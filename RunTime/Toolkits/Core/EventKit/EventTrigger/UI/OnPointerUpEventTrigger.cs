@@ -10,14 +10,14 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
     using UnityEngine.EventSystems;
 
     public class OnPointerUpEventTrigger : MonoBehaviour, IPointerUpHandler
     {
-        public readonly EasyEvent<PointerEventData> OnPointerUpEvent = new EasyEvent<PointerEventData>();
+        public readonly EasyEvent<PointerEventData> OnPointerUpEvent = new();
 
         public void OnPointerUp(PointerEventData eventData)
         {
@@ -31,13 +31,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnPointerUpEventTrigger>().OnPointerUpEvent
-                       .Register(onPointerUpEvent, priority);
+               .Register(onPointerUpEvent, priority);
         }
 
         public static IUnregister OnPointerUpEvent(this GameObject self, Action<PointerEventData> onPointerUpEvent, float priority = 0)
         {
             return self.GetOrAddComponent<OnPointerUpEventTrigger>().OnPointerUpEvent
-                       .Register(onPointerUpEvent, priority);
+               .Register(onPointerUpEvent, priority);
         }
     }
 }

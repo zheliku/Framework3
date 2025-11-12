@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.SingletonKit
     using UnityEngine;
 
     /// <summary>
-    /// 当场景里包含两个 PersistentMonoSingleton，保留先创建的
+    ///     当场景里包含两个 PersistentMonoSingleton，保留先创建的
     /// </summary>
     public abstract class PersistentMonoSingleton<TMonoSingleton> : MonoSingleton<TMonoSingleton> where TMonoSingleton : PersistentMonoSingleton<TMonoSingleton>
     {
@@ -19,7 +19,7 @@ namespace Framework3.Toolkits.SingletonKit
         protected override void Awake()
         {
             base.Awake();
-            
+
             if (!Application.isPlaying)
             {
                 return;

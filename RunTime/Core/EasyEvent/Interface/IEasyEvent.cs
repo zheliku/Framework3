@@ -11,12 +11,13 @@ namespace Framework3.Core
     using System;
 
     /// <summary>
-    /// 轻量级事件
+    ///     轻量级事件
     /// </summary>
     public interface IEasyEvent
     {
+        int EventCount { get; }
         /// <summary>
-        /// 注册事件
+        ///     注册事件
         /// </summary>
         /// <param name="onEvent">事件方法</param>
         /// <param name="priority">事件优先级</param>
@@ -24,10 +25,8 @@ namespace Framework3.Core
         IUnregister Register(Action onEvent, float priority = 0);
 
         /// <summary>
-        /// 注销所有事件
+        ///     注销所有事件
         /// </summary>
         void UnregisterAll();
-        
-        int EventCount { get; }
     }
 }

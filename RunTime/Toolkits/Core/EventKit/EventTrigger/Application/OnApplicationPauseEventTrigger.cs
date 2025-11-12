@@ -9,17 +9,16 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnApplicationPauseEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnApplicationPauseEvent = new EasyEvent();
+        public          bool      IsPaused;
+        public readonly EasyEvent OnApplicationPauseEvent = new();
 
-        public readonly EasyEvent OnApplicationUnPauseEvent = new EasyEvent();
-
-        public bool IsPaused;
+        public readonly EasyEvent OnApplicationUnPauseEvent = new();
 
         private void OnApplicationPause(bool pauseStatus)
         {

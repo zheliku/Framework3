@@ -11,7 +11,7 @@ namespace Framework3.Toolkits.UIKit
     using System;
 
     /// <summary>
-    /// 挂载到 Canvas 下的 Panel 上
+    ///     挂载到 Canvas 下的 Panel 上
     /// </summary>
     public abstract class UIPanel2D : UIPanel, IPanel2D
     {

@@ -1,3 +1,11 @@
+# v1.1.0
+1. 重构包结构，将 OdinInspector 相关代码移至 Framework3.Odin 包
+2. 支持多种插件集成：
+   - Odin Inspector
+   - BG Database
+   - Events Pro
+3. 友好的包欢迎界面
+
 # v1.0.2
 1. 修复 MultiTag 中包导入导致的错误
 

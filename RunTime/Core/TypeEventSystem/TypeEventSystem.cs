@@ -9,20 +9,23 @@
 namespace Framework3.Core
 {
     using System;
+#if ODIN_INSPECTOR
     using Sirenix.OdinInspector;
+#endif
 
     /// <summary>
-    /// 类型事件系统
+    ///     类型事件系统
     /// </summary>
     public sealed class TypeEventSystem
     {
+        public static readonly TypeEventSystem Global = new();
+    #if ODIN_INSPECTOR
         [ShowInInspector]
+    #endif
         private readonly EasyEvents _events = new();
 
-        public static readonly TypeEventSystem Global = new();
-
         /// <summary>
-        /// 发送 Event，参数使用默认构造函数 new() 传入
+        ///     发送 Event，参数使用默认构造函数 new() 传入
         /// </summary>
         /// <typeparam name="TEvent">Event 类型</typeparam>
         public void Send<TEvent>() where TEvent : new()
@@ -31,7 +34,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 发送 Event，参数使用指定的 e 传入
+        ///     发送 Event，参数使用指定的 e 传入
         /// </summary>
         /// <param name="e">Event 实例</param>
         /// <typeparam name="TEvent">Event 类型</typeparam>
@@ -41,7 +44,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注册事件监听
+        ///     注册事件监听
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">事件触发时的回调函数</param>
@@ -53,7 +56,7 @@ namespace Framework3.Core
         }
 
         /// <summary>
-        /// 注销事件监听
+        ///     注销事件监听
         /// </summary>
         /// <typeparam name="TEvent">事件类型</typeparam>
         /// <param name="onEvent">要注销的回调函数</param>

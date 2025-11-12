@@ -98,7 +98,7 @@ namespace Framework3.Toolkits.ActionKit
         {
             return self.Append(Toolkits.ActionKit.Lerp.Create(0, 1, duration, onLerp, onLerpFinish));
         }
-        
+
         public static ISequence Task(this ISequence self, Func<System.Threading.Tasks.Task> taskGetter)
         {
             return self.Append(Toolkits.ActionKit.Task.Create(taskGetter));

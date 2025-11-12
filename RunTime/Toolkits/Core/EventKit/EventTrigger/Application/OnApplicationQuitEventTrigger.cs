@@ -9,13 +9,13 @@
 namespace Framework3.Toolkits.EventKit
 {
     using System;
-    using FluentAPI;
     using Core;
+    using FluentAPI;
     using UnityEngine;
 
     public class OnApplicationQuitEventTrigger : MonoBehaviour
     {
-        public readonly EasyEvent OnApplicationQuitEvent = new EasyEvent();
+        public readonly EasyEvent OnApplicationQuitEvent = new();
 
         private void OnApplicationQuit()
         {
@@ -29,13 +29,13 @@ namespace Framework3.Toolkits.EventKit
             where T : Component
         {
             return self.GetOrAddComponent<OnApplicationQuitEventTrigger>().OnApplicationQuitEvent
-                       .Register(onApplicationQuitEvent, priority);
+               .Register(onApplicationQuitEvent, priority);
         }
 
         public static IUnregister OnApplicationQuitEventEvent(this GameObject self, Action onApplicationQuitEvent, int priority = 0)
         {
             return self.GetOrAddComponent<OnApplicationQuitEventTrigger>().OnApplicationQuitEvent
-                       .Register(onApplicationQuitEvent, priority);
+               .Register(onApplicationQuitEvent, priority);
         }
     }
 }
