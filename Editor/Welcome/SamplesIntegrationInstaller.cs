@@ -31,6 +31,7 @@ namespace Framework3.Editor
         public static string PackageName        { get; private set; }
         public static string PackageDisplayName { get; private set; }
         public static string PackageVersion     { get; private set; }
+        public static string PackageRootPath    { get; private set; }
 
         private static bool   inited;
         private static string pkgRoot;              // 包的磁盘目录（含 package.json）
@@ -42,7 +43,9 @@ namespace Framework3.Editor
             if (inited) return;
             inited = true;
 
-            pkgRoot                                          = ResolveThisPackageDiskPath();
+            pkgRoot         = ResolveThisPackageDiskPath();
+            PackageRootPath = pkgRoot;
+
             (PackageName, PackageDisplayName, PackageVersion) = ReadPackageInfos(pkgRoot);
 
             if (!string.IsNullOrEmpty(customPkgName)) PackageName            = customPkgName;

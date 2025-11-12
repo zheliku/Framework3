@@ -62,15 +62,46 @@ namespace Framework3.Editor
         private static bool ShouldPopForThisVersion()
         {
             SamplesIntegrationInstaller.InitPackageInfoIfNeeded(null, null); // 初始化包信息
-            keyThisVersion = SeenKeyPrefix + SamplesIntegrationInstaller.PackageName + "@" + SamplesIntegrationInstaller.PackageVersion;
+            keyThisVersion = $"{SeenKeyPrefix}{ProjectKey()}:{PackageIdOrFolder()}@{PackageVersionSafe()}";
             return !EditorPrefs.GetBool(keyThisVersion, false);
         }
         private static void MarkSeenForThisVersion()
         {
             if (string.IsNullOrEmpty(keyThisVersion))
-                keyThisVersion = SeenKeyPrefix + SamplesIntegrationInstaller.PackageName + "@" + SamplesIntegrationInstaller.PackageVersion;
+                keyThisVersion = $"{SeenKeyPrefix}{ProjectKey()}:{PackageIdOrFolder()}@{PackageVersionSafe()}";
 
             EditorPrefs.SetBool(keyThisVersion, true);
+        }
+        
+        private static string ProjectKey()
+        {
+            // 每个工程唯一
+            var path = Application.dataPath ?? "unknown";
+            return "proj_" + path.GetHashCode(); // 简单哈希够用了，也可换 MD5
+        }
+
+        private static string PackageIdOrFolder()
+        {
+            // 优先包名，其次包根目录名，最后 "unknown"
+            var name = SamplesIntegrationInstaller.PackageName;
+            if (!string.IsNullOrEmpty(name)) return name;
+
+            var root = SamplesIntegrationInstaller.PackageRootPath; // 见下文新增的公开属性
+            if (!string.IsNullOrEmpty(root)) return new System.IO.DirectoryInfo(root).Name;
+
+            return "unknown";
+        }
+
+        private static string PackageVersionSafe()
+        {
+            // 版本缺失时，用包根路径哈希“替代”
+            var ver = SamplesIntegrationInstaller.PackageVersion;
+            if (!string.IsNullOrEmpty(ver)) return ver;
+
+            var root = SamplesIntegrationInstaller.PackageRootPath;
+            if (!string.IsNullOrEmpty(root)) return "hash_" + root.GetHashCode();
+
+            return "unknown";
         }
 
         private void OnEnable()
