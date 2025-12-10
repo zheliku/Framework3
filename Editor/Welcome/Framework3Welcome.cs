@@ -185,15 +185,23 @@ namespace Framework3.Editor
                 GUILayout.Space(4);
                 using(new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button("打开 Package Manager（定位本包）", GUILayout.Height(24)))
-                        SamplesIntegrationInstaller.OpenPackageManagerToThisPackage(
-                            SamplesIntegrationInstaller.PackageName,
-                            SamplesIntegrationInstaller.PackageDisplayName
-                        );
-
-                    if (GUILayout.Button("导入本包所有 Samples（自动）", GUILayout.Height(24)))
+                    if (GUILayout.Button("打开 Package Manager(定位本包)", GUILayout.Height(24)))
                     {
-                        SamplesIntegrationInstaller.ImportAllSamplesToAssets();
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.OpenPackageManagerToThisPackage(
+                                SamplesIntegrationInstaller.PackageName,
+                                SamplesIntegrationInstaller.PackageDisplayName
+                            );
+                        };
+                    }
+
+                    if (GUILayout.Button("导入本包所有 Samples(自动)", GUILayout.Height(24)))
+                    {
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.ImportAllSamplesToAssets();
+                        };
                     }
                 }
             }
@@ -231,18 +239,38 @@ namespace Framework3.Editor
 
                 using(new EditorGUILayout.HorizontalScope())
                 {
-                    if (GUILayout.Button("打开 Package Manager（到本包）", GUILayout.Height(22)))
-                        SamplesIntegrationInstaller.OpenPackageManagerToThisPackage(
-                            SamplesIntegrationInstaller.PackageName, SamplesIntegrationInstaller.PackageDisplayName);
+                    if (GUILayout.Button("打开 Package Manager(到本包)", GUILayout.Height(22)))
+                    {
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.OpenPackageManagerToThisPackage(
+                                SamplesIntegrationInstaller.PackageName, SamplesIntegrationInstaller.PackageDisplayName);
+                        };
+                    }
 
-                    if (GUILayout.Button("一键安装（从 Samples~ 复制&导入）", GUILayout.Height(22)))
-                        SamplesIntegrationInstaller.InstallPluginFromSamples(spec);
+                    if (GUILayout.Button("一键安装(从 Samples~ 复制&导入)", GUILayout.Height(22)))
+                    {
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.InstallPluginFromSamples(spec);
+                        };
+                    }
 
                     if (GUILayout.Button("扫描已导入的 Samples 并导入 .unitypackage", GUILayout.Height(22)))
-                        SamplesIntegrationInstaller.ImportFromInstalledSamples(spec);
+                    {
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.ImportFromInstalledSamples(spec);
+                        };
+                    }
 
                     if (GUILayout.Button("重新扫描 Samples~", GUILayout.Height(22)))
-                        SamplesIntegrationInstaller.RescanSamples();
+                    {
+                        EditorApplication.delayCall += () =>
+                        {
+                            SamplesIntegrationInstaller.RescanSamples();
+                        };
+                    }
                 }
 
                 // 关键字显示（便于你检查匹配规则）
